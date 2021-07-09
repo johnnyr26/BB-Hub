@@ -1,6 +1,6 @@
-const parseLetterDays = require('../helpers/Scheduler/parseLetterDays');
-const formatCourseTitle = require('../helpers/Scheduler/formatCourseTitle');
-const formatSchedule = require('../helpers/Scheduler/formatSchedule');
+const parseLetterDays = require('../helpers/scheduler/parseLetterDays');
+const formatCourseTitle = require('../helpers/scheduler/formatCourseTitle');
+const formatSchedule = require('../helpers/scheduler/formatSchedule');
 
 module.exports.renderScheduler = (req, res) => {
     return res.render('scheduler');

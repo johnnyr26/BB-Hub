@@ -1,4 +1,4 @@
-const scheduleStructure = {
+const SCHEDULE_STRUCTURE = {
     A: [1, 2, 3, 4, 5, 6],
     B: [3, 4, 5, 6, 7, 8],
     C: [5, 6, 7, 8, 1, 2],
@@ -9,7 +9,7 @@ const scheduleStructure = {
     H: [5, 6, 7, 8, 1, 2]
 }
 
-const highSchoolSchedule = {
+const HIGH_SCHOOL_SCHEDULE = {
     schedule: scheduleStructure,
     times:[
         {
@@ -50,5 +50,5 @@ const highSchoolSchedule = {
     ]
 };
 
-module.exports.scheduleStructure = scheduleStructure;
-module.exports.highSchoolSchedule = highSchoolSchedule;
+module.exports.SCHEDULE_STRUCTURE = SCHEDULE_STRUCTURE;
+module.exports.HIGH_SCHOOL_SCHEDULE = HIGH_SCHOOL_SCHEDULE;
