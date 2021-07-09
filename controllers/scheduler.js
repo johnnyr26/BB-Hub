@@ -8,7 +8,7 @@ module.exports.renderScheduler = (req, res) => {
     return res.render('scheduler');
 }
 
-module.exports.uploadSchedule = async (req, res) => {
+module.exports.uploadSchedule = (req, res) => {
     if (!req.body.schedule) {
         return res.status(500).error('No schedule');
     }
@@ -38,14 +38,13 @@ module.exports.uploadSchedule = async (req, res) => {
 
     const letterDays = [];
 
-    await axios.get('https://www.blindbrook.org/Generator/TokenGenerator.ashx/ProcessRequest')
+    axios.get('https://www.blindbrook.org/Generator/TokenGenerator.ashx/ProcessRequest')
     .then(tokenResponse => {
-        const config = {
-            headers: { Authorization: `Bearer ${tokenResponse.data.Token}` }
-        };
         axios.get(
             'https://awsapieast1-prod2.schoolwires.com/REST/api/v4/CalendarEvents/GetEvents/1009?StartDate=2020-09-01&EndDate=2021-06-30&ModuleInstanceFilter=&CategoryFilter=&IsDBStreamAndShowAll=true',
-            config        
+            {
+                headers: { Authorization: `Bearer ${tokenResponse.data.Token}` } 
+            }       
         )
         .then(response => {
             const data = response.data;
@@ -55,5 +54,5 @@ module.exports.uploadSchedule = async (req, res) => {
             return res.status(201).send({ schedule: formattedSchedule, letterDays });
         });
     });
-    return res.status(500).send({ error: 'was not able to load request' });
+    // return res.status(500).send({ error: 'was not able to load request' });
 }
