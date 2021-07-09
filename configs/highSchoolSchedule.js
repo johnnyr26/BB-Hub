@@ -10,7 +10,7 @@ const SCHEDULE_STRUCTURE = {
 }
 
 const HIGH_SCHOOL_SCHEDULE = {
-    schedule: scheduleStructure,
+    schedule: SCHEDULE_STRUCTURE,
     times:[
         {
             block: 1,
