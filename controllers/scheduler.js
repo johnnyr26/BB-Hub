@@ -16,6 +16,7 @@ module.exports.uploadSchedule = (req, res) => {
     
     const scheduleObject = schedule.map(courseStringInfo => {
         const courseInfo = courseStringInfo.split('\t');
+
         const letterDays = parseLetterDays(courseInfo[0]);
         const period = parseInt(courseInfo[1]);
         const classRoom = courseInfo[2];
@@ -30,6 +31,7 @@ module.exports.uploadSchedule = (req, res) => {
             teacher
         };
     });
+    
     const formattedSchedule = formatSchedule(scheduleObject);
 
     return res.status(201).send({ formattedSchedule });
