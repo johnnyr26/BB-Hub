@@ -66,13 +66,12 @@ const findPathBack = node => {
 
 const traverseNodes = (nodes, visited, map) => {
     const sizes = [];
-    const startingNode = nodes[1][6];
+    const startingNode = nodes[26][0];
     const queue = [startingNode];
     const originalStartingPoint = map[startingNode.row][startingNode.col];
-    console.log(originalStartingPoint);
     while (queue.length > 0) {
         const node = queue.shift();
-        const finalDestination = 'LIBR';
+        const finalDestination = 'STAG';
         if (map[node.row][node.col] === finalDestination) {
             return findPathBack(node);
         }
