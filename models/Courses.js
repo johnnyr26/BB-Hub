@@ -31,7 +31,6 @@ Schema.statics.attachSchedule = async (userId, scheduleObject) => {
         await mongoose.model('Users').updateOne({ _id: userId }, {
             $push: {
                 schedule: {
-                  userId,
                   courseTitle,
                   period,
                   letterDays,

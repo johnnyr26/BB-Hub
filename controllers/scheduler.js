@@ -3,6 +3,7 @@ const axios = require('axios');
 const parseLetterDays = require('../helpers/scheduler/parseLetterDays');
 const formatCourseTitle = require('../helpers/scheduler/formatCourseTitle');
 const formatSchedule = require('../helpers/scheduler/formatSchedule');
+const filterInput = require('../helpers/scheduler/filterInput');
 
 const Users = require('../models/Users');
 const Courses = require('../models/Courses');
@@ -17,15 +18,14 @@ module.exports.uploadSchedule = async (req, res) => {
     }
    
     const { name, schedule: uncleanedSchedule } = req.body;
-    const schedule = uncleanedSchedule.split(' \n').filter(str => str);
+    const schedule = uncleanedSchedule.split('\n').filter(str => str);
     
     const scheduleObject = schedule.map(courseStringInfo => {
-        const courseInfo = courseStringInfo.split('\t');
-
+        const courseInfo = courseStringInfo.split('\t').filter(str => str);
         const letterDays = parseLetterDays(courseInfo[0]);
         const period = parseInt(courseInfo[1]);
         const classRoom = courseInfo[2];
-        const courseTitle = formatCourseTitle(courseInfo[4]);
+        const courseTitle = (courseInfo[4]);
         const teacher = courseInfo[6];
 
         return {
@@ -36,11 +36,13 @@ module.exports.uploadSchedule = async (req, res) => {
             teacher
         };
     });
+    
+    const filteredScheduleObject = filterInput(scheduleObject);
 
     const user = await Users.findByCredentials(name);
-    Courses.attachSchedule(user._id, scheduleObject);
+    Courses.attachSchedule(user._id, filteredScheduleObject);
 
-    const formattedSchedule = formatSchedule(scheduleObject);
+    const formattedSchedule = formatSchedule(filteredScheduleObject);
 
     const schoolYearLetterDays = [];
 

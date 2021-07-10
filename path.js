@@ -1,4 +1,4 @@
-const map = require('./assets/maps/highSchoolFirstFloor');
+const MAP = require('./assets/maps/highSchoolFirstFloor');
 
 const FINAL_DESTINATION = 'STAI';
 
@@ -67,7 +67,6 @@ const findPathBack = node => {
 }
 
 const traverseNodes = (nodes, visited, map) => {
-    const sizes = [];
     const startingNode = nodes[27][0];
     const queue = [startingNode];
     const originalStartingPoint = map[startingNode.row][startingNode.col];
@@ -84,19 +83,17 @@ const traverseNodes = (nodes, visited, map) => {
         if (!node.visited && (map[node.row][node.col] === 'PATH' || map[node.row][node.col] === originalStartingPoint)) {
             node.visited = true;
             visited[node.row][node.col] = true;
-            sizes.push([node.row, node.col]);
             getUnvisitedNeighbors(node.row, node.col, originalStartingPoint, FINAL_DESTINATION, nodes, visited, queue, map);
         }
     }
     console.log('There was no possible routes to the exit');
-    return;
 }
 
-const printRoute = route => {
+const printMapWithRoute = route => {
     let index = 1;
-    for (let row = 0; row < map.length; row ++) {
+    for (let row = 0; row < MAP.length; row ++) {
         let string = '';
-        for (let col = 0; col < map[row].length; col ++) {
+        for (let col = 0; col < MAP[row].length; col ++) {
             let thereIsAOne = false;          
             for (const row2 of route) {
                 if (row === row2[0]  && col === row2[1]) {
@@ -112,15 +109,15 @@ const printRoute = route => {
             }
             index = 1;
             if (!thereIsAOne) {
-                string += `${map[row][col][0]}   `;
+                string += `${MAP[row][col][0]}   `;
             }
         }
         console.log(string);
     }
 }
 
-const route = findPath(map);
-if (route) {
-    printRoute(route);
+const ROUTE = findPath(MAP);
+if (ROUTE) {
+    printMapWithRoute(ROUTE);
 }
 
