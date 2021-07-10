@@ -24,6 +24,15 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/scheduler', schedulerRouter);
 
+const mongoose = require('mongoose');
+mongoose.connect(process.env.mongoDBURL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  autoIndex: true,
+  useFindAndModify: false
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

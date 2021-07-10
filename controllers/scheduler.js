@@ -4,16 +4,19 @@ const parseLetterDays = require('../helpers/scheduler/parseLetterDays');
 const formatCourseTitle = require('../helpers/scheduler/formatCourseTitle');
 const formatSchedule = require('../helpers/scheduler/formatSchedule');
 
+const Users = require('../models/Users');
+const Courses = require('../models/Courses');
+
 module.exports.renderScheduler = (req, res) => {
     return res.render('scheduler');
 }
 
-module.exports.uploadSchedule = (req, res) => {
-    if (!req.body.schedule) {
+module.exports.uploadSchedule = async (req, res) => {
+    if (!req.body.schedule || !req.body.name) {
         return res.status(500).error('No schedule');
     }
-    const uncleanedSchedule = req.body.schedule;
-    
+   
+    const { name, schedule: uncleanedSchedule } = req.body;
     const schedule = uncleanedSchedule.split(' \n').filter(str => str);
     
     const scheduleObject = schedule.map(courseStringInfo => {
@@ -33,10 +36,13 @@ module.exports.uploadSchedule = (req, res) => {
             teacher
         };
     });
-    
+
+    const user = await Users.findByCredentials(name);
+    Courses.attachSchedule(user._id, scheduleObject);
+
     const formattedSchedule = formatSchedule(scheduleObject);
 
-    const letterDays = [];
+    const schoolYearLetterDays = [];
 
     axios.get('https://www.blindbrook.org/Generator/TokenGenerator.ashx/ProcessRequest')
     .then(tokenResponse => {
@@ -49,9 +55,9 @@ module.exports.uploadSchedule = (req, res) => {
         .then(response => {
             const data = response.data;
             data.forEach(day => {
-                letterDays.push(day.Title);
+                schoolYearLetterDays.push(day.Title);
             });
-            return res.status(201).send({ schedule: formattedSchedule, letterDays });
+            return res.status(201).send({ schedule: formattedSchedule, letterDays: schoolYearLetterDays });
         });
     });
     // return res.status(500).send({ error: 'was not able to load request' });

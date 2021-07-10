@@ -1,11 +1,13 @@
 document.querySelector('button').addEventListener('click', () => {
+    const name = document.getElementById('name').value;
     const schedule = document.querySelector('textarea').value;
+
     fetch(`/scheduler`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ schedule })
+        body: JSON.stringify({ name, schedule })
     })
     .then(response => response.json())
     .then(response => {
