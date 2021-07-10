@@ -1,4 +1,4 @@
-const { SCHEDULE_STRUCTURE, HIGH_SCHOOL_SCHEDULE } = require('../../configs/highSchoolSchedule');
+const { SCHEDULE_STRUCTURE, HIGH_SCHOOL_SCHEDULE } = require('../../assets/highSchoolSchedule');
 
 module.exports = scheduleObject => {
     const formatttedSchedule = {};

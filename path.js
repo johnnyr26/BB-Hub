@@ -1,4 +1,6 @@
-const map = require('./configs/Map/highSchoolFirstFloor');
+const map = require('./assets/maps/highSchoolFirstFloor');
+
+const FINAL_DESTINATION = 'MCAF';
 
 class Node {
     constructor (row, col) {
@@ -71,15 +73,15 @@ const traverseNodes = (nodes, visited, map) => {
     const originalStartingPoint = map[startingNode.row][startingNode.col];
     while (queue.length > 0) {
         const node = queue.shift();
-        const finalDestination = 'STAG';
-        if (map[node.row][node.col] === finalDestination) {
+        
+        if (map[node.row][node.col] === FINAL_DESTINATION) {
             return findPathBack(node);
         }
         if (!node.visited && (map[node.row][node.col] === 'PATH' || map[node.row][node.col] === originalStartingPoint)) {
             node.visited = true;
             visited[node.row][node.col] = true;
             sizes.push([node.row, node.col]);
-            getUnvisitedNeighbors(node.row, node.col, originalStartingPoint, finalDestination, nodes, visited, queue, map);
+            getUnvisitedNeighbors(node.row, node.col, originalStartingPoint, FINAL_DESTINATION, nodes, visited, queue, map);
         }
     }
     console.log('There was no possible routes to the exit');
