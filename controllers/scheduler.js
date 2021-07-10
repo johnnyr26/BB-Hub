@@ -4,13 +4,14 @@ const parseLetterDays = require('../helpers/scheduler/parseLetterDays');
 const formatCourseTitle = require('../helpers/scheduler/formatCourseTitle');
 const formatSchedule = require('../helpers/scheduler/formatSchedule');
 const filterInput = require('../helpers/scheduler/filterInput');
+const getDates = require('../helpers/scheduler/getDates');
 
 const Users = require('../models/Users');
 const Courses = require('../models/Courses');
 
 module.exports.renderScheduler = (req, res) => {
     return res.render('scheduler');
-}
+};
 
 module.exports.uploadSchedule = async (req, res) => {
     if (!req.body.schedule || !req.body.name) {
@@ -36,7 +37,7 @@ module.exports.uploadSchedule = async (req, res) => {
             teacher
         };
     });
-    
+
     const filteredScheduleObject = filterInput(scheduleObject);
 
     const user = await Users.findByCredentials(name);
@@ -44,23 +45,16 @@ module.exports.uploadSchedule = async (req, res) => {
 
     const formattedSchedule = formatSchedule(filteredScheduleObject);
 
-    const schoolYearLetterDays = [];
+    const { startYear, endYear } = getDates();
+    console.log(startYear, endYear);
 
-    axios.get('https://www.blindbrook.org/Generator/TokenGenerator.ashx/ProcessRequest')
-    .then(tokenResponse => {
-        axios.get(
-            'https://awsapieast1-prod2.schoolwires.com/REST/api/v4/CalendarEvents/GetEvents/1009?StartDate=2020-09-01&EndDate=2021-06-30&ModuleInstanceFilter=&CategoryFilter=&IsDBStreamAndShowAll=true',
-            {
-                headers: { Authorization: `Bearer ${tokenResponse.data.Token}` } 
-            }       
-        )
-        .then(response => {
-            const data = response.data;
-            data.forEach(day => {
-                schoolYearLetterDays.push(day.Title);
-            });
-            return res.status(201).send({ schedule: formattedSchedule, letterDays: schoolYearLetterDays });
-        });
-    });
-    // return res.status(500).send({ error: 'was not able to load request' });
-}
+    const tokenResponse = await axios.get('https://www.blindbrook.org/Generator/TokenGenerator.ashx/ProcessRequest');
+    const response = await axios.get(
+        `https://awsapieast1-prod2.schoolwires.com/REST/api/v4/CalendarEvents/GetEvents/1009?StartDate=${startYear - 1}-09-01&EndDate=${endYear - 1}-06-30&ModuleInstanceFilter=&CategoryFilter=&IsDBStreamAndShowAll=true`,
+        {
+            headers: { Authorization: `Bearer ${tokenResponse.data.Token}` } 
+        }       
+    );
+    const schoolYearLetterDays = response.data.map(day => day.Title);
+    return res.status(201).send({ schedule: formattedSchedule, letterDays: schoolYearLetterDays });
+};

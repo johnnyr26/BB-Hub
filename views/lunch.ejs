@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+        <div id="lunch">
+            <% meals.forEach(lunch => { %>
+                <p><%= lunch.date %>: <%= lunch.meal %></p>
+            <% }); %>
+        </div>
+    </body>
+    <script src="/javascripts/lunch.js"></script>
+</html>

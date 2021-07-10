@@ -7,6 +7,7 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const schedulerRouter = require('./routes/scheduler');
+const lunchRouter = require('./routes/lunch');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/scheduler', schedulerRouter);
+app.use('/lunch', lunchRouter);
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.mongoDBURL, {

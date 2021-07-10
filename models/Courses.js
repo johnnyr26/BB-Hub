@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Users = require('./Users');
 
 const Schema = mongoose.Schema({
     userId: {
