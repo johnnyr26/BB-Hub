@@ -1,6 +1,6 @@
 const map = require('./assets/maps/highSchoolFirstFloor');
 
-const FINAL_DESTINATION = 'MCAF';
+const FINAL_DESTINATION = 'STAI';
 
 class Node {
     constructor (row, col) {
@@ -68,9 +68,13 @@ const findPathBack = node => {
 
 const traverseNodes = (nodes, visited, map) => {
     const sizes = [];
-    const startingNode = nodes[26][0];
+    const startingNode = nodes[27][0];
     const queue = [startingNode];
     const originalStartingPoint = map[startingNode.row][startingNode.col];
+    if (originalStartingPoint === 'WALL') {
+        console.log('You chose to start at a wall');
+        return;
+    }
     while (queue.length > 0) {
         const node = queue.shift();
         
