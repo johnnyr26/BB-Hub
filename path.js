@@ -108,7 +108,7 @@ const printRoute = route => {
             }
             index = 1;
             if (!thereIsAOne) {
-                string += '0   ';
+                string += `${map[row][col][0]}   `;
             }
         }
         console.log(string);
