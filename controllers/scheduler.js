@@ -24,18 +24,16 @@ module.exports.renderScheduler = async (req, res) => {
             letterDays
         });
     }
-    const users = (await Users.find({})).map(user => user.name);
+    const friends = (await Users.find({ friends: user.id })).map(member => member.name);
 
     const letterDays = await getLetterDays();
-
-    
     const formattedSchedule = formatSchedule(user.schedule);
 
     return res.render('scheduler', { 
         user, 
         letterDays,
         schedule: formattedSchedule, 
-        users, 
+        users: friends, 
         picture: req.user.picture, 
         id: req.user._id 
     });
