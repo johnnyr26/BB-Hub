@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken'); 
+
 const Courses = require('./Courses');
+
+
 
 const Schema = mongoose.Schema({
     name: {
@@ -9,16 +13,44 @@ const Schema = mongoose.Schema({
         minlength: 2,
         maxlength: 200,
     },
+    email: {
+        type: String,
+        required: true
+    },
+    picture: {
+        type: String
+    },
+    tokens: [{
+        token: {
+            type: String,
+            required: true
+        }
+    }],
     schedule: [{
         type: Courses.schema
     }]
 });
 
-Schema.statics.findByCredentials = async name => {
-    const user = await Users.findOne({ name });
+Schema.methods.generateAuthToken = async function () {
+    const token = jwt.sign({ _id: this._id.toString() }, process.env.secret);
+    this.tokens = this.tokens.concat({ token });
+    await this.save();
+    return token;
+}
+
+Schema.statics.findByCredentials = async (name, email, picture) => {
+    const user = await Users.findOne({ email });
+    // incase the user changed their profile picture
+    if (user && user.picture !== picture) {
+        user.picture = picture;
+        await user.save();
+    }
+    console.log(user);
     if (!user) {
         const newUser = new Users({
-            name
+            name,
+            email,
+            picture
         })
         await newUser.save();
         return newUser;

@@ -1,5 +1,4 @@
 document.querySelector('button').addEventListener('click', () => {
-    const name = document.getElementById('name').value;
     const schedule = document.querySelector('textarea').value;
 
     fetch(`/scheduler`, {
@@ -7,7 +6,7 @@ document.querySelector('button').addEventListener('click', () => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, schedule })
+        body: JSON.stringify({ schedule })
     })
     .then(response => response.json())
     .then(response => {

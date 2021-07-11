@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <title>Log Out - BB - Hub</title>
+        <meta name="google-signin-client_id" content="665999096135-8onhd9jfj6f6rj4qid16s9j6qnqumf55.apps.googleusercontent.com">
+    </head>
+    <body>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script>
+            window.onload = () => {
+                gapi.load('auth2', () => {
+                    gapi.auth2.init({ client_id: '665999096135-8onhd9jfj6f6rj4qid16s9j6qnqumf55.apps.googleusercontent.com' }).then(user => {
+                        return user.signOut();
+                    }).then(() => {
+                        location.href = '/login';
+                    }).catch(error => {
+                        throw new Error(error);
+                    });
+                });
+            }
+        </script>
+    </body>
+</html>

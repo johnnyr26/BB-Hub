@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <link rel='stylesheet' href='/css/style.css' />
     </head>
     <body>
-        <input type="text" id="name" placeholder="Full Name"/>
         <textarea placeholder="Drop Schedule"></textarea>
         <button id="button" type="submit">Submit</button>
-        <p id="schedule"></p>
+        <a href="/logout">Log out</a>
+        <p id="schedule">
+            <% if (locals.schedule) { %>
+                <%  letterDays.forEach(letterDay => { %>
+                    <% const letter = letterDay[0]; %>
+                    <% const letterDaySchedule = schedule[letter]; %>
+                    <% if (!letterDaySchedule) { %>
+                        <% return; %>
+                    <% } %>
+                    <h1><%= letterDay %></h1>
+                    <% letterDaySchedule.forEach(course => { %>
+                        <% const { period, courseTitle, classRoom, teacher } = course.course; %>
+                        <% const { block, from, to } = course.time; %>
+                        <p><%= period %>: <%= courseTitle %>, <%= teacher %>, <%= classRoom %></p>
+                    <% }); %>
+                <% }); %>
+            <% } %>    
+        </p>
+        
     </body>
-    <script src="/javascripts/scheduler.js"></script>
+    <script src="/js/scheduler.js"></script>
 </html>

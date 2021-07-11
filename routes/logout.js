@@ -2,9 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const auth = require('../middlewares/auth');
-const controller = require('../controllers/lunch');
+const controller = require('../controllers/logout');
 
-router.route('/')
-    .get(auth, controller);
+router.get('/', auth, controller);
 
 module.exports = router;
