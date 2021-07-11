@@ -1,9 +1,9 @@
 function onSignIn(googleUser) {
     const email = googleUser.getBasicProfile().getEmail();
     const id_token = googleUser.getAuthResponse().id_token;
-    if (email.slice(-15) !== '@blindbrook.org') {
-        return signOut('Only Blind Brook emails are allowed to sign into this platform.');
-    }
+    // if (email.slice(-15) !== '@blindbrook.org') {
+    //     return signOut('Only Blind Brook emails are allowed to sign into this platform.');
+    // }
     fetch('/login', {
         method: 'POST',
         headers: {
@@ -17,7 +17,7 @@ function onSignIn(googleUser) {
             throw response.error;
         }
   
-        location.href = '/scheduler';
+        location.href = '/';
     })
     .catch((error) => {
       signOut(error);

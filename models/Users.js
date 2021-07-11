@@ -3,8 +3,6 @@ const jwt = require('jsonwebtoken');
 
 const Courses = require('./Courses');
 
-
-
 const Schema = mongoose.Schema({
     name: {
         type: String,
@@ -27,7 +25,30 @@ const Schema = mongoose.Schema({
         }
     }],
     schedule: [{
-        type: Courses.schema
+        courseTitle: {
+            type: String,
+        },
+        period: {
+            type: Number,
+        },
+        classRoom: {
+            type: String
+        },
+        letterDays: [{
+            type: String
+        }],
+        teacher: {
+            type: String
+        }
+    }],
+    friends: [{
+        type: mongoose.ObjectId,
+    }],
+    friendRequests: [{
+        type: mongoose.ObjectId,
+    }],
+    requestedFriends: [{
+        type: mongoose.ObjectId,
     }]
 });
 
@@ -45,7 +66,6 @@ Schema.statics.findByCredentials = async (name, email, picture) => {
         user.picture = picture;
         await user.save();
     }
-    console.log(user);
     if (!user) {
         const newUser = new Users({
             name,

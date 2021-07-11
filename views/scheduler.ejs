@@ -1,29 +1,44 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel='stylesheet' href='/css/style.css' />
+        <link rel='stylesheet' href='/css/schedule.css' />
     </head>
     <body>
         <textarea placeholder="Drop Schedule"></textarea>
-        <button id="button" type="submit">Submit</button>
+        <button id="submit" type="submit">Submit</button>
         <a href="/logout">Log out</a>
-        <p id="schedule">
-            <% if (locals.schedule) { %>
-                <%  letterDays.forEach(letterDay => { %>
-                    <% const letter = letterDay[0]; %>
-                    <% const letterDaySchedule = schedule[letter]; %>
-                    <% if (!letterDaySchedule) { %>
-                        <% return; %>
-                    <% } %>
-                    <h1><%= letterDay %></h1>
-                    <% letterDaySchedule.forEach(course => { %>
-                        <% const { period, courseTitle, classRoom, teacher } = course.course; %>
-                        <% const { block, from, to } = course.time; %>
-                        <p><%= period %>: <%= courseTitle %>, <%= teacher %>, <%= classRoom %></p>
+        <% if (locals.users) { %>
+            <% users.forEach(user => { %>
+                <button id="<%= user %>" class="users"><%= user %></button>
+            <% }); %>
+        <% } %>
+        <div id="column">
+            <div id="main-schedule">
+                <% if (locals.schedule) { %>
+                    <%  letterDays.forEach(letterDay => { %>
+                        <% const letter = letterDay[0]; %>
+                        <% const letterDaySchedule = schedule[letter]; %>
+                        <% if (!letterDaySchedule) { %>
+                            <% return; %>
+                        <% } %>
+                        <% const noSchool = letterDaySchedule.every(course => !course.course); %>
+                        <% if (noSchool) { %>
+                            <% return; %>
+                        <% } %>
+                        <h1><%= letterDay %></h1>
+                        <% letterDaySchedule.forEach(course => { %>
+                            <% const { period, courseTitle, classRoom, teacher } = course.course; %>
+                            <% const { block, from, to } = course.time; %>
+                            <p><%= period %>: <%= courseTitle %>, <%= teacher %>, <%= classRoom %></p>
+                        <% }); %>
                     <% }); %>
-                <% }); %>
-            <% } %>    
-        </p>
+                <% } %> 
+            </div>
+            <div id="schedule">
+                   
+            </div>
+        </div>
+        
         
     </body>
     <script src="/js/scheduler.js"></script>

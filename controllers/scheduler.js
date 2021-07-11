@@ -1,35 +1,44 @@
-const axios = require('axios');
+const Users = require('../models/Users');
 
 const parseLetterDays = require('../helpers/scheduler/parseLetterDays');
 const formatCourseTitle = require('../helpers/scheduler/formatCourseTitle');
 const formatSchedule = require('../helpers/scheduler/formatSchedule');
 const filterInput = require('../helpers/scheduler/filterInput');
-const getDates = require('../helpers/scheduler/getDates');
+const getLetterDays = require('../helpers/scheduler/getSchoolDays').getLetterDays;
+const getSharedCourses = require('../helpers/scheduler/findSharedCourses');
 
-const Users = require('../models/Users');
 
 module.exports.renderScheduler = async (req, res) => {
-    const { startYear, endYear } = getDates();
-    const tokenResponse = await axios.get('https://www.blindbrook.org/Generator/TokenGenerator.ashx/ProcessRequest');
-    const response = await axios.get(
-        `https://awsapieast1-prod2.schoolwires.com/REST/api/v4/CalendarEvents/GetEvents/1009?StartDate=${startYear - 1}-09-01&EndDate=${endYear - 1}-06-30&ModuleInstanceFilter=&CategoryFilter=&IsDBStreamAndShowAll=true`,
-        {
-            headers: { Authorization: `Bearer ${tokenResponse.data.Token}` } 
-        }       
-    );
-    const letterDays = response.data.map(day => day.Title);
-
     const user = await Users.findById(req.user._id);
-    if (user.schedule.length > 0) {
-        const formattedSchedule = formatSchedule(user.schedule);
-        return res.render('scheduler', { 
+
+    if (req.params.user) {
+        const searchedUser = await Users.findOne({ name: req.params.user });
+        if (!searchedUser) {
+            return res.render('scheduler', { users, picture: req.user.picture, id: req.user._id });
+        }
+        const sharedCourses = getSharedCourses(user.schedule, searchedUser.schedule).map(course => course.name);
+        const letterDays = await getLetterDays();
+        const formattedSchedule = formatSchedule(searchedUser.schedule);
+        return res.send({ 
             schedule: formattedSchedule, 
-            letterDays,
-            picture: req.user.picture, 
-            id: req.user._id 
+            letterDays
         });
     }
-    return res.render('scheduler', { picture: req.user.picture, id: req.user._id });
+    const users = (await Users.find({})).map(user => user.name);
+
+    const letterDays = await getLetterDays();
+
+    
+    const formattedSchedule = formatSchedule(user.schedule);
+
+    return res.render('scheduler', { 
+        user, 
+        letterDays,
+        schedule: formattedSchedule, 
+        users, 
+        picture: req.user.picture, 
+        id: req.user._id 
+    });
 };
 
 module.exports.uploadSchedule = async (req, res) => {
@@ -58,21 +67,10 @@ module.exports.uploadSchedule = async (req, res) => {
     });
 
     const filteredScheduleObject = filterInput(scheduleObject);
-
     await Users.findByIdAndUpdate(req.user._id, { schedule: filteredScheduleObject});
-
     const formattedSchedule = formatSchedule(filteredScheduleObject);
 
-    const { startYear, endYear } = getDates();
-
-    const tokenResponse = await axios.get('https://www.blindbrook.org/Generator/TokenGenerator.ashx/ProcessRequest');
-    const response = await axios.get(
-        `https://awsapieast1-prod2.schoolwires.com/REST/api/v4/CalendarEvents/GetEvents/1009?StartDate=${startYear - 1}-09-01&EndDate=${endYear - 1}-06-30&ModuleInstanceFilter=&CategoryFilter=&IsDBStreamAndShowAll=true`,
-        {
-            headers: { Authorization: `Bearer ${tokenResponse.data.Token}` } 
-        }       
-    );
-    const schoolYearLetterDays = response.data.map(day => day.Title);
+    const schoolYearLetterDays = await getLetterDays();
 
     return res.status(201).send({ schedule: formattedSchedule, letterDays: schoolYearLetterDays });
 };
