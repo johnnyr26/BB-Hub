@@ -66,7 +66,6 @@ module.exports.uploadSchedule = async (req, res) => {
         };
     });
 
-    
     const filteredScheduleObject = filterInput(scheduleObject);
     findFreePeriods(filteredScheduleObject);
     await Users.findByIdAndUpdate(req.user._id, { schedule: filteredScheduleObject});
