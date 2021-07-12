@@ -23,11 +23,11 @@
                         <% if (!letterDaySchedule) { %>
                             <% return; %>
                         <% } %>
-                        <% const noSchool = letterDaySchedule.every(course => !course.course); %>
+                        <h1><%= letterDay %></h1>
+                        <% const noSchool = !letterDay.substring(0, 5).match(/^[A-H] Day$/); %>
                         <% if (noSchool) { %>
                             <% return; %>
                         <% } %>
-                        <h1><%= letterDay %></h1>
                         <% letterDaySchedule.forEach(course => { %>
                             <% const { period, courseTitle, classRoom, teacher } = course.course; %>
                             <% const { block, from, to } = course.time; %>

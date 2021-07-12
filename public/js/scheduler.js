@@ -39,6 +39,10 @@ const printSchedule = (response, body) => {
         const h1 = document.createElement('h1');
         h1.textContent = letterDay;
         document.getElementById(body).appendChild(h1);
+        const noSchool = !letterDay.substring(0, 5).match(/^[A-H] Day$/);
+        if (noSchool) {
+            return;
+        }
         schedule.forEach(course => {
             const { period, courseTitle, classRoom, teacher } = course.course;
             const { block, from, to } = course.time;
