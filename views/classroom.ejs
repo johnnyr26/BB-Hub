@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <% if (locals.assignments) { %>
+            <% assignments.forEach(assignment => { %>
+                <% console.log(assignment); %>
+                <p><%= assignment %></p>
+            <% }); %>
+        <% } %>
+    </body>
+</html>

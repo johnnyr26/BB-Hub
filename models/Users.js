@@ -49,7 +49,10 @@ const Schema = mongoose.Schema({
     }],
     requestedFriends: [{
         type: mongoose.ObjectId,
-    }]
+    }],
+    authURL: {
+        type: String
+    }
 });
 
 Schema.methods.generateAuthToken = async function () {

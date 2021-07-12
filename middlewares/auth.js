@@ -3,7 +3,12 @@ const User = require('../models/Users');
 
 const auth = async (req, res, next) => {
     try {
-        const token = req.cookies['token'].replace('Bearer ', '');
+        let token;
+        if (req.cookies['token']) {
+            token = req.cookies['token'].replace('Bearer ', '');
+        } else {
+            token = req.query.state.replace('Bearer ', '');
+        }
         const decoded = jwt.verify(token, process.env.secret);
         const user = await User.findOne({ _id: decoded._id, 'tokens.token': token }).exec();
         if (!user) {
@@ -13,6 +18,7 @@ const auth = async (req, res, next) => {
         req.token = token;
         next();
     } catch (error) {
+        console.log(error);
         res.clearCookie('token');
         return res.status(401).redirect('/login');
     }
