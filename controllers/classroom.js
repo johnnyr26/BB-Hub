@@ -19,23 +19,24 @@ module.exports = async (req, res) => {
         const token = req.query.state ? req.query.state : req.cookies['token'];
         authorize(JSON.parse(content), token, async (auth) => {
             const classroom = google.classroom({version: 'v1', auth});
-            
-            const response = await classroom.courses.list();
+            const response = await classroom.courses.list({
+                pageSize: 10
+            });
             if (!res) {
                 return;
             }
             const courses = response.data.courses;
+            let activeCourses = courses.filter(course => course.courseState === 'ACTIVE');
             const assignments = [];
-            if (courses && courses.length) {
-                for (const course of courses) {
-                    if (course.courseState !== 'ACTIVE') {
-                        continue;
-                    }
-                    const n = course.id;
+            if (activeCourses.length) {
+                for (const course of activeCourses) {
                     try {
-                        const response = await classroom.courses.courseWork.list({ courseId: n });
+                        const response = await classroom.courses.courseWork.list({ 
+                            courseId: course.id,
+                            courseWorkStates: 'PUBLISHED'
+                        });
                         const { courseWork } = response.data;
-                        if (!courseWork) {
+                        if (!courseWork.length) {
                             return;
                         }
                         courseWork.forEach(work => {
@@ -52,20 +53,12 @@ module.exports = async (req, res) => {
                                     dueDate,
                                     dueTime
                                 });
-                                console.log(assignments[assignments.length - 1]);
                             }
                         });
-                    } catch(e) {
-                        console.log('rip');
-                        continue;
-                    }
+                    } catch(e) {}
                 }
-
-            } else {
-              console.log('No courses found.');
+                return res.render('classroom', { assignments });
             }
-            // console.log(assignments);
-            // return res.render('classroom');
         });
     });
 

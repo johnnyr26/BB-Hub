@@ -4,8 +4,8 @@
     <body>
         <% if (locals.assignments) { %>
             <% assignments.forEach(assignment => { %>
-                <% console.log(assignment); %>
-                <p><%= assignment %></p>
+                <% const { name, title } = assignment; %>
+                <p><%= name %>: <%= title %></p>
             <% }); %>
         <% } %>
     </body>
