@@ -25,6 +25,11 @@ const printSchedule = (response, body) => {
     if (response.schedule) {
         clearSchedule(body);
     }
+    if (response.sharedCourses) {
+        response.sharedCourses.forEach(course => {
+            document.querySelector('#shared-courses').textContent += `${course} `;
+        });
+    }
     letterDays.forEach(letterDay => {
         const letter = letterDay[0];
         const schedule = response.schedule[letter];

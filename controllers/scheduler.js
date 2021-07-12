@@ -6,6 +6,7 @@ const formatSchedule = require('../helpers/scheduler/formatSchedule');
 const filterInput = require('../helpers/scheduler/filterInput');
 const getLetterDays = require('../helpers/scheduler/getSchoolDays').getLetterDays;
 const getSharedCourses = require('../helpers/scheduler/findSharedCourses');
+const findFreePeriods = require('../helpers/scheduler/findFreePeriods');
 
 
 module.exports.renderScheduler = async (req, res) => {
@@ -16,15 +17,16 @@ module.exports.renderScheduler = async (req, res) => {
         if (!searchedUser) {
             return res.render('scheduler', { users, picture: req.user.picture, id: req.user._id });
         }
-        const sharedCourses = getSharedCourses(user.schedule, searchedUser.schedule).map(course => course.name);
+        const sharedCourses = getSharedCourses(user.schedule, searchedUser.schedule).map(course => course.courseTitle);
         const letterDays = await getLetterDays();
         const formattedSchedule = formatSchedule(searchedUser.schedule);
         return res.send({ 
             schedule: formattedSchedule, 
-            letterDays
+            letterDays,
+            sharedCourses
         });
     }
-    const friends = (await Users.find({ friends: user.id })).map(member => member.name);
+    const friends = (await Users.find({ friends: user.id })).filter(user => user.schedule.length > 0).map(member => member.name);
 
     const letterDays = await getLetterDays();
     const formattedSchedule = formatSchedule(user.schedule);
@@ -64,7 +66,9 @@ module.exports.uploadSchedule = async (req, res) => {
         };
     });
 
+    
     const filteredScheduleObject = filterInput(scheduleObject);
+    findFreePeriods(filteredScheduleObject);
     await Users.findByIdAndUpdate(req.user._id, { schedule: filteredScheduleObject});
     const formattedSchedule = formatSchedule(filteredScheduleObject);
 

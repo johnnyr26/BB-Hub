@@ -7,11 +7,13 @@
         <textarea placeholder="Drop Schedule"></textarea>
         <button id="submit" type="submit">Submit</button>
         <a href="/logout">Log out</a>
+        
         <% if (locals.users) { %>
             <% users.forEach(user => { %>
                 <button id="<%= user %>" class="users"><%= user %></button>
             <% }); %>
         <% } %>
+        <p id="shared-courses"></p>
         <div id="column">
             <div id="main-schedule">
                 <% if (locals.schedule) { %>

@@ -6,7 +6,7 @@ module.exports = scheduleObject => {
         const letter = object[0];
         const periods = object[1];
         const courses = periods.map((period, block) =>  {
-            const course = scheduleObject.find(courseObject => courseObject.period === period);
+            const course = scheduleObject.find(courseObject => courseObject.period === period && courseObject.letterDays.includes(letter));
             const time = HIGH_SCHOOL_SCHEDULE.times.find(timeBlock => timeBlock.block === block + 1);
             return {
                 course,
