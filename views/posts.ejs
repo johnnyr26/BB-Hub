@@ -1,0 +1,23 @@
+<!DOCTYPE>
+<html>
+    <head></head>
+    <body>
+        <a href="/">Home</a><br>
+        <input id="title" type="text" placeholder="Title"><br>
+        <textarea id="message"></textarea><br>
+        <button type="submit" id="submit">Submit</button>
+        <input type="file" id="img" name="img" accept="image/png, image/jpeg">
+        <div id="posts">
+            <% if (locals.posts) { %>
+                <% posts.forEach(post => { %>
+                    <hr>
+                    <h1><%= post.title %></h1>
+                    <p><%= post.user.name %></p>
+                    <p><%= post.message %></p>
+                    <hr>
+                <% }); %>
+            <% } %>
+        </div>
+        <script src="/js/posts.js"></script>
+    </body>
+</html>

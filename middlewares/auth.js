@@ -16,8 +16,11 @@ const auth = async (req, res, next) => {
         }
         req.user = user;
         req.token = token;
-        next();
+        if (next) {
+            next();
+        }
     } catch (error) {
+        console.log('error', error);
         res.clearCookie('token');
         return res.status(401).redirect('/login');
     }

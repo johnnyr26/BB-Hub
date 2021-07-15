@@ -16,15 +16,13 @@ module.exports = async (req, res) => {
         // Authorize a client with credentials, then call the Google Classroom API.
         const token = req.query.state ? req.query.state : req.cookies['token'];
         const user = await Users.findById(req.user._id);
-        authorize(JSON.parse(content), req, res, user, token, async (auth) => {
+        authorize(JSON.parse(content), req.query.code, res, user, token, async (auth) => {
             try {
                 const classroom = google.classroom({version: 'v1', auth});
                 const response = await classroom.courses.list({
-                    courseStates: 'ACTIVE',
-                    pageSize: 5
+                    courseStates: 'ACTIVE'
                 });
-                const { courses, nextPageToken } = response.data;
-                const courseNames = courses.map(course => course.name);
+                const { courses } = response.data;
                 const assignments = [];
                 if (courses.length) {
                     for (const course of courses) {
@@ -62,13 +60,13 @@ module.exports = async (req, res) => {
                     return res.render('classroom', { assignments });
                 }
             } catch (e) {
-                return getNewToken(auth, res, user, token);
+                return getNewToken(auth, res, token);
             }
         });
     });
 };
 
-const authorize = async (credentials, req, res, user, authToken, callback) => {
+const authorize = async (credentials, code, res, user, authToken, callback) => {
     const {client_secret, client_id, redirect_uris} = credentials.web;
     const oAuth2Client = new google.auth.OAuth2(
         client_id, client_secret, redirect_uris[1]
@@ -76,34 +74,31 @@ const authorize = async (credentials, req, res, user, authToken, callback) => {
     oAuth2Client.on('tokens', async (tokens) => {
         if (tokens.refresh_token) {
           // store the refresh_token in my database!
-            user.googleTokens = tokens;
+            user.googleRefreshToken = tokens.refresh_token;
             await user.save();
         }
     });
-    if (user.googleTokens.refresh_token) {
+    if (user.googleRefreshToken) {
         try {
-            oAuth2Client.credentials = { refresh_token: user.googleTokens.refresh_token };
+            oAuth2Client.credentials = { refresh_token: user.googleRefreshToken };
             return callback(oAuth2Client);
         } catch (e) {
-            return getNewToken(oAuth2Client, res, user, authToken);
+            return getNewToken(oAuth2Client, res, authToken);
         }
     }
-    const code = req.query.code;
     if (!code) {
-        return getNewToken(oAuth2Client, res, user, authToken);
+        return getNewToken(oAuth2Client, res, authToken);
     }
     const { tokens } = await oAuth2Client.getToken(code);
     oAuth2Client.setCredentials(tokens);
     callback(oAuth2Client);
 }
 
-const getNewToken = async (oAuth2Client, res, user, authToken) => {
+const getNewToken = async (oAuth2Client, res, authToken) => {
     const authURL = oAuth2Client.generateAuthUrl({
       access_type: 'offline',
       scope: SCOPES,
       state: authToken
     });
-    user.googleTokens = {};
-    await user.save();
     return res.redirect(authURL);
 }

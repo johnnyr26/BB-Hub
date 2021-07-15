@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken'); 
 
-const Courses = require('./Courses');
-
 const Schema = mongoose.Schema({
     name: {
         type: String,
@@ -50,14 +48,16 @@ const Schema = mongoose.Schema({
     requestedFriends: [{
         type: mongoose.ObjectId,
     }],
-    googleTokens: {
-        access_token: String,
-        refresh_token: String,
-        scope: String,
-        token_type: String,
-        expiry_date: Number,
+    googleRefreshToken: {
+        type: String
     }
 });
+
+Schema.virtual('Posts', {
+    ref: 'Posts',
+    localField: '_id',
+    foreignField: 'user'
+})
 
 Schema.methods.generateAuthToken = async function () {
     const token = jwt.sign({ _id: this._id.toString() }, process.env.secret);
