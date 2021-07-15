@@ -14,7 +14,7 @@ module.exports.uploadPosts = async (req, res) => {
         console.log(title, message);
         await Posts.createNewPost(req.user._id, title, message, image);
         const user = await Users.findById(req.user._id, 'name');
-        return res.send({ user: "Johnny Ramirez", title, message });
+        return res.send({ user: "Johnny Ramirez", title, message, image });
     } catch (e) {
         console.log(e);
         return res.send({ error: e.message });

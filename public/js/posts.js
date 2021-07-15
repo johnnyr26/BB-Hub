@@ -18,7 +18,8 @@ document.querySelector('#submit').addEventListener('click', () => {
         if (response.error) {
             throw new Error(response.error);
         }
-        const { user, title: titleResponse, message: messageResponse } = response;
+        const { user, title: titleResponse, message: messageResponse, image } = response;
+        console.log(image);
         const htmlPost = `
             <hr>
             <h1>${titleResponse}</h1>

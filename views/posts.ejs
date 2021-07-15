@@ -10,8 +10,10 @@
         <div id="posts">
             <% if (locals.posts) { %>
                 <% posts.forEach(post => { %>
+                    <% const b64 = new Buffer(post.img.data.buffer).toString('base64') %>
                     <hr>
                     <h1><%= post.title %></h1>
+                    <img width="200px" height="auto" src="data:image/jpeg;base64, <%= b64 %>">
                     <p><%= post.user.name %></p>
                     <p><%= post.message %></p>
                     <hr>
