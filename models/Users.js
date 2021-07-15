@@ -50,8 +50,12 @@ const Schema = mongoose.Schema({
     requestedFriends: [{
         type: mongoose.ObjectId,
     }],
-    authURL: {
-        type: String
+    googleTokens: {
+        access_token: String,
+        refresh_token: String,
+        scope: String,
+        token_type: String,
+        expiry_date: Number,
     }
 });
 

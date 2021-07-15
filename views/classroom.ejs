@@ -2,10 +2,11 @@
 <html>
     <head></head>
     <body>
+        <a href="/">Home Page</a><br>
         <% if (locals.assignments) { %>
             <% assignments.forEach(assignment => { %>
-                <% const { name, title } = assignment; %>
-                <p><%= name %>: <%= title %></p>
+                <% const { name, title, link, maxPoints } = assignment; %>
+                <a href="<%= link %>"><%= name %>: <%= title %> <%= maxPoints %></a><br>
             <% }); %>
         <% } %>
     </body>
