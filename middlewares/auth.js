@@ -6,16 +6,21 @@ const auth = async (req, res, next) => {
         let token;
         if (req.cookies['token']) {
             token = req.cookies['token'].replace('Bearer ', '');
-        } else {
+        } else if (req.query.state) {
             token = req.query.state.replace('Bearer ', '');
+        } else {
+            token = '';
         }
+        
         const decoded = jwt.verify(token, process.env.secret);
         const user = await User.findOne({ _id: decoded._id, 'tokens.token': token }).exec();
         if (!user) {
-            throw new Error();
+            throw new Error('User not found');
         }
+
         req.user = user;
         req.token = token;
+
         if (next) {
             next();
         }

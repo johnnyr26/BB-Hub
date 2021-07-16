@@ -33,5 +33,16 @@ const FIRST_FLOOR = [
     [ 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'OUTD', 'OUTD', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL' ]
 ];
 
+const ROOMS = [
+    'FITT', 'MCAF', 'STAI',
+    'H107', 'HGYM', 'H108',
+    'OUTD', 'COMM', 'BAND',
+    'H105', 'H104', 'LGI ',
+    'H103', 'H100', 'H101',
+    'MGYM', 'LIBR', 'WC  ',
+    'H102', 'NURS', 'AUDI',
+    'STAG', 'M100', 'M101'
+];
 
-module.exports = FIRST_FLOOR;
+module.exports.ROOMS = ROOMS;
+module.exports.MAP = FIRST_FLOOR;

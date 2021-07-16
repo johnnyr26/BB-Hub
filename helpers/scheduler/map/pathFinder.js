@@ -1,18 +1,23 @@
-const MAP = require('../../../assets/maps/highSchoolFirstFloor');
+const FIRST_FLOOR_MAP = require('../../../assets/maps/highSchoolFirstFloor').MAP;
+const FIRST_FLOOR_ROOMS = require('../../../assets/maps/highSchoolFirstFloor').ROOMS;
 
-const FINAL_DESTINATION = 'STAI';
+const SECOND_FLOOR_MAP = require('../../../assets/maps/highSchoolSecondFloor').MAP;
+const SECOND_FLOOR_ROOMS = require('../../../assets/maps/highSchoolSecondFloor').ROOMS;
+
+let STAIR_NODE;
 
 class Node {
-    constructor (row, col) {
+    constructor (row, col, room) {
         this.row = row
         this.col = col
         this.level = 1
         this.visited = false
         this.parent = null;
+        this.room = room;
     }
 }
 
-const findPath = map => {
+const findPath = (map, stairNode) => {
     const nodes = [];
     const visited = [];
     let rowIndex = 0;
@@ -21,8 +26,8 @@ const findPath = map => {
         const rowArray = [];
         const visitedRow = [];
         let colIndex = 0;
-        for (const col of row) {
-            rowArray.push(new Node(rowIndex, colIndex));
+        for (const cell of row) {
+            rowArray.push(new Node(rowIndex, colIndex, cell));
             visitedRow.push(false);
             colIndex ++;
         }
@@ -30,7 +35,7 @@ const findPath = map => {
         visited.push(visitedRow);
         rowIndex ++;
     }
-    return traverseNodes(nodes, visited, map);
+    return traverseNodes(nodes, visited, map, stairNode);
 }
 
 const getUnvisitedNeighbors = (row, col, originalStartingPoint, finalDestination, nodes, visited, queue, map) => {
@@ -66,34 +71,35 @@ const findPathBack = node => {
     return path;
 }
 
-const traverseNodes = (nodes, visited, map) => {
-    const startingNode = nodes[27][0];
+const traverseNodes = (nodes, visited, map, stairNode) => {
+    const startingNode = STAIR_NODE ? STAIR_NODE : getNodeOfPlace(STARTING_LOCATION, nodes);
     const queue = [startingNode];
     const originalStartingPoint = map[startingNode.row][startingNode.col];
-    if (originalStartingPoint === 'WALL') {
+    if (startingNode.room === 'WALL') {
         console.log('You chose to start at a wall');
         return;
     }
     while (queue.length > 0) {
         const node = queue.shift();
         
-        if (map[node.row][node.col] === FINAL_DESTINATION) {
+        if (map[node.row][node.col] === FINAL_LOCATION) {
+            STAIR_NODE = node;
             return findPathBack(node);
         }
         if (!node.visited && (map[node.row][node.col] === 'PATH' || map[node.row][node.col] === originalStartingPoint)) {
             node.visited = true;
             visited[node.row][node.col] = true;
-            getUnvisitedNeighbors(node.row, node.col, originalStartingPoint, FINAL_DESTINATION, nodes, visited, queue, map);
+            getUnvisitedNeighbors(node.row, node.col, originalStartingPoint, FINAL_LOCATION, nodes, visited, queue, map);
         }
     }
     console.log('There was no possible routes to the exit');
 }
 
-const printMapWithRoute = route => {
+const printMapWithRoute = (route, map) => {
     let index = 1;
-    for (let row = 0; row < MAP.length; row ++) {
+    for (let row = 0; row < map.length; row ++) {
         let string = '';
-        for (let col = 0; col < MAP[row].length; col ++) {
+        for (let col = 0; col < map[row].length; col ++) {
             let thereIsAOne = false;          
             for (const row2 of route) {
                 if (row === row2[0]  && col === row2[1]) {
@@ -109,15 +115,57 @@ const printMapWithRoute = route => {
             }
             index = 1;
             if (!thereIsAOne) {
-                string += `${MAP[row][col][0]}   `;
+                string += `${map[row][col][0]}   `;
             }
         }
         console.log(string);
     }
 }
 
-const ROUTE = findPath(MAP);
-if (ROUTE) {
-    printMapWithRoute(ROUTE);
+const getNodeOfPlace = (place, map) => {
+    for (const row of map) {
+        for (const cell of row) {
+            if (cell.room === place) {
+                return cell;
+            }
+        }
+    }
 }
 
+const getFloorOfStartingAndFinalLocations = () => {
+    const startingFloor = FIRST_FLOOR_ROOMS.includes(STARTING_LOCATION) ? 'FIRST_FLOOR' : 'SECOND_FLOOR';
+    const finalFloor = FIRST_FLOOR_ROOMS.includes(FINAL_LOCATION) ? 'FIRST_FLOOR' : 'SECOND_FLOOR';
+    return { startingFloor, finalFloor };
+}
+
+let STARTING_LOCATION = 'H213'
+let FINAL_LOCATION = 'GUID';
+
+const { startingFloor, finalFloor } = getFloorOfStartingAndFinalLocations();
+
+if (startingFloor === finalFloor) {
+    const map = startingFloor === 'FIRST_FLOOR' ? FIRST_FLOOR_MAP : SECOND_FLOOR_MAP;
+    const ROUTE = findPath(map);
+    if (ROUTE) {
+        printMapWithRoute(ROUTE, map);
+    }
+} else {
+    const endLocation = FINAL_LOCATION;
+    FINAL_LOCATION = 'STAI';
+
+    const startingMap = startingFloor === 'FIRST_FLOOR' ? FIRST_FLOOR_MAP : SECOND_FLOOR_MAP;
+    const finalMap = finalFloor === 'FIRST_FLOOR' ? FIRST_FLOOR_MAP : SECOND_FLOOR_MAP;
+
+    let route = findPath(startingMap);
+    if (route) {
+        printMapWithRoute(route, startingMap);
+    }
+
+    STARTING_LOCATION = STAIR_NODE;
+    FINAL_LOCATION = endLocation;
+
+    route = findPath(finalMap);
+    if (route) {
+        printMapWithRoute(route, finalMap);
+    }
+}
