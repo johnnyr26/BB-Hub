@@ -4,9 +4,9 @@ const SECOND_FLOOR = [
     [ 'WALL', 'WALL', 'PATH', 'WALL', 'WALL', 'PATH', 'PATH', 'PATH', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL' ],
     [ 'STAI', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL' ],
     [ 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'PATH', 'WALL', 'WALL', 'WALL', 'WALL', 'STAI', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL' ],
-    [ 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'H215', 'H215', 'WALL', 'PATH', 'WALL', 'WALL', 'WALL', 'WALL', 'PATH', 'WALL', '210B', '210B', 'WALL', '210A', '210A', 'WALL', 'H209', 'H209', 'WALL', 'H208', 'H208', 'WALL' ],
-    [ 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'H215', 'H215', 'WALL', 'PATH', 'WALL', 'H214', 'WALL', 'H212', 'PATH', 'WALL', '210B', '210B', 'WALL', '210A', '210A', 'WALL', 'H209', 'H209', 'WALL', 'H208', 'H208', 'WALL' ],
-    [ 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'H215', 'H215', 'WALL', 'PATH', 'WALL', 'H214', 'WALL', 'H212', 'PATH', 'PATH', '210B', '210B', 'WALL', '210A', '210A', 'WALL', 'H209', 'H209', 'WALL', 'H208', 'WALL', 'STAI' ],
+    [ 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'H215', 'H215', 'WALL', 'PATH', 'WALL', 'WALL', 'WALL', 'WALL', 'PATH', 'WALL', 'H210B', 'H210B', 'WALL', 'H210A', 'H210A', 'WALL', 'H209', 'H209', 'WALL', 'H208', 'H208', 'WALL' ],
+    [ 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'H215', 'H215', 'WALL', 'PATH', 'WALL', 'H214', 'WALL', 'H212', 'PATH', 'WALL', 'H210B', 'H210B', 'WALL', 'H210A', 'H210A', 'WALL', 'H209', 'H209', 'WALL', 'H208', 'H208', 'WALL' ],
+    [ 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'H215', 'H215', 'WALL', 'PATH', 'WALL', 'H214', 'WALL', 'H212', 'PATH', 'PATH', 'H210B', 'H210B', 'WALL', 'H210A', 'H210A', 'WALL', 'H209', 'H209', 'WALL', 'H208', 'WALL', 'STAI' ],
     [ 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'PATH', 'WALL', 'PATH', 'WALL', 'WALL', 'WALL', 'PATH', 'PATH', 'WALL', 'WALL', 'WALL', 'WALL', 'PATH', 'WALL', 'WALL', 'WALL', 'PATH', 'WALL', 'PATH', 'WALL', 'STAI' ],
     [ 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH', 'PATH' ],
     [ 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'PATH', 'WALL', 'WALL', 'WALL', 'WALL', 'WALL', 'PATH', 'WALL', 'WALL', 'WALL', 'WALL', 'PATH', 'WALL', 'PATH', 'WALL', 'WALL', 'WALL', 'WALL', 'PATH', 'WALL', 'PATH', 'WALL' ],
@@ -35,7 +35,7 @@ const SECOND_FLOOR = [
 
 const ROOMS = [
     'H213', 'H217', 'H216', 'STAI',
-    'H215', '210B', '210A', 'H209',
+    'H215', 'H210B', 'H210A', 'H209',
     'H208', 'H214', 'H212', 'H221',
     'H207', 'H206', 'H205', 'H204',
     'H219', 'H203', 'H202', 'H220',

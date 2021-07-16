@@ -4,8 +4,6 @@ const FIRST_FLOOR_ROOMS = require('../../../assets/maps/highSchoolFirstFloor').R
 const SECOND_FLOOR_MAP = require('../../../assets/maps/highSchoolSecondFloor').MAP;
 const SECOND_FLOOR_ROOMS = require('../../../assets/maps/highSchoolSecondFloor').ROOMS;
 
-let STAIR_NODE;
-
 class Node {
     constructor (row, col, room) {
         this.row = row
@@ -17,7 +15,7 @@ class Node {
     }
 }
 
-const findPath = (map, stairNode) => {
+module.exports.findPath = (map, STARTING_LOCATION, FINAL_LOCATION) => {
     const nodes = [];
     const visited = [];
     let rowIndex = 0;
@@ -35,7 +33,7 @@ const findPath = (map, stairNode) => {
         visited.push(visitedRow);
         rowIndex ++;
     }
-    return traverseNodes(nodes, visited, map, stairNode);
+    return traverseNodes(nodes, visited, map, STARTING_LOCATION, FINAL_LOCATION);
 }
 
 const getUnvisitedNeighbors = (row, col, originalStartingPoint, finalDestination, nodes, visited, queue, map) => {
@@ -61,18 +59,18 @@ const getUnvisitedNeighbors = (row, col, originalStartingPoint, finalDestination
     }
 }
 
-const findPathBack = node => {
+const findPathBack = (node, STAIR_NODE) => {
     console.log('Total length to the spot', node.level);
     const path = [[node.row, node.col]];
     while (node.parent) {
         path.unshift([node.parent.row, node.parent.col]);
         node = node.parent;
     }
-    return path;
+    return { path, STAIR_NODE };
 }
 
-const traverseNodes = (nodes, visited, map, stairNode) => {
-    const startingNode = STAIR_NODE ? STAIR_NODE : getNodeOfPlace(STARTING_LOCATION, nodes);
+const traverseNodes = (nodes, visited, map, STARTING_LOCATION, FINAL_LOCATION) => {
+    const startingNode = STARTING_LOCATION.room ? STARTING_LOCATION : getNodeOfPlace(STARTING_LOCATION, nodes);
     const queue = [startingNode];
     const originalStartingPoint = map[startingNode.row][startingNode.col];
     if (startingNode.room === 'WALL') {
@@ -83,8 +81,8 @@ const traverseNodes = (nodes, visited, map, stairNode) => {
         const node = queue.shift();
         
         if (map[node.row][node.col] === FINAL_LOCATION) {
-            STAIR_NODE = node;
-            return findPathBack(node);
+            const STAIR_NODE = node;
+            return findPathBack(node, STAIR_NODE);
         }
         if (!node.visited && (map[node.row][node.col] === 'PATH' || map[node.row][node.col] === originalStartingPoint)) {
             node.visited = true;
@@ -95,19 +93,20 @@ const traverseNodes = (nodes, visited, map, stairNode) => {
     console.log('There was no possible routes to the exit');
 }
 
-const printMapWithRoute = (route, map) => {
+module.exports.printMapWithRoute = (route, map) => {
     let index = 1;
+    const mapArray = [];
     for (let row = 0; row < map.length; row ++) {
-        let string = '';
+        const rowArray = [];
         for (let col = 0; col < map[row].length; col ++) {
             let thereIsAOne = false;          
             for (const row2 of route) {
                 if (row === row2[0]  && col === row2[1]) {
-                    let ender = '   ';
+                    let ender = '  ';
                     if (index >= 10) {
-                        ender = '  ';
+                        ender = ' ';
                     }
-                    string += index + ender;
+                    rowArray.push(index + ender);
                     thereIsAOne = true;
                     break;
                 }
@@ -115,11 +114,12 @@ const printMapWithRoute = (route, map) => {
             }
             index = 1;
             if (!thereIsAOne) {
-                string += `${map[row][col][0]}   `;
+                rowArray.push(`${map[row][col][0]}  `);
             }
         }
-        console.log(string);
+        mapArray.push(rowArray);
     }
+    return mapArray;
 }
 
 const getNodeOfPlace = (place, map) => {
@@ -132,40 +132,8 @@ const getNodeOfPlace = (place, map) => {
     }
 }
 
-const getFloorOfStartingAndFinalLocations = () => {
+module.exports.getFloorOfStartingAndFinalLocations = (STARTING_LOCATION, FINAL_LOCATION) => {
     const startingFloor = FIRST_FLOOR_ROOMS.includes(STARTING_LOCATION) ? 'FIRST_FLOOR' : 'SECOND_FLOOR';
     const finalFloor = FIRST_FLOOR_ROOMS.includes(FINAL_LOCATION) ? 'FIRST_FLOOR' : 'SECOND_FLOOR';
     return { startingFloor, finalFloor };
-}
-
-let STARTING_LOCATION = 'H213'
-let FINAL_LOCATION = 'GUID';
-
-const { startingFloor, finalFloor } = getFloorOfStartingAndFinalLocations();
-
-if (startingFloor === finalFloor) {
-    const map = startingFloor === 'FIRST_FLOOR' ? FIRST_FLOOR_MAP : SECOND_FLOOR_MAP;
-    const ROUTE = findPath(map);
-    if (ROUTE) {
-        printMapWithRoute(ROUTE, map);
-    }
-} else {
-    const endLocation = FINAL_LOCATION;
-    FINAL_LOCATION = 'STAI';
-
-    const startingMap = startingFloor === 'FIRST_FLOOR' ? FIRST_FLOOR_MAP : SECOND_FLOOR_MAP;
-    const finalMap = finalFloor === 'FIRST_FLOOR' ? FIRST_FLOOR_MAP : SECOND_FLOOR_MAP;
-
-    let route = findPath(startingMap);
-    if (route) {
-        printMapWithRoute(route, startingMap);
-    }
-
-    STARTING_LOCATION = STAIR_NODE;
-    FINAL_LOCATION = endLocation;
-
-    route = findPath(finalMap);
-    if (route) {
-        printMapWithRoute(route, finalMap);
-    }
 }

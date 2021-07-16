@@ -1,0 +1,13 @@
+* {
+    font-family: monospace;
+}
+#maps {
+    display: flex;
+    flex-direction: row;
+}
+.map {
+    margin: 20px;
+}
+p, span {
+    white-space: pre;
+}
