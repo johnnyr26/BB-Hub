@@ -3,7 +3,7 @@
 }
 #maps {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 .map {
     margin: 20px;
