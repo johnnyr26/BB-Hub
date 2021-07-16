@@ -18,18 +18,32 @@ document.querySelector('#submit').addEventListener('click', () => {
         if (response.error) {
             throw new Error(response.error);
         }
+
         const { user, title: titleResponse, message: messageResponse, image } = response;
-        const htmlPost = `
-            <hr>
-            <h1>${titleResponse}</h1>
-            <img width="200px" height="auto" src="data:image/jpeg;base64, ${image}">
-            <p>${user}</p>
-            <p>${messageResponse}</p>
-            <hr>
-        `;
+
+        let htmlPost;
+        if (image) {
+            htmlPost = `
+                <hr>
+                <h1>${titleResponse}</h1>
+                <img width="200px" height="auto" src="data:image/jpeg;base64, ${image}">
+                <p>${user}</p>
+                <p>${messageResponse}</p>
+                <hr>
+            `;
+        } else {
+            htmlPost = `
+                <hr>
+                <h1>${titleResponse}</h1>
+                <p>${user}</p>
+                <p>${messageResponse}</p>
+                <hr>
+            `;
+        }
         document.querySelector('#posts').innerHTML += htmlPost;
+
         title.value = '';
         message.value = '';
-    })
-    .catch(error => {});
+        document.querySelector('#img').value = '';
+    });
 });

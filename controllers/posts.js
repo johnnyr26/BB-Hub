@@ -18,9 +18,9 @@ module.exports.uploadPosts = async (req, res) => {
         await Posts.createNewPost(req.user._id, title, message, image);
         const user = await Users.findById(req.user._id, 'name');
 
-        const postImage = (await Posts.findOne({ title, message})).img;
-        const buffer = Buffer.from(postImage.data.buffer).toString('base64');
-        
+        const postImage = (await Posts.findOne({ title, message }, 'img')).img;
+        const buffer = postImage.data ? Buffer.from(postImage.data.buffer).toString('base64') : null;
+
         return res.send({ user: user.name, title, message, image: buffer });
     } catch (e) {
         console.log(e);

@@ -45,7 +45,7 @@ Schema.post('findOne', async post => {
 });
 
 Schema.statics.createNewPost = async (user, title, message, image)  => {
-    const post = new Posts({
+    const body = image ? {
         user,
         title,
         message,
@@ -53,7 +53,8 @@ Schema.statics.createNewPost = async (user, title, message, image)  => {
             data: fs.readFileSync(path.join(__dirname + '/../uploads/' + image.filename)),
             content: image.mimetype
         }
-    });
+    } : { user, title, message };
+    const post = new Posts(body);
     await post.save();
 } 
 

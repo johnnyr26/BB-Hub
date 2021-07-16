@@ -1,6 +1,8 @@
 <!DOCTYPE>
 <html>
-    <head></head>
+    <head>
+        <title>Posts</title>
+    </head>
     <body>
         <a href="/">Home</a><br>
         <input id="title" type="text" placeholder="Title"><br>
@@ -10,10 +12,12 @@
         <div id="posts">
             <% if (locals.posts) { %>
                 <% posts.forEach(post => { %>
-                    <% const b64 = Buffer.from(post.img.data.buffer).toString('base64') %>
                     <hr>
                     <h1><%= post.title %></h1>
-                    <img width="200px" height="auto" alt="Image" src="data:image/jpeg;base64, <%= b64 %>">
+                    <% if (post.img.data) { %>
+                        <% const b64 = Buffer.from(post.img.data.buffer).toString('base64') %>
+                        <img width="200px" height="auto" alt="Image" src="data:image/jpeg;base64, <%= b64 %>">
+                    <% } %>
                     <p><%= post.user.name %></p>
                     <p><%= post.message %></p>
                     <hr>

@@ -18,11 +18,18 @@ module.exports = async (req, res) => {
         const user = await Users.findById(req.user._id);
         authorize(JSON.parse(content), req.query.code, res, user, token, async (auth) => {
             try {
+                const { code } = req.query;
+                if (code) {
+                    const { tokens } = await auth.getToken(code);
+                    auth.setCredentials(tokens);
+                }
+
                 const classroom = google.classroom({version: 'v1', auth});
                 const response = await classroom.courses.list({
                     courseStates: 'ACTIVE'
                 });
                 const { courses } = response.data;
+                
                 const assignments = [];
                 if (courses.length) {
                     for (const course of courses) {

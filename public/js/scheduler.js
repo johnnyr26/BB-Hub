@@ -26,6 +26,7 @@ const printSchedule = (response, body) => {
         clearSchedule(body);
     }
     if (response.sharedCourses) {
+        document.querySelector('#shared-courses').textContent = '';
         response.sharedCourses.forEach(course => {
             document.querySelector('#shared-courses').textContent += `${course} `;
         });
@@ -36,13 +37,13 @@ const printSchedule = (response, body) => {
         if (!schedule) {
             return;
         }
-        const h1 = document.createElement('h1');
-        h1.textContent = letterDay;
-        document.getElementById(body).appendChild(h1);
-        const noSchool = !letterDay.substring(0, 5).match(/^[A-H] Day$/);
+        const noSchool = !letterDay.substring(0, 5).match(/^[A-H] Day$/) || schedule.find(course => !course.course);;
         if (noSchool) {
             return;
         }
+        const h1 = document.createElement('h1');
+        h1.textContent = letterDay;
+        document.getElementById(body).appendChild(h1);
         schedule.forEach(course => {
             const { period, courseTitle, classRoom, teacher } = course.course;
             const { block, from, to } = course.time;
