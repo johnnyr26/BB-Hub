@@ -13,11 +13,12 @@ document.querySelector('#submit').addEventListener('click', () => {
                     <p>${combined}</p>
                 `;
                 mapDiv.innerHTML += p;
-            })
+            });
+            document.querySelector('#map1-title').textContent = response.title;
         }
-        if (response.maps) {
+        if (response.map1 && response.map2) {
             const mapDiv1 = document.querySelector('#map1');
-            response.maps[0].forEach(row => {
+            response.map1.map.forEach(row => {
                 let rowDiv = '';
                 row.forEach(char => {
                     const num = parseInt(char);
@@ -30,8 +31,10 @@ document.querySelector('#submit').addEventListener('click', () => {
                 const p = `<div>${rowDiv}</div>`;
                 mapDiv1.innerHTML += p;
             });
+            document.querySelector('#map1-title').textContent = response.map1.title;
+
             const mapDiv2 = document.querySelector('#map2');
-            response.maps[1].forEach(row => {
+            response.map2.map.forEach(row => {
                 let rowDiv = '';
                 row.forEach(char => {
                     const num = parseInt(char);
@@ -44,6 +47,7 @@ document.querySelector('#submit').addEventListener('click', () => {
                 const p = `<div>${rowDiv}</div>`;
                 mapDiv2.innerHTML += p;
             });
+            document.querySelector('#map2-title').textContent = response.map2.title;
         }
     });
 });

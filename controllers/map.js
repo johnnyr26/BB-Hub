@@ -12,7 +12,7 @@ module.exports = (req, res) => {
             const map = startingFloor === 'FIRST_FLOOR' ? FIRST_FLOOR_MAP : SECOND_FLOOR_MAP;
             const { path } = findPath(map, STARTING_LOCATION, FINAL_LOCATION);
             if (path) {
-                return res.send({ map: printMapWithRoute(path, map) });
+                return res.send({ title: startingFloor, map: printMapWithRoute(path, map) });
             }
         } else {
             const endLocation = FINAL_LOCATION;
@@ -30,7 +30,15 @@ module.exports = (req, res) => {
             path = findPath(finalMap, STARTING_LOCATION, FINAL_LOCATION).path;
             const secondMap = printMapWithRoute(path, finalMap);
 
-            return res.send({ maps: [firstMap, secondMap] });
+            const map1 = {
+                title: startingFloor,
+                map: firstMap
+            };
+            const map2 = {
+                title: finalFloor,
+                map: secondMap
+            };
+            return res.send({ map1, map2 });
         }
     }
     return res.render('map');
