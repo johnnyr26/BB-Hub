@@ -19,10 +19,10 @@ document.querySelector('#submit').addEventListener('click', () => {
             throw new Error(response.error);
         }
         const { user, title: titleResponse, message: messageResponse, image } = response;
-        console.log(image);
         const htmlPost = `
             <hr>
             <h1>${titleResponse}</h1>
+            <img width="200px" height="auto" src="data:image/jpeg;base64, ${image}">
             <p>${user}</p>
             <p>${messageResponse}</p>
             <hr>
