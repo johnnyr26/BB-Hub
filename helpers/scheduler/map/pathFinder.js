@@ -1,95 +1,75 @@
-const FIRST_FLOOR_MAP = require('../../../assets/maps/highSchoolFirstFloor').MAP;
-const FIRST_FLOOR_ROOMS = require('../../../assets/maps/highSchoolFirstFloor').ROOMS;
+const FIRST_FLOOR_MAP = require('../../../assets/maps/array/highSchoolFirstFloor').MAP;
+const FIRST_FLOOR_ROOMS = require('../../../assets/maps/array/highSchoolFirstFloor').ROOMS;
 
-const SECOND_FLOOR_MAP = require('../../../assets/maps/highSchoolSecondFloor').MAP;
-const SECOND_FLOOR_ROOMS = require('../../../assets/maps/highSchoolSecondFloor').ROOMS;
+const SECOND_FLOOR_MAP = require('../../../assets/maps/array/highSchoolSecondFloor').MAP;
+const SECOND_FLOOR_ROOMS = require('../../../assets/maps/array/highSchoolSecondFloor').ROOMS;
+
+const SECOND_FLOOR = require('../../../assets/maps/SECOND_FLOOR');
 
 class Node {
-    constructor (row, col, room) {
-        this.row = row
-        this.col = col
-        this.level = 1
-        this.visited = false
-        this.parent = null;
+    constructor (room, neighbors) {
         this.room = room;
+        this.neighbors = neighbors
+        this.level = 1;
+        this.visited = false;
+        this.parent = null;
     }
 }
 
-module.exports.findPath = (map, STARTING_LOCATION, FINAL_LOCATION) => {
+module.exports.findPath = (STARTING_LOCATION, FINAL_LOCATION) => {
     const nodes = [];
-    const visited = [];
-    let rowIndex = 0;
-    
-    for (const row of map) {
-        const rowArray = [];
-        const visitedRow = [];
-        let colIndex = 0;
-        for (const cell of row) {
-            rowArray.push(new Node(rowIndex, colIndex, cell));
-            visitedRow.push(false);
-            colIndex ++;
-        }
-        nodes.push(rowArray);
-        visited.push(visitedRow);
-        rowIndex ++;
+
+    for (const node of SECOND_FLOOR) {
+        nodes.push(new Node(node.id, node.neighbors));
     }
-    return traverseNodes(nodes, visited, map, STARTING_LOCATION, FINAL_LOCATION);
+
+    return traverseNodes(nodes, STARTING_LOCATION, FINAL_LOCATION);
 }
 
-const getUnvisitedNeighbors = (row, col, originalStartingPoint, finalDestination, nodes, visited, queue, map) => {
-    if (row - 1 >= 0 &&  !visited[row - 1][col] && (map[row - 1][col] === 'PATH' || map[row - 1][col] === finalDestination || map[row - 1][col] === originalStartingPoint)) {
-        nodes[row - 1][col].level = nodes[row][col].level + 1;
-        nodes[row - 1][col].parent = nodes[row][col];
-        queue.push(nodes[row - 1][col]);
-    }
-    if (col - 1 >= 0 && !visited[row][col - 1] && (map[row][col - 1] === 'PATH' || map[row][col - 1] === finalDestination || map[row][col - 1] === originalStartingPoint)) {
-        nodes[row][col - 1].level = nodes[row][col].level + 1;
-        nodes[row][col - 1].parent = nodes[row][col];
-        queue.push(nodes[row][col - 1]);
-    }
-    if (row + 1 < map.length && !visited[row + 1][col] && (map[row + 1][col] === 'PATH' || map[row + 1][col] === finalDestination || map[row + 1][col] === originalStartingPoint)) {
-        nodes[row + 1][col].level = nodes[row][col].level + 1;
-        nodes[row + 1][col].parent = nodes[row][col];
-        queue.push(nodes[row + 1][col]);
-    }
-    if (col + 1 < map[0].length && !visited[row][col + 1] && (map[row][col + 1] === 'PATH' || map[row][col + 1] === finalDestination || map[row][col + 1] === originalStartingPoint)) {
-        nodes[row][col + 1].level = nodes[row][col].level + 1;
-        nodes[row][col + 1].parent = nodes[row][col];
-        queue.push(nodes[row][col + 1]);
-    }
+const getUnvisitedNeighbors = (node, nodes, queue) => {
+    const unvisitedNeighbors = node.neighbors.filter(neighborId => {
+        const neighbor = nodes.find(nodeInNodes => nodeInNodes.room === neighborId);
+        if (!neighbor.visited && !queue.includes(neighbor)) {
+            neighbor.level = node.level + 1;
+            neighbor.parent = node;
+            return true;
+        }
+    }).map(neighborNodeId => nodes.find(nodeInNodes => neighborNodeId === nodeInNodes.room));
+    return unvisitedNeighbors;
 }
 
 const findPathBack = (node, STAIR_NODE) => {
     console.log('Total length to the spot', node.level);
-    const path = [[node.row, node.col]];
+    const path = [node];
     while (node.parent) {
-        path.unshift([node.parent.row, node.parent.col]);
+        path.unshift(node.parent);
         node = node.parent;
     }
     return { path, STAIR_NODE };
 }
 
-const traverseNodes = (nodes, visited, map, STARTING_LOCATION, FINAL_LOCATION) => {
-    const startingNode = STARTING_LOCATION.room ? STARTING_LOCATION : getNodeOfPlace(STARTING_LOCATION, nodes);
+const traverseNodes = (nodes, STARTING_LOCATION, FINAL_LOCATION) => {
+    const startingNode = STARTING_LOCATION.room ? STARTING_LOCATION : nodes.find(node => node.room === STARTING_LOCATION);
     const queue = [startingNode];
-    const originalStartingPoint = map[startingNode.row][startingNode.col];
+
     if (startingNode.room === 'WALL') {
         console.log('You chose to start at a wall');
         return;
     }
+
     while (queue.length > 0) {
         const node = queue.shift();
-        
-        if (map[node.row][node.col] === FINAL_LOCATION) {
+        if (node.room === FINAL_LOCATION) {
             const STAIR_NODE = node;
             return findPathBack(node, STAIR_NODE);
         }
-        if (!node.visited && (map[node.row][node.col] === 'PATH' || map[node.row][node.col] === originalStartingPoint)) {
+
+        if (!node.visited) {
             node.visited = true;
-            visited[node.row][node.col] = true;
-            getUnvisitedNeighbors(node.row, node.col, originalStartingPoint, FINAL_LOCATION, nodes, visited, queue, map);
+            queue.push(...getUnvisitedNeighbors(node, nodes, queue));
         }
     }
+
     console.log('There was no possible routes to the exit');
 }
 
@@ -120,16 +100,6 @@ module.exports.printMapWithRoute = (route, map) => {
         mapArray.push(rowArray);
     }
     return mapArray;
-}
-
-const getNodeOfPlace = (place, map) => {
-    for (const row of map) {
-        for (const cell of row) {
-            if (cell.room === place) {
-                return cell;
-            }
-        }
-    }
 }
 
 module.exports.getFloorOfStartingAndFinalLocations = (STARTING_LOCATION, FINAL_LOCATION) => {

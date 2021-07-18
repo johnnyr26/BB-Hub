@@ -1,5 +1,5 @@
-const FIRST_FLOOR_MAP = require('../assets/maps/highSchoolFirstFloor').MAP;
-const SECOND_FLOOR_MAP = require('../assets/maps/highSchoolSecondFloor').MAP;
+const FIRST_FLOOR_MAP = require('../assets/maps/array/highSchoolFirstFloor').MAP;
+const SECOND_FLOOR_MAP = require('../assets/maps/array/highSchoolSecondFloor').MAP;
 
 const { findPath, getFloorOfStartingAndFinalLocations, printMapWithRoute } = require('../helpers/scheduler/map/pathFinder');
 
