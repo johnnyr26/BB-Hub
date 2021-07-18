@@ -1,0 +1,20 @@
+.route {
+    animation-duration: 2s;
+    animation-name: show-route;
+    stroke: red;
+    fill: red;
+}
+  
+@keyframes show-route {
+    from {
+        stroke: black;
+        fill: black;
+        right: 0%;
+    }
+
+    to {
+        right: 100%;
+        stroke: red;
+        fill: red;
+    }
+}

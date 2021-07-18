@@ -7,8 +7,8 @@ document.querySelector('#submit').addEventListener('click', () => {
     Object.values(document.querySelectorAll('line')).forEach(line => {
         const { id, coordinates, neighbors } = line;
         allLines.push({ id, coordinates, neighbors });
-        line.style.fill = 'none';
-        line.style.stroke = '#000';
+        line.style = '';
+        line.classList.remove('route');
     });
 
     fetch(`/bmap?startingLocation=${startingLocation}&finalLocation=${finalLocation}`)
@@ -17,12 +17,13 @@ document.querySelector('#submit').addEventListener('click', () => {
         const { title, path } = response;
         document.querySelector('#title').textContent = title;
         const g = document.querySelector('g');
-        path.forEach(line => {
-            const lineDiv = document.querySelector(`#${line.room}`);
-            lineDiv.style.fill = 'red';
-            lineDiv.style.stroke = 'red';
-            // prevents other lines from hovering over the selected line
-            g.appendChild(lineDiv)
+        path.forEach((line, index) => {
+            setTimeout(() => {
+                const lineDiv = document.querySelector(`#${line.room}`);
+                lineDiv.classList.add('route');
+                // prevents other lines from hovering over the selected line
+                g.appendChild(lineDiv);
+            }, 300 * (index + 1));
         });
     });
 });
