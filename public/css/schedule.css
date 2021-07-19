@@ -1,0 +1,10 @@
+#column {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#main-schedule {
+    flex-grow: 1;
+}

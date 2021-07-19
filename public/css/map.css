@@ -1,0 +1,32 @@
+.route {
+    animation-duration: 2s;
+    animation-name: show-route;
+    stroke: red;
+    fill: red;
+}
+#map1, #map2 {
+    width: 1000px;
+}
+#maps {
+    display: flex;
+    flex-direction: row;
+}
+  
+svg, g {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@keyframes show-route {
+    from {
+        right: 0%;
+        stroke: black;
+        fill: black;
+    }
+
+    to {
+        right: 100%;
+        stroke: red;
+        fill: red;
+    }
+}
