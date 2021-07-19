@@ -5,8 +5,8 @@ document.querySelector('#submit').addEventListener('click', () => {
     const allLines = [];
     document.querySelector('#title').textContent = '';
     Object.values(document.querySelectorAll('line')).forEach(line => {
-        const { id, coordinates, neighbors } = line;
-        allLines.push({ id, coordinates, neighbors });
+        const { id, coordinates, neighbors, classList } = line;
+        allLines.push({ id, coordinates, neighbors, classList });
         line.style = '';
         line.classList.remove('route');
     });
@@ -14,17 +14,36 @@ document.querySelector('#submit').addEventListener('click', () => {
     fetch(`/bmap?startingLocation=${startingLocation}&finalLocation=${finalLocation}`)
     .then(response => response.json())
     .then(response => {
-        const { title, path } = response;
-        document.querySelector('#title').textContent = title;
-        const g = document.querySelector(`#${title}`);
-        path.forEach((line, index) => {
-            setTimeout(() => {
-                const lineDiv = document.querySelector(`#${line.room}`);
-                lineDiv.classList.add('route');
-                // prevents other lines from hovering over the selected line
-                g.appendChild(lineDiv);
-            }, 300 * (index + 1));
-        });
+        if (response.map1 && response.map2) {
+            const { map1, map2 } = response
+            const maps = [ map1, map2 ];
+            for (const map of maps) {
+                const { title, path } = map;
+                document.querySelector('#title').textContent = title;
+                const g = document.querySelector(`#${title}`);
+                path.forEach((line, index) => {
+                    setTimeout(() => {
+                        const lineDiv = document.querySelector(`#${line.id}`);
+                        lineDiv.classList.add('route');
+                        // prevents other lines from hovering over the selected line
+                        g.appendChild(lineDiv);
+                    }, 1000 * (index + 1));
+                });
+            }
+        }
+        if (response.title && response.path) {
+            const { title, path } = response;
+            document.querySelector('#title').textContent = title;
+            const g = document.querySelector(`#${title}`);
+            path.forEach((line, index) => {
+                setTimeout(() => {
+                    const lineDiv = document.querySelector(`#${line.id}`);
+                    lineDiv.classList.add('route');
+                    // prevents other lines from hovering over the selected line
+                    g.appendChild(lineDiv);
+                }, 300 * (index + 1));
+            });
+        }
     });
 });
 

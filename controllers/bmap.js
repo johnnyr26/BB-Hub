@@ -19,27 +19,26 @@ module.exports = (req, res) => {
             }
         } else {
             const endLocation = FINAL_LOCATION;
-            FINAL_LOCATION = 'STAI';
-        
+            
             const startingMap = startingFloor === 'FIRST_FLOOR' ? FIRST_FLOOR : SECOND_FLOOR;
             const finalMap = finalFloor === 'FIRST_FLOOR' ? FIRST_FLOOR : SECOND_FLOOR;
-        
+
+            FINAL_LOCATION = `Stairs${startingMap === FIRST_FLOOR ? 1 : 2}`;
             let { path, STAIR_NODE } = findPath(STARTING_LOCATION, FINAL_LOCATION, startingMap);
-            const firstMap = printMapWithRoute(path, startingMap);
+
+            const firstPath = path;
         
-            STARTING_LOCATION = STAIR_NODE;
+            STARTING_LOCATION = STAIR_NODE.id.substring(0, 6) + (finalFloor === 'FIRST_FLOOR' ? 'L' : 'U');
             FINAL_LOCATION = endLocation;
         
-            path = findPath(finalMap, STARTING_LOCATION, FINAL_LOCATION).path;
-            const secondMap = printMapWithRoute(path, finalMap);
-
+            const secondPath = findPath(STARTING_LOCATION, FINAL_LOCATION, finalMap).path;
             const map1 = {
                 title: startingFloor,
-                map: firstMap
+                path: firstPath
             };
             const map2 = {
                 title: finalFloor,
-                map: secondMap
+                path: secondPath
             };
             return res.send({ map1, map2 });
         }

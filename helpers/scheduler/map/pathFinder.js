@@ -5,8 +5,9 @@ const SECOND_FLOOR_MAP = require('../../../assets/maps/array/highSchoolSecondFlo
 const SECOND_FLOOR_ROOMS = require('../../../assets/maps/array/highSchoolSecondFloor').ROOMS;
 
 class Node {
-    constructor (room, neighbors) {
+    constructor (room, id, neighbors) {
         this.room = room;
+        this.id = id;
         this.neighbors = neighbors
         this.level = 1;
         this.visited = false;
@@ -18,21 +19,20 @@ module.exports.findPath = (STARTING_LOCATION, FINAL_LOCATION, map) => {
     const nodes = [];
 
     for (const node of map) {
-        nodes.push(new Node(node.id, node.neighbors));
+        nodes.push(new Node(node.classList[0] ? node.classList[0] : node.id, node.id, node.neighbors));
     }
-
     return traverseNodes(nodes, STARTING_LOCATION, FINAL_LOCATION);
 }
 
 const getUnvisitedNeighbors = (node, nodes, queue) => {
     const unvisitedNeighbors = node.neighbors.filter(neighborId => {
-        const neighbor = nodes.find(nodeInNodes => nodeInNodes.room === neighborId);
+        const neighbor = nodes.find(nodeInNodes => nodeInNodes.id === neighborId);
         if (!neighbor.visited && !queue.includes(neighbor)) {
             neighbor.level = node.level + 1;
             neighbor.parent = node;
             return true;
         }
-    }).map(neighborNodeId => nodes.find(nodeInNodes => neighborNodeId === nodeInNodes.room));
+    }).map(neighborNodeId => nodes.find(nodeInNodes => neighborNodeId === nodeInNodes.id));
     return unvisitedNeighbors;
 }
 
@@ -47,14 +47,8 @@ const findPathBack = (node, STAIR_NODE) => {
 }
 
 const traverseNodes = (nodes, STARTING_LOCATION, FINAL_LOCATION) => {
-    const startingNode = STARTING_LOCATION.room ? STARTING_LOCATION : nodes.find(node => node.room === STARTING_LOCATION);
+    const startingNode = STARTING_LOCATION.room ? STARTING_LOCATION : nodes.find(node => node.id === STARTING_LOCATION);
     const queue = [startingNode];
-
-    if (startingNode.room === 'WALL') {
-        console.log('You chose to start at a wall');
-        return;
-    }
-
     while (queue.length > 0) {
         const node = queue.shift();
         if (node.room === FINAL_LOCATION) {
