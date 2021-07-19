@@ -1,5 +1,5 @@
 document.querySelector('#submit').addEventListener('click', () => {
-    const title = document.querySelector('#title');
+    const title = document.querySelector('#posts-title');
     const message = document.querySelector('#message');
     const img = document.querySelector('#img');
 

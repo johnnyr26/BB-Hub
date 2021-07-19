@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link href="/css/header.css" type="text/css" rel="stylesheet"/>
+        <link  href='/css/style.css' type="text/css" rel='stylesheet'/>
+        <link  href='/css/index.css' type="text/css" rel='stylesheet'/>
+    </head>
+    <body>
+        <%- include('../partials/header'); -%>
+        <main>
+        <div class="column">
+          <section>
+            <div class="section-title">
+                <h1>Schedule</h1>
+                <h1 id="letter-day-title"><%= schedule.letterDay.day %></h1>
+            </div>
+            <div id="grey-line"></div>
+            <div class="section-body">
+              <% schedule.schedule.forEach(course => { %>
+                  <div class="course-section">
+                    <h1 class="course-title"><%= course.course.courseTitle %></h1>
+                    <% if (course.course.courseTitle === 'Lunch') { %>
+                      <p><%= course.time.from %> - <%= course.time.to %></p>
+                    <% } else { %>
+                      <p><%= course.time.from %> - <%= course.time.to %> · <%= course.course.teacher %> · <%= course.course.classRoom %></p>
+                    <% } %>
+                  </div>
+              <% }); %>
+            </div>
+          </section>
+        </div>
+        <div class="column">
+          <section>
+            <div class="section-title">
+                <h1>Schedule</h1>
+            </div>
+            <div class="section-body">
+            </div>
+          </section>
+        </div>
+        <!-- <a href="/schedule">Schedule</a>
+        <a href="/classroom">Classroom</a>
+        <a href="/posts">Posts</a>
+        <a href="/map">Map</a>
+        <a href="/logout">Log Out</a> -->
+        
+      </main>
+    
+      <!-- <div>
+        <h1>Available Friends</h1>
+        <% if (locals.availableFriends) { %>
+          <% availableFriends.forEach(user => { %>
+            <button class="availableFriends" id=<%= user %>><%= user %></button>
+          <% }); %>
+        <% } %>
+        <h1>Friend Requests</h1>
+        <% if (locals.friendRequests) { %>
+          <% friendRequests.forEach(user => { %>
+            <button class="friendRequests" id=<%= user %>><%= user %></button>
+          <% }); %>
+        <% } %>
+      </div>
+      <h1>Requested Friends</h1>
+        <% if (locals.requestedFriends) { %>
+          <% requestedFriends.forEach(user => { %>
+            <button disabled class="requestedFriends" id=<%= user %>><%= user %></button>
+          <% }); %>
+        <% } %>
+      </div> -->
+    <script src="/js/script.js"></script>
+  </body>
+</html>

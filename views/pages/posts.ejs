@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link  href='/css/style.css' type="text/css" rel='stylesheet'/>
+        <link href="/css/header.css" type="text/css" rel="stylesheet">
+        <link href="/css/posts.css" type="text/css" rel="stylesheet">
+        <title>Posts</title>
+    </head>
+    <body>
+        <%- include('../partials/header'); -%>
+        <main>
+            <input id="posts-title" type="text" placeholder="Title">
+            <textarea id="message"></textarea><br>
+            <button type="submit" id="submit">Submit</button>
+            <input type="file" id="img" name="img" accept="image/png, image/jpeg">
+            <div id="posts">
+                <% if (locals.posts) { %>
+                    <% posts.forEach(post => { %>
+                        <hr>
+                        <h1><%= post.title %></h1>
+                        <% if (post.img.data) { %>
+                            <% const b64 = Buffer.from(post.img.data.buffer).toString('base64') %>
+                            <img class="announcements-image" width="200px" height="auto" alt="Image" src="data:image/jpeg;base64, <%= b64 %>">
+                        <% } %>
+                        <p><%= post.user.name %></p>
+                        <p><%= post.message %></p>
+                        <hr>
+                    <% }); %>
+                <% } %>
+            </div>
+        </main>
+        <script src="/js/posts.js"></script>
+    </body>
+</html>

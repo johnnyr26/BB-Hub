@@ -1,6 +1,6 @@
 Object.values(document.querySelectorAll('.users')).forEach(userButton => {
     userButton.addEventListener('click', () => {
-        fetch(`/scheduler/${userButton.id}`)
+        fetch(`/schedule/${userButton.id}`)
         .then(response => response.json())
         .then(response => printSchedule(response, 'schedule'));
     });
@@ -9,7 +9,7 @@ Object.values(document.querySelectorAll('.users')).forEach(userButton => {
 document.querySelector('#submit').addEventListener('click', () => {
     const scheduleInput = document.querySelector('textarea').value;
 
-    fetch(`/scheduler`, {
+    fetch(`/schedule`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

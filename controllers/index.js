@@ -1,9 +1,11 @@
 const Users = require('../models/Users');
 
+const getScheduleForDay = require('../helpers/schedule/getScheduleForDay');
+
 module.exports.renderIndex = async (req, res) => {
     const user = await Users.findById(req.user._id);
     if (!user) {
-        return res.render('index', { title: 'BB Hub', picture: req.user.picture, id: req.user._id }); 
+        return res.render('pages/index', { title: 'BB Hub', picture: req.user.picture, id: req.user._id }); 
     }
     
     const allUsers = await Users.find({});
@@ -17,11 +19,14 @@ module.exports.renderIndex = async (req, res) => {
     const friendRequests = await Promise.all(user.friendRequests.map(async id => (await Users.findById(id)).name));
     const requestedFriends = await Promise.all(user.requestedFriends.map(async id => (await Users.findById(id)).name));
 
-    return res.render('index', { 
+    const schedule = await getScheduleForDay(req.user._id);
+    
+    return res.render('pages/index', { 
         title: 'BB Hub', 
         availableFriends, 
         friendRequests,
         requestedFriends,
+        schedule,
         picture: req.user.picture, 
         id: req.user._id 
     });

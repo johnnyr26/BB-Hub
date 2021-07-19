@@ -5,8 +5,8 @@ module.exports = async (req, res) => {
         const user = await User.findById(req.user._id);
         user.tokens = user.tokens.filter(token => token.token !== req.token);
         await user.save();
-        return res.render('logout');
+        return res.render('pages/logout');
     } catch (error) {
-        return res.render('logout');
+        return res.render('pages/logout');
     }
 }

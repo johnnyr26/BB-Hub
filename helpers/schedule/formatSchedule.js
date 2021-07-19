@@ -13,6 +13,18 @@ module.exports = scheduleObject => {
                 time
             };
         });
+        const lunchPeriodIndex = HIGH_SCHOOL_SCHEDULE.times.findIndex(block => block.block === 'LUNCH');
+        const lunchPeriod = HIGH_SCHOOL_SCHEDULE.times.find(block => block.block === 'LUNCH');
+        courses.splice(lunchPeriodIndex, 0, {
+            course: {
+                period: 'LUNCH',
+                letterDays: Object.keys(SCHEDULE_STRUCTURE),
+                courseTitle: `Lunch`,
+                teacher: '',
+                classRoom: ''
+            },
+            time: lunchPeriod
+        });
         formatttedSchedule[letter] = courses;
     });
     return formatttedSchedule;

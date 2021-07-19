@@ -1,0 +1,61 @@
+main {
+    margin: 0 50px;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.column {
+    max-width: 430px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-grow: 1;
+}
+section {
+    box-sizing: border-box;
+    background-color: white;
+    height: 410px;
+    width: 400px;
+    border-radius: 5%;
+    padding: 10px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.section-title {
+    margin-left: 10px;
+    height: 60px;
+}
+.section-body {
+    height: 280px;
+    border-radius: 10px;
+    padding: 10px;
+    padding-top: 0;
+    overflow-y: scroll;
+}
+#grey-line {
+    margin: 0 10px;
+    height: 2px;
+    background-color: #e6e6e6;
+}
+h1, p {
+    margin: 5px 0;
+}
+h1 {
+    font-weight: 600;
+}
+.course-section {
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #ffffff;
+    width: 100%;
+    border-bottom: solid #e6e6e6 1px;
+    /* box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19); */
+}
+.course-title {
+    font-weight: 600;
+    font-size: 14px;
+}
+#letter-day-title {
+    font-weight: 500;
+}

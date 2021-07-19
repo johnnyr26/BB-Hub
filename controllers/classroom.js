@@ -64,7 +64,11 @@ module.exports = async (req, res) => {
                             });
                         } catch(e) {}
                     }
-                    return res.render('classroom', { assignments });
+                    return res.render('pages/classroom', { 
+                        assignments,
+                        id: req.user._id,
+                        picture: req.user.picture
+                    });
                 }
             } catch (e) {
                 return getNewToken(auth, res, token);

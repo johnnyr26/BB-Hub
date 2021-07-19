@@ -7,7 +7,11 @@ const path = require('path');
 
 module.exports.renderPosts = async (req, res) => {
     const posts = await Posts.find({});
-    return res.render('posts', { posts });
+    return res.render('pages/posts', { 
+        posts,
+        id: req.user._id,
+        picture: req.user.picture
+     });
 }
 
 module.exports.uploadPosts = async (req, res) => {

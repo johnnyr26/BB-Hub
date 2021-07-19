@@ -5,5 +5,5 @@ module.exports = async (req, res) => {
     const meals = response.data.menu.grabNGoItems.map(item => {
         return { name: item.name, description: item.description };
     });
-    return res.render('lunch', { meals, picture: req.user.picture, id: req.user._id  });
+    return res.render('pages/lunch', { meals, picture: req.user.picture, id: req.user._id  });
 };

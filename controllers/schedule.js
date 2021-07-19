@@ -1,21 +1,20 @@
 const Users = require('../models/Users');
 
-const parseLetterDays = require('../helpers/scheduler/parseLetterDays');
-const formatCourseTitle = require('../helpers/scheduler/formatCourseTitle');
-const formatSchedule = require('../helpers/scheduler/formatSchedule');
-const filterInput = require('../helpers/scheduler/filterInput');
-const getLetterDays = require('../helpers/scheduler/getSchoolDays').getLetterDays;
-const getSharedCourses = require('../helpers/scheduler/findSharedCourses');
-const findFreePeriods = require('../helpers/scheduler/findFreePeriods');
+const parseLetterDays = require('../helpers/schedule/parseLetterDays');
+const formatCourseTitle = require('../helpers/schedule/formatCourseTitle');
+const formatSchedule = require('../helpers/schedule/formatSchedule');
+const filterInput = require('../helpers/schedule/filterInput');
+const getLetterDays = require('../helpers/schedule/getSchoolDays').getLetterDays;
+const getSharedCourses = require('../helpers/schedule/findSharedCourses');
+const findFreePeriods = require('../helpers/schedule/findFreePeriods');
 
-
-module.exports.renderScheduler = async (req, res) => {
+module.exports.renderSchedule = async (req, res) => {
     const user = await Users.findById(req.user._id);
 
     if (req.params.user) {
         const searchedUser = await Users.findOne({ name: req.params.user });
         if (!searchedUser) {
-            return res.render('scheduler', { users, picture: req.user.picture, id: req.user._id });
+            return res.render('pages/schedule', { users, picture: req.user.picture, id: req.user._id });
         }
         const sharedCourses = getSharedCourses(user.schedule, searchedUser.schedule).map(course => course.courseTitle);
         const letterDays = await getLetterDays();
@@ -27,11 +26,10 @@ module.exports.renderScheduler = async (req, res) => {
         });
     }
     const friends = (await Users.find({ friends: user.id })).filter(user => user.schedule.length > 0).map(member => member.name);
-
     const letterDays = await getLetterDays();
     const formattedSchedule = formatSchedule(user.schedule);
 
-    return res.render('scheduler', { 
+    return res.render('pages/schedule', { 
         user, 
         letterDays,
         schedule: formattedSchedule, 
