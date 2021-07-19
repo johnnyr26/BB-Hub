@@ -1,6 +1,7 @@
 const FIRST_FLOOR_MAP = require('../assets/maps/array/highSchoolFirstFloor').MAP;
 const SECOND_FLOOR_MAP = require('../assets/maps/array/highSchoolSecondFloor').MAP;
 
+const FIRST_FLOOR = require('../assets/maps/FIRST_FLOOR');
 const SECOND_FLOOR = require('../assets/maps/SECOND_FLOOR');
 
 const { findPath, getFloorOfStartingAndFinalLocations, printMapWithRoute } = require('../helpers/scheduler/map/pathFinder');
@@ -11,8 +12,8 @@ module.exports = (req, res) => {
         const { startingFloor, finalFloor } = getFloorOfStartingAndFinalLocations(STARTING_LOCATION, FINAL_LOCATION);
 
         if (startingFloor === finalFloor) {
-            const map = startingFloor === 'FIRST_FLOOR' ? FIRST_FLOOR_MAP : SECOND_FLOOR;
-            const { path } = findPath(STARTING_LOCATION, FINAL_LOCATION);
+            const map = startingFloor === 'FIRST_FLOOR' ? FIRST_FLOOR : SECOND_FLOOR;
+            const { path } = findPath(STARTING_LOCATION, FINAL_LOCATION, map);
             if (path) {
                 return res.send({ title: startingFloor, path });
             }
@@ -20,10 +21,10 @@ module.exports = (req, res) => {
             const endLocation = FINAL_LOCATION;
             FINAL_LOCATION = 'STAI';
         
-            const startingMap = startingFloor === 'FIRST_FLOOR' ? FIRST_FLOOR_MAP : SECOND_FLOOR_MAP;
-            const finalMap = finalFloor === 'FIRST_FLOOR' ? FIRST_FLOOR_MAP : SECOND_FLOOR_MAP;
+            const startingMap = startingFloor === 'FIRST_FLOOR' ? FIRST_FLOOR : SECOND_FLOOR;
+            const finalMap = finalFloor === 'FIRST_FLOOR' ? FIRST_FLOOR : SECOND_FLOOR;
         
-            let { path, STAIR_NODE } = findPath(startingMap, STARTING_LOCATION, FINAL_LOCATION);
+            let { path, STAIR_NODE } = findPath(STARTING_LOCATION, FINAL_LOCATION, startingMap);
             const firstMap = printMapWithRoute(path, startingMap);
         
             STARTING_LOCATION = STAIR_NODE;

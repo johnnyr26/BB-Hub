@@ -34,14 +34,17 @@ const FIRST_FLOOR = [
 ];
 
 const ROOMS = [
-    'FITT', 'MCAF', 'STAI',
-    'H107', 'HGYM', 'H108',
-    'OUTD', 'COMM', 'BAND',
-    'H105', 'H104', 'LGI ',
-    'H103', 'H100', 'H101',
-    'MGYM', 'LIBR', 'WC  ',
-    'H102', 'NURS', 'AUDI',
-    'STAG', 'M100', 'M101'
+    "Stair1","MarketPlace","FITT",
+    "H107","H108","Stair3",
+    "M101","M100","Library",
+    "Nurse","Auditorium","Stair5",
+    "WC","Stair6","HGYM",
+    "MGYM","Cafeteria","BandRoom",
+    "H105","H104","H103",
+    "H101","H100","LGI",
+    "H102","Stair4","Faculty",
+    "Stair2","MCAF","Entrance",
+    "PORT"
 ];
 
 module.exports.ROOMS = ROOMS;

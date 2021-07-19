@@ -16,7 +16,7 @@ document.querySelector('#submit').addEventListener('click', () => {
     .then(response => {
         const { title, path } = response;
         document.querySelector('#title').textContent = title;
-        const g = document.querySelector('g');
+        const g = document.querySelector(`#${title}`);
         path.forEach((line, index) => {
             setTimeout(() => {
                 const lineDiv = document.querySelector(`#${line.room}`);
@@ -54,7 +54,7 @@ const yMatch = (line1, line2) => {
 }
 
 const lines = Object.values(document.querySelectorAll('line'));
-lines.forEach(line1 => {
+lines.forEach((line1, index) => {
     line1.coordinates = getCoordinates(line1);
     const neighbors = [];
     lines.forEach(line2 => {
@@ -70,16 +70,4 @@ lines.forEach(line1 => {
         }  
     });
     line1.neighbors = neighbors;
-    // line1.addEventListener('mouseover', () => {
-    //     line1.neighbors.forEach(neighbor => {
-    //         neighbor.style.stroke = 'blue';
-    //         neighbor.style.fill = 'blue';
-    //     });
-    // });
-    // line1.addEventListener('mouseleave', () => {
-    //     line1.neighbors.forEach(neighbor => {
-    //         neighbor.style.stroke = '#000';
-    //         neighbor.style.fill = 'none';
-    //     })
-    // });
 });

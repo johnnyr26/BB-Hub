@@ -4,8 +4,6 @@ const FIRST_FLOOR_ROOMS = require('../../../assets/maps/array/highSchoolFirstFlo
 const SECOND_FLOOR_MAP = require('../../../assets/maps/array/highSchoolSecondFloor').MAP;
 const SECOND_FLOOR_ROOMS = require('../../../assets/maps/array/highSchoolSecondFloor').ROOMS;
 
-const SECOND_FLOOR = require('../../../assets/maps/SECOND_FLOOR');
-
 class Node {
     constructor (room, neighbors) {
         this.room = room;
@@ -16,10 +14,10 @@ class Node {
     }
 }
 
-module.exports.findPath = (STARTING_LOCATION, FINAL_LOCATION) => {
+module.exports.findPath = (STARTING_LOCATION, FINAL_LOCATION, map) => {
     const nodes = [];
 
-    for (const node of SECOND_FLOOR) {
+    for (const node of map) {
         nodes.push(new Node(node.id, node.neighbors));
     }
 

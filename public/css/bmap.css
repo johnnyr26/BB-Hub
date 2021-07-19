@@ -4,7 +4,19 @@
     stroke: red;
     fill: red;
 }
+#map1, #map2 {
+    height: 450px;
+}
+#maps {
+    display: flex;
+    flex-direction: column;
+}
   
+svg, g {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 @keyframes show-route {
     from {
         stroke: black;
