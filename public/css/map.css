@@ -1,13 +1,32 @@
-* {
-    font-family: monospace;
+.route {
+    animation-duration: 2s;
+    animation-name: show-route;
+    stroke: red;
+    fill: red;
+}
+#map1, #map2 {
+    width: 1000px;
 }
 #maps {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
-.map {
-    margin: 20px;
+  
+svg, g {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-p, span {
-    white-space: pre;
+@keyframes show-route {
+    from {
+        right: 0%;
+        stroke: black;
+        fill: black;
+    }
+
+    to {
+        right: 100%;
+        stroke: red;
+        fill: red;
+    }
 }
