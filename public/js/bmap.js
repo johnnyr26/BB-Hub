@@ -3,7 +3,7 @@ document.querySelector('#submit').addEventListener('click', () => {
     const finalLocation = document.querySelector('#finalLocation').value;
 
     const allLines = [];
-    document.querySelector('#title').textContent = '';
+    Object.values(document.querySelectorAll('.title')).forEach(title => title.textContent = '');
     Object.values(document.querySelectorAll('line')).forEach(line => {
         const { id, coordinates, neighbors, classList } = line;
         allLines.push({ id, coordinates, neighbors, classList });
@@ -17,23 +17,31 @@ document.querySelector('#submit').addEventListener('click', () => {
         if (response.map1 && response.map2) {
             const { map1, map2 } = response
             const maps = [ map1, map2 ];
-            for (const map of maps) {
-                const { title, path } = map;
-                document.querySelector('#title').textContent = title;
+            const paths = [];
+            maps.forEach((map, mapIndex) => {
+                map.path.forEach(line => {
+                    paths.push({
+                        line,
+                        title: map.title,
+                        mapIndex
+                    })
+                })
+            });
+            paths.forEach((path, index) => {
+                const { title, line, mapIndex } = path;
+                document.querySelectorAll('.title')[mapIndex].textContent = title;
                 const g = document.querySelector(`#${title}`);
-                path.forEach((line, index) => {
-                    setTimeout(() => {
-                        const lineDiv = document.querySelector(`#${line.id}`);
-                        lineDiv.classList.add('route');
-                        // prevents other lines from hovering over the selected line
-                        g.appendChild(lineDiv);
-                    }, 1000 * (index + 1));
-                });
-            }
+                setTimeout(() => {
+                    const lineDiv = document.querySelector(`#${line.id}`);
+                    lineDiv.classList.add('route');
+                    // prevents other lines from hovering over the selected line
+                    g.appendChild(lineDiv);
+                }, 300 * (index + 1));
+            });
         }
         if (response.title && response.path) {
             const { title, path } = response;
-            document.querySelector('#title').textContent = title;
+            document.querySelectorAll('.title')[0].textContent = title;
             const g = document.querySelector(`#${title}`);
             path.forEach((line, index) => {
                 setTimeout(() => {
@@ -72,6 +80,7 @@ const yMatch = (line1, line2) => {
     return line1.coordinates.y1 === line2.coordinates.y1 || line1.coordinates.y1 === line2.coordinates.y2 || line1.coordinates.y2 === line2.coordinates.y1 || line1.coordinates.y2 === line2.coordinates.y2;
 }
 
+const setLines = new Set();
 const lines = Object.values(document.querySelectorAll('line'));
 lines.forEach((line1, index) => {
     line1.coordinates = getCoordinates(line1);
@@ -89,4 +98,5 @@ lines.forEach((line1, index) => {
         }  
     });
     line1.neighbors = neighbors;
+    setLines.add(line1.id);
 });
