@@ -1,6 +1,8 @@
 const Users = require('../models/Users');
 
 const getScheduleForDay = require('../helpers/schedule/getScheduleForDay');
+const getLunch = require('../helpers/lunch/getLunch');
+const getAssignments = require('../helpers/classroom/getAssignments');
 
 module.exports.renderIndex = async (req, res) => {
     const user = await Users.findById(req.user._id);
@@ -16,17 +18,25 @@ module.exports.renderIndex = async (req, res) => {
         const notRequestedFriends = !user.requestedFriends.includes(member.id);
         return notSelf && notAlreadyFriends && notFriendRequested && notRequestedFriends;
     }).map(user => user.name);
+
     const friendRequests = await Promise.all(user.friendRequests.map(async id => (await Users.findById(id)).name));
     const requestedFriends = await Promise.all(user.requestedFriends.map(async id => (await Users.findById(id)).name));
 
     const schedule = await getScheduleForDay(req.user._id);
+    const { lunch } = await getLunch();
     
+    if (req.query.assignments) {
+        const assignments = await getAssignments(req, res);
+        return res.send({ assignments });
+    }
+
     return res.render('pages/index', { 
         title: 'BB Hub', 
         availableFriends, 
         friendRequests,
         requestedFriends,
         schedule,
+        lunch,
         picture: req.user.picture, 
         id: req.user._id 
     });

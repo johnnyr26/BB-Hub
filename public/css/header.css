@@ -1,10 +1,10 @@
 #header {
     box-sizing: border-box;
-    font: 18px Arial;
+    font: 20px Arial;
     background-color: #ffffff;
     position: fixed;
     top: 0;
-    padding: 24px;
+    padding: 18px;
     width: 100%;
     z-index: 900;
 }
@@ -13,8 +13,8 @@
     outline: none;
     font-weight: 700;
     color: #000000;
-    font-size: 24px;
-    margin-left: 64px;
+    font-size: 30px;
+    margin-left: 20px;
 }
 #title-div {
     height: 41px;

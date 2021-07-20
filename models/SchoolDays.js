@@ -5,7 +5,12 @@ const Schema = mongoose.Schema({
         type: String,
     },
     lunch: [{
-        type: String,
+        name: {
+            type: String,
+        },
+        description: {
+            type: String
+        }
     }]
 });
 

@@ -1,12 +1,12 @@
 main {
-    margin: 0 50px;
-    padding-top: 100px;
+    min-width: 1220px;
+    margin: 0 15px;
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: center;
 }
 .column {
+    height: 100%;
     max-width: 430px;
     display: flex;
     flex-direction: row;
@@ -18,22 +18,23 @@ section {
     background-color: white;
     height: 410px;
     width: 400px;
-    border-radius: 5%;
+    border-radius: 10px;
     padding: 10px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
 .section-title {
+    color:#1472ff;
     margin-left: 10px;
     height: 60px;
 }
 .section-body {
-    height: 280px;
+    height: 310px;
     border-radius: 10px;
     padding: 10px;
     padding-top: 0;
     overflow-y: scroll;
 }
-#grey-line {
+.grey-line {
     margin: 0 10px;
     height: 2px;
     background-color: #e6e6e6;
@@ -44,18 +45,62 @@ h1, p {
 h1 {
     font-weight: 600;
 }
-.course-section {
+.detail-section {
     box-sizing: border-box;
     padding: 10px;
     background-color: #ffffff;
     width: 100%;
-    border-bottom: solid #e6e6e6 1px;
-    /* box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19); */
+    /* border-bottom: solid #e6e6e6 1px; */
+    border-radius: 10px;
+    margin: 10px 0;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
-.course-title {
+.detail-title {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 18px;
+}
+.detail-body {
+    box-sizing: border-box;
+    font-size: 16px;
 }
 #letter-day-title {
     font-weight: 500;
+}
+#lunch-section {
+    height: 450px;
+}
+#lunch-section-body {
+    height: 350px;
+}
+#schedule-section, #classroom-section, #schedule-section-body, #classroom-section-body {
+    height: 100%;
+}
+.classroom-link {
+    color: black;
+    text-decoration: none;
+}
+.classroom-link:visited {
+    color: black;
+    text-decoration: none;
+}
+.animate-load {
+    animation-duration: 1s;
+    animation-name: animate-load;
+}
+@keyframes animate-load {
+    from {
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.25;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    75% {
+        opacity: 0.75;
+    }
+    to {
+        opacity: 1;
+    }
 }

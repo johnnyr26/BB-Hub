@@ -10,20 +10,20 @@
         <%- include('../partials/header'); -%>
         <main>
         <div class="column">
-          <section>
+          <section id="schedule-section">
             <div class="section-title">
                 <h1>Schedule</h1>
                 <h1 id="letter-day-title"><%= schedule.letterDay.day %></h1>
             </div>
-            <div id="grey-line"></div>
-            <div class="section-body">
+            <div class="grey-line"></div>
+            <div id="schedule-section-body" class="section-body">
               <% schedule.schedule.forEach(course => { %>
-                  <div class="course-section">
-                    <h1 class="course-title"><%= course.course.courseTitle %></h1>
-                    <% if (course.course.courseTitle === 'Lunch') { %>
-                      <p><%= course.time.from %> - <%= course.time.to %></p>
+                  <div class="detail-section">
+                    <h1 class="detail-title"><%= course.course.courseTitle %></h1>
+                    <% if (course.course.courseTitle === 'Lunch' || course.course.courseTitle.substring(0, 4) === 'FREE') { %>
+                      <p class="detail-body"><%= course.time.from %> - <%= course.time.to %></p>
                     <% } else { %>
-                      <p><%= course.time.from %> - <%= course.time.to %> · <%= course.course.teacher %> · <%= course.course.classRoom %></p>
+                      <p class="detail-body"><%= course.time.from %> - <%= course.time.to %> · <%= course.course.teacher %> · <%= course.course.classRoom %></p>
                     <% } %>
                   </div>
               <% }); %>
@@ -31,11 +31,29 @@
           </section>
         </div>
         <div class="column">
-          <section>
+          <section id="classroom-section">
             <div class="section-title">
-                <h1>Schedule</h1>
+                <h1>Classroom Assignments</h1>
             </div>
-            <div class="section-body">
+            <div class="grey-line"></div>
+            <div id="classroom-section-body" class="section-body">
+              <h1>Loading...</h1>
+            </div>
+          </section>
+        </div>
+        <div class="column">
+          <section id="lunch-section">
+            <div class="section-title">
+                <h1>Patty's Corner</h1>
+            </div>
+            <div class="grey-line"></div>
+            <div id="lunch-section-body" class="section-body">
+              <% lunch.forEach(food => { %>
+                <div class="detail-section">
+                  <h1 class="detail-title"><%= food.name %></h1>
+                  <p class="detail-body"><%= food.description %></p>
+                </div>
+              <% }); %>
             </div>
           </section>
         </div>
