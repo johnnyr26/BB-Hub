@@ -63,7 +63,6 @@ module.exports = async (req, res) => {
                                     courseWorkDueDate = new Date(Date.UTC(dueDate.year, dueDate.month - 1, dueDate.day));
                                 }
                                 if (courseWorkDueDate >= currentDate) {
-                                    console.log(course.name, course.id, work);
                                     assignments.push({
                                         name: course.name,
                                         title,

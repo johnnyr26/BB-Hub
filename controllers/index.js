@@ -26,7 +26,7 @@ module.exports.renderIndex = async (req, res) => {
     const schedule = await getScheduleForDay(req.user._id);
     const { lunch } = await getLunch();
     const assignments = await getAssignments(req, res);
-    
+
     if (req.query.assignments) {
         const assignments = await getAssignments(req, res);
         return res.send({ assignments });
