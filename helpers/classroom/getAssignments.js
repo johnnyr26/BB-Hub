@@ -8,14 +8,14 @@ const SCOPES = [
 
 module.exports = async (req, res) => {
     const content = {
-        "web":{
+        "web": {
             "client_id":"665999096135-8onhd9jfj6f6rj4qid16s9j6qnqumf55.apps.googleusercontent.com",
             "project_id":"bb-hub-319503",
             "auth_uri":"https://accounts.google.com/o/oauth2/auth",
             "token_uri":"https://oauth2.googleapis.com/token",
             "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
             "client_secret":"lb40rdtN_46sKpNE-rTl-y1_",
-            "redirect_uris":["http://localhost:3000", "http://localhost:3000/classroom"],
+            "redirect_uris":["http://localhost:3000","http://localhost:3000/classroom","http://localhost/?assignments=true"],
             "javascript_origins":["http://localhost:3000"]
         }
     };
@@ -43,7 +43,7 @@ module.exports = async (req, res) => {
                             const response = await classroom.courses.courseWork.list({ 
                                 courseId: course.id,
                                 orderBy: 'dueDate asc',
-                                fields: 'courseWork.title,courseWork.dueDate,courseWork.dueTime,courseWork.alternateLink,courseWork.maxPoints',
+                                fields: 'courseWork.id,courseWork.title,courseWork.dueDate,courseWork.dueTime,courseWork.alternateLink,courseWork.maxPoints',
                             });
                             const { courseWork } = response.data;
                             if (!courseWork.length) {
@@ -53,7 +53,6 @@ module.exports = async (req, res) => {
                                 const { title, dueDate, dueTime, alternateLink: link, maxPoints  } = work;
                                 if (!dueDate) {
                                     return;
-                                    
                                 }
                                 const currentDate = new Date();
                                 if (dueTime.hours && dueTime.minutes) {
@@ -64,6 +63,7 @@ module.exports = async (req, res) => {
                                     courseWorkDueDate = new Date(Date.UTC(dueDate.year, dueDate.month - 1, dueDate.day));
                                 }
                                 if (courseWorkDueDate >= currentDate) {
+                                    console.log(course.name, course.id, work);
                                     assignments.push({
                                         name: course.name,
                                         title,
@@ -93,7 +93,7 @@ module.exports = async (req, res) => {
 const authorize = async (credentials, code, res, user, authToken, callback) => {
     const {client_secret, client_id, redirect_uris} = credentials.web;
     const oAuth2Client = new google.auth.OAuth2(
-        client_id, client_secret, redirect_uris[1]
+        client_id, client_secret, redirect_uris[0]
     );
     oAuth2Client.on('tokens', async (tokens) => {
         if (tokens.refresh_token) {

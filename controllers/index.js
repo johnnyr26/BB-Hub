@@ -1,4 +1,5 @@
 const Users = require('../models/Users');
+const fs = require('fs');
 
 const getScheduleForDay = require('../helpers/schedule/getScheduleForDay');
 const getLunch = require('../helpers/lunch/getLunch');
@@ -24,6 +25,7 @@ module.exports.renderIndex = async (req, res) => {
 
     const schedule = await getScheduleForDay(req.user._id);
     const { lunch } = await getLunch();
+    const assignments = await getAssignments(req, res);
     
     if (req.query.assignments) {
         const assignments = await getAssignments(req, res);

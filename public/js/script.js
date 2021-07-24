@@ -49,10 +49,9 @@ window.onload = () => {
     fetch('/?assignments=true')
     .then(response => response.json())
     .then(response => {
-        document.querySelector('#classroom-section-body').innerHTML = '';
         let { assignments, nextPageToken } = response.assignments;
-        if (!assignments.length) {
-            document.querySelector('#classroom-section-body').innerHTML = `<h1>You have no assignments due!</h1>`;
+        if (assignments.length) {
+            document.querySelector('#classroom-section-body').innerHTML = '';
         }
         postAssignments(assignments);
         fetchNextClassRoomAssignments(nextPageToken)
@@ -61,19 +60,28 @@ window.onload = () => {
 
 const fetchNextClassRoomAssignments = (nextPageToken) => {
     if (!nextPageToken) {
+        if (document.querySelector('#classroom-loading') && document.querySelector('#classroom-loading').textContent === 'Loading...') {
+            document.querySelector('#classroom-section-body').innerHTML = `<h1>You have no assignments due!</h1>`;
+        }
         return;
     }
     fetch(`/?assignments=true&nextPageToken=${nextPageToken}`)
     .then(response => response.json())
     .then(response => {
         ({ assignments, nextPageToken } = response.assignments);
+        if (assignments.length && document.querySelector('#classroom-loading') && document.querySelector('#classroom-loading').innerHTML === 'Loading...') {
+            document.querySelector('#classroom-section-body').innerHTML = '';
+        }
         postAssignments(assignments);
         fetchNextClassRoomAssignments(nextPageToken);
+    }).catch(e => {
+        if (document.querySelector('#classroom-loading') && document.querySelector('#classroom-loading').textContent === 'Loading...') {
+            document.querySelector('#classroom-section-body').innerHTML = `<h1>You have no assignments due!</h1>`;
+        }
     });
 }
 
 const postAssignments = assignments => {
-    console.log(assignments);
     for (const assignment of assignments) {
         const { name, title, link, courseWorkDueDate, maxPoints } = assignment;
         let dueDate = new Date(courseWorkDueDate).toLocaleString('en-US');

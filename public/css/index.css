@@ -20,12 +20,19 @@ section {
     width: 400px;
     border-radius: 10px;
     padding: 10px;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
 .section-title {
     color:#1472ff;
     margin-left: 10px;
     height: 60px;
+}
+#schedule-section-title, #classroom-section-title, #lunch-section-title {
+    margin: 0;
+    color:#1472ff;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
 }
 .section-body {
     height: 310px;
@@ -63,8 +70,13 @@ h1 {
     box-sizing: border-box;
     font-size: 16px;
 }
-#letter-day-title {
-    font-weight: 500;
+#letter-day-title, #classroom-title, #lunch-title {
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #lunch-section {
     height: 450px;
@@ -74,6 +86,10 @@ h1 {
 }
 #schedule-section, #classroom-section, #schedule-section-body, #classroom-section-body {
     height: 100%;
+}
+#classroom-section-body {
+    max-height: 500px;
+    overflow-y: scroll;
 }
 .classroom-link {
     color: black;
@@ -86,6 +102,22 @@ h1 {
 .animate-load {
     animation-duration: 1s;
     animation-name: animate-load;
+}
+#schedule-image-icon, #classroom-image-icon, #lunch-image-icon {
+    margin: 0;
+    height: 50px;
+    width: auto;
+}
+#lunch-image-icon {
+    margin-right: 3px;
+}
+#classroom-image-icon {
+    margin-right: 5px;
+}
+#schedule-image-icon {
+    height: 45px;
+    margin-right: 10px;
+    margin-bottom: 5px;
 }
 @keyframes animate-load {
     from {
