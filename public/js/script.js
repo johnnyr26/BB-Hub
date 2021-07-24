@@ -46,16 +46,38 @@ Object.values(document.querySelectorAll('.friendRequests')).forEach(userButton =
 });
 
 window.onload = () => {
+    const url = new URLSearchParams(window.location.search);
     fetch('/?assignments=true')
     .then(response => response.json())
     .then(response => {
-        let { assignments, nextPageToken } = response.assignments;
-        if (assignments.length) {
-            document.querySelector('#classroom-section-body').innerHTML = '';
+        if (response.authURL && !url.has('code')) {
+            document.querySelector('#classroom-section-body').innerHTML = `<a href=${response.authURL}>Authorize Classroom Access</a>`;
         }
-        postAssignments(assignments);
-        fetchNextClassRoomAssignments(nextPageToken)
+        if (url.has('code')) {
+            const code = url.get('code');
+            const state = url.get('state');
+            const scope = url.get('scope');
+            fetch(`/?assignments=true&state=${state}&code=${code}&scope=${scope}`)
+            .then(response => response.json())
+            .then(response => {
+                if (response.authURL) {
+                    return document.querySelector('#classroom-section-body').innerHTML = `<a href=${response.authURL}>Authorize Classroom Access</a>`;
+                }
+                getAssignments(response)
+            });
+        } else {
+            getAssignments(response);
+        }
     });
+}
+const getAssignments = response => {
+    console.log(response);
+    let { assignments, nextPageToken } = response.assignments;
+    if (assignments.length) {
+        document.querySelector('#classroom-section-body').innerHTML = '';
+    }
+    postAssignments(assignments);
+    fetchNextClassRoomAssignments(nextPageToken);
 }
 
 const fetchNextClassRoomAssignments = (nextPageToken) => {
@@ -83,17 +105,19 @@ const fetchNextClassRoomAssignments = (nextPageToken) => {
 
 const postAssignments = assignments => {
     for (const assignment of assignments) {
-        const { name, title, link, courseWorkDueDate, maxPoints } = assignment;
+        const { name, title, link, courseWorkDueDate, maxPoints, state } = assignment;
         let dueDate = new Date(courseWorkDueDate).toLocaleString('en-US');
         const { month, day, year, time } = getDateInfo(dueDate);
 
-        const assignmentDiv = maxPoints ?  `
+        let assignmentDiv;
+        if (state === 'CREATED' || state === 'NEW') {
+            assignmentDiv = maxPoints ?  `
             <div class="detail-section animate-load">
                 <a class="classroom-link" href=${link}>
                     <h1 class="detail-title">${name}</h1>
                     <h1 class="detail-title">${title}</h1>
-                    <p class="detail-body">Due ${month} ${day}, ${year} · ${time}</p>  
-                    <p class="detail-body">${maxPoints} points</p>  
+                    <p class="detail-body">Due ${month} ${day}, ${year} · ${time}</p>
+                    <p class="detail-body">${maxPoints} points</p>
                 </a>
             </div>
         ` : `
@@ -105,6 +129,30 @@ const postAssignments = assignments => {
                 </a>
             </div>
         `;
+        } else if (state === 'TURNED_IN') {
+            assignmentDiv = maxPoints ?  `
+            <div class="detail-section animate-load">
+                <a class="classroom-link" href=${link}>
+                    <del>
+                        <h1 class="detail-title">${name}</h1>
+                        <h1 class="detail-title">${title}</h1>
+                        <p class="detail-body">Due ${month} ${day}, ${year} · ${time}</p>
+                        <p class="detail-body">${maxPoints} points</p>
+                    </del>
+                </a>
+            </div>
+        ` : `
+            <div class="detail-section animate-load">
+                <a class="classroom-link" href=${link}>
+                    <del>
+                        <h1 class="detail-title">${name}</h1>
+                        <h1 class="detail-title">${title}</h1>
+                        <p class="detail-body">Due ${month} ${day}, ${year} · ${time}</p>
+                    </del>
+                </a>
+            </div>
+        `;
+        }
 
         document.querySelector('#classroom-section-body').innerHTML += assignmentDiv;
         setTimeout(() => {

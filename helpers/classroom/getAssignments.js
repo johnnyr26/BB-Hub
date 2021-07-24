@@ -15,17 +15,21 @@ module.exports = async (req, res) => {
             "token_uri":"https://oauth2.googleapis.com/token",
             "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
             "client_secret":"lb40rdtN_46sKpNE-rTl-y1_",
-            "redirect_uris":["http://localhost:3000","http://localhost:3000/classroom","http://localhost/?assignments=true"],
+            "redirect_uris":["http://localhost:3000","http://localhost:3000/classroom","http://localhost:3000/?assignments=true"],
             "javascript_origins":["http://localhost:3000"]
         }
     };
     const token = req.query.state ? req.query.state : req.cookies['token'];
     const user = await Users.findById(req.user._id);
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
         authorize(content, req.query.code, res, user, token, async (auth) => {
             try {
                 const { code } = req.query;
                 if (code) {
+                    const scopes = req.query.scope.split(' ');
+                    if (scopes.length <= 1) {
+                        reject(getNewToken(auth, token));
+                    }
                     const { tokens } = await auth.getToken(code);
                     auth.setCredentials(tokens);
                 }
@@ -49,12 +53,13 @@ module.exports = async (req, res) => {
                             if (!courseWork.length) {
                                 return;
                             }
-                            courseWork.forEach(work => {
-                                const { title, dueDate, dueTime, alternateLink: link, maxPoints  } = work;
+                            for (const work of courseWork) {
+                                const { title, dueDate, id: courseWorkId, dueTime, alternateLink: link, maxPoints  } = work;
                                 if (!dueDate) {
                                     return;
                                 }
                                 const currentDate = new Date();
+                                let courseWorkDueDate;
                                 if (dueTime.hours && dueTime.minutes) {
                                     courseWorkDueDate = new Date(Date.UTC(dueDate.year, dueDate.month - 1, dueDate.day, dueTime.hours, dueTime.minutes));
                                 } else if (dueTime.hours) {
@@ -63,15 +68,22 @@ module.exports = async (req, res) => {
                                     courseWorkDueDate = new Date(Date.UTC(dueDate.year, dueDate.month - 1, dueDate.day));
                                 }
                                 if (courseWorkDueDate >= currentDate) {
+                                    const courseWorkResponse = await classroom.courses.courseWork.studentSubmissions.list({ 
+                                        courseId: course.id,
+                                        courseWorkId,
+                                        states: ['CREATED', 'TURNED_IN']
+                                    });
+                                    const state = courseWorkResponse.data.studentSubmissions[0].state;
                                     assignments.push({
                                         name: course.name,
                                         title,
                                         courseWorkDueDate,
                                         link,
-                                        maxPoints
+                                        maxPoints,
+                                        state
                                     });
                                 }
-                            });
+                            }
                         } catch(e) {}
                     }
                     assignments.sort((a, b) => {
@@ -83,7 +95,8 @@ module.exports = async (req, res) => {
                     });
                 }
             } catch (e) {
-                getNewToken(auth, res, token);
+                const url = getNewToken(auth, token);
+                reject(url);
             }
         });
     });
@@ -106,22 +119,21 @@ const authorize = async (credentials, code, res, user, authToken, callback) => {
             oAuth2Client.credentials = { refresh_token: user.googleRefreshToken };
             return callback(oAuth2Client);
         } catch (e) {
-            return getNewToken(oAuth2Client, res, authToken);
+            return getNewToken(oAuth2Client, authToken);
         }
     }
     if (!code) {
-        return getNewToken(oAuth2Client, res, authToken);
+        return getNewToken(oAuth2Client, authToken);
     }
     const { tokens } = await oAuth2Client.getToken(code);
     oAuth2Client.setCredentials(tokens);
     callback(oAuth2Client);
 };
 
-const getNewToken = async (oAuth2Client, res, authToken) => {
-    const authURL = oAuth2Client.generateAuthUrl({
+const getNewToken = async (oAuth2Client, authToken) => {
+    return oAuth2Client.generateAuthUrl({
       access_type: 'offline',
       scope: SCOPES,
       state: authToken
     });
-    return res.redirect(authURL);
 };
