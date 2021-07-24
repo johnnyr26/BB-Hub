@@ -50,8 +50,14 @@ window.onload = () => {
     fetch('/?assignments=true')
     .then(response => response.json())
     .then(response => {
+        console.log('first response', response);
         if (response.authURL && !url.has('code')) {
             document.querySelector('#classroom-section-body').innerHTML = `<a href=${response.authURL}>Authorize Classroom Access</a>`;
+            return;
+        }
+        if (response.assignments) {
+            getAssignments(response);
+            return;
         }
         if (url.has('code')) {
             const code = url.get('code');
@@ -60,18 +66,16 @@ window.onload = () => {
             fetch(`/?assignments=true&state=${state}&code=${code}&scope=${scope}`)
             .then(response => response.json())
             .then(response => {
+                console.log('second response', response);
                 if (response.authURL) {
                     return document.querySelector('#classroom-section-body').innerHTML = `<a href=${response.authURL}>Authorize Classroom Access</a>`;
                 }
                 getAssignments(response)
             });
-        } else {
-            getAssignments(response);
         }
     });
 }
 const getAssignments = response => {
-    console.log(response);
     let { assignments, nextPageToken } = response.assignments;
     if (assignments.length) {
         document.querySelector('#classroom-section-body').innerHTML = '';
@@ -110,7 +114,7 @@ const postAssignments = assignments => {
         const { month, day, year, time } = getDateInfo(dueDate);
 
         let assignmentDiv;
-        if (state === 'CREATED' || state === 'NEW') {
+        if (state === 'CREATED' || state === 'NEW' || state === 'RECLAIMED_BY_STUDENT') {
             assignmentDiv = maxPoints ?  `
             <div class="detail-section animate-load">
                 <a class="classroom-link" href=${link}>

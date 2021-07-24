@@ -22,10 +22,10 @@ module.exports = async (req, res) => {
     const token = req.query.state ? req.query.state : req.cookies['token'];
     const user = await Users.findById(req.user._id);
     return new Promise((resolve, reject) => {
-        authorize(content, req.query.code, res, user, token, async (auth) => {
+        authorize(content, req.query.code, res, user, token, reject, async (auth) => {
             try {
                 const { code } = req.query;
-                if (code) {
+                if (code && !auth.credentials) {
                     const scopes = req.query.scope.split(' ');
                     if (scopes.length <= 1) {
                         reject(getNewToken(auth, token));
@@ -71,7 +71,7 @@ module.exports = async (req, res) => {
                                     const courseWorkResponse = await classroom.courses.courseWork.studentSubmissions.list({ 
                                         courseId: course.id,
                                         courseWorkId,
-                                        states: ['CREATED', 'TURNED_IN']
+                                        states: ['CREATED', 'TURNED_IN', 'RECLAIMED_BY_STUDENT']
                                     });
                                     const state = courseWorkResponse.data.studentSubmissions[0].state;
                                     assignments.push({
@@ -102,7 +102,7 @@ module.exports = async (req, res) => {
     });
 };
 
-const authorize = async (credentials, code, res, user, authToken, callback) => {
+const authorize = async (credentials, code, res, user, authToken, reject, callback) => {
     const {client_secret, client_id, redirect_uris} = credentials.web;
     const oAuth2Client = new google.auth.OAuth2(
         client_id, client_secret, redirect_uris[0]
@@ -123,7 +123,8 @@ const authorize = async (credentials, code, res, user, authToken, callback) => {
         }
     }
     if (!code) {
-        return getNewToken(oAuth2Client, authToken);
+        const url = getNewToken(oAuth2Client, authToken);
+        return reject(url);
     }
     const { tokens } = await oAuth2Client.getToken(code);
     oAuth2Client.setCredentials(tokens);
