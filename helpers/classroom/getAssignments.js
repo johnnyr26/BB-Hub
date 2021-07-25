@@ -10,6 +10,13 @@ const sortAssignments = assignments => {
     const notCompletedAssignments = assignments.filter(assignment => assignment.state === 'CREATED' || assignment.state === 'RECLAIMED_BY_STUDENT');
     const completedAssignments = assignments.filter(assignment => assignment.state === 'TURNED_IN');
 
+    notCompletedAssignments.sort((a, b) => {
+        return a.courseWorkDueDate - b.courseWorkDueDate;
+    });
+    completedAssignments.sort((a, b) => {
+        return a.courseWorkDueDate - b.courseWorkDueDate;
+    });
+    
     for (let i = 0; i < assignments.length; i ++) {
         if (i < notCompletedAssignments.length) {
             assignments[i] = notCompletedAssignments[i];

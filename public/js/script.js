@@ -64,13 +64,14 @@ window.onload = () => {
             const state = url.get('state');
             const scope = url.get('scope');
             fetch(`/?assignments=true&state=${state}&code=${code}&scope=${scope}`)
-            .then(response => response.json())
-            .then(response => {
-                console.log('second response', response);
-                if (response.authURL) {
-                    return document.querySelector('#classroom-section-body').innerHTML = `<a href=${response.authURL}>Authorize Classroom Access</a>`;
+            .then(secondResponse => secondResponse.json())
+            .then(secondResponse => {
+                console.log('second response', secondResponse);
+                if (secondResponse.authURL) {
+                    document.querySelector('#classroom-section-body').innerHTML = `<a href=${secondResponse.authURL}>Authorize Classroom Access</a>`;
+                    return;
                 }
-                getAssignments(response)
+                getAssignments(secondResponse)
             });
         }
     });
@@ -84,7 +85,7 @@ const getAssignments = response => {
     fetchNextClassRoomAssignments(nextPageToken);
 }
 
-const fetchNextClassRoomAssignments = (nextPageToken) => {
+const fetchNextClassRoomAssignments = nextPageToken => {
     if (!nextPageToken) {
         if (document.querySelector('#classroom-loading') && document.querySelector('#classroom-loading').textContent === 'Loading...') {
             document.querySelector('#classroom-section-body').innerHTML = `<h1>You have no assignments due!</h1>`;
@@ -94,12 +95,12 @@ const fetchNextClassRoomAssignments = (nextPageToken) => {
     fetch(`/?assignments=true&nextPageToken=${nextPageToken}`)
     .then(response => response.json())
     .then(response => {
-        ({ assignments, nextPageToken } = response.assignments);
+        let { assignments, nextPageToken: newToken } = response.assignments;
         if (assignments.length && document.querySelector('#classroom-loading') && document.querySelector('#classroom-loading').innerHTML === 'Loading...') {
             document.querySelector('#classroom-section-body').innerHTML = '';
         }
         postAssignments(assignments);
-        fetchNextClassRoomAssignments(nextPageToken);
+        fetchNextClassRoomAssignments(newToken);
     }).catch(e => {
         if (document.querySelector('#classroom-loading') && document.querySelector('#classroom-loading').textContent === 'Loading...') {
             document.querySelector('#classroom-section-body').innerHTML = `<h1>You have no assignments due!</h1>`;
@@ -108,12 +109,14 @@ const fetchNextClassRoomAssignments = (nextPageToken) => {
 }
 
 const postAssignments = assignments => {
+    let firstTurnedInAssignment = false;
     for (const assignment of assignments) {
         const { name, title, link, courseWorkDueDate, maxPoints, state } = assignment;
         let dueDate = new Date(courseWorkDueDate).toLocaleString('en-US');
         const { month, day, year, time } = getDateInfo(dueDate);
 
         let assignmentDiv;
+        
         if (state === 'CREATED' || state === 'NEW' || state === 'RECLAIMED_BY_STUDENT') {
             assignmentDiv = maxPoints ?  `
             <div class="detail-section animate-load">
@@ -157,7 +160,10 @@ const postAssignments = assignments => {
             </div>
         `;
         }
-
+        if (state === 'TURNED_IN' && !firstTurnedInAssignment) {
+            document.querySelector('#classroom-section-body').innerHTML += `<p class="clasroom-assignments-p">Turned In Assignments`;
+            firstTurnedInAssignment = true;
+        }
         document.querySelector('#classroom-section-body').innerHTML += assignmentDiv;
         setTimeout(() => {
             Object.values(document.querySelectorAll('.animate-load')).forEach(div => div.classList.remove('animate-load'));

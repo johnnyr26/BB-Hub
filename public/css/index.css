@@ -119,6 +119,12 @@ h1 {
     margin-right: 10px;
     margin-bottom: 5px;
 }
+.clasroom-assignments-p {
+    margin: 5px;
+    color: #000000;
+    opacity: .7;
+    font-size: 18px;
+}
 @keyframes animate-load {
     from {
         opacity: 0;
