@@ -16,7 +16,7 @@ const sortAssignments = assignments => {
     completedAssignments.sort((a, b) => {
         return a.courseWorkDueDate - b.courseWorkDueDate;
     });
-    
+
     for (let i = 0; i < assignments.length; i ++) {
         if (i < notCompletedAssignments.length) {
             assignments[i] = notCompletedAssignments[i];
@@ -173,11 +173,8 @@ const authorize = async (code, user, authToken) => {
                 return reject(getNewToken(oAuth2Client, authToken));
             }
         }
-    
-        if (!code) {
-            const url = getNewToken(oAuth2Client, authToken);
-            return reject(url);
-        }
+        
+        return reject(getNewToken(oAuth2Client, authToken));
     });
 };
 

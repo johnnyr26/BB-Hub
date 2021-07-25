@@ -110,10 +110,15 @@ const fetchNextClassRoomAssignments = nextPageToken => {
 
 const postAssignments = assignments => {
     let firstTurnedInAssignment = false;
+
+    document.querySelector('#classroom-section-body').innerHTML += `<p class="clasroom-assignments-p">Incompleted Assignments</p>`;
+
     for (const assignment of assignments) {
         const { name, title, link, courseWorkDueDate, maxPoints, state } = assignment;
         let dueDate = new Date(courseWorkDueDate).toLocaleString('en-US');
         const { month, day, year, time } = getDateInfo(dueDate);
+
+        
 
         let assignmentDiv;
         
@@ -161,7 +166,7 @@ const postAssignments = assignments => {
         `;
         }
         if (state === 'TURNED_IN' && !firstTurnedInAssignment) {
-            document.querySelector('#classroom-section-body').innerHTML += `<p class="clasroom-assignments-p">Turned In Assignments`;
+            document.querySelector('#classroom-section-body').innerHTML += `<p class="clasroom-assignments-p">Completed Assignments`;
             firstTurnedInAssignment = true;
         }
         document.querySelector('#classroom-section-body').innerHTML += assignmentDiv;
