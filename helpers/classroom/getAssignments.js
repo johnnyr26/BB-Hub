@@ -51,12 +51,12 @@ module.exports = async (req, res) => {
                             });
                             const { courseWork } = response.data;
                             if (!courseWork.length) {
-                                return;
+                                continue;
                             }
                             for (const work of courseWork) {
                                 const { title, dueDate, id: courseWorkId, dueTime, alternateLink: link, maxPoints  } = work;
                                 if (!dueDate) {
-                                    return;
+                                    continue;
                                 }
                                 const currentDate = new Date();
                                 let courseWorkDueDate;
