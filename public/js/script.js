@@ -120,7 +120,7 @@ const postAssignments = assignments => {
     let firstTurnedInAssignment = false;
 
     if (assignments.length) {
-        document.querySelector('#classroom-section-body').innerHTML += `<p class="clasroom-assignments-p">Incompleted Assignments</p>`;
+        document.querySelector('#classroom-section-body').innerHTML += `<p class="clasroom-assignments-p" id="incomplete-assignments">Incomplete Assignments</p>`;
     }
 
     for (const assignment of assignments) {

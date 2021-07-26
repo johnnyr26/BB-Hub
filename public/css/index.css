@@ -37,6 +37,9 @@ section {
     height: auto;
     margin: 0;
 }
+.announcements-title-heading {
+    font-size: 26px;
+}
 .announcements-image {
     width: 100%;
     height: auto;
@@ -45,6 +48,10 @@ section {
 }
 .announcements-section-body {
     height: auto !important;
+}
+.announcements-body {
+    font-size: 16px;
+    margin: 10px 0;
 }
 #schedule-section-title, #classroom-section-title, #lunch-section-title {
     margin: 0;
@@ -162,6 +169,9 @@ h1 {
 }
 #authorize-classroom:hover {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.35), 0 3px 10px 0 rgba(0, 0, 0, 0.35);
+}
+#incomplete-assignments {
+    margin-top: 10px;
 }
 @keyframes animate-load {
     from {

@@ -1,6 +1,5 @@
 const Users = require('../models/Users');
 const Posts = require('../models/Posts');
-const fs = require('fs');
 
 const getScheduleForDay = require('../helpers/schedule/getScheduleForDay');
 const getLunch = require('../helpers/lunch/getLunch');

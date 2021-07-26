@@ -67,65 +67,66 @@ module.exports = async (req, res) => {
                 });
             });
 
-            Promise.allSettled(coursePromises).then(async courseWorkResponseArray => {
-                for (let i = 0; i < courseWorkResponseArray.length; i ++) {
-                    if (courseWorkResponseArray[i].status === 'rejected') {
-                        continue;
-                    }
-
-                    const courseWorkResponse = courseWorkResponseArray[i].value;
-                    const course = courses[i];
-
-                    const { courseWork } = courseWorkResponse.data;
-
-                    if (!courseWork || !courseWork.length) {
-                        continue;
-                    }
-
-                    for (const work of courseWork) {
-
-                        const { title, dueDate, id: courseWorkId, dueTime, alternateLink: link, maxPoints  } = work;
-
-                        if (!dueDate) {
-                            continue;
-                        }
-
-                        const currentDate = new Date();
-                        let courseWorkDueDate;
-                        if (dueTime.hours && dueTime.minutes) {
-                            courseWorkDueDate = new Date(Date.UTC(dueDate.year, dueDate.month - 1, dueDate.day, dueTime.hours, dueTime.minutes));
-                        } else if (dueTime.hours) {
-                            courseWorkDueDate = new Date(Date.UTC(dueDate.year, dueDate.month - 1, dueDate.day, dueTime.hours));
-                        } else {
-                            courseWorkDueDate = new Date(Date.UTC(dueDate.year, dueDate.month - 1, dueDate.day));
-                        }
-                        const oldAssignment = courseWorkDueDate < currentDate;
-
-                        if (oldAssignment) {
-                            continue;
-                        }
-                        const submissionResponse = await classroom.courses.courseWork.studentSubmissions.list({ 
-                            courseId: course.id,
-                            courseWorkId,
-                            states: ['CREATED', 'TURNED_IN', 'RECLAIMED_BY_STUDENT']
-                        });
-                        const state = submissionResponse.data.studentSubmissions[0].state;
-                        assignments.push({
-                            name: course.name,
-                            title,
-                            courseWorkDueDate,
-                            link,
-                            maxPoints,
-                            state
-                        });
-                    }
+            const courseWorkResponseArray = await Promise.allSettled(coursePromises);
+            for (let i = 0; i < courseWorkResponseArray.length; i ++) {
+                if (courseWorkResponseArray[i].status === 'rejected') {
+                    continue;
                 }
-                sortAssignments(assignments);
 
-                resolve({
-                    assignments,
-                    nextPageToken
-                });
+                const courseWorkResponse = courseWorkResponseArray[i].value;
+                const course = courses[i];
+
+                const { courseWork } = courseWorkResponse.data;
+
+                if (!courseWork || !courseWork.length) {
+                    continue;
+                }
+
+                for (const work of courseWork) {
+
+                    const { title, dueDate, id: courseWorkId, dueTime, alternateLink: link, maxPoints  } = work;
+
+                    if (!dueDate) {
+                        continue;
+                    }
+
+                    const currentDate = new Date();
+                    let courseWorkDueDate;
+                    if (dueTime.hours && dueTime.minutes) {
+                        courseWorkDueDate = new Date(Date.UTC(dueDate.year, dueDate.month - 1, dueDate.day, dueTime.hours, dueTime.minutes));
+                    } else if (dueTime.hours) {
+                        courseWorkDueDate = new Date(Date.UTC(dueDate.year, dueDate.month - 1, dueDate.day, dueTime.hours));
+                    } else {
+                        courseWorkDueDate = new Date(Date.UTC(dueDate.year, dueDate.month - 1, dueDate.day));
+                    }
+
+                    const oldAssignment = courseWorkDueDate < currentDate;
+                    if (oldAssignment) {
+                        continue;
+                    }
+
+                    const submissionResponse = await classroom.courses.courseWork.studentSubmissions.list({ 
+                        courseId: course.id,
+                        courseWorkId,
+                        states: ['CREATED', 'TURNED_IN', 'RECLAIMED_BY_STUDENT']
+                    });
+                    const state = submissionResponse.data.studentSubmissions[0].state;
+                    
+                    assignments.push({
+                        name: course.name,
+                        title,
+                        courseWorkDueDate,
+                        link,
+                        maxPoints,
+                        state
+                    });
+                }
+            }
+            sortAssignments(assignments);
+
+            resolve({
+                assignments,
+                nextPageToken
             });
         } catch (e) {
             console.log(e, e.message);
