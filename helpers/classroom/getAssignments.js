@@ -49,75 +49,86 @@ module.exports = async (req, res) => {
             const classroom = google.classroom({version: 'v1', auth});
             const classroomResponse = await classroom.courses.list({
                 courseStates: 'ACTIVE',
-                pageSize: 5,
                 pageToken: req.query.nextPageToken
             });
 
             const { courses, nextPageToken } = classroomResponse.data;
             const assignments = [];
 
-            if (!courses.length) {
-                resolve({ assignments });
+            if (!courses || !courses.length) {
+                return resolve({ assignments });
             }
-
-            for (const course of courses) {
-                const courseWorkResponse = await classroom.courses.courseWork.list({ 
+            
+            const coursePromises = courses.map(course => {
+                return classroom.courses.courseWork.list({ 
                     courseId: course.id,
                     orderBy: 'dueDate asc',
                     fields: 'courseWork.id,courseWork.title,courseWork.dueDate,courseWork.dueTime,courseWork.alternateLink,courseWork.maxPoints',
                 });
-                const { courseWork } = courseWorkResponse.data;
-                if (!courseWork || !courseWork.length) {
-                    continue;
-                }
-                for (const work of courseWork) {
+            });
 
-                    const { title, dueDate, id: courseWorkId, dueTime, alternateLink: link, maxPoints  } = work;
-
-                    if (!dueDate) {
+            Promise.allSettled(coursePromises).then(async courseWorkResponseArray => {
+                for (let i = 0; i < courseWorkResponseArray.length; i ++) {
+                    if (courseWorkResponseArray[i].status === 'rejected') {
                         continue;
                     }
 
-                    const currentDate = new Date();
-                    let courseWorkDueDate;
-                    if (dueTime.hours && dueTime.minutes) {
-                        courseWorkDueDate = new Date(Date.UTC(dueDate.year, dueDate.month - 1, dueDate.day, dueTime.hours, dueTime.minutes));
-                    } else if (dueTime.hours) {
-                        courseWorkDueDate = new Date(Date.UTC(dueDate.year, dueDate.month - 1, dueDate.day, dueTime.hours));
-                    } else {
-                        courseWorkDueDate = new Date(Date.UTC(dueDate.year, dueDate.month - 1, dueDate.day));
-                    }
-                    const oldAssignment = courseWorkDueDate < currentDate;
+                    const courseWorkResponse = courseWorkResponseArray[i].value;
+                    const course = courses[i];
 
-                    if (oldAssignment) {
+                    const { courseWork } = courseWorkResponse.data;
+
+                    if (!courseWork || !courseWork.length) {
                         continue;
                     }
 
-                    const submissionResponse = await classroom.courses.courseWork.studentSubmissions.list({ 
-                        courseId: course.id,
-                        courseWorkId,
-                        states: ['CREATED', 'TURNED_IN', 'RECLAIMED_BY_STUDENT']
-                    });
-                    const state = submissionResponse.data.studentSubmissions[0].state;
-                    assignments.push({
-                        name: course.name,
-                        title,
-                        courseWorkDueDate,
-                        link,
-                        maxPoints,
-                        state
-                    });
+                    for (const work of courseWork) {
+
+                        const { title, dueDate, id: courseWorkId, dueTime, alternateLink: link, maxPoints  } = work;
+
+                        if (!dueDate) {
+                            continue;
+                        }
+
+                        const currentDate = new Date();
+                        let courseWorkDueDate;
+                        if (dueTime.hours && dueTime.minutes) {
+                            courseWorkDueDate = new Date(Date.UTC(dueDate.year, dueDate.month - 1, dueDate.day, dueTime.hours, dueTime.minutes));
+                        } else if (dueTime.hours) {
+                            courseWorkDueDate = new Date(Date.UTC(dueDate.year, dueDate.month - 1, dueDate.day, dueTime.hours));
+                        } else {
+                            courseWorkDueDate = new Date(Date.UTC(dueDate.year, dueDate.month - 1, dueDate.day));
+                        }
+                        const oldAssignment = courseWorkDueDate < currentDate;
+
+                        if (oldAssignment) {
+                            continue;
+                        }
+                        const submissionResponse = await classroom.courses.courseWork.studentSubmissions.list({ 
+                            courseId: course.id,
+                            courseWorkId,
+                            states: ['CREATED', 'TURNED_IN', 'RECLAIMED_BY_STUDENT']
+                        });
+                        const state = submissionResponse.data.studentSubmissions[0].state;
+                        assignments.push({
+                            name: course.name,
+                            title,
+                            courseWorkDueDate,
+                            link,
+                            maxPoints,
+                            state
+                        });
+                    }
                 }
-            }
+                sortAssignments(assignments);
 
-            sortAssignments(assignments);
-
-            resolve({
-                assignments,
-                nextPageToken
+                resolve({
+                    assignments,
+                    nextPageToken
+                });
             });
         } catch (e) {
-            console.log(e.message);
+            console.log(e, e.message);
             if (auth) {
                 reject(getNewToken(auth, token));
             } else {

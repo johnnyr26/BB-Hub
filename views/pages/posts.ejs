@@ -22,7 +22,9 @@
                             <% const b64 = Buffer.from(post.img.data.buffer).toString('base64') %>
                             <img class="announcements-image" width="200px" height="auto" alt="Image" src="data:image/jpeg;base64, <%= b64 %>">
                         <% } %>
-                        <p><%= post.user.name %></p>
+                        <% if (post.user) { %>
+                            <p><%= post.user.name %></p>
+                        <% } %>
                         <p><%= post.message %></p>
                         <hr>
                     <% }); %>

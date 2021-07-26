@@ -1,4 +1,5 @@
 const Users = require('../models/Users');
+const Posts = require('../models/Posts');
 const fs = require('fs');
 
 const getScheduleForDay = require('../helpers/schedule/getScheduleForDay');
@@ -18,13 +19,14 @@ module.exports.renderIndex = async (req, res) => {
         const notFriendRequested = !user.friendRequests.includes(member.id);
         const notRequestedFriends = !user.requestedFriends.includes(member.id);
         return notSelf && notAlreadyFriends && notFriendRequested && notRequestedFriends;
-    }).map(user => user.name);
+    }).map(userInfo => userInfo.name);
 
     const friendRequests = await Promise.all(user.friendRequests.map(async id => (await Users.findById(id)).name));
     const requestedFriends = await Promise.all(user.requestedFriends.map(async id => (await Users.findById(id)).name));
 
-    const schedule = await getScheduleForDay(req.user._id);
+    const scheduleObject = await getScheduleForDay(req.user._id);
     const { lunch } = await getLunch();
+    const posts = await Posts.find({});
 
     if (req.query.assignments) {
         try {
@@ -42,7 +44,8 @@ module.exports.renderIndex = async (req, res) => {
         availableFriends, 
         friendRequests,
         requestedFriends,
-        schedule,
+        scheduleObject,
+        posts,
         lunch,
         picture: req.user.picture, 
         id: req.user._id 

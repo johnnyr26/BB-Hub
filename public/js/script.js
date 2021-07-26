@@ -52,7 +52,11 @@ window.onload = () => {
     .then(response => {
         console.log('first response', response);
         if (response.authURL && !url.has('code')) {
-            document.querySelector('#classroom-section-body').innerHTML = `<a href=${response.authURL}>Authorize Classroom Access</a>`;
+            document.querySelector('#classroom-section-body').innerHTML = `
+                <div id="authorize-classroom-div">
+                    <a id="authorize-classroom" href=${response.authURL}>Authorize Classroom Access</a>
+                </div>
+            `;
             return;
         }
         if (response.assignments) {
@@ -68,7 +72,11 @@ window.onload = () => {
             .then(secondResponse => {
                 console.log('second response', secondResponse);
                 if (secondResponse.authURL) {
-                    document.querySelector('#classroom-section-body').innerHTML = `<a href=${secondResponse.authURL}>Authorize Classroom Access</a>`;
+                    document.querySelector('#classroom-section-body').innerHTML = `
+                        <div id="authorize-classroom-div">
+                            <a id="authorize-classroom" href=${response.authURL}>Authorize Classroom Access</a>
+                        </div>
+                    `;
                     return;
                 }
                 getAssignments(secondResponse)
@@ -111,14 +119,14 @@ const fetchNextClassRoomAssignments = nextPageToken => {
 const postAssignments = assignments => {
     let firstTurnedInAssignment = false;
 
-    document.querySelector('#classroom-section-body').innerHTML += `<p class="clasroom-assignments-p">Incompleted Assignments</p>`;
+    if (assignments.length) {
+        document.querySelector('#classroom-section-body').innerHTML += `<p class="clasroom-assignments-p">Incompleted Assignments</p>`;
+    }
 
     for (const assignment of assignments) {
         const { name, title, link, courseWorkDueDate, maxPoints, state } = assignment;
         let dueDate = new Date(courseWorkDueDate).toLocaleString('en-US');
         const { month, day, year, time } = getDateInfo(dueDate);
-
-        
 
         let assignmentDiv;
         
@@ -166,7 +174,7 @@ const postAssignments = assignments => {
         `;
         }
         if (state === 'TURNED_IN' && !firstTurnedInAssignment) {
-            document.querySelector('#classroom-section-body').innerHTML += `<p class="clasroom-assignments-p">Completed Assignments`;
+            document.querySelector('#classroom-section-body').innerHTML += `<p class="clasroom-assignments-p">Completed Assignments</p>`;
             firstTurnedInAssignment = true;
         }
         document.querySelector('#classroom-section-body').innerHTML += assignmentDiv;
