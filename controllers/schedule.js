@@ -8,10 +8,25 @@ const getLetterDays = require('../helpers/schedule/getSchoolDays').getLetterDays
 const getSharedCourses = require('../helpers/schedule/findSharedCourses');
 const findFreePeriods = require('../helpers/schedule/findFreePeriods');
 
+const presetColors = [
+    "#ff6347",
+    "#1e90ff",
+    "#ffff00",
+    "#ffa500",
+    "#3cb371",
+    "#add8e6",
+    "#ffc0cb",
+    "#d6ff99",
+    "#dcdcdc",
+    "#fae7b5",
+    "#a89de1",
+    "#deb887"
+];
+
 module.exports.renderSchedule = async (req, res) => {
     const user = await Users.findById(req.user._id);
 
-    if (req.params.user) {
+    if (req.params.view && req.params.view !== 'table-schedule') {
         const searchedUser = await Users.findOne({ name: req.params.user });
         if (!searchedUser) {
             return res.render('pages/schedule', { users, picture: req.user.picture, id: req.user._id });
@@ -27,12 +42,33 @@ module.exports.renderSchedule = async (req, res) => {
     }
     const friends = (await Users.find({ friends: user.id })).filter(user => user.schedule.length > 0).map(member => member.name);
     const letterDays = await getLetterDays();
+    const courseBackgroundColors = user.schedule.map((course, index) => {
+        return {
+            name:  course.courseTitle,
+            color: presetColors[index]
+        }
+    });
     const formattedSchedule = formatSchedule(user.schedule);
 
+    if (req.params.view === 'table-schedule') {
+        return res.render('pages/table-schedule', {
+            user, 
+            letterDays,
+            presetColors,
+            schedule: formattedSchedule, 
+            courseBackgroundColors,
+            users: friends, 
+            picture: req.user.picture, 
+            id: req.user._id 
+        });
+    }
     return res.render('pages/schedule', { 
         user, 
         letterDays,
+        presetColors,
+        userSchedule: user.schedule,
         schedule: formattedSchedule, 
+        courseBackgroundColors,
         users: friends, 
         picture: req.user.picture, 
         id: req.user._id 
@@ -62,7 +98,7 @@ module.exports.uploadSchedule = async (req, res) => {
             courseTitle,
             teacher
         };
-    });
+    }).filter(course => !course.includes('Community Service'));
 
     const filteredScheduleObject = filterInput(scheduleObject);
     findFreePeriods(filteredScheduleObject);

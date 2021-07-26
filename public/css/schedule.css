@@ -1,10 +1,167 @@
-#column {
+.content-container {
+    width: 100%;
+    max-width: 1335px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 0.25rem;
+}
+
+.table-wrapper {
+    max-width: 100%;
+    overflow: auto;
+    padding: 25px 0;
+    border-radius: 7px;
+}
+
+.schedule-table {
+    background-color: #ffffff;
+    table-layout: fixed;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 25px;
+    min-width: 700px;
+    border-collapse: collapse;
+}
+
+.section-body {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+}
+.schedule-section {
+    width: 680px;
+}
+.detail-section {
+    width: 300px;
+    margin: 10px;
+}
+main {
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+.schedule-button {
+    box-sizing: border-box;
+    text-decoration: none;
+    color: #ffffff;
+    display: block;
+    width: 680px;
+    font-size: 24px;
+    background-color: #1472ff;
+    border-radius: 10px;
+    text-align: center;
+    padding: 12px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    border: none;
+    cursor: pointer;
+}
+.view-table {
+    width: 100% !important;
+}
+.invisible {
+    display: none;
+}
+section {
+    box-sizing: border-box;
+}
+main {
+    display: block;
+}
+@media screen and (max-width: 900px) {
+    .schedule-table {
+        min-width: 900px;
+    }
+}
 
-#main-schedule {
-    flex-grow: 1;
+.time-label {
+    font-size: 20px;
+}
+
+.block {
+    font-size: 18px;
+    padding: 10px;
+}
+
+.block > span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.block.class {
+    font-size: 12px;
+}
+
+.block.class > span {
+    display: block;
+}
+
+.class-name {
+    font-weight: 600;
+}
+
+.block.long {
+    background: #465ec4;
+    color: white;
+}
+
+.time {
+    font-size: 15px;
+}
+
+
+.schedule-table th, td {
+    text-align: center;
+    text-overflow: ellipsis;
+    border: 1px solid #b2b2b2;
+    overflow: hidden;
+}
+
+th {
+    width: 12%;
+}
+
+th:first-child {
+    width: 15%;
+}
+
+
+@media print {
+
+    body,
+    html {
+        overflow: hidden;
+    }
+
+    .table-wrapper {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background: white;
+        top: 0;
+        left: 0;
+        border-radius: 0;
+    }
+
+    .block {
+        -webkit-print-color-adjust: exact !important; /* Chrome, Safari */
+        color-adjust: exact !important; /*Firefox*/
+    }
+
+    .time-label {
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    thead {
+        display: table-row-group
+    }
+}
+
+@media only print and (max-width: 670px) {
+    .block.class {
+        font-size: 10px;
+        padding: 5px;
+    }
 }

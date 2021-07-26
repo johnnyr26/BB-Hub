@@ -3,47 +3,70 @@
     <head>
         <title>Schedule</title>
         <link  href='/css/style.css' type="text/css" rel='stylesheet'/>
-        <link href="/css/header.css" type="text/css" rel="stylesheet">
-        <link rel='stylesheet' href='/css/schedule.css' />
+        <link  href='/css/index.css' type="text/css" rel='stylesheet'/>
+        <link href="/css/header.css" type="text/css" rel="stylesheet"/>
+        <link href='/css/schedule.css' type="text/css" rel="stylesheet"/>
     </head>
     <body>
         <%- include('../partials/header'); -%>
         <main>
-            <textarea placeholder="Drop Schedule"></textarea>
-            <button id="submit" type="submit">Submit</button>
-            <a href="/">Home</a>
-            <a href="/logout">Log out</a>
-            <% if (locals.users) { %>
-                <% users.forEach(user => { %>
-                    <button id="<%= user %>" class="users"><%= user %></button>
-                <% }); %>
-            <% } %>
-            <p id="shared-courses"></p>
-            <div id="column">
-                <div id="main-schedule">
-                    <% if (locals.schedule) { %>
-                        <%  letterDays.forEach(letterDay => { %>
-                            <% const letter = letterDay[0]; %>
-                            <% const letterDaySchedule = schedule[letter]; %>
-                            <% if (!letterDaySchedule) { %>
-                                <% return; %>
+            <% if (locals.userSchedule) { %>
+                <section class="schedule-section">
+                    <div>
+                        <h1>My Schedule</h1>
+                    </div>
+                    <div id="schedule-section-body" class="section-body">
+                    <% userSchedule.forEach(course => { %>
+                        <div class="detail-section">
+                            <h1 class="detail-title"><%= course.courseTitle %></h1>
+                            <% if (course.courseTitle.substring(0, 4) === 'FREE') { %>
+                                <p class="detail-body">Period <%= course.period %></p>
+                            <% } else { %>
+                                <p class="detail-body">Period <%= course.period %> · <%= course.teacher %> · <%= course.classRoom %></p>
                             <% } %>
-                            <% const noSchool = !letterDay.substring(0, 5).match(/^[A-H] Day$/) || letterDaySchedule.find(course => !course.course); %>
-                            <% if (noSchool) { %>
-                                <% return; %>
-                            <% } %>
-                            <h1><%= letterDay %></h1>
-                            <% letterDaySchedule.forEach(course => { %>
-                                <% const { period, courseTitle, classRoom, teacher } = course.course; %>
-                                <% const { block, from, to } = course.time; %>
-                                <p><%= period %>: <%= courseTitle %>, <%= teacher %>, <%= classRoom %></p>
+                        </div>
+                    <% }); %>
+                    <button class="edit-schedule schedule-button" href="/schedule/table-schedule">Edit Schedule</button>
+                    </div>
+                </section>
+                <button class="view-table schedule-button" href="/schedule/table-schedule">View Letter Day Schedule</button>
+                <div class="table-wrapper invisible">
+                    <table class="schedule-table">
+                        <thead>
+                        <tr>
+                            <th class="time-label">Time</th>
+                            <% Object.keys(schedule).forEach(letter => { %>
+                                <th class="letter"><%= letter %></th>
                             <% }); %>
-                        <% }); %>
-                    <% } %> 
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <% const colorObject = {} %>
+                            <% for (let i = 0; i < schedule['A'].length; i ++) { %>
+                                <tr>
+                                    <td class="time"><%= schedule[Object.keys(schedule)[i]][i].time.from %> - <%= schedule[Object.keys(schedule)[i]][i].time.to %></td>
+                                    <% for (let j = 0; j < Object.entries(schedule).length; j ++) { %>
+                                        <% const { courseTitle: name, classRoom, teacher } = schedule[Object.keys(schedule)[j]][i].course  %>
+                                        <% if (name === 'Lunch') { %>
+                                            <td class="block long" colspan=<%= Object.keys(schedule).length %>><%= name %></td>
+                                            <% break; %>
+                                        <% }  else if (name.substring(0, 4) === 'FREE') { %>
+                                            <td class="block free">Free</td>
+                                            <% continue %>
+                                        <% } %>
+                                        <% const backgroundColor = courseBackgroundColors.find(course => course.name === name).color %>
+                                        <td class="block class" style="background-color: <%= backgroundColor %>">
+                                            <span class="class-name"><%= name %></span>
+                                            <span class="class-room"><%= classRoom %></span>
+                                            <span class="class-teacher"><%= teacher %></span>
+                                        </td>
+                                    <% } %>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
                 </div>
-                <div id="schedule">
-                </div>
-            </div>
+            <% } %>
         </main>
     </body>
     <script src="/js/schedule.js"></script>

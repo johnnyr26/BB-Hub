@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Schedule</title>
+        <link  href='/css/style.css' type="text/css" rel='stylesheet'/>
+        <link href="/css/header.css" type="text/css" rel="stylesheet">
+        <link rel='stylesheet' href='/css/schedule.css' />
+    </head>
+    <body>
+        <%- include('../partials/header'); -%>
+        <main>
+            <a href="/schedule">View Schedule</a>
+            <div class="content-container">
+                <% if (locals.schedule && Object.values(schedule).every(letterDaySchedule => letterDaySchedule.every(course => course.course))) { %>
+                    <div class="table-wrapper"></div>
+                        <table class="schedule-table">
+                            <thead>
+                            <tr>
+                                <th class="time-label">Time</th>
+                                <% Object.keys(schedule).forEach(letter => { %>
+                                    <th class="letter"><%= letter %></th>
+                                <% }); %>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <% const colorObject = {} %>
+                                <% for (let i = 0; i < schedule['A'].length; i ++) { %>
+                                    <tr>
+                                        <td class="time"><%= schedule[Object.keys(schedule)[i]][i].time.from %> - <%= schedule[Object.keys(schedule)[i]][i].time.to %></td>
+                                        <% for (let j = 0; j < Object.entries(schedule).length; j ++) { %>
+                                            <% const { courseTitle: name, classRoom, teacher } = schedule[Object.keys(schedule)[j]][i].course  %>
+                                            <% if (name === 'Lunch') { %>
+                                                <td class="block long" colspan=<%= Object.keys(schedule).length %>><%= name %></td>
+                                                <% break; %>
+                                            <% }  else if (name.substring(0, 4) === 'FREE') { %>
+                                                <td class="block free">Free</td>
+                                                <% continue %>
+                                            <% } %>
+                                            <% const backgroundColor = courseBackgroundColors.find(course => course.name === name).color %>
+                                            <td class="block class" style="background-color: <%= backgroundColor %>">
+                                                <span class="class-name"><%= name %></span>
+                                                <span class="class-room"><%= classRoom %></span>
+                                                <span class="class-teacher"><%= teacher %></span>
+                                            </td>
+                                        <% } %>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                <% } %>
+            </div>
+        </main>
+    </body>
+    <script src="/js/schedule.js"></script>
+</html>
