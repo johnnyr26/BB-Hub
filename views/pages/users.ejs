@@ -9,6 +9,7 @@
     <body>
         <%- include('../partials/header'); -%>
         <main>
+            <a class="schedule-button" href="/logout">Log out</a>
             <div class="user-profile-div">
                 <div class="user-profile-header">
                     <img class="user-profile-image" alt="profile-photo" src="<%= userPicture %>">
@@ -39,7 +40,7 @@
                                 </div>
                             <% }); %>
                             <% if (userId.toString() === id.toString()) { %>
-                                <button class="edit-schedule schedule-button" href="/schedule/table-schedule">Edit Schedule</button>
+                                <button class="edit-schedule schedule-button">Edit Schedule</button>
                             <% } %>
                         </section>
                     <% } %>

@@ -124,6 +124,10 @@ th:first-child {
     width: 15%;
 }
 
+#my-schedule {
+    text-align: center;
+}
+
 
 @media print {
 
@@ -157,9 +161,10 @@ th:first-child {
     thead {
         display: table-row-group
     }
-}
-#my-schedule {
-    text-align: center;
+
+    #header {
+        display: none;
+    }
 }
 @media only print and (max-width: 670px) {
     .block.class {

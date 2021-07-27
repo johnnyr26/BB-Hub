@@ -13,26 +13,8 @@
             <textarea placeholder="Drop Schedule"></textarea>
             <button id="submit" type="submit">Submit</button>
             <% if (locals.userSchedule && userSchedule.length) { %>
-                <section class="schedule-section">
-                    <div>
-                        <h1 id="my-schedule">My Schedule</h1>
-                    </div>
-                    <div id="schedule-section-body" class="section-body">
-                    <% userSchedule.forEach(course => { %>
-                        <div class="detail-section">
-                            <h1 class="detail-title"><%= course.courseTitle %></h1>
-                            <% if (course.courseTitle.substring(0, 4) === 'FREE') { %>
-                                <p class="detail-body">Period <%= course.period %></p>
-                            <% } else { %>
-                                <p class="detail-body">Period <%= course.period %> · <%= course.teacher %> · <%= course.classRoom %></p>
-                            <% } %>
-                        </div>
-                    <% }); %>
-                    <button class="edit-schedule schedule-button" href="/schedule/table-schedule">Edit Schedule</button>
-                    </div>
-                </section>
-                <button class="view-table schedule-button" href="/schedule/table-schedule">View Letter Day Schedule</button>
-                <div class="table-wrapper invisible">
+                <button class="view-table schedule-button" href="/schedule/table-schedule">Hide Letter Day Schedule</button>
+                <div class="table-wrapper">
                     <table class="schedule-table">
                         <thead>
                         <tr>

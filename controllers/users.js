@@ -11,6 +11,9 @@ module.exports.renderUser = async (req, res) => {
         const user = await Users.findById(req.user._id);
         const friendUser = await Users.findById(id);
 
+        friendUser.schedule.sort((a, b) => {
+            return a.period - b.period;
+        });
         
         const sharedCourses = user.id !== friendUser.id ? getSharedCourses(user.schedule, friendUser.schedule).map(course => course.courseTitle) : [];
 
