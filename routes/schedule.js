@@ -4,7 +4,7 @@ const router = express.Router();
 const controller = require('../controllers/schedule');
 const auth = require('../middlewares/auth');
 
-router.route('/:view?')
+router.route('/:user?')
     .get(auth, controller.renderSchedule)
     .post(auth, controller.uploadSchedule);
 

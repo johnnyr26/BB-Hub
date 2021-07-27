@@ -2,6 +2,11 @@ main {
     min-width: 1220px;
     margin: 0 15px;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.columns-div {
+    display: flex;
     flex-direction: row;
     justify-content: center;
 }
@@ -10,7 +15,7 @@ main {
     max-width: 430px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
     flex-grow: 1;
 }
 section {
@@ -176,6 +181,10 @@ h1 {
 }
 #incomplete-assignments {
     margin-top: 10px;
+}
+.friends-div {
+    height: 128px;
+    width: 100%;
 }
 @keyframes animate-load {
     from {

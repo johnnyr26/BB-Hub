@@ -26,7 +26,7 @@ const presetColors = [
 module.exports.renderSchedule = async (req, res) => {
     const user = await Users.findById(req.user._id);
 
-    if (req.params.view && req.params.view !== 'table-schedule') {
+    if (req.params.user && req.params.user !== 'table-schedule') {
         const searchedUser = await Users.findOne({ name: req.params.user });
         if (!searchedUser) {
             return res.render('pages/schedule', { users, picture: req.user.picture, id: req.user._id });
@@ -50,7 +50,7 @@ module.exports.renderSchedule = async (req, res) => {
     });
     const formattedSchedule = formatSchedule(user.schedule);
 
-    if (req.params.view === 'table-schedule') {
+    if (req.params.user === 'table-schedule') {
         return res.render('pages/table-schedule', {
             user, 
             letterDays,

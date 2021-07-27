@@ -50,30 +50,3 @@ module.exports.renderIndex = async (req, res) => {
         id: req.user._id 
     });
 }
-
-module.exports.updateFriends = async (req, res) => {
-    const user = await Users.findById(req.user._id);
-    const allUsers = await Users.find({});
-
-    if (req.body.friendRequest) {
-        const name = req.body.friendRequest;
-        const friendRequestUser = allUsers.find(member => member.name === name);
-        user.requestedFriends.push(friendRequestUser.id);
-        friendRequestUser.friendRequests.push(user.id);
-        await user.save();
-        await friendRequestUser.save();
-        return res.send({ success: true });
-    }
-    if (req.body.acceptedFriendRequest) {
-        const name = req.body.acceptedFriendRequest;
-        const acceptedFriend = allUsers.find(member => member.name === name);
-        user.friends.push(acceptedFriend);
-        user.friendRequests = user.friendRequests.filter(friendId => friendId.toString() !== acceptedFriend.id);
-        acceptedFriend.friends.push(user);
-        acceptedFriend.requestedFriends = acceptedFriend.requestedFriends.filter(friendId => friendId.toString() !== user.id);
-        await user.save();
-        await acceptedFriend.save();
-        return res.send({ success: true });
-    }
-    return res.send({ success: true });
-};

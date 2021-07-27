@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="/css/header.css" type="text/css" rel="stylesheet"/>
+        <link  href='/css/style.css' type="text/css" rel='stylesheet'/>
+        <link  href='/css/index.css' type="text/css" rel='stylesheet'/>
+        <link  href='/css/friends.css' type="text/css" rel='stylesheet'/>
+    </head>
+    <body>
+        <%- include('../partials/header'); -%>
+        <main>
+            <% if (locals.friendRequests && friendRequests.length) { %>
+                <div class="friend-requests-div">
+                    <h1 class="title-heading">Friend Requests</h1>
+                    <% friendRequests.forEach(friend => { %>
+                        <section class="friends-section">
+                            <div class="friends-header">
+                                <% if (friend.picture) { %>
+                                    <img class="friends-image" alt="Image" src=<%= friend.picture %>>
+                                <% } %>
+                            </div>
+                            <div class="friends-body">
+                                <h1 class="friends-name"><%= friend.name %></h1>
+                                <button class="accept-friend-button" name="<%= friend.name %>">Accept</button>
+                                <button class="decline-friend-button" name="<%= friend.name %>">Decline</button>
+                            </div>
+                        </section>
+                    <% }); %>
+                </div>
+            <% } %>
+            <% if (locals.availableFriends && availableFriends.length) { %>
+                <% availableFriends.forEach(friend => { %>
+                  <section class="friends-section">
+                    <div class="friends-header">
+                      <% if (friend.picture) { %>
+                        <img class="friends-image" alt="Image" src=<%= friend.picture %>>
+                      <% } %>
+                    </div>
+                    <div class="friends-body">
+                      <h1 class="friends-name"><%= friend.name %></h1>
+                      <button class="add-friend-button" name="<%= friend.name %>">Add Friend</button>
+                    </div>
+                  </section>
+                <% }); %>
+            <% } %>
+        </main>
+    </body>
+    <script src="/js/friends.js"></script>
+</html>
