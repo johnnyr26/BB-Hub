@@ -158,7 +158,9 @@ th:first-child {
         display: table-row-group
     }
 }
-
+#my-schedule {
+    text-align: center;
+}
 @media only print and (max-width: 670px) {
     .block.class {
         font-size: 10px;

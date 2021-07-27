@@ -10,67 +10,81 @@
         <%- include('../partials/header'); -%>
         <main>
             <% if (locals.friendRequests && friendRequests.length) { %>
-                <div class="friend-requests-div">
+                <div class="friends-divs">
                     <h1 class="title-heading">Friend Requests</h1>
-                    <% friendRequests.forEach(friend => { %>
-                        <section class="friends-section">
-                            <div class="friends-header">
+                    <div class="friends-row">
+                        <% friendRequests.forEach(friend => { %>
+                            <section class="friends-section">
+                                <div class="friends-header">
+                                    <% if (friend.picture) { %>
+                                        <img class="friends-image" alt="Image" src=<%= friend.picture %>>
+                                    <% } %>
+                                </div>
+                                <div class="friends-body">
+                                    <h1 class="friends-name"><%= friend.name %></h1>
+                                    <button class="accept-friend-button" name="<%= friend.name %>">Accept</button>
+                                    <button class="decline-friend-button" name="<%= friend.name %>">Decline</button>
+                                </div>
+                            </section>
+                        <% }); %>
+                    </div>
+                </div>
+            <% } %>
+            <% if (locals.friends && friends.length) { %>
+                <div class="friends-divs">
+                    <h1 class="title-heading">Friends</h1>
+                    <div class="friends-row">
+                        <% friends.forEach(friend => { %>
+                            <section class="friends-section">
+                                <div class="friends-header">
                                 <% if (friend.picture) { %>
                                     <img class="friends-image" alt="Image" src=<%= friend.picture %>>
                                 <% } %>
-                            </div>
-                            <div class="friends-body">
+                                </div>
+                                <div class="friends-body">
                                 <h1 class="friends-name"><%= friend.name %></h1>
-                                <button class="accept-friend-button" name="<%= friend.name %>">Accept</button>
-                                <button class="decline-friend-button" name="<%= friend.name %>">Decline</button>
-                            </div>
-                        </section>
-                    <% }); %>
+                                </div>
+                            </section>
+                        <% }); %>
+                    </div>
                 </div>
             <% } %>
-            <% if (locals.requestedFriends && requestedFriends.length) { %>
-                <% requestedFriends.forEach(friend => { %>
-                  <section class="friends-section">
-                    <div class="friends-header">
-                      <% if (friend.picture) { %>
-                        <img class="friends-image" alt="Image" src=<%= friend.picture %>>
-                      <% } %>
+            <% if ((locals.requestedFriends && requestedFriends.length) || (locals.availableFriends && availableFriends.length)) { %>
+                <div class="friends-divs">
+                    <h1 class="title-heading">People you may know</h1>
+                    <div class="friends-row">
+                        <% if (locals.requestedFriends && requestedFriends.length) { %>
+                                <% requestedFriends.forEach(friend => { %>
+                                    <section class="friends-section">
+                                        <div class="friends-header">
+                                        <% if (friend.picture) { %>
+                                            <img class="friends-image" alt="Image" src=<%= friend.picture %>>
+                                        <% } %>
+                                        </div>
+                                        <div class="friends-body">
+                                            <h1 class="friends-name"><%= friend.name %></h1>
+                                            <button class="add-friend-button changed-friend-request" name="<%= friend.name %>" disabled>Requested</button>
+                                        </div>
+                                    </section>
+                                <% }); %>
+                        <% } %>
+                        <% if (locals.availableFriends && availableFriends.length) { %>
+                            <% availableFriends.forEach(friend => { %>
+                                <section class="friends-section">
+                                    <div class="friends-header">
+                                    <% if (friend.picture) { %>
+                                        <img class="friends-image" alt="Image" src=<%= friend.picture %>>
+                                    <% } %>
+                                    </div>
+                                    <div class="friends-body">
+                                        <h1 class="friends-name"><%= friend.name %></h1>
+                                        <button class="add-friend-button" name="<%= friend.name %>">Add Friend</button>
+                                    </div>
+                                </section>
+                            <% }); %>
+                        <% } %>
                     </div>
-                    <div class="friends-body">
-                      <h1 class="friends-name"><%= friend.name %></h1>
-                      <button class="add-friend-button changed-friend-request" name="<%= friend.name %>">Requested</button>
-                    </div>
-                  </section>
-                <% }); %>
-            <% } %>
-            <% if (locals.friends && friends.length) { %>
-                <% friends.forEach(friend => { %>
-                  <section class="friends-section">
-                    <div class="friends-header">
-                      <% if (friend.picture) { %>
-                        <img class="friends-image" alt="Image" src=<%= friend.picture %>>
-                      <% } %>
-                    </div>
-                    <div class="friends-body">
-                      <h1 class="friends-name"><%= friend.name %></h1>
-                    </div>
-                  </section>
-                <% }); %>
-            <% } %>
-            <% if (locals.availableFriends && availableFriends.length) { %>
-                <% availableFriends.forEach(friend => { %>
-                  <section class="friends-section">
-                    <div class="friends-header">
-                      <% if (friend.picture) { %>
-                        <img class="friends-image" alt="Image" src=<%= friend.picture %>>
-                      <% } %>
-                    </div>
-                    <div class="friends-body">
-                      <h1 class="friends-name"><%= friend.name %></h1>
-                      <button class="add-friend-button" name="<%= friend.name %>">Add Friend</button>
-                    </div>
-                  </section>
-                <% }); %>
+                </div>
             <% } %>
         </main>
     </body>

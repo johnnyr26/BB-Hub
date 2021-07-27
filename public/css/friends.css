@@ -1,6 +1,11 @@
+main {
+    flex-direction: column;
+    justify-content: initial;
+}
 .friends-section {
     width: 225px;
     height: auto;
+    margin-right: 18px;
 }
 .friends-header {
     display: flex;
@@ -42,8 +47,12 @@
     margin: 5px 0;
 }
 
-.friend-requests-div {
+.friends-divs {
     border-bottom: solid #d3d3d3 1px;
+}
+.friends-row {
+    display: flex;
+    flex-direction: row;
 }
 .title-heading {
     margin-top: 0;
