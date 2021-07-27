@@ -14,15 +14,14 @@
                     <img class="user-profile-image" alt="profile-photo" src="<%= userPicture %>">
                     <div class="user-profile-header-info">
                         <h1 class="user-profile-name"><%= userName %></h1>
-                        <h1 class="user-profile-info">Class of 2022</h1>
+                        <h1 class="user-profile-info">Class of 2023</h1>
                     </div>
                 </div>
                 <div class="user-profile-body">
                     <% if (locals.userSchedule && userSchedule.length) { %>
                         <section class="schedule-section">
                             <div>
-                                <h1 id="my-schedule"><%= userName %>'s Schedule</h1>
-                                </div>
+                                <h1 id="my-schedule">Schedule</h1>
                                 <div class="schedule-section-body" class="section-body">
                                 <% userSchedule.forEach(course => { %>
                                     <% if (sharedCourses.includes(course.courseTitle)) { %>
@@ -45,6 +44,34 @@
                                 <% } %>
                             </div>
                         </section>
+                        <div class="column">
+                            <section class="clubs-section">
+                                <div>
+                                    <h1 id="my-schedule">Clubs</h1>
+                                </div>
+                                <div class="club-section-body" class="section-body">
+                                    <% clubs.forEach(club => { %>
+                                        <div class="club-div">
+                                            <div class="club-icon"><%= club[0] %></div>
+                                            <p class="club-name"><%= club %></p>
+                                        </div>
+                                    <% }); %>
+                                </div>
+                            </section>
+                            <section class="sports-section">
+                                <div>
+                                    <h1 id="my-schedule">Sports</h1>
+                                </div>
+                                <div class="sports-section-body" class="section-body">
+                                    <% sports.forEach(sport => { %>
+                                        <div class="sports-div">
+                                            <div class="sports-icon"><%= sport[0] %></div>
+                                            <p class="sports-name"><%= sport %></p>
+                                        </div>
+                                    <% }); %>
+                                </div>
+                            </section>
+                        </div>
                     <% } %>
                 </div>
             </div>

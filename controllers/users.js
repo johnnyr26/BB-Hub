@@ -11,7 +11,8 @@ module.exports.renderUser = async (req, res) => {
         const user = await Users.findById(req.user._id);
         const friendUser = await Users.findById(id);
 
-        const sharedCourses = getSharedCourses(user.schedule, friendUser.schedule).map(course => course.courseTitle);
+        
+        const sharedCourses = user.id !== friendUser.id ? getSharedCourses(user.schedule, friendUser.schedule).map(course => course.courseTitle) : [];
 
         const { name: userName, email: userEmail, friends: userFriends, picture: userPicture, schedule: userSchedule, } = friendUser;
 

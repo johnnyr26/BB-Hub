@@ -39,19 +39,31 @@ main {
 .user-profile-info {
     margin: 8px 0;
 }
-.schedule-section, .detail-section {
+.schedule-section, .detail-section, .clubs-section, .club-div, .sports-section, .sports-div {
     border-radius: 10px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
     padding: 12px;
+    margin-left: 12px;
+    margin-right: 12px;;
 }
 .schedule-section {
-    width: 375px;
+    min-width: 375px;
+    max-width: 375px;
     overflow-y: scroll;
 }
 .schedule-section-body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+.clubs-section, .sports-section {
+    box-sizing: border-box;
+    width: 100% !important;
+    height: 400px;
+    margin: 24px 12px;
+}
+.clubs-section {
+    margin-top: 0;
 }
 .detail-section {
     display: flex;
@@ -76,4 +88,36 @@ main {
 }
 .shared-course {
     border: solid #1472ff 1px;
+}
+.club-section-body, .sports-section-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    height: 300px;
+}
+.club-div, .sports-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 24px 12px;
+}
+.club-icon, .sports-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 100%;
+    margin-bottom: 12px;
+    background-color:#bbd6ff;
+}
+.club-name, .sports-name {
+    margin: 0;
+    text-align: center;
+    width: 100px;
 }
