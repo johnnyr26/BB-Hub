@@ -21,6 +21,13 @@ module.exports.renderFriends = async (req, res) => {
         }
     });
 
+    const friends = await Promise.all(user.friends.map(async id => {
+        const friend = await Users.findById(id);
+        return {
+            name: friend.name,
+            picture: friend.picture
+        };
+    }));
     const friendRequests = await Promise.all(user.friendRequests.map(async id => {
         const friend = await Users.findById(id);
         return {
@@ -39,6 +46,7 @@ module.exports.renderFriends = async (req, res) => {
         id: req.user._id,
         picture: req.user.picture,
         availableFriends,
+        friends,
         friendRequests,
         requestedFriends
     });
@@ -73,6 +81,18 @@ module.exports.updateFriends = async (req, res) => {
             acceptedFriend.requestedFriends = acceptedFriend.requestedFriends.filter(friendId => friendId.toString() !== user.id);
             await user.save();
             await acceptedFriend.save();
+            return res.send({ success: true });
+        }
+        if (req.body.deniedFriendRequest) {
+            const name = req.body.deniedFriendRequest;
+            const deniedFriend = allUsers.find(member => member.name === name);
+            if (user.friends.includes(deniedFriend)) {
+                return res.send({ success: false });
+            }
+            user.friendRequests = user.friendRequests.filter(friendId => friendId.toString() !== deniedFriend.id);
+            deniedFriend.requestedFriends = deniedFriend.requestedFriends.filter(friendId => friendId.toString() !== user.id);
+            await user.save();
+            await deniedFriend.save();
             return res.send({ success: true });
         }
         return res.send({ success: true });
