@@ -35,16 +35,16 @@
                     <h1 class="title-heading">Friends</h1>
                     <div class="friends-row">
                         <% friends.forEach(friend => { %>
-                            <section class="friends-section">
+                            <a href="/users/<%= friend.id %>" class="friends-section">
                                 <div class="friends-header">
-                                <% if (friend.picture) { %>
-                                    <img class="friends-image" alt="Image" src=<%= friend.picture %>>
-                                <% } %>
+                                    <% if (friend.picture) { %>
+                                        <img class="friends-image" alt="Image" src=<%= friend.picture %>>
+                                    <% } %>
                                 </div>
                                 <div class="friends-body">
-                                <h1 class="friends-name"><%= friend.name %></h1>
+                                    <h1 class="friends-name"><%= friend.name %></h1>
                                 </div>
-                            </section>
+                            </a>
                         <% }); %>
                     </div>
                 </div>

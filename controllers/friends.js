@@ -25,7 +25,8 @@ module.exports.renderFriends = async (req, res) => {
         const friend = await Users.findById(id);
         return {
             name: friend.name,
-            picture: friend.picture
+            picture: friend.picture,
+            id
         };
     }));
     const friendRequests = await Promise.all(user.friendRequests.map(async id => {
@@ -60,7 +61,7 @@ module.exports.updateFriends = async (req, res) => {
         if (req.body.friendRequest) {
             const name = req.body.friendRequest;
             const friendRequestUser = allUsers.find(member => member.name === name);
-            if (user.requestedFriends.includes(friendRequestUser.id) || friendRequestUser.friendRequests.includes(user.id)) {
+            if (user.requestedFriends.includes(friendRequestUser.id) || friendRequestUser.friendRequests.includes(user.id) || user.friendRequests.includes(friendRequestUser.id) || friendRequestUser.requestedFriends.includes(user.id)) {
                 return res.send({ success: false });
             }
             user.requestedFriends.push(friendRequestUser.id);

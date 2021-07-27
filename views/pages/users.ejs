@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="/css/style.css" type="text/css" rel="stylesheet"/>
+        <link href="/css/header.css" type="text/css" rel="stylesheet"/>
+        <link href='/css/schedule.css' type="text/css" rel="stylesheet"/>
+        <link href="/css/users.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <%- include('../partials/header'); -%>
+        <main>
+            <div class="user-profile-div">
+                <div class="user-profile-header">
+                    <img class="user-profile-image" alt="profile-photo" src="<%= userPicture %>">
+                    <div class="user-profile-header-info">
+                        <h1 class="user-profile-name"><%= userName %></h1>
+                        <h1 class="user-profile-info">Class of 2022</h1>
+                    </div>
+                </div>
+                <div class="user-profile-body">
+                    <% if (locals.userSchedule && userSchedule.length) { %>
+                        <section class="schedule-section">
+                            <div>
+                                <h1 id="my-schedule"><%= userName %>'s Schedule</h1>
+                                </div>
+                                <div class="schedule-section-body" class="section-body">
+                                <% userSchedule.forEach(course => { %>
+                                    <% if (sharedCourses.includes(course.courseTitle)) { %>
+                                        <div class="detail-section shared-course">
+                                    <% } else { %>
+                                        <div class="detail-section">
+                                    <% } %>
+                                        <h1 class="detail-title"><%= course.courseTitle %></h1>
+                                        <div class="detail-body-info">
+                                            <% if (course.courseTitle.substring(0, 4) === 'FREE') { %>
+                                                <p class="detail-body">Period <%= course.period %></p>
+                                            <% } else { %>
+                                                <p class="detail-body">Period <%= course.period %> · <%= course.teacher %> · <%= course.classRoom %></p>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                <% }); %>
+                                <% if (userId.toString() === id.toString()) { %>
+                                    <button class="edit-schedule schedule-button" href="/schedule/table-schedule">Edit Schedule</button>
+                                <% } %>
+                            </div>
+                        </section>
+                    <% } %>
+                </div>
+            </div>
+        </main>
+    </body>
+    <script src="/js/lunch.js"></script>
+</html>

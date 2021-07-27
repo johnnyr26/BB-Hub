@@ -10,7 +10,9 @@
     <body>
         <%- include('../partials/header'); -%>
         <main>
-            <% if (locals.userSchedule) { %>
+            <textarea placeholder="Drop Schedule"></textarea>
+            <button id="submit" type="submit">Submit</button>
+            <% if (locals.userSchedule && userSchedule.length) { %>
                 <section class="schedule-section">
                     <div>
                         <h1 id="my-schedule">My Schedule</h1>

@@ -26,9 +26,10 @@ Object.values(document.querySelectorAll('.accept-friend-button')).forEach(button
         })
         .then(response => response.json())
         .then(response => {
-            document.querySelector('.accept-friend-button + .decline-friend-button').textContent = 'Accepted';
-            document.querySelector('.accept-friend-button + .decline-friend-button').classList.add('changed-friend-request');
-            document.querySelector('.accept-friend-button + .decline-friend-button').disabled = true;
+            const declineButton = Object.values(document.querySelectorAll('.decline-friend-button')).find(declineButton => declineButton.name === button.name);
+            declineButton.textContent = 'Accepted';
+            declineButton.classList.add('changed-friend-request');
+            declineButton.disabled = true;
             button.remove();
         });
     });

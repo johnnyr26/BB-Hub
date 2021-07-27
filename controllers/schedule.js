@@ -98,7 +98,12 @@ module.exports.uploadSchedule = async (req, res) => {
             courseTitle,
             teacher
         };
-    }).filter(course => !course.includes('Community Service'));
+    }).filter(course => {
+        if (course.courseTitle) {
+            return !course.courseTitle.includes('Community Service');
+        }
+        return course;
+    });
 
     const filteredScheduleObject = filterInput(scheduleObject);
     findFreePeriods(filteredScheduleObject);

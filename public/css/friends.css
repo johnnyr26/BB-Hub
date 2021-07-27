@@ -3,9 +3,17 @@ main {
     justify-content: initial;
 }
 .friends-section {
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 18px;
     width: 225px;
     height: auto;
     margin-right: 18px;
+    text-decoration: none !important;
+    color: #000000 !important;
 }
 .friends-header {
     display: flex;
@@ -49,6 +57,7 @@ main {
 
 .friends-divs {
     border-bottom: solid #d3d3d3 1px;
+    margin-bottom: 12px;
 }
 .friends-row {
     display: flex;
