@@ -7,7 +7,7 @@ main {
     padding: 24px;
     background-color: #ffffff;
     border-radius: 10px;
-    width: 1000px;
+    width: 900px;
 }
 .user-profile-header {
     display: flex;
@@ -49,6 +49,7 @@ main {
 .schedule-section {
     min-width: 375px;
     max-width: 375px;
+    margin-left: 0;
     overflow-y: scroll;
 }
 .schedule-section-body {
@@ -60,7 +61,8 @@ main {
     box-sizing: border-box;
     width: 100% !important;
     height: 400px;
-    margin: 24px 12px;
+    margin: 12px;
+    margin-left: 0;
 }
 .clubs-section {
     margin-top: 0;
