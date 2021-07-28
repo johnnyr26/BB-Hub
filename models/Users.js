@@ -57,6 +57,9 @@ const Schema = mongoose.Schema({
     sports: [{
         type: String
     }],
+    privacy: [{
+        type: String
+    }],
     googleRefreshToken: {
         type: String
     }

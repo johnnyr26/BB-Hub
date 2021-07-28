@@ -8,6 +8,9 @@ document.querySelector('.submit-profile-info').addEventListener('click', () => {
     const graduationYear = parseInt(document.querySelector('.grad-year-button.year-selected').name);
     const clubs = Object.values(document.querySelectorAll('.select-club-div.div-selected')).map(div => div.name);
     const sports = Object.values(document.querySelectorAll('.select-sport-div.div-selected')).map(div => div.name);
+    const privacy = Object.values(document.querySelectorAll('.privacy-button.privacy-selected')).map(div => div.name);
+
+    console.log(privacy);
 
     fetch(`/users`, {
         method: 'POST',
@@ -17,7 +20,8 @@ document.querySelector('.submit-profile-info').addEventListener('click', () => {
         body: JSON.stringify({ 
             gradYear: graduationYear,
             clubs,
-            sports
+            sports,
+            privacy
         })
     })
     .then(response => response.json())
@@ -72,5 +76,14 @@ Object.values(document.querySelectorAll('.grad-year-button')).forEach(button => 
             gradYear.classList.remove('year-selected');
         });
         button.classList.add('year-selected');
+    });
+});
+Object.values(document.querySelectorAll('.privacy-button')).forEach(button => {
+    button.addEventListener('click', () => {
+        if (!button.classList.contains('privacy-selected')) {
+            button.classList.add('privacy-selected');
+        } else {
+            button.classList.remove('privacy-selected');
+        }
     });
 });

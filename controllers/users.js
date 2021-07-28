@@ -1,6 +1,7 @@
 const Users = require('../models/Users');
 const clubs = require('../assets/clubs/clubs');
 const sports = require('../assets/sports/sports');
+const privacy = require('../assets/privacy/privacy');
 
 const getSharedCourses = require('../helpers/schedule/findSharedCourses');
 
@@ -17,7 +18,17 @@ module.exports.renderUser = async (req, res) => {
         
         const sharedCourses = user.id !== friendUser.id ? getSharedCourses(user.schedule, friendUser.schedule).map(course => course.courseTitle) : [];
 
-        const { name: userName, email: userEmail, friends: userFriends, picture: userPicture, schedule: userSchedule, gradYear: userGradYear, clubs: userClubs, sports: userSports } = friendUser;
+        const { 
+            name: userName, 
+            email: userEmail, 
+            friends: userFriends, 
+            picture: userPicture, 
+            schedule: userSchedule, 
+            gradYear: userGradYear, 
+            clubs: userClubs, 
+            sports: userSports, 
+            privacy: userPrivacy 
+        } = friendUser;
 
         res.render('pages/users', {
             userName,
@@ -25,10 +36,12 @@ module.exports.renderUser = async (req, res) => {
             userGradYear,
             userClubs: userClubs ? userClubs : [],
             userSports: userSports ? userSports : [],
+            userPrivacy,
             userFriends,
             userPicture,
             userSchedule,
             sharedCourses,
+            privacy,
             userId: id,
             clubs,
             sports,
@@ -40,12 +53,13 @@ module.exports.renderUser = async (req, res) => {
 
 module.exports.editProfile = async (req, res) => {
     try {
-        const { gradYear, clubs, sports } = req.body;
+        const { gradYear, clubs, sports, privacy } = req.body;
         const user = await Users.findById(req.user._id);
 
         user.gradYear = gradYear;
         user.clubs = clubs;
         user.sports = sports;
+        user.privacy = privacy;
 
         await user.save();
 

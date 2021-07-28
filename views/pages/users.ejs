@@ -9,6 +9,7 @@
     <body>
         <%- include('../partials/header'); -%>
         <main>
+            <% const selfUser = userId.toString() === id.toString(); %>
             <div class="shadow-background invisible">
                 <div class="modal">
                     <div class="modal-header">
@@ -66,6 +67,22 @@
                                 <% }); %>
                             </div>
                         </div>
+                        <div class="privacy-div">
+                            <p class="privacy-label">Visible To Friends</p>
+                            <div class="privacy-col">
+                                <% privacy.forEach(privacy => { %>
+                                    <div class="privacy-option">
+                                        <% if (userPrivacy.includes(privacy)) { %>
+                                            <button class="privacy-button privacy-selected" name="<%= privacy %>"></button>
+                                            <p class="privacy-label-option"><%= privacy %></p>
+                                        <% } else { %>
+                                            <button class="privacy-button" name="<%= privacy %>"></button>
+                                            <p class="privacy-label-option"><%= privacy %></p>
+                                        <% } %>
+                                    </div>
+                                <% }); %>
+                            </div>
+                        </div>
                         <button class="profile-button submit-profile-info">Submit</button>
                     </div>
                 </div> 
@@ -80,13 +97,13 @@
                         <% } else { %>
                             <h1 class="user-profile-info"></h1>
                         <% } %>
-                        <% if (userId.toString() === id.toString()) { %>
+                        <% if (selfUser) { %>
                             <button class="profile-button edit-profile">Edit Profile</button>
                         <% } %>
                     </div>
                 </div>
                 <div class="user-profile-body">
-                    <% if (locals.userSchedule && userSchedule.length) { %>
+                    <% if ((locals.userSchedule && userSchedule.length) && ((!selfUser && userPrivacy.includes('Schedule')) || selfUser)) { %>
                         <section class="schedule-section">
                             <h1 id="my-schedule">Schedule</h1>
                             <div class="schedule-section-body" class="section-body">
@@ -106,13 +123,14 @@
                                     </div>
                                 </div>
                             <% }); %>
-                            <% if (userId.toString() === id.toString()) { %>
+                            <% if (selfUser) { %>
                                 <button class="edit-schedule schedule-button">Edit Schedule</button>
                             <% } %>
                         </section>
                     <% } %>
                     <div class="column">
-                        <% if (locals.userClubs) { %>
+                        <% console.log(userPrivacy) %>
+                        <% if (locals.userClubs && ((!selfUser && userPrivacy.includes('Clubs')) || selfUser)) { %>
                             <section class="clubs-section">
                                 <div>
                                     <h1 id="my-schedule">Clubs</h1>
@@ -130,7 +148,7 @@
                                 </div>
                             </section>
                         <% } %>
-                        <% if (locals.sports) { %>
+                        <% if (locals.sports && ((!selfUser && userPrivacy.includes('Sports')) || selfUser)) { %>
                             <section class="sports-section">
                                 <div>
                                     <h1 id="my-schedule">Sports</h1>
