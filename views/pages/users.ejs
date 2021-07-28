@@ -75,7 +75,11 @@
                     <img class="user-profile-image" alt="profile-photo" src="<%= userPicture %>">
                     <div class="user-profile-header-info">
                         <h1 class="user-profile-name"><%= userName %></h1>
-                        <h1 class="user-profile-info">Class of <%= userGradYear %></h1>
+                        <% if (userGradYear) { %>
+                            <h1 class="user-profile-info">Class of <%= userGradYear %></h1>
+                        <% } else { %>
+                            <h1 class="user-profile-info"></h1>
+                        <% } %>
                         <% if (userId.toString() === id.toString()) { %>
                             <button class="profile-button edit-profile">Edit Profile</button>
                         <% } %>
@@ -114,6 +118,9 @@
                                     <h1 id="my-schedule">Clubs</h1>
                                 </div>
                                 <div class="club-section-body section-body">
+                                    <% if (!userClubs.length) { %>
+                                        <p class="no-activities">No Clubs</p>
+                                    <% } %>
                                     <% userClubs.forEach(club => { %>
                                         <div class="club-div">
                                             <div class="club-icon"><%= club[0] %></div>
@@ -129,6 +136,9 @@
                                     <h1 id="my-schedule">Sports</h1>
                                 </div>
                                 <div class="sport-section-body section-body">
+                                    <% if (!userSports.length) { %>
+                                        <p class="no-activities">No Sports</p>
+                                    <% } %>
                                     <% userSports.forEach(sport => { %>
                                         <div class="sport-div">
                                             <div class="sport-icon"><%= sport[0] %></div>

@@ -261,3 +261,6 @@ select {
     flex-direction: row;
     padding-right: 0;
 }
+.no-activities {
+    font-size: 18px;
+}
