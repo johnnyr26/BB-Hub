@@ -3,6 +3,9 @@ main {
     flex-direction: column;
     align-items: center;
 }
+.column {
+    width: 100%;
+}
 .user-profile-div {
     padding: 24px;
     background-color: #ffffff;
@@ -30,6 +33,7 @@ main {
     flex-direction: column;
     justify-content: flex-end;
     margin: 0 32px;
+    margin-right: 0;
     width: 100%;
 }
 .user-profile-name {
@@ -39,7 +43,7 @@ main {
 .user-profile-info {
     margin: 8px 0;
 }
-.schedule-section, .detail-section, .clubs-section, .club-div, .sports-section, .sports-div {
+.schedule-section, .detail-section, .clubs-section, .club-div, .sports-section, .sport-div {
     border-radius: 10px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
     padding: 12px;
@@ -60,7 +64,7 @@ main {
 .clubs-section, .sports-section {
     box-sizing: border-box;
     width: 100% !important;
-    height: 400px;
+    height: auto;
     margin: 12px;
     margin-left: 0;
 }
@@ -91,23 +95,24 @@ main {
 .shared-course {
     border: solid #1472ff 1px;
 }
-.club-section-body, .sports-section-body {
+.club-section-body, .sport-section-body {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
     overflow-y: scroll;
-    height: 300px;
+    height: auto;
 }
-.club-div, .sports-div {
+.club-div, .sport-div {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 24px 12px;
+    height: 118px;
 }
-.club-icon, .sports-icon {
+.club-icon, .sport-icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -118,8 +123,141 @@ main {
     margin-bottom: 12px;
     background-color:#bbd6ff;
 }
-.club-name, .sports-name {
+.club-name, .sport-name {
     margin: 0;
     text-align: center;
     width: 100px;
+}
+.profile-button {
+    box-sizing: border-box;
+    text-decoration: none;
+    color: #ffffff;
+    display: block;
+    font-size: 24px;
+    background-color: #1472ff;
+    border-radius: 10px;
+    text-align: center;
+    padding: 12px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    border: none;
+    cursor: pointer;
+}
+.shadow-background {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: rgba(256,256,256,0.6);
+    z-index: 999;
+    overflow-y: scroll;
+}
+.modal {
+    position: relative;
+    width: 680px;
+    padding: 24px;
+    border-radius: 10px;
+    height: auto;
+    margin: 24px !important;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-header {
+    border-bottom: solid #d3d3d3 1px;
+    padding: 10px 0;
+}
+.grad-year-div {
+    margin: 48px 0;
+}
+.grad-year-button {
+    background-color: #d3d3d3;
+    border: none;
+    border-radius: 10px;
+    color: #000000;
+    font-size: 24px;
+    padding: 8px;
+    cursor: pointer;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.grad-year-button:hover {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 3px 10px 0 rgba(0, 0, 0, 0.4);
+}
+.grad-year-button:active {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.4), 0 3px 10px 0 rgba(0, 0, 0, 0.6);
+}
+.grad-year-label, .edit-clubs-label, .edit-sports-label {
+    font-size: 24px;
+    margin-right: 24px;
+}
+select {
+    width: 128px;
+    text-align: center;
+}
+.edit-clubs-div, .edit-sports-div {
+}
+.edit-clubs-body, .edit-sports-body {
+    border-radius: 10px;
+    border: solid #d3d3d3 1px;
+    height: 320px;
+    margin-bottom: 48px;
+}
+.select-club-div, .select-sport-div {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+.select-club-div:hover, .select-sport-div:hover {
+    color: #000000;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 3px 10px 0 rgba(0, 0, 0, 0.4);
+}
+.select-club-div:active, .select-sport-div:active {
+    color: #000000;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.4), 0 3px 10px 0 rgba(0, 0, 0, 0.6);
+}
+.div-selected {
+    border: solid #1472ff 1px;
+    box-shadow: none !important;
+}
+.year-selected {
+    background-color: #a6dbff;
+    color: #144bff;
+}
+.submit-profile-info {
+    width: 100%;
+    margin-top: 24px;
+}
+.x {
+    border: none;
+    border-radius: 10px;
+    background-color: #d3d3d3;
+    font-size: 24px;
+    height: 48px;
+    width: 48px;
+    padding: 0;
+    cursor: pointer;
+    margin-bottom: 6px;
+}
+.x:active {
+    color: #000000;
+}
+.edit-profile-label {
+    font-size: 40px;
+    text-align: center;
+    margin: 0;
+    padding: 0 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.edit-profile-label-div {
+    font-size: 36px;
+    text-align: center;
+    margin: 0;
+    padding: 0 50px;
+    display: flex;
+    flex-direction: row;
+    padding-right: 0;
 }

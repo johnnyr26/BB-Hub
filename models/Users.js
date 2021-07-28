@@ -16,6 +16,9 @@ const Schema = mongoose.Schema({
     picture: {
         type: String
     },
+    gradYear: {
+        type: Number
+    },
     tokens: [{
         token: {
             type: String,
@@ -47,6 +50,12 @@ const Schema = mongoose.Schema({
     }],
     requestedFriends: [{
         type: mongoose.ObjectId,
+    }],
+    clubs: [{
+        type: String
+    }],
+    sports: [{
+        type: String
     }],
     googleRefreshToken: {
         type: String

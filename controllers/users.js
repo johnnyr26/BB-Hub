@@ -17,11 +17,14 @@ module.exports.renderUser = async (req, res) => {
         
         const sharedCourses = user.id !== friendUser.id ? getSharedCourses(user.schedule, friendUser.schedule).map(course => course.courseTitle) : [];
 
-        const { name: userName, email: userEmail, friends: userFriends, picture: userPicture, schedule: userSchedule, } = friendUser;
+        const { name: userName, email: userEmail, friends: userFriends, picture: userPicture, schedule: userSchedule, gradYear: userGradYear, clubs: userClubs, sports: userSports } = friendUser;
 
         res.render('pages/users', {
             userName,
             userEmail,
+            userGradYear,
+            userClubs: userClubs ? userClubs : [],
+            userSports: userSports ? userSports : [],
             userFriends,
             userPicture,
             userSchedule,
@@ -33,4 +36,21 @@ module.exports.renderUser = async (req, res) => {
             id: req.user._id
         });
     }
+}
+
+module.exports.editProfile = async (req, res) => {
+    try {
+        const { gradYear, clubs, sports } = req.body;
+        const user = await Users.findById(req.user._id);
+
+        user.gradYear = gradYear;
+        user.clubs = clubs;
+        user.sports = sports;
+
+        await user.save();
+
+        res.send({ gradYear, clubs, sports });
+    } catch (e) {
+        res.send({ success: false });
+    }    
 }

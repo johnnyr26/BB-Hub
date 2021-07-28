@@ -5,6 +5,7 @@ const controller = require('../controllers/users');
 const auth = require('../middlewares/auth');
 
 router.route('/:user?')
-    .get(auth, controller.renderUser);
+    .get(auth, controller.renderUser)
+    .post(auth, controller.editProfile);
 
 module.exports = router;
