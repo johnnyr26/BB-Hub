@@ -14,7 +14,7 @@
                     <h1 class="title-heading">Friend Requests</h1>
                     <div class="friends-row">
                         <% friendRequests.forEach(friend => { %>
-                            <section class="friends-section">
+                            <a href="/users/<%= friend.id %>" class="friends-section">
                                 <div class="friends-header">
                                     <% if (friend.picture) { %>
                                         <img class="friends-image" alt="Image" src=<%= friend.picture %>>
@@ -25,7 +25,7 @@
                                     <button class="accept-friend-button" name="<%= friend.name %>">Accept</button>
                                     <button class="decline-friend-button" name="<%= friend.name %>">Decline</button>
                                 </div>
-                            </section>
+                            </a>
                         <% }); %>
                     </div>
                 </div>
@@ -54,23 +54,23 @@
                     <h1 class="title-heading">People you may know</h1>
                     <div class="friends-row">
                         <% if (locals.requestedFriends && requestedFriends.length) { %>
-                                <% requestedFriends.forEach(friend => { %>
-                                    <section class="friends-section">
-                                        <div class="friends-header">
-                                        <% if (friend.picture) { %>
-                                            <img class="friends-image" alt="Image" src=<%= friend.picture %>>
-                                        <% } %>
-                                        </div>
-                                        <div class="friends-body">
-                                            <h1 class="friends-name"><%= friend.name %></h1>
-                                            <button class="add-friend-button changed-friend-request" name="<%= friend.name %>" disabled>Requested</button>
-                                        </div>
-                                    </section>
-                                <% }); %>
+                            <% requestedFriends.forEach(friend => { %>
+                                <a href="/users/<%= friend.id %>" class="friends-section">
+                                    <div class="friends-header">
+                                    <% if (friend.picture) { %>
+                                        <img class="friends-image" alt="Image" src=<%= friend.picture %>>
+                                    <% } %>
+                                    </div>
+                                    <div class="friends-body">
+                                        <h1 class="friends-name"><%= friend.name %></h1>
+                                        <button class="cancel-request-button" name="<%= friend.name %>">Cancel Request</button>
+                                    </div>
+                                </a>
+                            <% }); %>
                         <% } %>
                         <% if (locals.availableFriends && availableFriends.length) { %>
                             <% availableFriends.forEach(friend => { %>
-                                <section class="friends-section">
+                                <a href="/users/<%= friend.id %>" class="friends-section">
                                     <div class="friends-header">
                                     <% if (friend.picture) { %>
                                         <img class="friends-image" alt="Image" src=<%= friend.picture %>>
@@ -80,7 +80,7 @@
                                         <h1 class="friends-name"><%= friend.name %></h1>
                                         <button class="add-friend-button" name="<%= friend.name %>">Add Friend</button>
                                     </div>
-                                </section>
+                                </a>
                             <% }); %>
                         <% } %>
                     </div>

@@ -1,6 +1,88 @@
-document.querySelector('.edit-profile').addEventListener('click', () => {
-    document.querySelector('.shadow-background').classList.remove('invisible');
-});
+const cancelRequest = (button) => {
+    fetch(`/users`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ cancelledFriendRequest: button.name })
+    })
+    .then(response => response.json())
+    .then(response => {
+        button.textContent = 'Add Friend';
+        button.classList.remove('cancel-request-button');
+        button.classList.add('add-friend-button');
+        const newButton = button.cloneNode(true);
+        button.parentNode.replaceChild(newButton, button);
+        newButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            addFriend(newButton)
+        });
+    });
+}
+
+const addFriend = (button) => {
+    fetch(`/users`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ friendRequest: button.name })
+    })
+    .then(response => response.json())
+    .then(response => {
+        button.textContent = 'Cancel Request';
+        button.classList.add('cancel-request-button');
+        const newButton = button.cloneNode(true);
+        button.parentNode.replaceChild(newButton, button);
+        newButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            cancelRequest(newButton)
+        });
+    });
+};
+
+const acceptFriend = (button) => {
+    fetch(`/users`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ acceptedFriendRequest: button.name })
+    })
+    .then(response => response.json())
+    .then(() => {
+        location.reload();
+    });
+};
+
+const declineFriend = (button) => {
+    fetch(`/users`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ deniedFriendRequest: button.name })
+    })
+    .then(response => response.json())
+    .then(response => {
+        Object.values(document.querySelectorAll('.accept-friend-button')).find(acceptButton => acceptButton.name === button.name).remove();
+        button.classList.remove('decline-friend-button');
+        button.classList.add('profile-button');
+        button.classList.add('add-friend-button');
+        button.textContent = 'Add Friend';
+        const newButton = button.cloneNode(true);
+        button.parentNode.replaceChild(newButton, button);
+        newButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            addFriend(newButton)
+        });
+    });
+}
+if (document.querySelector('.edit-profile')) {
+    document.querySelector('.edit-profile').addEventListener('click', () => {
+        document.querySelector('.shadow-background').classList.remove('invisible');
+    });
+}
 document.querySelector('.x').addEventListener('click', () => {
     document.querySelector('.shadow-background').classList.add('invisible');
 });
@@ -86,4 +168,19 @@ Object.values(document.querySelectorAll('.privacy-button')).forEach(button => {
             button.classList.remove('privacy-selected');
         }
     });
+});
+Object.values(document.querySelectorAll('.cancel-request-button')).forEach(button => {
+    button.addEventListener('click', () => cancelRequest(button));
+});
+
+Object.values(document.querySelectorAll('.add-friend-button')).forEach(button => {
+    button.addEventListener('click', () => addFriend(button));
+});
+
+Object.values(document.querySelectorAll('.accept-friend-button')).forEach(button => {
+    button.addEventListener('click', () => acceptFriend(button));
+});
+
+Object.values(document.querySelectorAll('.decline-friend-button')).forEach(button => {
+    button.addEventListener('click', () => declineFriend(button));
 });

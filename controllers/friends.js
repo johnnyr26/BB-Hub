@@ -17,7 +17,8 @@ module.exports.renderFriends = async (req, res) => {
     }).map(userInfo => {
         return {
             name: userInfo.name,
-            picture: userInfo.picture
+            picture: userInfo.picture,
+            id: userInfo.id
         }
     });
 
@@ -33,16 +34,19 @@ module.exports.renderFriends = async (req, res) => {
         const friend = await Users.findById(id);
         return {
             name: friend.name,
-            picture: friend.picture
+            picture: friend.picture,
+            id
         };
     }));
     const requestedFriends = await Promise.all(user.requestedFriends.map(async id => {
         const friend = await Users.findById(id);
         return {
             name: friend.name,
-            picture: friend.picture
+            picture: friend.picture,
+            id
         };
     }));
+
     return res.render('pages/friends', {
         id: req.user._id,
         picture: req.user.picture,
@@ -70,6 +74,7 @@ module.exports.updateFriends = async (req, res) => {
             await friendRequestUser.save();
             return res.send({ success: true });
         }
+
         if (req.body.acceptedFriendRequest) {
             const name = req.body.acceptedFriendRequest;
             const acceptedFriend = allUsers.find(member => member.name === name);
@@ -82,8 +87,9 @@ module.exports.updateFriends = async (req, res) => {
             acceptedFriend.requestedFriends = acceptedFriend.requestedFriends.filter(friendId => friendId.toString() !== user.id);
             await user.save();
             await acceptedFriend.save();
-            return res.send({ success: true });
+            return res.send({ userId: acceptedFriend._id });
         }
+
         if (req.body.deniedFriendRequest) {
             const name = req.body.deniedFriendRequest;
             const deniedFriend = allUsers.find(member => member.name === name);
@@ -96,10 +102,23 @@ module.exports.updateFriends = async (req, res) => {
             await deniedFriend.save();
             return res.send({ success: true });
         }
+
+        if (req.body.cancelledFriendRequest) {
+            const name = req.body.cancelledFriendRequest;
+            const cancelledFriend = allUsers.find(member => member.name === name);
+            if (!user.requestedFriends.includes(cancelledFriend.id) && !cancelledFriend.friendRequests.includes(user.id)) {
+                return res.send({ success: false });
+            }
+            user.requestedFriends = user.requestedFriends.filter(friendId => friendId.toString() !== cancelledFriend.id);
+            cancelledFriend.friendRequests = cancelledFriend.friendRequests.filter(friendId => friendId.toString() !== user.id);
+            await user.save();
+            await cancelledFriend.save();
+            return res.send({ success: true });
+        }
+
         return res.send({ success: true });
     } catch (e) {
         console.log(e);
         console.log(e.message);
-        
     }
 };

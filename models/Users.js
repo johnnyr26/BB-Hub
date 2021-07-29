@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken'); 
+const privacy = require('../assets/privacy/privacy');
 
 const Schema = mongoose.Schema({
     name: {
@@ -89,7 +90,8 @@ Schema.statics.findByCredentials = async (name, email, picture) => {
         const newUser = new Users({
             name,
             email,
-            picture
+            picture,
+            privacy
         })
         await newUser.save();
         return newUser;

@@ -179,6 +179,7 @@ main {
     font-size: 24px;
     padding: 8px;
     cursor: pointer;
+    margin-right: 10px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
 .grad-year-button:hover {
@@ -289,4 +290,15 @@ select {
     margin: 0;
     margin-left: 6px;
     font-size: 24px;
+}
+.accept-decline-row {
+    display: flex;
+    flex-direction: row;
+}
+.accept-friend-button {
+    margin-right: 12px;
+}
+.decline-friend-button, .cancel-request-button {
+    background-color: #d3d3d3;
+    color: #000000;
 }
