@@ -83,7 +83,7 @@
                                 <% }); %>
                             </div>
                         </div>
-                        <button class="profile-button submit-profile-info">Submit</button>
+                        <button class="profile-button submit-profile-info">Save</button>
                     </div>
                 </div> 
             </div>
@@ -116,6 +116,9 @@
                 </div>
                 <div class="user-profile-body">
                     <% if (selfUser || userFriends.includes(id)) { %> 
+                        <% if (!locals.userSchedule && !locals.userClubs && !locals.userSports) { %>
+                            <h1>No Information available</h1>
+                        <% } %>
                         <% if ((locals.userSchedule && userSchedule.length) && ((!selfUser && userPrivacy.includes('Schedule')) || selfUser)) { %>
                             <section class="schedule-section">
                                 <h1 id="my-schedule">Schedule</h1>

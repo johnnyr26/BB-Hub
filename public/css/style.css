@@ -3,7 +3,7 @@ html, body {
   min-height: 400px;
   box-sizing: border-box;
   margin: 0;
-  font: 14px Arial;
+  font-family: 'Lato', sans-serif;
   background-color: #F0F2F5;
 }
 main {

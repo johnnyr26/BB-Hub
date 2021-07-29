@@ -76,7 +76,7 @@ module.exports.editProfile = async (req, res) => {
         if (req.body.acceptedFriendRequest) {
             const id = req.body.acceptedFriendRequest;
             const acceptedFriend = allUsers.find(member => member._id.toString() === id);
-            
+
             if (user.friends.includes(acceptedFriend)) {
                 return res.send({ success: false });
             }

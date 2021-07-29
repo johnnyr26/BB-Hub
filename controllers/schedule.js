@@ -26,21 +26,10 @@ const presetColors = [
 module.exports.renderSchedule = async (req, res) => {
     const user = await Users.findById(req.user._id);
 
-    if (req.params.user && req.params.user !== 'table-schedule') {
-        const searchedUser = await Users.findOne({ name: req.params.user });
-        if (!searchedUser) {
-            return res.render('pages/schedule', { users, picture: req.user.picture, id: req.user._id });
-        }
-        const sharedCourses = getSharedCourses(user.schedule, searchedUser.schedule).map(course => course.courseTitle);
-        const letterDays = await getLetterDays();
-        const formattedSchedule = formatSchedule(searchedUser.schedule);
-        return res.send({ 
-            schedule: formattedSchedule, 
-            letterDays,
-            sharedCourses
-        });
-    }
-    const friends = (await Users.find({ friends: user.id })).filter(user => user.schedule.length > 0).map(member => member.name);
+    user.schedule.sort((a, b) => {
+        return a.period - b.period;
+    });
+
     const letterDays = await getLetterDays();
     const courseBackgroundColors = user.schedule.map((course, index) => {
         return {
@@ -50,18 +39,6 @@ module.exports.renderSchedule = async (req, res) => {
     });
     const formattedSchedule = formatSchedule(user.schedule);
 
-    if (req.params.user === 'table-schedule') {
-        return res.render('pages/table-schedule', {
-            user, 
-            letterDays,
-            presetColors,
-            schedule: formattedSchedule, 
-            courseBackgroundColors,
-            users: friends, 
-            picture: req.user.picture, 
-            id: req.user._id 
-        });
-    }
     return res.render('pages/schedule', { 
         user, 
         letterDays,
@@ -69,16 +46,38 @@ module.exports.renderSchedule = async (req, res) => {
         userSchedule: user.schedule,
         schedule: formattedSchedule, 
         courseBackgroundColors,
-        users: friends, 
         picture: req.user.picture, 
         id: req.user._id 
     });
 };
 
 module.exports.uploadSchedule = async (req, res) => {
-    if (!req.body.schedule) {
-        return res.status(500).error('No schedule');
+
+    const user = await Users.findById(req.user._id);
+
+    if (req.body.removeCourse) {
+        const courseId = req.body.removeCourse;
+        const course = user.schedule.find(userCourse => userCourse._id.toString() === courseId);
+        user.schedule = user.schedule.filter(userCourse => userCourse._id.toString() !== course._id.toString());
+        findFreePeriods(user.schedule);
+        await user.save();
+        return res.send({ success: true });
     }
+
+    if (req.body.newCourse) {
+        const { newCourse } = req.body;
+        user.schedule = user.schedule.filter(userCourse => userCourse.courseTitle.substring(0,4) !== 'FREE');
+        user.schedule.push(newCourse);
+        findFreePeriods(user.schedule);
+        await user.save();
+        return res.send({ success: true });
+    }
+
+    if (!req.body.schedule) {
+        return res.send({ success: false });
+    }
+
+    
    
     const { schedule: uncleanedSchedule } = req.body;
     const schedule = uncleanedSchedule.split('\n').filter(str => str);

@@ -9,26 +9,87 @@
     </head>
     <body>
         <%- include('../partials/header'); -%>
+        <div class="shadow-background invisible">
+            <div class="modal import-class-modal invisible">
+                <div class="modal-header">
+                    <h1>Import Classes</h1>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="help-row">
+                            <textarea placeholder="Paste Schedule"></textarea>
+                            <video playsinline="" autoplay="" loop="" src="/video/tutorialow.mp4" class="import-tutorial"></video>
+                        </div>
+                        <button class="submit-schedule">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal edit-class-modal invisible">
+                <div class="modal-header">
+                    <h1>Edit Classes</h1>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <% userSchedule.forEach(course => { %>
+                            <% if (course.courseTitle.substring(0, 4) !== 'FREE') { %>
+                                <div class="detail-section">
+                                    <p class="detail-body"><strong><%= course.courseTitle %></strong> · Period <%= course.period %> · <%= course.teacher %> · <%= course.classRoom %></p>
+                                    <button type="submit" class="remove" name="<%= course._id %>">Remove</button>
+                                </div>
+                            <% } %>
+                        <% }); %>
+                    </form>
+                </div>
+            </div>
+            <div class="modal add-class-modal invisible">
+                <div class="modal-header">
+                    <h1>Add Class</h1>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="name-textfield" name="className" placeholder="Class Name" required>
+                    <input type="text" class="period-textfield" name="period" placeholder="Period" required>
+                    <input type="text" class="letterDay-textfield" name="letterDay" placeholder="Letter Days (e.g 'A,C,D,F,G,H')" required>
+                    <input type="text" class="room-textfield" name="room" placeholder="Room" required>
+                    <input type="text" class="teacher-textfield" name="teacher" placeholder="Teacher" required>
+                    <p class="error-message invisible"></p>
+                    <div class="add-class-button-wrapper">
+                        <button class="add-class-button">Add</button>
+                        <button class="cancel-add-class-button">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <main>
-            <textarea placeholder="Drop Schedule"></textarea>
-            <button id="submit" type="submit">Submit</button>
-            <% if (locals.userSchedule && userSchedule.length) { %>
-                <div class="table-wrapper">
-                    <table class="schedule-table">
-                        <thead>
-                        <tr>
-                            <th class="time-label">Time</th>
-                            <% Object.keys(schedule).forEach(letter => { %>
-                                <th class="letter"><%= letter %></th>
-                            <% }); %>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <% const colorObject = {} %>
-                            <% for (let i = 0; i < schedule['A'].length; i ++) { %>
-                                <tr>
-                                    <td class="time"><%= schedule[Object.keys(schedule)[i]][i].time.from %> - <%= schedule[Object.keys(schedule)[i]][i].time.to %></td>
-                                    <% for (let j = 0; j < Object.entries(schedule).length; j ++) { %>
+            <div class="create-button-wrapper">
+                <button class="edit-class-button edit-class">Edit Class</button>
+                <div>
+                    <button class="edit-class-button import-class">Import Classes</button>
+                    <button class="edit-class-button add-class">Add Class</button>
+                </div>
+            </div>
+            <div class="table-options">
+                <label><input type="checkbox" class="free-periods-checkbox" checked/>Show Free Periods</label>
+                <label><input type="checkbox" class="room-number-checkbox" checked/>Show Room Number</label>
+                <label><input type="checkbox" class="show-teacher-checkbox" checked/>Show Teacher</label>
+                <label><input type="checkbox" class="show-colors-checkbox" checked/>Show Colors</label>
+            </div>
+            <div class="table-wrapper">
+                <table class="schedule-table">
+                    <thead>
+                    <tr>
+                        <th class="time-label">Time</th>
+                        <% Object.keys(schedule).forEach(letter => { %>
+                            <th class="letter"><%= letter %></th>
+                        <% }); %>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <% const colorObject = {} %>
+                        <% for (let i = 0; i < schedule['A'].length; i ++) { %>
+                            <tr>
+                                <td class="time"><%= schedule[Object.keys(schedule)[i]][i].time.from %> - <%= schedule[Object.keys(schedule)[i]][i].time.to %></td>
+                                <% for (let j = 0; j < Object.entries(schedule).length; j ++) { %>
+                                    <% if (schedule[Object.keys(schedule)[j]][i].course) { %>
                                         <% const { courseTitle: name, classRoom, teacher } = schedule[Object.keys(schedule)[j]][i].course  %>
                                         <% if (name === 'Lunch') { %>
                                             <td class="block long" colspan=<%= Object.keys(schedule).length %>><%= name %></td>
@@ -43,13 +104,15 @@
                                             <span class="class-room"><%= classRoom %></span>
                                             <span class="class-teacher"><%= teacher %></span>
                                         </td>
+                                    <% } else { %>
+                                        <td class="block free">Free</td>
                                     <% } %>
-                                </tr>
-                            <% } %>
-                        </tbody>
-                    </table>
-                </div>
-            <% } %>
+                                <% } %>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
         </main>
     </body>
     <script src="/js/schedule.js"></script>

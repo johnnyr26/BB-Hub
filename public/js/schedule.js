@@ -6,20 +6,6 @@ Object.values(document.querySelectorAll('.users')).forEach(userButton => {
     });
 });
 
-document.querySelector('#submit').addEventListener('click', () => {
-    const scheduleInput = document.querySelector('textarea').value;
-
-    fetch(`/schedule`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ schedule: scheduleInput })
-    })
-    .then(response => response.json())
-    .then(response => printSchedule(response, 'main-schedule'));
-});
-
 const printSchedule = (response, body) => {
     const { letterDays } = response;
     if (response.schedule) {
@@ -61,12 +47,201 @@ const clearSchedule = (body) => {
     }
 }
 
-document.querySelector('.view-table').addEventListener('click', () => {
-    if (document.querySelector('.table-wrapper.invisible')) {
-        document.querySelector('.table-wrapper.invisible').classList.remove('invisible');
-        document.querySelector('.view-table').textContent = 'Hide Letter Day Schedule';
+document.querySelector('.free-periods-checkbox').addEventListener('change', () => {
+    if (document.querySelector('.free-periods-checkbox').checked) {
+        Object.values(document.querySelectorAll('.block.free')).forEach(freeBlock => {
+            freeBlock.textContent = 'Free';
+        });
     } else {
-        document.querySelector('.table-wrapper').classList.add('invisible');
-        document.querySelector('.view-table').textContent = 'View Letter Day Schedule';
+        Object.values(document.querySelectorAll('.block.free')).forEach(freeBlock => {
+            freeBlock.textContent = '';
+        });
     }
+});
+
+document.querySelector('.room-number-checkbox').addEventListener('change', () => {
+    if (document.querySelector('.room-number-checkbox').checked) {
+        Object.values(document.querySelectorAll('.class-room')).forEach(freeBlock => {
+            freeBlock.style.display = 'block'
+        });
+    } else {
+        Object.values(document.querySelectorAll('.class-room')).forEach(freeBlock => {
+            freeBlock.style.display = 'none';
+        });
+    }
+});
+
+document.querySelector('.show-teacher-checkbox').addEventListener('change', () => {
+    if (document.querySelector('.show-teacher-checkbox').checked) {
+        Object.values(document.querySelectorAll('.class-teacher')).forEach(freeBlock => {
+            freeBlock.style.display = 'block'
+        });
+    } else {
+        Object.values(document.querySelectorAll('.class-teacher')).forEach(freeBlock => {
+            freeBlock.style.display = 'none';
+        });
+    }
+});
+
+document.querySelector('.show-teacher-checkbox').addEventListener('change', () => {
+    if (document.querySelector('.show-teacher-checkbox').checked) {
+        Object.values(document.querySelectorAll('.class-teacher')).forEach(freeBlock => {
+            freeBlock.style.display = 'block'
+        });
+    } else {
+        Object.values(document.querySelectorAll('.class-teacher')).forEach(freeBlock => {
+            freeBlock.style.display = 'none';
+        });
+    }
+});
+
+//show-colors-checkbox
+
+document.querySelector('.show-colors-checkbox').addEventListener('change', () => {
+    if (document.querySelector('.show-colors-checkbox').checked) {
+        Object.values(document.querySelectorAll('.block.class')).forEach(freeBlock => {
+            freeBlock.style.backgroundColor = freeBlock.backgroundColor;
+        });
+        document.querySelector('.block.long').style.backgroundColor = document.querySelector('.block.long').backgroundColor;
+        document.querySelector('.block.long').style.color = '#ffffff';
+    } else {
+        Object.values(document.querySelectorAll('.block.class')).forEach(freeBlock => {
+            freeBlock.backgroundColor = freeBlock.style.backgroundColor;
+            freeBlock.style.backgroundColor = 'transparent';
+        });
+        document.querySelector('.block.long').backgroundColor = document.querySelector('.block.long').style.backgroundColor;
+        document.querySelector('.block.long').style.backgroundColor = 'transparent';
+        document.querySelector('.block.long').style.color = '#000000';
+    }
+});
+
+document.querySelector('.import-class').addEventListener('click', () => {
+    document.querySelector('.shadow-background').classList.remove('invisible');
+    document.querySelector('.modal.import-class-modal').classList.remove('invisible');
+});
+
+document.querySelector('.edit-class').addEventListener('click', () => {
+    document.querySelector('.shadow-background').classList.remove('invisible');
+    document.querySelector('.modal.edit-class-modal').classList.remove('invisible');
+});
+
+document.querySelector('.add-class').addEventListener('click', () => {
+    document.querySelector('.shadow-background').classList.remove('invisible');
+    document.querySelector('.modal.add-class-modal').classList.remove('invisible');
+});
+
+
+
+document.querySelector('.submit-schedule').addEventListener('click', () => {
+    const scheduleInput = document.querySelector('textarea').value;
+
+    if (!scheduleInput.trim()) {
+        return;
+    }
+
+    fetch(`/schedule`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ schedule: scheduleInput })
+    })
+    .then(response => response.json())
+    .then(response => {
+        document.querySelector('.shadow-background').classList.add('invisible');
+        document.querySelector('.modal.import-class-modal').classList.add('invisible');
+        document.querySelector('.modal.edit-class-modal').classList.add('invisible');
+        document.querySelector('.modal.add-class-modal').classList.add('invisible');
+    });
+});
+
+document.querySelector('.add-class-button').addEventListener('click', () => {
+    const letterDayRegex = /([A-H],?)*[A-H]$/;
+    const periodRegex = /([1-9])$/;
+
+    document.querySelector('.error-message').classList.add('invisible');
+
+    const courseTitle = document.querySelector('.name-textfield').value.trim();
+    const period = document.querySelector('.period-textfield').value.trim();
+    const letterDays = document.querySelector('.letterDay-textfield').value.trim();
+    const classRoom = document.querySelector('.room-textfield').value.trim();
+    const teacher = document.querySelector('.teacher-textfield').value.trim();
+
+    const allFilled = courseTitle && period && letterDays && classRoom && teacher;
+    const regexMatch = letterDays.match(letterDayRegex) &&  period.match(periodRegex);
+
+    if (!allFilled) {
+        document.querySelector('.error-message').classList.remove('invisible');
+        document.querySelector('.error-message').textContent = 'Not all required textfields were filled. Please fill in all required information';
+        return;
+    }
+    if (!regexMatch) {
+        document.querySelector('.error-message').classList.remove('invisible');
+        if (!letterDays.match(letterDayRegex)) {
+            document.querySelector('.error-message').textContent = 'The letter days were not entered in the right format. The format should be A,C,D,F';
+            return;
+        } else {
+            document.querySelector('.error-message').textContent = 'The period can only be between 1 and 8';
+            return;
+        }
+    }
+
+    const newCourse = {
+        courseTitle, 
+        period,
+        letterDays: letterDays.split(','),
+        classRoom,
+        teacher
+    }
+
+    fetch(`/schedule`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ newCourse })
+    })
+    .then(response => response.json())
+    .then(response => {
+        location.reload();
+    });
+});
+
+document.querySelector('.cancel-add-class-button').addEventListener('click', () => {
+    Object.values(document.querySelectorAll('input[type="text')).forEach(textfield => {
+        textfield.value = '';
+    });
+    document.querySelector('.shadow-background').classList.add('invisible');
+    document.querySelector('.modal.import-class-modal').classList.add('invisible');
+    document.querySelector('.modal.edit-class-modal').classList.add('invisible');
+    document.querySelector('.modal.add-class-modal').classList.add('invisible');
+})
+
+
+document.querySelector('.shadow-background').addEventListener('click', e => {
+    if (e.target !== document.querySelector('.shadow-background')) {
+        e.stopPropagation();
+        return;
+    }
+    document.querySelector('.shadow-background').classList.add('invisible');
+    document.querySelector('.modal.import-class-modal').classList.add('invisible');
+    document.querySelector('.modal.edit-class-modal').classList.add('invisible');
+    document.querySelector('.modal.add-class-modal').classList.add('invisible');
+});
+
+Object.values(document.querySelectorAll('.remove')).forEach(removeButton => {
+    removeButton.addEventListener('click', () => {
+        fetch(`/schedule`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ removeCourse: removeButton.name })
+        })
+        .then(response => response.json())
+        .then(response => {
+            
+            removeButton.parentElement.remove();
+        });
+    });
 });

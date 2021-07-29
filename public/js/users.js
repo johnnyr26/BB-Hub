@@ -184,3 +184,10 @@ Object.values(document.querySelectorAll('.accept-friend-button')).forEach(button
 Object.values(document.querySelectorAll('.decline-friend-button')).forEach(button => {
     button.addEventListener('click', () => declineFriend(button));
 });
+document.querySelector('.shadow-background').addEventListener('click', e => {
+    if (e.target !== document.querySelector('.shadow-background')) {
+        e.stopPropagation();
+        return;
+    }
+    document.querySelector('.shadow-background').classList.add('invisible');
+});
