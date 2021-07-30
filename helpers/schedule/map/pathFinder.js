@@ -37,7 +37,6 @@ const getUnvisitedNeighbors = (node, nodes, queue) => {
 }
 
 const findPathBack = (node, STAIR_NODE) => {
-    console.log('Total length to the spot', node.level);
     const path = [node];
     while (node.parent) {
         path.unshift(node.parent);

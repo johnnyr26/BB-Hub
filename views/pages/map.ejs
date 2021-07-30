@@ -8,9 +8,21 @@
     <body>
         <%- include('../partials/header'); -%>
         <main>
-            <input type="text" id="startingLocation" placeholder="Starting Location"/>
-            <input type="text" id="finalLocation" placeholder="Final Location"/>
-            <button id="submit">Submit</button>
+            <div class="get-location-divs">
+                <div class="location-location-div">
+                    <label for="startingLocation">Select starting location</label>
+                    <select name="startingLocation" id="startingLocation">
+                        <%- include('../partials/rooms'); -%>
+                    </select>
+                </div>
+                <div class="location-div">
+                    <label for="finalLocation">Select destination</label>
+                    <select name="finalLocation" id="finalLocation">
+                        <%- include('../partials/rooms'); -%>
+                    </select>
+                </div>
+                <button class="submit">Submit</button>
+            </div>
             <div id="maps">
                 <div id="map1">
                     <p class="title">First Floor</p>

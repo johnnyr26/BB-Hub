@@ -22,6 +22,28 @@ svg, g {
     align-items: center;
     justify-content: center;
 }
+.get-location-divs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.location-div {
+    margin: 6px 0;
+}
+label {
+    font-size: 24px;
+}
+.submit {
+    font-size: 24px;
+    background-color: #1472ff;
+    padding: 8px;
+    border: none;
+    padding: 8px;
+    border-radius: 10px;
+    color: #ffffff;
+}
 @keyframes show-route {
     from {
         right: 0%;

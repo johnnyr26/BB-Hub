@@ -1,4 +1,4 @@
-document.querySelector('#submit').addEventListener('click', () => {
+document.querySelector('.submit').addEventListener('click', () => {
     const startingLocation = document.querySelector('#startingLocation').value;
     const finalLocation = document.querySelector('#finalLocation').value;
 

@@ -1,24 +1,17 @@
-const coords = [
-    333,
-    372,
-    410,
-    414,
-    462,
-    494,
-    500,
-    508,
-    580,
-    592,
-    638,
-    650,
-    670
-];
+const firstFloor = require('./assets/maps/FIRST_FLOOR');
+const secondFloor = require('./assets/maps/SECOND_FLOOR');
 
-coords.forEach((coord1, index1) => {
-    coords.forEach((coord2, index2) => {
-        if (coord1 === coord2) {
-            return;
-        }
-        console.log(`<line stroke-width="5" stroke="#000" fill="none" x1="${coord1}" y1="203" x2="${coord2}" y2="203" id="svg_${(index1 + 1) * 1000 + index2}" style="fill: none; stroke: rgb(0, 0, 0);"></line>`);
-    })
-});
+const fRooms = firstFloor.map(cell => cell.id).filter(id => id.substring(0, 3) !== 'svg' && id.substring(0, 5) !== 'Stair');
+const sRooms = secondFloor.map(cell => cell.id).filter(id => id.substring(0, 3) !== 'svg' && id.substring(0, 5) !== 'Stair');
+
+const firstFloorSelectOptions = fRooms.map(room => {
+    return `<option value="${room}">${room}</option>`;
+}).sort();
+
+const secondFloorSelectOptions = sRooms.map(room => {
+    return `<option value="${room}">${room}</option>`;
+}).sort();
+
+firstFloorSelectOptions.forEach(room => console.log(room));
+console.log();
+secondFloorSelectOptions.forEach(room => console.log(room));
