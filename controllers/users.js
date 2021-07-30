@@ -1,4 +1,6 @@
 const Users = require('../models/Users');
+const Posts = require('../models/Posts');
+
 const clubs = require('../assets/clubs/clubs');
 const sports = require('../assets/sports/sports');
 const privacy = require('../assets/privacy/privacy');
@@ -32,6 +34,8 @@ module.exports.renderUser = async (req, res) => {
             privacy: userPrivacy 
         } = friendUser;
 
+        const userPosts = (await Posts.find({ 'user': id })).filter(post => post.grades.includes(req.user.gradYear)).reverse();
+
         res.render('pages/users', {
             userName,
             userEmail,
@@ -45,6 +49,7 @@ module.exports.renderUser = async (req, res) => {
             userRequestedFriends,
             userFriendRequests,
             userId: id,
+            userPosts,
             sharedCourses,
             privacy,
             clubs,

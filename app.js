@@ -35,7 +35,7 @@ app.use('/users', usersRouter);
 app.use('/schedule', scheduleRouter);
 app.use('/lunch', lunchRouter);
 app.use('/classroom', classroomRouter);
-app.use('/posts', postsRouter);
+app.use('/announcements', postsRouter);
 app.use('/map', mapRouter);
 app.use('/friends', friendsRouter);
 

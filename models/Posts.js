@@ -10,18 +10,19 @@ const Schema = mongoose.Schema({
     },
     title: {
         type: String,
-        required: true,
         trim: true
     },
     message: {
         type: String,
-        require: true,
         trim: true
     },
     img: { 
         data: Buffer, 
         content: String 
-    }
+    },
+    grades: [{
+        type: Number
+    }]
 }, {
     timestamps: true
 });
@@ -44,18 +45,23 @@ Schema.post('findOne', async post => {
     await post.populate('user').execPopulate();
 });
 
-Schema.statics.createNewPost = async (user, title, message, image)  => {
-    const body = image ? {
-        user,
-        title,
-        message,
-        img: {
-            data: fs.readFileSync(path.join(__dirname + '/../uploads/' + image.filename)),
-            content: image.mimetype
-        }
-    } : { user, title, message };
-    const post = new Posts(body);
-    await post.save();
+Schema.statics.createNewPost = async (user, title, message, image, grades)  => {
+    try {
+        const body = image ? {
+            user,
+            title,
+            message,
+            img: {
+                data: fs.readFileSync(path.join(__dirname + '/../uploads/' + image.filename)),
+                content: image.mimetype
+            }, 
+            grades
+        } : { user, title, message, grades };
+        const post = new Posts(body);
+        await post.save();
+    } catch (e) {
+        throw new Error(e);
+    }
 } 
 
 const Posts = mongoose.model('Posts', Schema);

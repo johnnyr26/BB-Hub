@@ -49,26 +49,6 @@
                 <h1 id="classroom-loading">Loading...</h1>
               </div>
             </section>
-            <% if (locals.posts) { %>
-              <% const firstHalfPostArrays = posts.filter((post, index) => index % 2 === 1); %>
-              <% firstHalfPostArrays.forEach(post => { %>
-                <section class="announcements-section">
-                  <div class="announcements-section-title section-title">
-                    <% if (post.img.data) { %>
-                      <% const b64 = Buffer.from(post.img.data.buffer).toString('base64') %>
-                      <img class="announcements-image" alt="Image" src="data:image/jpeg;base64, <%= b64 %>">
-                    <% } %>
-                  </div>
-                  <div class="section-body announcements-section-body">
-                    <h1 class="announcements-title-heading"><%= post.title %></h1>
-                    <!-- <% if (post.user) { %>
-                        <p class="announcements-body"><%= post.user.name %></p>
-                    <% } %> -->
-                    <p class="announcements-body"><%= post.message %></p>
-                  </div>
-                </section>
-              <% }); %>
-            <% } %>
           </div> 
           <div id="column3" class="column">
             <section id="lunch-section">
@@ -88,26 +68,6 @@
                 <% }); %>
               </div>
             </section>
-            <% if (locals.posts) { %>
-              <% const secondHalfPostsArray = posts.filter((post, index) => index % 2 === 0); %>
-              <% secondHalfPostsArray.forEach(post => { %>
-                <section class="announcements-section">
-                  <div class="announcements-section-title section-title">
-                    <% if (post.img.data) { %>
-                      <% const b64 = Buffer.from(post.img.data.buffer).toString('base64') %>
-                      <img class="announcements-image" alt="Image" src="data:image/jpeg;base64, <%= b64 %>">
-                    <% } %>
-                  </div>
-                  <div class="section-body announcements-section-body">
-                    <h1 class="announcements-title-heading"><%= post.title %></h1>
-                    <!-- <% if (post.user) { %>
-                        <p class="announcements-body"><%= post.user.name %></p>
-                    <% } %> -->
-                    <p class="announcements-body"><%= post.message %></p>
-                  </div>
-                </section>
-              <% }); %>
-            <% } %>
           </div>
         </div>
       </main>

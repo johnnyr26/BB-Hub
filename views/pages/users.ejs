@@ -35,7 +35,7 @@
                         </div>
                         <div class="edit-clubs-div">
                             <div>
-                                <p class="edit-clubs-label">Clubs</p>
+                                <p class="edit-clubs-label">Select The Clubs You Participate In</p>
                             </div>
                             <div class="club-section-body edit-clubs-body" class="section-body">
                                 <% clubs.forEach(club => { %>
@@ -52,7 +52,7 @@
                         </div>
                         <div class="edit-sports-div">
                             <div>
-                                <p class="edit-sports-label">Sports</p>
+                                <p class="edit-sports-label">Select The Sports You Participate In</p>
                             </div>
                             <div class="sport-section-body edit-sports-body" class="section-body">
                                 <% sports.forEach(sport => { %>
@@ -139,9 +139,6 @@
                                         </div>
                                     </div>
                                 <% }); %>
-                                <% if (selfUser) { %>
-                                    <button class="edit-schedule schedule-button">Edit Schedule</button>
-                                <% } %>
                             </section>
                         <% } %>
                         <div class="column">
@@ -163,7 +160,7 @@
                                     </div>
                                 </section>
                             <% } %>
-                            <% if (locals.sports && ((!selfUser && userPrivacy.includes('Sports')) || selfUser)) { %>
+                            <% if (locals.userSports && ((!selfUser && userPrivacy.includes('Sports')) || selfUser)) { %>
                                 <section class="sports-section">
                                     <div>
                                         <h1 id="my-schedule">Sports</h1>
@@ -179,6 +176,36 @@
                                             </div>
                                         <% }); %>
                                     </div>
+                                </section>
+                            <% } %>
+                            <% if (locals.userPosts && ((!selfUser && userPrivacy.includes('Announcements')) || selfUser)) { %>
+                                <section class="posts-section">
+                                    <div>
+                                        <h1 id="my-schedule">Announcements</h1>
+                                    </div>
+                                    <% if (!userPosts.length) { %>
+                                        <p class="no-activities">No Announcements</p>
+                                    <% } %>
+                                    <% userPosts.forEach(post => { %>
+                                        <section class="announcements-section">
+                                            <div class="announcements-section-title section-title">
+                                                <% if (post.img.data) { %>
+                                                    <% const b64 = Buffer.from(post.img.data.buffer).toString('base64') %>
+                                                    <img class="announcements-image" alt="Image" src="data:image/jpeg;base64, <%= b64 %>">
+                                                <% } %>
+                                            </div>
+                                            <div class="section-body announcements-section-body">
+                                                <% if (post.user) { %>
+                                                    <a href="/users/<%= post.user._id %>" class="user-info">
+                                                        <img alt="profile-image" src="<%= post.user.picture %>"/>
+                                                        <p class="announcements-body userlink"><%= post.user.name %></p>
+                                                    </a>
+                                                <% } %>
+                                                <h1 class="announcements-title-heading"><%= post.title %></h1>
+                                                <p class="announcements-body"><%= post.message %></p>
+                                            </div>
+                                        </section>
+                                    <% }); %>
                                 </section>
                             <% } %>
                         </div>

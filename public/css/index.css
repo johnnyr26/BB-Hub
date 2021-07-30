@@ -20,7 +20,7 @@ main {
 }
 section {
     box-sizing: border-box;
-    background-color: white;
+    background-color: #ffffff;
     height: 410px;
     width: 400px;
     border-radius: 10px;
@@ -113,16 +113,10 @@ h1 {
     align-items: center;
     justify-content: center;
 }
-#lunch-section {
-    height: 450px;
-}
-#lunch-section-body {
-    height: 350px;
-}
-.schedule-section, #classroom-section, #schedule-section-body, #classroom-section-body {
+.schedule-section, #classroom-section, #schedule-section-body, #classroom-section-body, #lunch-section, #lunch-section-body {
     height: 100%;
 }
-#classroom-section-body {
+#classroom-section-body, #lunch-section-body {
     max-height: 500px;
     overflow-y: scroll;
     padding: none;
@@ -185,6 +179,22 @@ h1 {
 .friends-div {
     height: 128px;
     width: 100%;
+}
+.user-info {
+    margin: 12px 0;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.userlink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-left: 8px;
+    text-decoration: none;
+    outline: none;
+    color: #000000;
 }
 @keyframes animate-load {
     from {
