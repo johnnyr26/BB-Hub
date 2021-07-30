@@ -94,9 +94,9 @@ Schema.statics.findByCredentials = async (name, email, picture) => {
             privacy
         })
         await newUser.save();
-        return newUser;
+        return { user: newUser, newUser: true };
     }
-    return user;
+    return { user, newUser: false };
 }
 
 const Users = mongoose.model('Users', Schema);

@@ -79,20 +79,23 @@ const declineFriend = (button) => {
     });
 }
 if (document.querySelector('.edit-profile')) {
-    document.querySelector('.edit-profile').addEventListener('click', () => {
-        document.querySelector('.shadow-background').classList.remove('invisible');
+    Object.values(document.querySelectorAll('.edit-profile')).forEach(button => {
+        button.addEventListener('click', () => {
+            document.querySelector('.shadow-background').classList.remove('invisible');
+            document.querySelector('.new-user-modal').classList.add('invisible');
+            document.querySelector('.edit-profile-modal').classList.remove('invisible');
+        });
     });
 }
 document.querySelector('.x').addEventListener('click', () => {
     document.querySelector('.shadow-background').classList.add('invisible');
+    document.querySelector('.edit-profile-modal').classList.add('invisible');
 });
 document.querySelector('.submit-profile-info').addEventListener('click', () => {
     const graduationYear = parseInt(document.querySelector('.grad-year-button.year-selected').name);
     const clubs = Object.values(document.querySelectorAll('.select-club-div.div-selected')).map(div => div.name);
     const sports = Object.values(document.querySelectorAll('.select-sport-div.div-selected')).map(div => div.name);
     const privacy = Object.values(document.querySelectorAll('.privacy-button.privacy-selected')).map(div => div.name);
-
-    console.log(privacy);
 
     fetch(`/users`, {
         method: 'POST',
@@ -108,30 +111,19 @@ document.querySelector('.submit-profile-info').addEventListener('click', () => {
     })
     .then(response => response.json())
     .then(response => {
-        const { gradYear, clubs, sports } = response;
-        document.querySelector('.user-profile-info').textContent = `Class of ${gradYear}`;
+        if (window.location.href.includes('newuser')) {
+            document.querySelector('.new-user-modal').classList.remove('invisible');
+            document.querySelector('.edit-profile-modal').classList.add('invisible');
 
-        document.querySelector('.club-section-body.section-body').innerHTML = '';
-        clubs.forEach(club => {
-            document.querySelector('.club-section-body.section-body').innerHTML += `
-                <a href="/roster?club=${club}" class="club-div">
-                    <div class="club-icon">${club[0]}</div>
-                    <p class="club-name">${club}</p>
-                </a>
+            document.querySelector('.new-user-modal-header').innerHTML = `
+                <h1>Nice Job</h1>
+                <h1>Let's add your schedule</h1>
             `;
-        });
-
-        document.querySelector('.sport-section-body.section-body').innerHTML = '';
-        sports.forEach(sport => {
-            document.querySelector('.sport-section-body.section-body').innerHTML += `
-                <a href="/roster?sport=${sport}" class="sport-div">
-                    <div class="sport-icon">${sport[0]}</div>
-                    <p class="sport-name">${sport}</p>
-                </a>
+            document.querySelector('.new-user-modal-body').innerHTML = `
+                <a href="/schedule" class="profile-button edit-profile">Add Schedule</a>
             `;
-        });
-
-        document.querySelector('.shadow-background').classList.add('invisible');
+        }
+        
     });
 });
 Object.values(document.querySelectorAll('.select-club-div')).forEach(button => {

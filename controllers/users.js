@@ -36,7 +36,7 @@ module.exports.renderUser = async (req, res) => {
 
         const userPosts = (await Posts.find({ 'user': id })).filter(post => post.grades.includes(req.user.gradYear)).reverse();
 
-        res.render('pages/users', {
+        const responseInfo =  {
             userName,
             userEmail,
             userGradYear,
@@ -56,7 +56,13 @@ module.exports.renderUser = async (req, res) => {
             sports,
             picture: req.user.picture,
             id: req.user._id
-        });
+        };
+
+        if (req.query.newuser) {
+            responseInfo['newUser'] = true;
+        }
+        
+        res.render('pages/users', responseInfo);
     }
 }
 

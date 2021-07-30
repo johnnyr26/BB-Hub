@@ -10,8 +10,22 @@
         <%- include('../partials/header'); -%>
         <main>
             <% const selfUser = userId.toString() === id.toString(); %>
-            <div class="shadow-background invisible">
-                <div class="modal">
+            <% if (locals.newUser) { %>
+                <div class="shadow-background">
+                    <div class="modal new-user-modal">
+                <% } else { %>
+                <div class="shadow-background invisible">
+                    <div class="modal new-user-modal invisible">
+                <% } %>
+                    <div class="modal-header new-user-modal-header">
+                        <h1>Welcome to BB Hub</h1>
+                        <p>Before you proceed to the site, edit your profile page.</p>
+                    </div>
+                    <div class="modal-body new-user-modal-body">
+                        <button class="profile-button edit-profile">Edit Profile</button>
+                    </div>
+                </div>
+                <div class="modal edit-profile-modal invisible">
                     <div class="modal-header">
                         <div class="edit-profile-label-div">
                             <h1 class="edit-profile-label">Edit Profile</h1>
@@ -22,7 +36,7 @@
                         <div class="grad-year-div">
                             <% const date = new Date(); %>
                             <% const year = date.getMonth() < 6 ? date.getFullYear() : date.getFullYear() + 1; %>
-                            <p class="grad-year-label">Graduation Year</p>
+                            <p class="grad-year-label">Select the year that you graduate high school</p>
                             <div class="grad-year-row">
                                 <% for (let i = year; i < year + 4; i ++) { %>
                                     <% if (i === userGradYear) { %>
@@ -37,7 +51,7 @@
                             <div>
                                 <p class="edit-clubs-label">Select the clubs that you are a member of</p>
                             </div>
-                            <div class="club-section-body edit-clubs-body" class="section-body">
+                            <div class="club-section-body edit-clubs-body section-body">
                                 <% clubs.forEach(club => { %>
                                     <% if (userClubs.includes(club)) { %>
                                         <button class="club-div select-club-div div-selected" name="<%= club %>">
@@ -54,7 +68,7 @@
                             <div>
                                 <p class="edit-sports-label">Select the sports that you participate in</p>
                             </div>
-                            <div class="sport-section-body edit-sports-body" class="section-body">
+                            <div class="sport-section-body edit-sports-body section-body">
                                 <% sports.forEach(sport => { %>
                                     <% if (userSports.includes(sport)) { %>
                                         <button class="sport-div select-sport-div div-selected" name="<%= sport %>">
@@ -131,7 +145,7 @@
                                         <% } else if (sharedCourses.includes(course.courseTitle)) { %>
                                             <a class="detail-section shared-course">
                                         <% } else { %>
-                                            <a class="detail-section"></a>
+                                            <a class="detail-section">
                                         <% } %>
                                         <h1 class="detail-title"><%= course.courseTitle %></h1>
                                         <div class="detail-body-info">

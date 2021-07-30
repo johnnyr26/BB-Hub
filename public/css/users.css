@@ -148,7 +148,6 @@ main {
     text-align: center;
     width: 100px;
     font-size: 13px;
-    font
 }
 .profile-button {
     box-sizing: border-box;
@@ -189,6 +188,12 @@ main {
 .modal-header {
     border-bottom: solid #d3d3d3 1px;
     padding: 10px 0;
+}
+.new-user-modal-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: none;
 }
 .modal-body {
     align-items: flex-start;
@@ -272,6 +277,9 @@ select {
 }
 .x:active {
     color: #000000;
+}
+.edit-profile {
+    width: 100%;
 }
 .edit-profile-label {
     font-size: 40px;

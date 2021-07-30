@@ -7,10 +7,11 @@ const getAssignments = require('../helpers/classroom/getAssignments');
 
 module.exports.renderIndex = async (req, res) => {
     const user = await Users.findById(req.user._id);
-    if (!user) {
-        return res.render('pages/index', { title: 'BB Hub', picture: req.user.picture, id: req.user._id }); 
-    }
     
+    if (req.query.newuser) {
+        return res.redirect(`/users/${req.user._id}?newuser=true`);
+    }
+
     const allUsers = await Users.find({});
     const availableFriends = allUsers.filter(member => {
         const notSelf = member.id !== user.id;
