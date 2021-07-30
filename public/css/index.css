@@ -88,6 +88,9 @@ h1 {
     font-weight: 600;
 }
 .detail-section {
+    display: block;
+    color: #000000;
+    text-decoration: none;
     box-sizing: border-box;
     padding: 10px;
     background-color: #ffffff;

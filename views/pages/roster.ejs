@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link  href="/css/style.css" type="text/css" rel="stylesheet"/>
+        <link href="/css/header.css" type="text/css" rel="stylesheet"/>
+        <link href="/css/index.css" type="text/css" rel="stylesheet"/>
+        <link  href="/css/roster.css" type="text/css" rel='stylesheet'/>
+    </head>
+    <body>
+        <%- include('../partials/header'); -%>
+        <main>
+            <h1 class="roster-header"><%= title %> Roster</h1>
+            <% if (period !== undefined) { %>
+                <h1 class="roster-header">Period <%= period %></h1>
+            <% } %>
+            <div class="roster">
+                <% roster.forEach(student => { %>
+                    <a href="/users/<%= student.id %>" class="student-section">
+                        <div class="student-header">
+                        <% if (student.picture) { %>
+                            <img class="student-image" alt="Image" src=<%= student.picture %>>
+                        <% } %>
+                        </div>
+                        <div class="student-body">
+                            <h1 class="student-name"><%= student.name %></h1>
+                        </div>
+                    </a>
+                <% }); %>
+            </div>
+        </main>
+    </body>
+</html>

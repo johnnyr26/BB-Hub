@@ -114,20 +114,20 @@ document.querySelector('.submit-profile-info').addEventListener('click', () => {
         document.querySelector('.club-section-body.section-body').innerHTML = '';
         clubs.forEach(club => {
             document.querySelector('.club-section-body.section-body').innerHTML += `
-                <div class="club-div">
+                <a href="/roster?club=${club}" class="club-div">
                     <div class="club-icon">${club[0]}</div>
                     <p class="club-name">${club}</p>
-                </div>
+                </a>
             `;
         });
 
         document.querySelector('.sport-section-body.section-body').innerHTML = '';
         sports.forEach(sport => {
             document.querySelector('.sport-section-body.section-body').innerHTML += `
-                <div class="sport-div">
+                <a href="/roster?sport=${sport}" class="sport-div">
                     <div class="sport-icon">${sport[0]}</div>
                     <p class="sport-name">${sport}</p>
-                </div>
+                </a>
             `;
         });
 

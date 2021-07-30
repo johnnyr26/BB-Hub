@@ -91,6 +91,8 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    color: #000000;
+    text-decoration: none;
 }
 .detail-body {
     margin: 0;
@@ -121,6 +123,8 @@ main {
     height: auto;
 }
 .club-div, .sport-div {
+    color: #000000;
+    text-decoration: none;
     display: flex;
     flex-direction: column;
     align-items: center;

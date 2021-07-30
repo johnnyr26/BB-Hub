@@ -124,10 +124,14 @@
                                 <h1 id="my-schedule">Schedule</h1>
                                 <div class="schedule-section-body" class="section-body">
                                     <% userSchedule.forEach(course => { %>
-                                        <% if (sharedCourses.includes(course.courseTitle)) { %>
-                                            <div class="detail-section shared-course">
+                                        <% if (sharedCourses.includes(course.courseTitle) && course.courseTitle.substring(0, 4) !== 'FREE') { %>
+                                            <a href="/roster?course=<%= course.courseTitle %>&period=<%= course.period %>" class="detail-section shared-course">
+                                        <% } else if (course.courseTitle.substring(0, 4) !== 'FREE') { %>
+                                            <a href="/roster?course=<%= course.courseTitle %>&period=<%= course.period %>" class="detail-section">
+                                        <% } else if (sharedCourses.includes(course.courseTitle)) { %>
+                                            <a class="detail-section shared-course">
                                         <% } else { %>
-                                            <div class="detail-section">
+                                            <a class="detail-section"></a>
                                         <% } %>
                                         <h1 class="detail-title"><%= course.courseTitle %></h1>
                                         <div class="detail-body-info">
@@ -137,7 +141,7 @@
                                                 <p class="detail-body">Period <%= course.period %> · <%= course.teacher %> · <%= course.classRoom %></p>
                                             <% } %>
                                         </div>
-                                    </div>
+                                    </a>
                                 <% }); %>
                             </section>
                         <% } %>
@@ -152,10 +156,10 @@
                                             <p class="no-activities">No Clubs</p>
                                         <% } %>
                                         <% userClubs.forEach(club => { %>
-                                            <div class="club-div">
+                                            <a href="/roster?club=<%= club %>" class="club-div">
                                                 <div class="club-icon"><%= club[0] %></div>
                                                 <p class="club-name"><%= club %></p>
-                                            </div>
+                                            </a>
                                         <% }); %>
                                     </div>
                                 </section>
@@ -170,10 +174,10 @@
                                             <p class="no-activities">No Sports</p>
                                         <% } %>
                                         <% userSports.forEach(sport => { %>
-                                            <div class="sport-div">
+                                            <a href="/roster?sport=<%= sport %>" class="sport-div">
                                                 <div class="sport-icon"><%= sport[0] %></div>
                                                 <p class="sport-name"><%= sport %></p>
-                                            </div>
+                                            </a>
                                         <% }); %>
                                     </div>
                                 </section>

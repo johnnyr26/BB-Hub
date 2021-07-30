@@ -14,6 +14,7 @@ const classroomRouter = require('./routes/classroom');
 const postsRouter = require('./routes/posts');
 const mapRouter = require('./routes/map');
 const friendsRouter = require('./routes/friends');
+const rosterRouter = require('./routes/roster');
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use('/classroom', classroomRouter);
 app.use('/announcements', postsRouter);
 app.use('/map', mapRouter);
 app.use('/friends', friendsRouter);
+app.use('/roster', rosterRouter);
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.mongoDBURL, {

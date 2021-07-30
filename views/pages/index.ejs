@@ -23,14 +23,18 @@
                 <div class="grey-line"></div>
                 <div id="schedule-section-body" class="section-body">
                   <% scheduleObject.schedule.forEach(course => { %>
-                      <div class="detail-section">
+                    <% if (course.course.courseTitle === 'Lunch' || course.course.courseTitle.substring(0, 4) === 'FREE') { %>
+                      <a class="detail-section">
+                    <% } else { %>
+                      <a href="/roster?course=<%= course.course.courseTitle %>&period=<%= course.course.period %>" class="detail-section">
+                    <% } %>
                         <h1 class="detail-title"><%= course.course.courseTitle %></h1>
                         <% if (course.course.courseTitle === 'Lunch' || course.course.courseTitle.substring(0, 4) === 'FREE') { %>
                           <p class="detail-body"><%= course.time.from %> - <%= course.time.to %></p>
                         <% } else { %>
                           <p class="detail-body"><%= course.time.from %> - <%= course.time.to %> · <%= course.course.teacher %> · <%= course.course.classRoom %></p>
                         <% } %>
-                      </div>
+                      </a>
                   <% }); %>
                 </div>
               </section>
