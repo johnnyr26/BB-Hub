@@ -122,8 +122,10 @@ document.querySelector('.submit-profile-info').addEventListener('click', () => {
             document.querySelector('.new-user-modal-body').innerHTML = `
                 <a href="/schedule" class="profile-button edit-profile">Add Schedule</a>
             `;
+        } else {
+            document.querySelector('.shadow-background').classList.add('invisible');
+            document.querySelector('.edit-profile-modal').classList.add('invisible');
         }
-        
     });
 });
 Object.values(document.querySelectorAll('.select-club-div')).forEach(button => {
