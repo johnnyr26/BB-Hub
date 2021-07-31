@@ -4,7 +4,7 @@ const SECOND_FLOOR_MAP = require('../assets/maps/array/highSchoolSecondFloor').M
 const FIRST_FLOOR = require('../assets/maps/FIRST_FLOOR');
 const SECOND_FLOOR = require('../assets/maps/SECOND_FLOOR');
 
-const { findPath, getFloorOfStartingAndFinalLocations, printMapWithRoute } = require('../helpers/scheduler/map/pathFinder');
+const { findPath, getFloorOfStartingAndFinalLocations, printMapWithRoute } = require('../helpers/schedule/map/pathFinder');
 
 module.exports = (req, res) => {
     if (req.query.startingLocation && req.query.finalLocation) {
@@ -44,5 +44,8 @@ module.exports = (req, res) => {
             return res.send({ map1, map2 });
         }
     }
-    return res.render('map');
+    return res.render('pages/map', {
+        id: req.user._id,
+        picture: req.user.picture
+    });
 }

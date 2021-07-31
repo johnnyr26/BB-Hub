@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="/css/style.css" type="text/css" rel="stylesheet"/>
+        <link href="/css/header.css" type="text/css" rel="stylesheet"/>
+        <link href='/css/schedule.css' type="text/css" rel="stylesheet"/>
+        <link href="/css/users.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <%- include('../partials/header'); -%>
+        <main>
+            <% const selfUser = userId.toString() === id.toString(); %>
+            <% if (locals.newUser) { %>
+                <div class="shadow-background">
+                    <div class="modal new-user-modal">
+                <% } else { %>
+                <div class="shadow-background invisible">
+                    <div class="modal new-user-modal invisible">
+                <% } %>
+                    <div class="modal-header new-user-modal-header">
+                        <h1>Welcome to BB Hub</h1>
+                        <p>Before you proceed to the site, edit your profile page.</p>
+                    </div>
+                    <div class="modal-body new-user-modal-body">
+                        <button class="profile-button edit-profile">Edit Profile</button>
+                    </div>
+                </div>
+                <div class="modal edit-profile-modal invisible">
+                    <div class="modal-header">
+                        <div class="edit-profile-label-div">
+                            <h1 class="edit-profile-label">Edit Profile</h1>
+                            <button class="x">X</button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="grad-year-div">
+                            <% const date = new Date(); %>
+                            <% const year = date.getMonth() < 6 ? date.getFullYear() : date.getFullYear() + 1; %>
+                            <p class="grad-year-label">Select the year that you graduate high school</p>
+                            <div class="grad-year-row">
+                                <% for (let i = year; i < year + 4; i ++) { %>
+                                    <% if (i === userGradYear) { %>
+                                        <button class="grad-year-button year-selected" name="<%= i %>"><%= i %></button>
+                                    <% } else { %>
+                                        <button class="grad-year-button" name="<%= i %>"><%= i %></button>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="edit-clubs-div">
+                            <div>
+                                <p class="edit-clubs-label">Select the clubs that you are a member of</p>
+                            </div>
+                            <div class="club-section-body edit-clubs-body section-body">
+                                <% clubs.forEach(club => { %>
+                                    <% if (userClubs.includes(club)) { %>
+                                        <button class="club-div select-club-div div-selected" name="<%= club %>">
+                                    <% } else { %>
+                                        <button class="club-div select-club-div" name="<%= club %>">
+                                    <% } %>
+                                        <div class="club-icon"><%= club[0] %></div>
+                                        <p class="club-name"><%= club %></p>
+                                    </button>
+                                <% }); %>
+                            </div>
+                        </div>
+                        <div class="edit-sports-div">
+                            <div>
+                                <p class="edit-sports-label">Select the sports that you participate in</p>
+                            </div>
+                            <div class="sport-section-body edit-sports-body section-body">
+                                <% sports.forEach(sport => { %>
+                                    <% if (userSports.includes(sport)) { %>
+                                        <button class="sport-div select-sport-div div-selected" name="<%= sport %>">
+                                    <% } else { %>
+                                        <button class="sport-div select-sport-div" name="<%= sport %>">
+                                    <% } %>
+                                        <div class="sport-icon"><%= sport[0] %></div>
+                                        <p class="sport-name"><%= sport %></p>
+                                    </button>
+                                <% }); %>
+                            </div>
+                        </div>
+                        <div class="privacy-div">
+                            <p class="privacy-label">Visible To Friends</p>
+                            <div class="privacy-col">
+                                <% privacy.forEach(privacy => { %>
+                                    <div class="privacy-option">
+                                        <% if (userPrivacy.includes(privacy)) { %>
+                                            <button class="privacy-button privacy-selected" name="<%= privacy %>"></button>
+                                            <p class="privacy-label-option"><%= privacy %></p>
+                                        <% } else { %>
+                                            <button class="privacy-button" name="<%= privacy %>"></button>
+                                            <p class="privacy-label-option"><%= privacy %></p>
+                                        <% } %>
+                                    </div>
+                                <% }); %>
+                            </div>
+                        </div>
+                        <button class="profile-button submit-profile-info">Save</button>
+                    </div>
+                </div> 
+            </div>
+            <div class="user-profile-div">
+                <div class="user-profile-header">
+                    <img class="user-profile-image" alt="profile-photo" src="<%= userPicture %>">
+                    <div class="user-profile-header-info">
+                        <h1 class="user-profile-name"><%= userName %></h1>
+                        <% if (userGradYear) { %>
+                            <h1 class="user-profile-info">Class of <%= userGradYear %></h1>
+                        <% } else { %>
+                            <h1 class="user-profile-info"></h1>
+                        <% } %>
+                        <% if (selfUser) { %>
+                            <button class="profile-button edit-profile">Edit Profile</button>
+                        <% } else if (!userFriends.includes(id) ) { %>
+                            <div class="accept-decline-row">
+                                <% if (userFriendRequests.includes(id)) { %>
+                                    
+                                    <button class="profile-button cancel-request-button" name="<%= userId %>">Cancel Request</button>
+                                <% } else if (userRequestedFriends.includes(id)) { %>
+                                        <button class="profile-button accept-friend-button" name="<%= userId %>">Accept</button>
+                                        <button class="profile-button decline-friend-button" name="<%= userId %>">Decline</button>
+                                <% } else { %>
+                                    <button class="profile-button add-friend-button" name="<%= userId %>">Add Friend</button>
+                                <% } %>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+                <div class="user-profile-body">
+                    <% if (selfUser || userFriends.includes(id)) { %> 
+                        <% if (!locals.userSchedule && !locals.userClubs && !locals.userSports) { %>
+                            <h1>No Information available</h1>
+                        <% } %>
+                        <% if ((locals.userSchedule && userSchedule.length) && ((!selfUser && userPrivacy.includes('Schedule')) || selfUser)) { %>
+                            <section class="schedule-section">
+                                <h1 id="my-schedule">Schedule</h1>
+                                <div class="schedule-section-body" class="section-body">
+                                    <% userSchedule.forEach(course => { %>
+                                        <% if (sharedCourses.includes(course.courseTitle) && course.courseTitle.substring(0, 4) !== 'FREE') { %>
+                                            <a href="/roster?course=<%= course.courseTitle %>&period=<%= course.period %>" class="detail-section shared-course">
+                                        <% } else if (course.courseTitle.substring(0, 4) !== 'FREE') { %>
+                                            <a href="/roster?course=<%= course.courseTitle %>&period=<%= course.period %>" class="detail-section">
+                                        <% } else if (sharedCourses.includes(course.courseTitle)) { %>
+                                            <a class="detail-section shared-course">
+                                        <% } else { %>
+                                            <a class="detail-section">
+                                        <% } %>
+                                        <h1 class="detail-title"><%= course.courseTitle %></h1>
+                                        <div class="detail-body-info">
+                                            <% if (course.courseTitle.substring(0, 4) === 'FREE') { %>
+                                                <p class="detail-body">Period <%= course.period %></p>
+                                            <% } else { %>
+                                                <p class="detail-body">Period <%= course.period %> · <%= course.teacher %> · <%= course.classRoom %></p>
+                                            <% } %>
+                                        </div>
+                                    </a>
+                                <% }); %>
+                            </section>
+                        <% } %>
+                        <div class="column">
+                            <% if (locals.userClubs && ((!selfUser && userPrivacy.includes('Clubs')) || selfUser)) { %>
+                                <section class="clubs-section">
+                                    <div>
+                                        <h1 id="my-schedule">Clubs</h1>
+                                    </div>
+                                    <div class="club-section-body section-body">
+                                        <% if (!userClubs.length) { %>
+                                            <p class="no-activities">No Clubs</p>
+                                        <% } %>
+                                        <% userClubs.forEach(club => { %>
+                                            <a href="/roster?club=<%= club %>" class="club-div">
+                                                <div class="club-icon"><%= club[0] %></div>
+                                                <p class="club-name"><%= club %></p>
+                                            </a>
+                                        <% }); %>
+                                    </div>
+                                </section>
+                            <% } %>
+                            <% if (locals.userSports && ((!selfUser && userPrivacy.includes('Sports')) || selfUser)) { %>
+                                <section class="sports-section">
+                                    <div>
+                                        <h1 id="my-schedule">Sports</h1>
+                                    </div>
+                                    <div class="sport-section-body section-body">
+                                        <% if (!userSports.length) { %>
+                                            <p class="no-activities">No Sports</p>
+                                        <% } %>
+                                        <% userSports.forEach(sport => { %>
+                                            <a href="/roster?sport=<%= sport %>" class="sport-div">
+                                                <div class="sport-icon"><%= sport[0] %></div>
+                                                <p class="sport-name"><%= sport %></p>
+                                            </a>
+                                        <% }); %>
+                                    </div>
+                                </section>
+                            <% } %>
+                            <% if (locals.userPosts && ((!selfUser && userPrivacy.includes('Announcements')) || selfUser)) { %>
+                                <section class="posts-section">
+                                    <div>
+                                        <h1 id="my-schedule">Announcements</h1>
+                                    </div>
+                                    <% if (!userPosts.length) { %>
+                                        <p class="no-activities">No Announcements</p>
+                                    <% } %>
+                                    <% userPosts.forEach(post => { %>
+                                        <section class="announcements-section">
+                                            <div class="announcements-section-title section-title">
+                                                <% if (post.img.data) { %>
+                                                    <% const b64 = Buffer.from(post.img.data.buffer).toString('base64') %>
+                                                    <img class="announcements-image" alt="Image" src="data:image/jpeg;base64, <%= b64 %>">
+                                                <% } %>
+                                            </div>
+                                            <div class="section-body announcements-section-body">
+                                                <% if (post.user) { %>
+                                                    <a href="/users/<%= post.user._id %>" class="user-info">
+                                                        <img alt="profile-image" src="<%= post.user.picture %>"/>
+                                                        <p class="announcements-body userlink"><%= post.user.name %></p>
+                                                    </a>
+                                                <% } %>
+                                                <h1 class="announcements-title-heading"><%= post.title %></h1>
+                                                <p class="announcements-body"><%= post.message %></p>
+                                            </div>
+                                        </section>
+                                    <% }); %>
+                                </section>
+                            <% } %>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </main>
+    </body>
+    <script src="/js/users.js"></script>
+</html>

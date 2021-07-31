@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken'); 
+const privacy = require('../assets/privacy/privacy');
 
 const Schema = mongoose.Schema({
     name: {
@@ -15,6 +16,9 @@ const Schema = mongoose.Schema({
     },
     picture: {
         type: String
+    },
+    gradYear: {
+        type: Number
     },
     tokens: [{
         token: {
@@ -48,6 +52,15 @@ const Schema = mongoose.Schema({
     requestedFriends: [{
         type: mongoose.ObjectId,
     }],
+    clubs: [{
+        type: String
+    }],
+    sports: [{
+        type: String
+    }],
+    privacy: [{
+        type: String
+    }],
     googleRefreshToken: {
         type: String
     }
@@ -77,12 +90,13 @@ Schema.statics.findByCredentials = async (name, email, picture) => {
         const newUser = new Users({
             name,
             email,
-            picture
+            picture,
+            privacy
         })
         await newUser.save();
-        return newUser;
+        return { user: newUser, newUser: true };
     }
-    return user;
+    return { user, newUser: false };
 }
 
 const Users = mongoose.model('Users', Schema);

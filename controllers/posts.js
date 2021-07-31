@@ -6,24 +6,36 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports.renderPosts = async (req, res) => {
-    const posts = await Posts.find({});
-    return res.render('posts', { posts });
+    const posts = (await Posts.find({})).filter(post => post.grades.includes(req.user.gradYear)).reverse();
+
+    return res.render('pages/posts', { 
+        posts,
+        year: req.user.gradYear,
+        id: req.user._id,
+        picture: req.user.picture
+     });
 }
 
 module.exports.uploadPosts = async (req, res) => {
     try {
         const image = req.file;
-        const { title, message } = req.body;
+        const { title, message } = req.body; 
 
-        await Posts.createNewPost(req.user._id, title, message, image);
+        const grades = req.body.grades.split(',').map(grade => parseInt(grade));
+
+        if (!grades.includes(req.user.gradYear)) {
+            grades.push(req.user.gradYear);
+        }
+
+        await Posts.createNewPost(req.user._id, title, message, image, grades);
         const user = await Users.findById(req.user._id, 'name');
 
         const postImage = (await Posts.findOne({ title, message }, 'img')).img;
         const buffer = postImage.data ? Buffer.from(postImage.data.buffer).toString('base64') : null;
 
-        return res.send({ user: user.name, title, message, image: buffer });
+        return res.send({ success: true });
     } catch (e) {
-        console.log(e);
+        console.log(e.message);
         return res.send({ error: e.message });
     }
 }

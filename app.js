@@ -8,11 +8,13 @@ const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 const logoutRouter = require('./routes/logout');
 const usersRouter = require('./routes/users');
-const schedulerRouter = require('./routes/scheduler');
+const scheduleRouter = require('./routes/schedule');
 const lunchRouter = require('./routes/lunch');
 const classroomRouter = require('./routes/classroom');
 const postsRouter = require('./routes/posts');
 const mapRouter = require('./routes/map');
+const friendsRouter = require('./routes/friends');
+const rosterRouter = require('./routes/roster');
 
 const app = express();
 
@@ -27,14 +29,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/home', indexRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/users', usersRouter);
-app.use('/scheduler', schedulerRouter);
+app.use('/schedule', scheduleRouter);
 app.use('/lunch', lunchRouter);
 app.use('/classroom', classroomRouter);
-app.use('/posts', postsRouter);
+app.use('/announcements', postsRouter);
 app.use('/map', mapRouter);
+app.use('/friends', friendsRouter);
+app.use('/roster', rosterRouter);
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.mongoDBURL, {
@@ -58,7 +63,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('pages/error');
 });
 
 module.exports = app;

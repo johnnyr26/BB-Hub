@@ -5,7 +5,6 @@ const auth = require('../middlewares/auth');
 const controller = require('../controllers/index');
 
 router.route('/')
-  .get(auth, controller.renderIndex)
-  .post(auth, controller.updateFriends);
+  .get(auth, controller.renderIndex);
 
 module.exports = router;

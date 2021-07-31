@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link  href='/css/style.css' type="text/css" rel='stylesheet'/>
+        <link href="/css/header.css" type="text/css" rel="stylesheet"/>
+        <link href="/css/classroom.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <%- include('../partials/header'); -%>
+        <main>
+            <% if (locals.assignments) { %>
+                <% assignments.forEach(assignment => { %>
+                    <% const { name, title, link, maxPoints } = assignment; %>
+                    <a href="<%= link %>"><%= name %>: <%= title %> <%= maxPoints %></a><br>
+                <% }); %>
+            <% } %>
+        </main>
+    </body>
+</html>

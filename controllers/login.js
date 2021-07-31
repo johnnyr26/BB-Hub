@@ -3,7 +3,7 @@ const {OAuth2Client} = require('google-auth-library');
 const client = new OAuth2Client();
 
 module.exports.renderLogin = (req, res) => {
-    res.render('login');
+    res.render('pages/login');
 }
 
 async function verify(token) {
@@ -21,10 +21,10 @@ async function verify(token) {
 module.exports.authenticate = async (req, res) => {
     try {
       const { name, email, picture } = await verify(req.body.id_token);
-      const user = await User.findByCredentials(name, email, picture);
+      const { user, newUser } = await User.findByCredentials(name, email, picture.replace('s96-c', 's240-c'));
       const token = await user.generateAuthToken();
       res.cookie('token', `Bearer ${token}`, { httpOnly: true, sameSite: true });
-      return res.json({ token: `Bearer ${token}` });
+      return res.json({ token: `Bearer ${token}`, newUser });
     } catch (error) {
       console.log(error);
       return res.send({ error: 'Only Blind Brook emails are allowed to sign into this platform.' });

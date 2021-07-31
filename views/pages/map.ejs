@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link  href='/css/style.css' type="text/css" rel='stylesheet'/>
+        <link href="/css/header.css" type="text/css" rel="stylesheet">
+        <link rel='stylesheet' href='/css/map.css' />
+    </head>
+    <body>
+        <%- include('../partials/header'); -%>
+        <main>
+            <div class="get-location-divs">
+                <div class="location-location-div">
+                    <label for="startingLocation">Select starting location</label>
+                    <select name="startingLocation" id="startingLocation">
+                        <%- include('../partials/rooms'); -%>
+                    </select>
+                </div>
+                <div class="location-div">
+                    <label for="finalLocation">Select destination</label>
+                    <select name="finalLocation" id="finalLocation">
+                        <%- include('../partials/rooms'); -%>
+                    </select>
+                </div>
+                <button class="submit">Submit</button>
+            </div>
+            <div id="maps">
+                <div id="map1">
+                    <p class="title">First Floor</p>
+                    <svg id="svg1" viewbox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+                        <g id="FIRST_FLOOR">
+                            <rect id="svg_02" height="38" width="54" y="162" x="127" stroke="#000" fill="#fff"/>
+                            <rect id="svg_03" height="38" width="54" y="200" x="127" stroke="#000" fill="#fff"/>
+                            <rect id="svg_04" height="59" width="55" y="86" x="126" stroke="#000" fill="#fff"/>
+                            <rect stroke="#000" id="svg_05" height="59" width="38" y="86" x="181" fill="#fff"/>
+                            <rect id="svg_06" height="60" width="66" y="88" x="235" stroke="#000" fill="#fff"/>
+                            <rect id="svg_07" height="65" width="93" y="112" x="333" stroke="#000" fill="#fff"/>
+                            <rect stroke="#000" id="svg_08" height="158" width="123" y="161" x="197" fill="#fff"/>
+                            <rect stroke="#000" id="svg_09" height="71" width="74" y="177" x="320" fill="#fff"/>
+                            <rect stroke="#000" id="svg_010" height="71" width="74" y="248" x="320" fill="#fff"/>
+                            <rect stroke="#000" id="svg_012" height="34" width="70" y="193" x="436" fill="#fff"/>
+                            <rect id="svg_013" height="46" width="54" y="181" x="506" stroke="#000" fill="#fff"/>
+                            <rect stroke="#000" id="svg_014" height="41" width="49" y="243" x="584" fill="#fff"/>
+                            <rect stroke="#000" id="svg_019" height="42" width="49" y="284" x="584" fill="#fff"/>
+                            <rect stroke="#000" id="svg_020" height="37" width="49" y="326" x="584" fill="#fff"/>
+                            <rect stroke="#000" id="svg_021" height="41" width="49" y="363" x="584" fill="#fff"/>
+                            <rect stroke="#000" id="svg_023" height="55" width="41" y="347" x="493" fill="#fff"/>
+                            <rect stroke="#000" id="svg_025" height="55" width="34" y="347" x="534" fill="#fff"/>
+                            <rect stroke="#000" id="svg_026" height="77" width="46" y="323" x="447" fill="#fff"/>
+                            <rect stroke="#000" id="svg_027" height="66.00001" width="60" y="256.99999" x="447" fill="#fff"/>
+                            <rect stroke="#000" id="svg_028" height="104.00001" width="79" y="368" x="304" fill="#fff"/>
+                            <rect id="svg_029" height="33" width="17" y="368" x="383" stroke="#000" fill="#fff"/>
+                            <rect id="svg_030" height="30" width="52" y="434" x="417" stroke="#000" fill="#fff"/>
+                            <rect id="svg_031" height="100" width="133" y="421" x="469" stroke="#000" fill="#fff"></rect>
+                            <rect id="svg_032" height="109" width="53" y="420" x="602" stroke="#000" fill="#fff"/>
+                            <rect stroke="#000" id="svg_033" height="36" width="56" y="436" x="248" fill="#fff"/>
+                            <rect id="svg_034" height="101" width="134" y="335" x="144" stroke="#000" fill="#fff"/>
+                            <rect id="svg_035" height="89" width="54" y="453" x="179" stroke="#000" fill="#fff"/>
+                            <rect stroke="#000" id="svg_037" height="64" width="61" y="241" x="507" fill="#fff"/>
+                            <rect stroke="#000" id="svg_038" height="34" width="25" y="193" x="411" fill="#fff"/>
+                            <rect id="svg_0102" height="125" width="34" y="274" x="413" stroke="#000" fill="none"/>
+                            <rect stroke="#000" id="svg_0140" height="108.99999" width="49" y="122.00001" x="662" fill="none"/>
+                            <line stroke-width="5" class="Stairs1" id="Stair1L" y2="153" x2="148" y1="153" x1="101" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10001" y2="153" x2="189" y1="153" x1="148" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10002" y2="153" x2="224" y1="153" x1="189" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10003" y2="153" x2="318" y1="153" x1="224" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10004" y2="153" x2="318" y1="120" x1="318" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10005" y2="153" x2="326" y1="153" x1="318" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10006" y2="170" x2="326" y1="153" x1="326" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10007" y2="120" x2="318" y1="120" x1="301" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10008" y2="120" x2="333" y1="120" x1="318" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10009" y2="170" x2="326" y1="170" x1="320" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10010" y2="187" x2="404" y1="177" x1="404" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10011" y2="187" x2="459" y1="187" x1="404" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10012" y2="235" x2="404" y1="187" x1="404" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10013" y2="235" x2="424" y1="235" x1="404" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="MarketPlace" y2="235" x2="424" y1="227" x1="424" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10015" y2="235" x2="444" y1="235" x1="424" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10016" y2="153" x2="224" y1="144" x1="224" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="FITT" y2="144" x2="235" y1="144" x1="224" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10018" y2="193" x2="189" y1="153" x1="189" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10019" y2="153" x2="189" y1="145" x1="189" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10020" y2="153" x2="148" y1="145" x1="148" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="H107" y2="193" x2="189" y1="193" x1="181" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10022" y2="209" x2="189" y1="193" x1="189" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="H108" y2="209" x2="189" y1="209" x1="181" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10024" y2="249" x2="189" y1="209" x1="189" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10025" y2="268" x2="424" y1="235" x1="424" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10026" y2="268" x2="424" y1="268" x1="405" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10027" y2="330" x2="405" y1="268" x1="405" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10028" y2="396" x2="405" y1="330" x1="405" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10029" y2="410" x2="405" y1="396" x1="405" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10030" y2="423" x2="405" y1="410" x1="405" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10031" y2="478" x2="405" y1="423" x1="405" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10032" y2="482" x2="405" y1="478" x1="405" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10033" y2="482" x2="405" y1="482" x1="383" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10034" y2="482" x2="383" y1="482" x1="321" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10035" y2="482" x2="321" y1="482" x1="254" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10036" y2="482" x2="254" y1="482" x1="240" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="MGYM" y2="468" x2="240" y1="436" x1="240" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10038" y2="482" x2="240" y1="468" x1="240" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="M101" y2="468" x2="240" y1="468" x1="233" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="M100" y2="482" x2="254" y1="472" x1="254" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="Library" y2="482" x2="321" y1="472" x1="321" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10042" y2="478" x2="425" y1="478" x1="405" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="Nurse" y2="478" x2="425" y1="464" x1="425" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="Auditorium" y2="478" x2="469" y1="478" x1="425" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" class="Stairs1" id="Stair5L" y2="423" x2="425" y1="423" x1="405" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="WC" y2="396" x2="405" y1="396" x1="400" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10047" y2="410" x2="453" y1="410" x1="405" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10048" y2="330" x2="405" y1="330" x1="311" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" class="Stairs1" id="Stair6L" y2="346" x2="311" y1="330" x1="311" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="HGYM" y2="330" x2="311" y1="319" x1="311" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10051" y2="330" x2="311" y1="330" x1="280" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10052" y2="330" x2="280" y1="330" x1="267" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10053" y2="330" x2="280" y1="319" x1="280" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10054" y2="335" x2="267" y1="330" x1="267" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="Cafeteria" y2="235" x2="444" y1="227" x1="444" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10056" y2="274" x2="424" y1="268" x1="424" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10057" y2="330" x2="413" y1="330" x1="405" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10058" y2="268" x2="405" y1="256" x1="405" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10059" y2="256" x2="405" y1="256" x1="394" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10060" y2="246" x2="405" y1="246" x1="394" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10061" y2="256" x2="405" y1="246" x1="405" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10062" y2="235" x2="484" y1="235" x1="444" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="BandRoom" y2="257" x2="484" y1="235" x1="484" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10064" y2="235" x2="498" y1="235" x1="484" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10065" y2="235" x2="498" y1="227" x1="498" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10066" y2="235" x2="574" y1="235" x1="498" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10067" y2="235" x2="641" y1="235" x1="574" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10068" y2="280" x2="574" y1="235" x1="574" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10069" y2="288" x2="574" y1="280" x1="574" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="H105" y2="280" x2="584" y1="280" x1="574" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="H104" y2="288" x2="584" y1="288" x1="574" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10072" y2="329" x2="574" y1="288" x1="574" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10073" y2="329" x2="574" y1="329" x1="497" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10074" y2="329" x2="497" y1="323" x1="497" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10075" y2="359" x2="574" y1="329" x1="574" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="H103" y2="359" x2="584" y1="359" x1="574" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10077" y2="410" x2="574" y1="359" x1="574" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="H101" y2="410" x2="539" y1="402" x1="539" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="H100" y2="410" x2="526" y1="402" x1="526" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="LGI" y2="410" x2="453" y1="400" x1="453" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="H102" y2="410" x2="622" y1="404" x1="622" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" class="Stairs1" id="Stair4L" y2="410" x2="652" y1="410" x1="622" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10083" y2="410" x2="526" y1="410" x1="453" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10084" y2="410" x2="539" y1="410" x1="526" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10085" y2="410" x2="574" y1="410" x1="539" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10086" y2="410" x2="622" y1="410" x1="574" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="Faculty" y2="288" x2="574" y1="288" x1="568" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" class="Stairs1" id="Stair2L" y2="187" x2="459" y1="177" x1="459" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10089" y2="120" x2="404" y1="120" x1="333" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="MCAF" y2="177" x2="404" y1="120" x1="404" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="Entrance" y2="496" x2="383" y1="482" x1="383" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="PORT" y2="258" x2="668" y1="231" x1="668" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" class="Stairs1" id="Stair3L" y2="235" x2="652" y1="235" x1="641" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10094" y2="258" x2="641" y1="235" x1="641" fill="none" stroke="#000"></line>
+                            <line stroke-width="5" id="svg_10095" y2="258" x2="668" y1="258" x1="641" fill="none" stroke="#000"></line>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_146" y="187" x="133" stroke="#000" fill="#000000">H107</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_147" y="226" x="133" stroke="#000" fill="#000000">H108</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_148" y="125" x="248" stroke="#000" fill="#000000">FITT</text>
+                            <text style="cursor: move;" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_149" y="243" x="227" stroke="#000" fill="#000000">HGYM</text>
+                            <g id="svg_152">
+                            <text stroke="#000" transform="matrix(0.794794 0 0 1 70.3335 -1)" stroke-width="0" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" id="svg_0150" y="147" x="332.51637" fill="#000000">Middle School</text>
+                            <text stroke="#000" transform="matrix(0.794794 0 0 1 69.3335 17)" stroke-width="0" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" id="svg_0151" y="144" x="351.87282" fill="#000000">Cafeteria</text>
+                            </g>
+                            <g id="svg_162">
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_0153" y="198" x="338" stroke="#000" fill="#000000">Boy's</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_0154" y="216" x="334" stroke="#000" fill="#000000">Locker</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_0155" y="234" x="336" stroke="#000" fill="#000000">Room</text>
+                            </g>
+                            <g id="svg_163">
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_0159" y="271" x="338" stroke="#000" fill="#000000">Girl's</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_0160" y="289" x="334" stroke="#000" fill="#000000">Locker</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_0161" y="307" x="336" stroke="#000" fill="#000000">Room</text>
+                            </g>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_0165" y="214" x="445" stroke="#000" fill="#000000">Cafeteria</text>
+                            <g id="svg_169">
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_0167" y="286" x="460" stroke="#000" fill="#000000">Band</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_0168" y="305" x="459" stroke="#000" fill="#000000">Room</text>
+                            </g>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_0170" y="366" x="458" stroke="#000" fill="#000000">LGI</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_0171" y="379" x="498" stroke="#000" fill="#000000">H100</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_0172" y="379" x="536" stroke="#000" fill="#000000">H101</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_0173" y="268" x="593" stroke="#000" fill="#000000">H105</text>
+                            <text style="cursor: move;" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_0174" y="310" x="593" stroke="#000" fill="#000000">H104</text>
+                            <text style="cursor: move;" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_0175" y="351" x="593" stroke="#000" fill="#000000">H103</text>
+                            <text style="cursor: move;" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_0176" y="387" x="593" stroke="#000" fill="#000000">H102</text>
+                            <text transform="rotate(90 430.008 336.25)" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" id="svg_0177" y="342" x="393" stroke-width="0" stroke="#000" fill="#000000">Commons</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" id="svg_0178" y="279.80939" x="510.84959" stroke-width="0" stroke="#000" fill="#000000">Faculty</text>
+                            <text transform="rotate(90 390.07 383.977)" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_0179" y="388.47815" x="378.79517" stroke="#000" fill="#000000">WC</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_0181" y="427" x="318" stroke="#000" fill="#000000">Library</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_0182" y="394" x="179" stroke="#000" fill="#000000">MGYM</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_0183" y="149" x="665" stroke="#000" fill="#000000">Port 2</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_0184" y="205" x="665" stroke="#000" fill="#000000">Port 1</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" id="svg_0185" y="460" x="255" stroke-width="0" stroke="#000" fill="#000000">M100</text>
+                            <text style="cursor: move;" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" id="svg_0186" y="502" x="184" stroke-width="0" stroke="#000" fill="#000000">M101</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" id="svg_0187" y="454" x="421" stroke-width="0" stroke="#000" fill="#000000">Nurse</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" id="svg_0188" y="480" x="496" stroke-width="0" stroke="#000" fill="#000000">Auditorium</text>
+                            <text transform="rotate(90 628 476.25)" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" id="svg_0189" y="482" x="608" stroke-width="0" stroke="#000" fill="#000000">Stage</text>
+                        </g>
+                    </svg>
+                </div>
+                <div id="map2">
+                    <p class="title">Second Floor</p>
+                    <svg id="svg2" viewbox="0 -60 800 600" xmlns="http://www.w3.org/2000/svg">
+                        <g id="SECOND_FLOOR">
+                            <rect fill="#fff" stroke="#000" x="170" y="123" width="138" height="181" id="svg_7"/>
+                            <rect fill="#fff" stroke="#000" x="383" y="131" width="56" height="62" id="svg_8"/>
+                            <rect fill="#fff" stroke="#000" x="439" y="131" width="56" height="62" id="svg_9"/>
+                            <rect fill="#fff" stroke="#000" x="515" y="130" width="58" height="41" id="svg_10"/>
+                            <rect fill="#fff" stroke="#000" x="577" y="127" width="29" height="62" id="svg_11"/>
+                            <rect fill="#fff" stroke="#000" x="606" y="140" width="36" height="36" id="svg_12"/>
+                            <rect fill="#fff" stroke="#000" x="646" y="130" width="50" height="58" id="svg_13"/>
+                            <rect stroke="#000" fill="#fff" x="610" y="211" width="81" height="57" id="svg_14"/>
+                            <rect stroke="#000" fill="#fff" x="617" y="268" width="74" height="67" id="svg_15"/>
+                            <rect stroke="#000" fill="#fff" x="617" y="335" width="74" height="65" id="svg_16"/>
+                            <line stroke-width="5" stroke="#000" stroke-width="5" fill="none" x1="100" y1="110" x2="137" y2="110" id="svg_17"/>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="372" y1="110" x2="372" y2="203" id="svg_20"/>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="333" y1="203" x2="333" y2="193" id="H215"/>
+                            <text fill="#000000" stroke="#000" x="197" y="219" id="svg_23" stroke-width="0" font-size="24" font-family="Noto Sans JP" text-anchor="start" xml:space="preserve">HGYM</text>
+                            <line stroke-width="5" stroke-linecap="undefined" stroke-linejoin="undefined" id="H213" y2="100" x2="137" y1="110" x1="137" fill="none" stroke="#000"/>
+                            <line stroke-width="5" stroke-linecap="undefined" stroke-linejoin="undefined" id="H217" y2="100" x2="182" y1="110" x1="182" stroke="#000" fill="none"/>
+                            <line stroke-width="5" stroke-linecap="undefined" stroke-linejoin="undefined" id="H216" y2="100" x2="254" y1="110" x1="254" stroke="#000" fill="none"/>
+                            <rect fill="#fff" stroke="#000" x="149" y="30" width="67" height="70" id="svg_4"/>
+                            <rect fill="#fff" stroke="#000" x="216" y="30" width="67" height="70" id="svg_5"/>
+                            <rect fill="#fff" stroke="#000" x="83" y="30" width="67" height="70" id="svg_2"/>
+                            <rect fill="#fff" x="308" y="123" width="54" height="70" id="svg_6" stroke="#000"/>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="333" y1="203" x2="372" y2="203" id="svg_1001" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="333" y1="203" x2="410" y2="203" id="svg_1002" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="333" y1="203" x2="414" y2="203" id="svg_1003" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="333" y1="203" x2="462" y2="203" id="svg_1004" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="333" y1="203" x2="494" y2="203" id="svg_1005" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="333" y1="203" x2="500" y2="203" id="svg_1006" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="333" y1="203" x2="508" y2="203" id="svg_1007" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="333" y1="203" x2="580" y2="203" id="svg_1008" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="333" y1="203" x2="592" y2="203" id="svg_1009" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="333" y1="203" x2="638" y2="203" id="svg_1010" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="333" y1="203" x2="650" y2="203" id="svg_1011" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="333" y1="203" x2="670" y2="203" id="svg_1012" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="372" y1="203" x2="333" y2="203" id="svg_2000" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="372" y1="203" x2="410" y2="203" id="svg_2002" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="372" y1="203" x2="414" y2="203" id="svg_2003" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="372" y1="203" x2="462" y2="203" id="svg_2004" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="372" y1="203" x2="494" y2="203" id="svg_2005" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="372" y1="203" x2="500" y2="203" id="svg_2006" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="372" y1="203" x2="508" y2="203" id="svg_2007" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="372" y1="203" x2="580" y2="203" id="svg_2008" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="372" y1="203" x2="592" y2="203" id="svg_2009" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="372" y1="203" x2="638" y2="203" id="svg_2010" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="372" y1="203" x2="650" y2="203" id="svg_2011" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="372" y1="203" x2="670" y2="203" id="svg_2012" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="410" y1="203" x2="333" y2="203" id="svg_3000" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="410" y1="203" x2="372" y2="203" id="svg_3001" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="410" y1="203" x2="414" y2="203" id="svg_3003" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="410" y1="203" x2="462" y2="203" id="svg_3004" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="410" y1="203" x2="494" y2="203" id="svg_3005" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="410" y1="203" x2="500" y2="203" id="svg_3006" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="410" y1="203" x2="508" y2="203" id="svg_3007" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="410" y1="203" x2="580" y2="203" id="svg_3008" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="410" y1="203" x2="592" y2="203" id="svg_3009" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="410" y1="203" x2="638" y2="203" id="svg_3010" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="410" y1="203" x2="650" y2="203" id="svg_3011" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="410" y1="203" x2="670" y2="203" id="svg_3012" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="414" y1="203" x2="333" y2="203" id="svg_4000" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="414" y1="203" x2="372" y2="203" id="svg_4001" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="414" y1="203" x2="410" y2="203" id="svg_4002" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="414" y1="203" x2="462" y2="203" id="svg_4004" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="414" y1="203" x2="494" y2="203" id="svg_4005" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="414" y1="203" x2="500" y2="203" id="svg_4006" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="414" y1="203" x2="508" y2="203" id="svg_4007" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="414" y1="203" x2="580" y2="203" id="svg_4008" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="414" y1="203" x2="592" y2="203" id="svg_4009" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="414" y1="203" x2="638" y2="203" id="svg_4010" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="414" y1="203" x2="650" y2="203" id="svg_4011" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="414" y1="203" x2="670" y2="203" id="svg_4012" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="462" y1="203" x2="333" y2="203" id="svg_5000" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="462" y1="203" x2="372" y2="203" id="svg_5001" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="462" y1="203" x2="410" y2="203" id="svg_5002" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="462" y1="203" x2="414" y2="203" id="svg_5003" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="462" y1="203" x2="494" y2="203" id="svg_5005" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="462" y1="203" x2="500" y2="203" id="svg_5006" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="462" y1="203" x2="508" y2="203" id="svg_5007" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="462" y1="203" x2="580" y2="203" id="svg_5008" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="462" y1="203" x2="592" y2="203" id="svg_5009" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="462" y1="203" x2="638" y2="203" id="svg_5010" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="462" y1="203" x2="650" y2="203" id="svg_5011" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="462" y1="203" x2="670" y2="203" id="svg_5012" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="494" y1="203" x2="333" y2="203" id="svg_6000" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="494" y1="203" x2="372" y2="203" id="svg_6001" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="494" y1="203" x2="410" y2="203" id="svg_6002" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="494" y1="203" x2="414" y2="203" id="svg_6003" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="494" y1="203" x2="462" y2="203" id="svg_6004" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="494" y1="203" x2="500" y2="203" id="svg_6006" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="494" y1="203" x2="508" y2="203" id="svg_6007" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="494" y1="203" x2="580" y2="203" id="svg_6008" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="494" y1="203" x2="592" y2="203" id="svg_6009" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="494" y1="203" x2="638" y2="203" id="svg_6010" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="494" y1="203" x2="650" y2="203" id="svg_6011" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="494" y1="203" x2="670" y2="203" id="svg_6012" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="500" y1="203" x2="333" y2="203" id="svg_7000" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="500" y1="203" x2="372" y2="203" id="svg_7001" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="500" y1="203" x2="410" y2="203" id="svg_7002" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="500" y1="203" x2="414" y2="203" id="svg_7003" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="500" y1="203" x2="462" y2="203" id="svg_7004" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="500" y1="203" x2="494" y2="203" id="svg_7005" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="500" y1="203" x2="508" y2="203" id="svg_7007" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="500" y1="203" x2="580" y2="203" id="svg_7008" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="500" y1="203" x2="592" y2="203" id="svg_7009" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="500" y1="203" x2="638" y2="203" id="svg_7010" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="500" y1="203" x2="650" y2="203" id="svg_7011" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="500" y1="203" x2="670" y2="203" id="svg_7012" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="508" y1="203" x2="333" y2="203" id="svg_8000" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="508" y1="203" x2="372" y2="203" id="svg_8001" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="508" y1="203" x2="410" y2="203" id="svg_8002" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="508" y1="203" x2="414" y2="203" id="svg_8003" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="508" y1="203" x2="462" y2="203" id="svg_8004" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="508" y1="203" x2="494" y2="203" id="svg_8005" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="508" y1="203" x2="500" y2="203" id="svg_8006" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="508" y1="203" x2="580" y2="203" id="svg_8008" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="508" y1="203" x2="592" y2="203" id="svg_8009" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="508" y1="203" x2="638" y2="203" id="svg_8010" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="508" y1="203" x2="650" y2="203" id="svg_8011" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="508" y1="203" x2="670" y2="203" id="svg_8012" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="580" y1="203" x2="333" y2="203" id="svg_9000" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="580" y1="203" x2="372" y2="203" id="svg_9001" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="580" y1="203" x2="410" y2="203" id="svg_9002" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="580" y1="203" x2="414" y2="203" id="svg_9003" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="580" y1="203" x2="462" y2="203" id="svg_9004" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="580" y1="203" x2="494" y2="203" id="svg_9005" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="580" y1="203" x2="500" y2="203" id="svg_9006" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="580" y1="203" x2="508" y2="203" id="svg_9007" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="580" y1="203" x2="592" y2="203" id="svg_9009" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="580" y1="203" x2="638" y2="203" id="svg_9010" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="580" y1="203" x2="650" y2="203" id="svg_9011" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="580" y1="203" x2="670" y2="203" id="svg_9012" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="592" y1="203" x2="333" y2="203" id="svg_10000" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="592" y1="203" x2="372" y2="203" id="svg_100010" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="592" y1="203" x2="410" y2="203" id="svg_100020" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="592" y1="203" x2="414" y2="203" id="svg_100030" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="592" y1="203" x2="462" y2="203" id="svg_100040" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="592" y1="203" x2="494" y2="203" id="svg_100050" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="592" y1="203" x2="500" y2="203" id="svg_100060" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="592" y1="203" x2="508" y2="203" id="svg_100070" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="592" y1="203" x2="580" y2="203" id="svg_100080" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="592" y1="203" x2="638" y2="203" id="svg_100100" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="592" y1="203" x2="650" y2="203" id="svg_100110" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="592" y1="203" x2="670" y2="203" id="svg_100120" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="638" y1="203" x2="333" y2="203" id="svg_11000" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="638" y1="203" x2="372" y2="203" id="svg_11001" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="638" y1="203" x2="410" y2="203" id="svg_11002" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="638" y1="203" x2="414" y2="203" id="svg_11003" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="638" y1="203" x2="462" y2="203" id="svg_11004" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="638" y1="203" x2="494" y2="203" id="svg_11005" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="638" y1="203" x2="500" y2="203" id="svg_11006" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="638" y1="203" x2="508" y2="203" id="svg_11007" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="638" y1="203" x2="580" y2="203" id="svg_11008" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="638" y1="203" x2="592" y2="203" id="svg_11009" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="638" y1="203" x2="650" y2="203" id="svg_11011" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="638" y1="203" x2="670" y2="203" id="svg_11012" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="650" y1="203" x2="333" y2="203" id="svg_12000" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="650" y1="203" x2="372" y2="203" id="svg_12001" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="650" y1="203" x2="410" y2="203" id="svg_12002" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="650" y1="203" x2="414" y2="203" id="svg_12003" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="650" y1="203" x2="462" y2="203" id="svg_12004" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="650" y1="203" x2="494" y2="203" id="svg_12005" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="650" y1="203" x2="500" y2="203" id="svg_12006" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="650" y1="203" x2="508" y2="203" id="svg_12007" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="650" y1="203" x2="580" y2="203" id="svg_12008" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="650" y1="203" x2="592" y2="203" id="svg_12009" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="650" y1="203" x2="638" y2="203" id="svg_12010" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="650" y1="203" x2="670" y2="203" id="svg_12012" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="670" y1="203" x2="333" y2="203" id="svg_13000" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="670" y1="203" x2="372" y2="203" id="svg_13001" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="670" y1="203" x2="410" y2="203" id="svg_13002" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="670" y1="203" x2="414" y2="203" id="svg_13003" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="670" y1="203" x2="462" y2="203" id="svg_13004" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="670" y1="203" x2="494" y2="203" id="svg_13005" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="670" y1="203" x2="500" y2="203" id="svg_13006" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="670" y1="203" x2="508" y2="203" id="svg_13007" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="670" y1="203" x2="580" y2="203" id="svg_13008" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="670" y1="203" x2="592" y2="203" id="svg_13009" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="670" y1="203" x2="638" y2="203" id="svg_13010" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="670" y1="203" x2="650" y2="203" id="svg_13011" style="fill: none; stroke: rgb(0, 0, 0);"></line>
+                            <line stroke-width="5" fill="none" x1="137" y1="110" x2="182" y2="110" id="svg_26" stroke="#000"/>
+                            <line stroke-width="5" fill="none" stroke="#000" x1="182" y1="110" x2="254" y2="110" id="svg_27"/>
+                            <line stroke-width="5" fill="none" stroke="#000" x1="254" y1="110" x2="372" y2="110" id="svg_29"/>
+                            <line stroke-width="5" stroke="#000" id="svg_30" y2="203" x2="372" y1="203" x1="333" fill="none"/>
+                            <line stroke-width="5" stroke="#000" id="svg_31" y2="203" x2="410" y1="203" x1="372" fill="none"/>
+                            <line stroke-width="5" stroke="#000" id="H214" y2="193" x2="410" y1="203" x1="410" fill="none"/>
+                            <line stroke-width="5" stroke="#000" id="svg_35" y2="203" x2="462" y1="203" x1="414" fill="none"/>
+                            <line stroke-width="5" stroke="#000" id="svg_36" y2="203" x2="494" y1="203" x1="462" fill="none"/>
+                            <line stroke-width="5" stroke="#000" stroke-width="5" id="svg_38" y2="203" x2="500" y1="203" x1="494" fill="none"/>
+                            <line stroke-width="5" stroke="#000" stroke-width="5" id="svg_39" y2="203" x2="508" y1="203" x1="500" fill="none"/>
+                            <line stroke-width="5" fill="none" x1="494" y1="203" x2="494" y2="226" id="H221" stroke="#000"/>
+                            <line stroke-width="5" fill="none" x1="462" y1="193" x2="462" y2="203" id="H212" stroke="#000"/>
+                            <line stroke-width="5" fill="none" x1="500" y1="167" x2="500" y2="203" id="svg_32" stroke="#000"/>.
+                            <line stroke-width="5" fill="none" x1="515" y1="167" x2="500" y2="167" id="H210B" stroke="#000"/>
+                            <line stroke-width="5" class="Stairs2" stroke="#000" fill="none" x1="500" y1="144" x2="500" y2="167" id="Stair2U"/>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="508" y1="203" x2="508" y2="268" id="H219"/>
+                            <line stroke-width="5" id="svg_41" y2="203" x2="580" y1="203" x1="508" fill="none" stroke="#000"/>
+                            <line stroke-width="5" id="svg_42" y2="203" x2="592" y1="203" x1="580" fill="none" stroke="#000"/>
+                            <line stroke-width="5" id="svg_44" y2="203" x2="638" y1="203" x1="592" fill="none" stroke="#000"/>
+                            <line stroke-width="5" id="svg_45" y2="203" x2="650" y1="203" x1="638" fill="none" stroke="#000"/>
+                            <line stroke-width="5" id="svg_47" y2="203" x2="670" y1="203" x1="650" fill="none" stroke="#000"/>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="580" y1="189" x2="580" y2="203" id="H210A"/>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="638" y1="176" x2="638" y2="203" id="H209"/>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="650" y1="188" x2="650" y2="203" id="H208"/>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="670" y1="203" x2="670" y2="211" id="H206"/>
+                            <line stroke-width="5" class="Stairs2" id="Stair3U" y2="203" x2="701" y1="203" x1="670" fill="none" stroke="#000"/>
+                            <line stroke-width="5" fill="none" x1="592" y1="203" x2="592" y2="216" id="svg_53" stroke="#000"/>
+                            <line stroke-width="5" fill="none" x1="592" y1="216" x2="592" y2="255" id="svg_54" stroke="#000"/>
+                            <line stroke-width="5" fill="none" x1="592" y1="255" x2="592" y2="279" id="svg_55" stroke="#000"/>
+                            <line stroke-width="5" fill="none" x1="592" y1="279" x2="592" y2="355" id="svg_57" stroke="#000"/>
+                            <line stroke-width="5" fill="none" x1="592" y1="355" x2="592" y2="393" id="svg_58" stroke="#000"/>
+                            <line stroke-width="5" fill="none" x1="592" y1="393" x2="592" y2="409" id="svg_59" stroke="#000"/>
+                            <line stroke-width="5" id="svg_61" y2="409" x2="672" y1="409" x1="592" fill="none" stroke="#000"/>
+                            <line stroke-width="5" id="svg_62" y2="409" x2="592" y1="409" x1="462" fill="none" stroke="#000"/>
+                            <line stroke-width="5" id="svg_63" y2="409" x2="462" y1="409" x1="414" fill="none" stroke="#000"/>
+                            <line stroke-width="5" fill="none" x1="414" y1="349" x2="414" y2="409" id="svg_64" stroke="#000"/>
+                            <line stroke-width="5" fill="none" x1="414" y1="203" x2="414" y2="349" id="svg_65" stroke="#000"/>
+                            <line stroke-width="5" id="svg_66" y2="349" x2="414" y1="350" x1="319" fill="none" stroke="#000"/>
+                            <line stroke-width="5" fill="none" x1="319" y1="203" x2="319" y2="350" id="svg_67" stroke="#000"/>
+                            <line stroke-width="5" stroke="#000" id="svg_68" y2="203" x2="333" y1="203" x1="319" fill="none"/>
+                            <line stroke-width="5" class="Stairs2" fill="none" stroke="#000" x1="300" y1="350" x2="319" y2="350" id="Stair6U"/>
+                            <line stroke-width="5" class="Stairs2" stroke="#000" fill="none" x1="85" y1="110" x2="100" y2="110" id="Stair1U"/>
+                            <line stroke-width="5" fill="none" stroke="#000" x1="574" y1="216" x2="592" y2="216" id="H207"/>
+                            <line stroke-width="5" fill="none" stroke="#000" x1="574" y1="255" x2="592" y2="255" id="H205"/>
+                            <line stroke-width="5" fill="none" stroke="#000" x1="574" y1="355" x2="592" y2="355" id="H203"/>
+                            <line stroke-width="5" fill="none" stroke="#000" x1="574" y1="393" x2="592" y2="393" id="H201"/>
+                            <line stroke-width="5" fill="none" stroke="#000" x1="592" y1="279" x2="617" y2="279" id="H204"/>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="672" y1="400" x2="672" y2="409" id="H202"/>
+                            <line stroke-width="5" class="Stairs2" fill="none" stroke="#000" x1="672" y1="409" x2="695" y2="409" id="Stair4U"/>
+                            <line stroke-width="5" stroke="#000" fill="none" x1="462" y1="350" x2="462" y2="409" id="H220"/>
+                            <line stroke-width="5" id="svg_78" y2="409" x2="414" y1="409" x1="368" stroke="#000" fill="none"/>
+                            <line stroke-width="5" class="Stairs2" id="Stair5U" y2="426" x2="414" y1="409" x1="414" stroke="#000" fill="none"/>
+                            <!-- <polygon xmlns="http://www.w3.org/2000/svg" id="Stairs" fill="#B3B3B3" stroke="#000000" points="279,318 297,318 297,282 306,282 306,318 324,318 324,264 279,264"/> -->
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_80" y="72" x="89" stroke="#000" fill="#000000">H213</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_81" y="71" x="156" stroke="#000" fill="#000000">H217</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0" id="svg_82" y="71" x="223" stroke="#000" fill="#000000">H216</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_83" y="168" x="316" stroke="#000" fill="#000000">H215</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_84" y="170" x="390" stroke="#000" fill="#000000">H214</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_85" y="169" x="443" stroke="#000" fill="#000000">H212</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_86" y="156" x="518" stroke="#000" fill="#000000">H210B</text>
+                            <text transform="rotate(90 591.5 158.25)" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_87" y="164" x="565" stroke="#000" fill="#000000">H210A</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_88" y="163" x="608" stroke="#000" fill="#000000">H209</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_90" y="166" x="651" stroke="#000" fill="#000000">H208</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_91" y="247" x="636" stroke="#000" fill="#000000">H206</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_92" y="307" x="639" stroke="#000" fill="#000000">H204</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_93" y="369" x="639" stroke="#000" fill="#000000">H202</text>
+                            <rect fill="#fff" x="455" y="226" width="45" height="42" id="svg_95" stroke="#000"/>
+                            <rect stroke="#000" fill="#fff" x="455" y="268" width="63" height="41" id="svg_96"/>
+                            <rect stroke="#000" fill="#fff" x="455" y="268" width="63" height="42" id="svg_97"/>
+                            <rect stroke="#000" fill="#fff" x="455" y="310" width="63" height="41" id="svg_98"/>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_99" y="338" x="464" stroke="#000" fill="#000000">H220</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_100" y="298" x="464" stroke="#000" fill="#000000">H219</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_101" y="298" x="464" stroke="#000" fill="#000000">H219</text>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="14" stroke-width="0" id="svg_102" y="251" x="462" stroke="#000" fill="#000000">H221</text>
+                            <rect fill="#fff" x="521" y="210" width="53" height="34" id="svg_1" stroke="#000"/>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_94" y="232" x="528" fill="#000000" stroke="#000">H207</text>
+                            <rect fill="#fff" x="521" y="244" width="53" height="65" stroke="#000"/>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_105" y="282" x="526" fill="#000000" stroke="#000">H205</text>
+                            <rect fill="#fff" x="521" y="309" width="53" height="60" id="svg_106" stroke="#000"/>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_107" y="345" x="526" fill="#000000" stroke="#000">H203</text>
+                            <rect fill="#fff" x="521" y="369" width="53" height="33" id="svg_108" stroke="#000"/>
+                            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0" id="svg_109" y="392" x="527" fill="#000000" stroke="#000">H201</text>
+                            <text fill="#000000" stroke="#000" stroke-width="0" x="387" y="319" id="svg_110" font-size="24" font-family="Noto Sans JP" text-anchor="start" xml:space="preserve" transform="rotate(90 436.344 311.25)">Commons</text>
+                            <text fill="#000000" stroke="#000" stroke-width="0" x="337" y="329" id="svg_111" font-size="18" font-family="Noto Sans JP" text-anchor="start" xml:space="preserve">Lockers</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </main>
+    </body>
+    <script src="/js/map.js"></script>
+</html>

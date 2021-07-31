@@ -1,15 +1,31 @@
-document.querySelector('#submit').addEventListener('click', () => {
-    const title = document.querySelector('#title');
-    const message = document.querySelector('#message');
-    const img = document.querySelector('#img');
+document.querySelector('.submit-post-button').addEventListener('click', () => {
+    const title = document.querySelector('.posts-title-textfield').value.trim();
+    const message = document.querySelector('.posts-message-textarea').value.trim();
+    const grades = Object.values(document.querySelectorAll('.grad-year-button.grades-selected')).map(button => parseInt(button.name));
+    const img = document.querySelector('#image-upload');
+
+    document.querySelector('.error-message').classList.add('invisible');
+
+    if (!title || !message) {
+        document.querySelector('.error-message').classList.remove('invisible');
+        if (!title) {
+            document.querySelector('.error-message').textContent = 'The announcement needs a title';
+            return;
+        }
+        if (!message) {
+            document.querySelector('.error-message').textContent = 'The announcement needs a message';
+            return;
+        }
+    }
 
     const formData = new FormData();
     
-    formData.append('title', title.value);
-    formData.append('message', message.value);
+    formData.append('title', title);
+    formData.append('message', message);
     formData.append('img', img.files[0]);
+    formData.append('grades', grades);
 
-    fetch(`/posts`, {
+    fetch(`/announcements`, {
         method: 'POST',
         body: formData
     })
@@ -18,32 +34,39 @@ document.querySelector('#submit').addEventListener('click', () => {
         if (response.error) {
             throw new Error(response.error);
         }
+        location.href = '/announcements';
+    }).catch(error => {
+        document.querySelector('.error-message').classList.remove('invisible');
+        document.querySelector('.error-message').textContent = 'The post that you tried to submit has the same title. Please try a different title';
+    })
+});
 
-        const { user, title: titleResponse, message: messageResponse, image } = response;
+document.querySelector('#image-upload').addEventListener('change', function() {
+    if (this.files && this.files[0]) {
+        const reader = new FileReader();
 
-        let htmlPost;
-        if (image) {
-            htmlPost = `
-                <hr>
-                <h1>${titleResponse}</h1>
-                <img width="200px" height="auto" src="data:image/jpeg;base64, ${image}">
-                <p>${user}</p>
-                <p>${messageResponse}</p>
-                <hr>
-            `;
-        } else {
-            htmlPost = `
-                <hr>
-                <h1>${titleResponse}</h1>
-                <p>${user}</p>
-                <p>${messageResponse}</p>
-                <hr>
-            `;
-        }
-        document.querySelector('#posts').innerHTML += htmlPost;
+        reader.onload = function (e) {
+            document.querySelector('.posts-image-upload-div').src = e.target.result;
+            document.querySelector('.posts-image-upload-div').height = 'auto';
+        };
 
-        title.value = '';
-        message.value = '';
-        document.querySelector('#img').value = '';
+        document.querySelector('.posts-image-upload-div').classList.remove('invisible');
+
+        reader.readAsDataURL(this.files[0]);
+    }
+})
+
+document.querySelector('.create-new-post-button').addEventListener('click', () => {
+    document.querySelector('.create-new-post-button').classList.add('invisible');
+    document.querySelector('.new-posts-div').classList.remove('invisible');
+
+    Object.values(document.querySelectorAll('.grad-year-button')).forEach(gradYear => {
+        gradYear.addEventListener('click', function() {
+            if (!this.classList.contains('grades-selected')) {
+                this.classList.add('grades-selected');
+            } else {
+                this.classList.remove('grades-selected');
+            }
+        });
     });
 });

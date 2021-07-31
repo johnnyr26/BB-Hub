@@ -1,0 +1,157 @@
+.new-posts-section, .new-posts-div {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+.posts {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.posts-title-textfield {
+  padding-left: 8px;
+  border: none;
+  border-bottom: solid #d3d3d3 1px;
+  height: 50px;
+  font-size: 24px;
+  margin: 10px 0;
+  outline: none;
+}
+
+.posts-message-textarea {
+  padding-left: 8px;
+  border: none;
+  border-bottom: solid #d3d3d3 1px;
+  height: 64px;
+  size: 64px;
+  font-size: 24px;
+  resize: vertical;
+  margin: 10px 0;
+  outline: none;
+}
+
+#image-upload {
+  display: none;
+}
+.image-upload-label {
+  display: flex;
+  flex-direction: row;
+}
+.upload-photo-label {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+.upload-photo-icon {
+  height: 50px;
+  width: auto;
+  margin: 12px 0;
+  cursor: pointer;
+}
+.submit-post-button, .create-new-post-button {
+  font-size: 24px;
+  color: #ffffff;
+  background-color: #1472ff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.user-info {
+  margin: 12px 0;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.userlink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px !important;
+  margin-left: 8px !important;
+  text-decoration: none;
+  outline: none;
+  color: #000000;
+}
+.announcements-section {
+  padding: 0;
+  box-sizing: border-box;
+  height: max-content !important;
+  margin-right: 24px;
+}
+.announcements-section-title {
+  height: auto;
+  margin: 0;
+}
+.announcements-title-heading {
+  font-size: 26px;
+}
+.announcements-image {
+  width: 100%;
+  height: auto;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.announcements-section-body {
+  height: auto !important;
+}
+.announcements-body {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; 
+  font-size: 16px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 400;
+  line-height: 20px;
+}
+.grad-year-div{
+  margin: 12px 0;
+}
+.grad-year-button {
+  background-color: #d3d3d3;
+  border: none;
+  border-radius: 10px;
+  color: #000000;
+  font-size: 24px;
+  padding: 8px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-left: 0;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.grad-year-button:hover {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 3px 10px 0 rgba(0, 0, 0, 0.4);
+}
+.grad-year-button:active {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.4), 0 3px 10px 0 rgba(0, 0, 0, 0.6);
+}
+.grad-year-label{
+  font-size: 24px;
+  margin-right: 24px;
+}
+.grades-selected {
+  background-color: #a6dbff;
+  color: #144bff;
+}
+.posts-image-upload-div {
+  width: 400px;
+  height: auto;
+}
+.columns {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.error-message {
+  font-size: 24px;
+  color: #ff0000;
+}

@@ -1,0 +1,218 @@
+main {
+    min-width: 1220px;
+    margin: 0 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.columns-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.column {
+    height: 100%;
+    max-width: 430px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+section {
+    box-sizing: border-box;
+    background-color: #ffffff;
+    height: 410px;
+    width: 400px;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 18px;
+}
+.section-title {
+    color:#1472ff;
+    margin-left: 10px;
+    height: 60px;
+}
+.announcements-section {
+    padding: 0;
+    box-sizing: border-box;
+    height: auto !important;
+}
+.announcements-section-title {
+    height: auto;
+    margin: 0;
+}
+.announcements-title-heading {
+    font-size: 26px;
+}
+.announcements-image {
+    width: 100%;
+    height: auto;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.announcements-section-body {
+    height: auto !important;
+}
+.announcements-body {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; 
+    font-size: 16px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 400;
+    line-height: 20px;
+}
+#schedule-section-title, #classroom-section-title, #lunch-section-title {
+    margin: 0;
+    color:#1472ff;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+}
+.section-body {
+    height: 310px;
+    border-radius: 10px;
+    padding: 10px;
+    padding-top: 0;
+    overflow-y: scroll;
+}
+.grey-line {
+    margin: 0 10px;
+    height: 2px;
+    background-color: #e6e6e6;
+}
+h1, p {
+    margin: 5px 0;
+}
+h1 {
+    font-weight: 600;
+}
+.detail-section {
+    display: block;
+    color: #000000;
+    text-decoration: none;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #ffffff;
+    width: 100%;
+    /* border-bottom: solid #e6e6e6 1px; */
+    border-radius: 10px;
+    margin: 10px 0;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.detail-title {
+    font-weight: 600;
+    font-size: 18px;
+}
+.detail-body {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+#letter-day-title, #classroom-title, #lunch-title {
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.schedule-section, #classroom-section, #schedule-section-body, #classroom-section-body, #lunch-section, #lunch-section-body {
+    height: 100%;
+}
+#classroom-section-body, #lunch-section-body {
+    max-height: 500px;
+    overflow-y: scroll;
+    padding: none;
+}
+.classroom-link {
+    color: black;
+    text-decoration: none;
+}
+.classroom-link:visited {
+    color: black;
+    text-decoration: none;
+}
+.animate-load {
+    animation-duration: 1s;
+    animation-name: animate-load;
+}
+#schedule-image-icon, #classroom-image-icon, #lunch-image-icon {
+    margin: 0;
+    height: 50px;
+    width: auto;
+}
+#lunch-image-icon {
+    margin-right: 3px;
+}
+#classroom-image-icon {
+    margin-right: 5px;
+}
+#schedule-image-icon {
+    height: 45px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+.clasroom-assignments-p {
+    margin: 5px;
+    color: #000000;
+    opacity: .7;
+    font-size: 18px;
+}
+.authorize-classroom-div {
+    height: 50px;
+}
+#authorize-classroom {
+    display: block;
+    color: white;
+    background-color: #1472ff;
+    text-decoration: none;
+    font-size: 24px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 10px 0;
+    padding: 12px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+#authorize-classroom:hover {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.35), 0 3px 10px 0 rgba(0, 0, 0, 0.35);
+}
+#incomplete-assignments {
+    margin-top: 10px;
+}
+.friends-div {
+    height: 128px;
+    width: 100%;
+}
+.user-info {
+    margin: 12px 0;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.userlink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-left: 8px;
+    text-decoration: none;
+    outline: none;
+    color: #000000;
+}
+@keyframes animate-load {
+    from {
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.25;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    75% {
+        opacity: 0.75;
+    }
+    to {
+        opacity: 1;
+    }
+}

@@ -11,11 +11,43 @@
     display: flex;
     flex-direction: row;
 }
+
+p {
+    font-size: 24px;
+    text-align: center;
+}
+
+.title {
+    margin: 0;
+    margin-top: 12px;
+}
   
 svg, g {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.get-location-divs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.location-div {
+    margin: 6px 0;
+}
+label {
+    font-size: 24px;
+}
+.submit {
+    font-size: 24px;
+    background-color: #1472ff;
+    padding: 8px;
+    border: none;
+    padding: 8px;
+    border-radius: 10px;
+    color: #ffffff;
 }
 @keyframes show-route {
     from {
