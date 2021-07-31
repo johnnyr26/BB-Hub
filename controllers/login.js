@@ -2,6 +2,7 @@ const User = require('../models/Users');
 const {OAuth2Client} = require('google-auth-library');
 const client = new OAuth2Client();
 
+
 module.exports.renderLogin = (req, res) => {
     res.render('pages/login');
 }

@@ -4,6 +4,7 @@ function onSignIn(googleUser) {
     // if (email.slice(-15) !== '@blindbrook.org') {
     //     return signOut('Only Blind Brook emails are allowed to sign into this platform.');
     // }
+
     fetch('/login', {
         method: 'POST',
         headers: {
@@ -22,6 +23,7 @@ function onSignIn(googleUser) {
         location.href = '/';
     })
     .catch((error) => {
+      console.log(error);
       signOut(error);
     });
 }
@@ -31,3 +33,4 @@ function signOut(error) {
         document.getElementById('error').innerHTML = error;
     });
 }
+window.onload = () => console.log('hi');
