@@ -16,7 +16,10 @@ function onSignIn(googleUser) {
         if (response.error) {
             throw response.error;
         }
-        location.href = '/?newuser=true';
+        if (response.newUser){
+            return location.href = '/?newuser=true';
+        }
+        location.href = '/';
     })
     .catch((error) => {
       signOut(error);

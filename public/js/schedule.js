@@ -148,10 +148,7 @@ document.querySelector('.submit-schedule').addEventListener('click', () => {
     })
     .then(response => response.json())
     .then(response => {
-        document.querySelector('.shadow-background').classList.add('invisible');
-        document.querySelector('.modal.import-class-modal').classList.add('invisible');
-        document.querySelector('.modal.edit-class-modal').classList.add('invisible');
-        document.querySelector('.modal.add-class-modal').classList.add('invisible');
+        location.reload();
     });
 });
 

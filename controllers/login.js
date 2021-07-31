@@ -24,7 +24,7 @@ module.exports.authenticate = async (req, res) => {
       const { user, newUser } = await User.findByCredentials(name, email, picture.replace('s96-c', 's240-c'));
       const token = await user.generateAuthToken();
       res.cookie('token', `Bearer ${token}`, { httpOnly: true, sameSite: true });
-      return newUser ? res.json({ token: `Bearer ${token}`, newUser }) : res.json({ token: `Bearer ${token}` });
+      return res.json({ token: `Bearer ${token}`, newUser });
     } catch (error) {
       console.log(error);
       return res.send({ error: 'Only Blind Brook emails are allowed to sign into this platform.' });
