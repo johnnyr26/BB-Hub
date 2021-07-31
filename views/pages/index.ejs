@@ -26,7 +26,7 @@
                     <% if (course.course.courseTitle === 'Lunch' || course.course.courseTitle.substring(0, 4) === 'FREE') { %>
                       <a class="detail-section">
                     <% } else { %>
-                      <a href="/roster?course=<%= course.course.courseTitle %>&period=<%= course.course.period %>" class="detail-section">
+                      <a href="/roster?course=<%= encodeURIComponent(course.course.courseTitle) %>&period=<%= course.course.period %>" class="detail-section">
                     <% } %>
                         <h1 class="detail-title"><%= course.course.courseTitle %></h1>
                         <% if (course.course.courseTitle === 'Lunch' || course.course.courseTitle.substring(0, 4) === 'FREE') { %>

@@ -139,9 +139,9 @@
                                 <div class="schedule-section-body" class="section-body">
                                     <% userSchedule.forEach(course => { %>
                                         <% if (sharedCourses.includes(course.courseTitle) && course.courseTitle.substring(0, 4) !== 'FREE') { %>
-                                            <a href="/roster?course=<%= course.courseTitle %>&period=<%= course.period %>" class="detail-section shared-course">
+                                            <a href="/roster?course=<%= encodeURIComponent(course.courseTitle) %>&period=<%= course.period %>" class="detail-section shared-course">
                                         <% } else if (course.courseTitle.substring(0, 4) !== 'FREE') { %>
-                                            <a href="/roster?course=<%= course.courseTitle %>&period=<%= course.period %>" class="detail-section">
+                                            <a href="/roster?course=<%= encodeURIComponent(course.courseTitle) %>&period=<%= course.period %>" class="detail-section">
                                         <% } else if (sharedCourses.includes(course.courseTitle)) { %>
                                             <a class="detail-section shared-course">
                                         <% } else { %>
