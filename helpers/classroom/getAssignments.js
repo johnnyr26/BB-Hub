@@ -149,8 +149,15 @@ const authorize = async (code, user, authToken) => {
                 "token_uri":"https://oauth2.googleapis.com/token",
                 "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
                 "client_secret":"lb40rdtN_46sKpNE-rTl-y1_",
-                "redirect_uris":["http://localhost:3000","http://localhost:3000/classroom","http://localhost:3000/?assignments=true"],
-                "javascript_origins":["http://localhost:3000"]
+                "redirect_uris":[
+                    "http://localhost:3000",
+                    "http://localhost:3000/classroom",
+                    "http://localhost:3000/?assignments=true",
+                    "https://bb-hub.herokuapp.com",
+                    "https://bb-hub.herokuapp.com/classroom",
+                    "https://bb-hub.herokuapp.com/?assignments=true"
+                ],
+                "javascript_origins":["http://localhost:3000","https://bb-hub.herokuapp.com"]
             }
         };
     
