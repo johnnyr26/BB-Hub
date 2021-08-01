@@ -3,16 +3,18 @@ main {
     justify-content: initial;
 }
 .friends-section {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    position: relative;
     box-sizing: border-box;
     background-color: white;
     border-radius: 10px;
-    padding: 10px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
-    width: 225px;
+    width: 175px;
     margin-bottom: 18px;
-    height: max-content;
+    height: auto;
     margin-right: 18px;
+    justify-content: space-between;
     text-decoration: none !important;
     color: #000000 !important;
 }
@@ -21,20 +23,24 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex: 1 1 auto;
 }
 .friends-image {
     width: 100%;
     height: auto;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 .friends-body {
-    position: relative;
-    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 .friends-name {
     font-size: 30px;
     text-align: center;
     word-wrap: break-word;
+    margin: 0 5px;
 }
 .add-friend-button, .accept-friend-button {
     border: none;
@@ -44,7 +50,8 @@ main {
     font-size: 30px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
     cursor: pointer;
-    margin: 5px 0;
+    margin: 10px;
+    padding: 6px;
 }
 .decline-friend-button, .cancel-request-button {
     border: none;
@@ -54,7 +61,7 @@ main {
     font-size: 30px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
     cursor: pointer;
-    margin: 5px 0;
+    margin: 10px;
 }
 
 .friends-divs {
