@@ -110,6 +110,7 @@ module.exports = async (req, res) => {
                         courseWorkId,
                         states: ['CREATED', 'TURNED_IN', 'RECLAIMED_BY_STUDENT']
                     });
+                    console.log(submissionResponse);
                     const state = submissionResponse.data.studentSubmissions[0].state;
                     
                     assignments.push({
