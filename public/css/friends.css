@@ -3,31 +3,32 @@ main {
     justify-content: initial;
 }
 .friends-section {
+    display: block;
     box-sizing: border-box;
     background-color: white;
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
-    margin-bottom: 18px;
     width: 225px;
-    height: auto;
+    height: max-content;
     margin-right: 18px;
     text-decoration: none !important;
     color: #000000 !important;
 }
 .friends-header {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex: 1 1 auto;
 }
 .friends-image {
     width: 100%;
     height: auto;
 }
 .friends-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    position: relative;
+    bottom: 0;
 }
 .friends-name {
     font-size: 30px;
@@ -63,6 +64,7 @@ main {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    padding-bottom: 18px;
 }
 .title-heading {
     margin-top: 0;

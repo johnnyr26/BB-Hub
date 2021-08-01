@@ -61,9 +61,9 @@
                                     <% if (friend.picture) { %>
                                         <img class="friends-image" alt="Image" src=<%= friend.picture %>>
                                     <% } %>
+                                        <h1 class="friends-name"><%= friend.name %></h1>
                                     </div>
                                     <div class="friends-body">
-                                        <h1 class="friends-name"><%= friend.name %></h1>
                                         <button class="cancel-request-button" name="<%= friend.name %>">Cancel Request</button>
                                     </div>
                                 </a>
@@ -76,9 +76,9 @@
                                     <% if (friend.picture) { %>
                                         <img class="friends-image" alt="Image" src=<%= friend.picture %>>
                                     <% } %>
+                                    <h1 class="friends-name"><%= friend.name %></h1>
                                     </div>
                                     <div class="friends-body">
-                                        <h1 class="friends-name"><%= friend.name %></h1>
                                         <button class="add-friend-button" name="<%= friend.name %>">Add Friend</button>
                                     </div>
                                 </a>
