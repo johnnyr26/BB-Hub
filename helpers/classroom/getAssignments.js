@@ -111,7 +111,8 @@ module.exports = async (req, res) => {
                         states: ['CREATED', 'TURNED_IN', 'RECLAIMED_BY_STUDENT']
                     });
                     console.log(submissionResponse);
-                    const state = submissionResponse.data.studentSubmissions[0].state;
+                
+                    const state = submissionResponse.data.studentSubmissions ? submissionResponse.data.studentSubmissions[0].state : null;
                     
                     assignments.push({
                         name: course.name,
