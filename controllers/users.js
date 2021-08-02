@@ -129,8 +129,13 @@ module.exports.editProfile = async (req, res) => {
             return res.send({ success: true });
         }
 
-        const { gradYear, clubs, sports, privacy } = req.body;
+        const { name, gradYear, clubs, sports, privacy } = req.body;
 
+        if (allUsers.find(friendUser => friendUser.name === name && friendUser.name !== user.name)) {
+            throw new Error(`The selected name can't be used`);
+        }
+
+        user.name = name;
         user.gradYear = gradYear;
         user.clubs = clubs;
         user.sports = sports;
@@ -138,9 +143,9 @@ module.exports.editProfile = async (req, res) => {
 
         await user.save();
 
-        res.send({ gradYear, clubs, sports });
+        res.send({ name, gradYear, clubs, sports });
     } catch (e) {
         console.log(e);
-        res.send({ success: false });
+        res.send({ error: e });
     }    
 }

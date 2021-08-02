@@ -198,7 +198,7 @@ main {
 .modal-body {
     align-items: flex-start;
 }
-.grad-year-div{
+.grad-year-div {
     margin: 48px 0;
 }
 .privacy-div {
@@ -221,7 +221,7 @@ main {
 .grad-year-button:active {
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.4), 0 3px 10px 0 rgba(0, 0, 0, 0.6);
 }
-.grad-year-label, .edit-clubs-label, .edit-sports-label, .privacy-label {
+.grad-year-label, .edit-clubs-label, .edit-sports-label, .privacy-label, .name-label {
     font-size: 24px;
     margin-right: 24px;
 }

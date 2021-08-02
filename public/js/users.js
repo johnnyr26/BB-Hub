@@ -92,6 +92,7 @@ document.querySelector('.x').addEventListener('click', () => {
     document.querySelector('.edit-profile-modal').classList.add('invisible');
 });
 document.querySelector('.submit-profile-info').addEventListener('click', () => {
+    const name = document.querySelector('.name').value;
     const graduationYear = parseInt(document.querySelector('.grad-year-button.year-selected').name);
     const clubs = Object.values(document.querySelectorAll('.select-club-div.div-selected')).map(div => div.name);
     const sports = Object.values(document.querySelectorAll('.select-sport-div.div-selected')).map(div => div.name);
@@ -103,6 +104,7 @@ document.querySelector('.submit-profile-info').addEventListener('click', () => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({ 
+            name,
             gradYear: graduationYear,
             clubs,
             sports,
@@ -123,9 +125,13 @@ document.querySelector('.submit-profile-info').addEventListener('click', () => {
                 <a href="/schedule" class="profile-button edit-profile">Add Schedule</a>
             `;
         } else {
-            document.querySelector('.shadow-background').classList.add('invisible');
-            document.querySelector('.edit-profile-modal').classList.add('invisible');
+            if (response.error) {
+                throw new Error(response.error);
+            }
+            location.reload();
         }
+    }).catch(e => {
+        console.log(e);
     });
 });
 Object.values(document.querySelectorAll('.select-club-div')).forEach(button => {
