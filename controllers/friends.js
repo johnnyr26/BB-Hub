@@ -18,7 +18,8 @@ module.exports.renderFriends = async (req, res) => {
         return {
             name: userInfo.name,
             picture: userInfo.picture,
-            id: userInfo.id
+            id: userInfo.id,
+            gradYear: userInfo.gradYear
         }
     });
 
@@ -47,10 +48,15 @@ module.exports.renderFriends = async (req, res) => {
         };
     }));
 
+    const friendsInSameGrade = availableFriends.filter(friend => friend.gradYear === user.gradYear);
+    const friendsInDiffGrade = availableFriends.filter(friend => friend.gradYear !== user.gradYear);
+
+    const sortedFriends = [...friendsInSameGrade, ...friendsInDiffGrade];
+
     return res.render('pages/friends', {
         id: req.user._id,
         picture: req.user.picture,
-        availableFriends,
+        availableFriends: sortedFriends,
         friends,
         friendRequests,
         requestedFriends

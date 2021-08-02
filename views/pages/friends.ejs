@@ -68,7 +68,7 @@
                             <% }); %>
                         <% } %>
                         <% if (locals.availableFriends && availableFriends.length) { %>
-                            <% availableFriends.forEach(friend => { %>
+                            <% availableFriends.forEach((friend, index) => { %>
                                 <a href="/users/<%= friend.id %>" class="friends-section">
                                     <div class="friends-header">
                                     <% if (friend.picture) { %>
