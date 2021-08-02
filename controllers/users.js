@@ -135,7 +135,7 @@ module.exports.editProfile = async (req, res) => {
             throw new Error(`The selected name can't be used`);
         }
 
-        user.name = name;
+        user.name = name ? name : user.name;
         user.gradYear = gradYear;
         user.clubs = clubs;
         user.sports = sports;
