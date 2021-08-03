@@ -121,7 +121,6 @@
                         <% } else if (!userFriends.includes(id) ) { %>
                             <div class="accept-decline-row">
                                 <% if (userFriendRequests.includes(id)) { %>
-                                    
                                     <button class="profile-button cancel-request-button" name="<%= userId %>">Cancel Request</button>
                                 <% } else if (userRequestedFriends.includes(id)) { %>
                                         <button class="profile-button accept-friend-button" name="<%= userId %>">Accept</button>
@@ -175,7 +174,7 @@
                                             <p class="no-activities">No Clubs</p>
                                         <% } %>
                                         <% userClubs.forEach(club => { %>
-                                            <a href="/roster?club=<%= club %>" class="club-div">
+                                            <a href="/roster?club=<%= encodeURIComponent(club) %>" class="club-div">
                                                 <div class="club-icon"><%= club[0] %></div>
                                                 <p class="club-name"><%= club %></p>
                                             </a>
@@ -193,7 +192,7 @@
                                             <p class="no-activities">No Sports</p>
                                         <% } %>
                                         <% userSports.forEach(sport => { %>
-                                            <a href="/roster?sport=<%= sport %>" class="sport-div">
+                                            <a href="/roster?sport=<%= encodeURIComponent(sport) %>" class="sport-div">
                                                 <div class="sport-icon"><%= sport[0] %></div>
                                                 <p class="sport-name"><%= sport %></p>
                                             </a>
