@@ -205,10 +205,13 @@
                                     <div>
                                         <h1 id="my-schedule">Announcements</h1>
                                     </div>
-                                    <% if (!userPosts.length) { %>
+                                    <% if (!userPosts.length || userPosts.every(post => !post.grades.includes(userGradYear))) { %>
                                         <p class="no-activities">No Announcements</p>
                                     <% } %>
                                     <% userPosts.forEach(post => { %>
+                                        <% if (!post.grades.includes(userGradYear)) { %>
+                                            <% return; %>
+                                        <% } %>
                                         <section class="announcements-section">
                                             <div class="announcements-section-title section-title">
                                                 <% if (post.img.data) { %>

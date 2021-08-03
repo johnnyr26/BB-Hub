@@ -1,14 +1,23 @@
+let timeOuts = [];
+
 document.querySelector('.submit').addEventListener('click', () => {
     const startingLocation = document.querySelector('#startingLocation').value;
     const finalLocation = document.querySelector('#finalLocation').value;
 
     const allLines = [];
+
+    if (timeOuts) {
+        timeOuts.forEach(timeOut => clearTimeout(timeOut));
+    }
+
     Object.values(document.querySelectorAll('line')).forEach(line => {
         const { id, coordinates, neighbors, classList } = line;
         allLines.push({ id, coordinates, neighbors, classList });
         line.style = '';
         line.classList.remove('route');
     });
+
+    
 
     fetch(`/map?startingLocation=${startingLocation}&finalLocation=${finalLocation}`)
     .then(response => response.json())
@@ -44,24 +53,24 @@ document.querySelector('.submit').addEventListener('click', () => {
             paths.forEach((path, index) => {
                 const { title, line, mapIndex } = path;
                 const g = document.querySelector(`#${title}`);
-                setTimeout(() => {
+                timeOuts.push(setTimeout(() => {
                     const lineDiv = document.querySelector(`#${line.id}`);
                     lineDiv.classList.add('route');
                     // prevents other lines from hovering over the selected line
                     g.appendChild(lineDiv);
-                }, 300 * (index + 1));
+                }, 200 * (index + 1)));
             });
         }
         if (response.title && response.path) {
             const { title, path } = response;
             const g = document.querySelector(`#${title}`);
             path.forEach((line, index) => {
-                setTimeout(() => {
+                timeOuts.push(setTimeout(() => {
                     const lineDiv = document.querySelector(`#${line.id}`);
                     lineDiv.classList.add('route');
                     // prevents other lines from hovering over the selected line
                     g.appendChild(lineDiv);
-                }, 300 * (index + 1));
+                }, 200 * (index + 1)));
             });
         }
     });
