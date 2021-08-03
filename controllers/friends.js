@@ -93,8 +93,6 @@ module.exports.renderFriends = async (req, res) => {
     sortedFriendsByGrade.splice(sameYearIndex, 1);
     sortedFriendsByGrade.unshift(sameYearEntry);
 
-    console.log(sortedFriendsByGrade);
-
     return res.render('pages/friends', {
         id: req.user._id,
         picture: req.user.picture,

@@ -45,11 +45,19 @@ label {
     background-color: #1472ff;
     padding: 8px;
     border: none;
-    padding: 8px;
+    width: 256px;
     border-radius: 10px;
     color: #ffffff;
     cursor: pointer;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    margin: 18px 0;
+    margin-bottom: 0;
+}
+.submit:hover {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 3px 10px 0 rgba(0, 0, 0, 0.4);
+}
+.submit:active {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.4), 0 3px 10px 0 rgba(0, 0, 0, 0.6);
 }
 @keyframes show-route {
     from {
