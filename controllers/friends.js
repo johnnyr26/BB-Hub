@@ -82,6 +82,11 @@ module.exports.renderFriends = async (req, res) => {
 
     sortedFriendsByGrade.reverse();
 
+    sortedFriendsByGrade.push({
+        grade: 'Unknown',
+        friends: sortedFriends.filter(friend => !friend.gradYear)
+    });
+
     const sameYearIndex = sortedFriendsByGrade.findIndex(entry => entry.grade === 12 - (user.gradYear - year));
 
     const sameYearEntry = sortedFriendsByGrade[sameYearIndex];

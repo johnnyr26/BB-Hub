@@ -55,7 +55,11 @@
                             <% const { grade, friends } = entry; %>
                             <% if (friends.length) { %>
                                 <div class="friends-grade">
-                                    <h1 class="title-heading"><%= grade %>th grade</h1>
+                                    <% if (grade === 'Unknown') { %>
+                                        <h1 class="title-heading">Unknown grade</h1>
+                                    <% } else { %>
+                                        <h1 class="title-heading"><%= grade %>th grade</h1>
+                                    <% } %>
                                     <div class="friends-row">
                                         <% friends.forEach(friend => { %>
                                             <a href="/users/<%= friend.id %>" class="friends-section">
