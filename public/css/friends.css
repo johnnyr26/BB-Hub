@@ -10,7 +10,8 @@ main {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
-    width: 175px;
+    max-width: 175px;
+    min-width: 175px;
     margin-bottom: 18px;
     height: auto;
     margin-right: 18px;
@@ -69,10 +70,15 @@ main {
     border-bottom: solid #d3d3d3 1px;
     margin-bottom: 12px;
 }
+.friends-grade {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
 .friends-row {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    overflow-x: scroll;
 }
 .title-heading {
     margin-top: 0;

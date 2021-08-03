@@ -1,5 +1,7 @@
 const Users = require('../models/Users');
 
+const getSharedCourses = require('../helpers/schedule/findSharedCourses');
+
 module.exports.renderFriends = async (req, res) => {
     const user = await Users.findById(req.user._id);
     if (!user) {
@@ -19,7 +21,11 @@ module.exports.renderFriends = async (req, res) => {
             name: userInfo.name,
             picture: userInfo.picture,
             id: userInfo.id,
-            gradYear: userInfo.gradYear
+            gradYear: userInfo.gradYear,
+            clubs: userInfo.clubs,
+            sports: userInfo.sports,
+            schedule: userInfo.schedule,
+            availableFriend: true
         }
     });
 
@@ -36,7 +42,10 @@ module.exports.renderFriends = async (req, res) => {
         return {
             name: friend.name,
             picture: friend.picture,
-            id
+            id,
+            clubs: friend.clubs,
+            sports: friend.sports,
+            schedule: friend.schedule
         };
     }));
     const requestedFriends = await Promise.all(user.requestedFriends.map(async id => {
@@ -44,22 +53,49 @@ module.exports.renderFriends = async (req, res) => {
         return {
             name: friend.name,
             picture: friend.picture,
-            id
+            id,
+            gradYear: friend.gradYear
         };
     }));
 
     const friendsInSameGrade = availableFriends.filter(friend => friend.gradYear === user.gradYear);
     const friendsInDiffGrade = availableFriends.filter(friend => friend.gradYear !== user.gradYear);
 
-    const sortedFriends = [...friendsInSameGrade, ...friendsInDiffGrade];
+    sortFriends(user, requestedFriends);
+    sortFriends(user, friendsInSameGrade);
+    sortFriends(user, friendsInDiffGrade);
+
+    const sortedFriends = [...requestedFriends, ...friendsInSameGrade, ...friendsInDiffGrade];
+
+    const sortedFriendsByGrade = [];
+
+    const date = new Date();
+    const year = date.getMonth() < 6 ? date.getFullYear() : date.getFullYear() + 1;
+
+    for (let grade = year; grade < year + 4; grade ++) {
+        const yearStudents = sortedFriends.filter(friend => friend.gradYear === grade);
+        sortedFriendsByGrade.push({
+            grade: 12 - (grade - year),
+            friends: yearStudents
+        });
+    }
+
+    sortedFriendsByGrade.reverse();
+
+    const sameYearIndex = sortedFriendsByGrade.findIndex(entry => entry.grade === 12 - (user.gradYear - year));
+
+    const sameYearEntry = sortedFriendsByGrade[sameYearIndex];
+    sortedFriendsByGrade.splice(sameYearIndex, 1);
+    sortedFriendsByGrade.unshift(sameYearEntry);
+
+    console.log(sortedFriendsByGrade);
 
     return res.render('pages/friends', {
         id: req.user._id,
         picture: req.user.picture,
-        availableFriends: sortedFriends,
+        availableFriends: sortedFriendsByGrade,
         friends,
         friendRequests,
-        requestedFriends
     });
 };
 
@@ -128,3 +164,42 @@ module.exports.updateFriends = async (req, res) => {
         console.log(e.message);
     }
 };
+
+const sortFriends = (user, friends) => {
+    friends.sort((a, b) => {
+        let aScore = 0;
+        let bScore = 0;
+
+        if (user.clubs) {
+            user.clubs.forEach(club => {
+                if (a.clubs && a.clubs.includes(club)) {
+                    aScore ++;
+                }
+                if (b.clubs && b.clubs.includes(club)) {
+                    bScore ++;
+                }
+            });
+        }
+        
+        if (user.sports) {
+            user.sports.forEach(sport => {
+                if (a.sports && a.sports.includes(sport)) {
+                    aScore ++;
+                }
+                if (b.sports && b.sports.includes(sport)) {
+                    bScore ++;
+                }
+            });
+        }
+        
+
+        if (a.schedule) {
+            aScore += getSharedCourses(user.schedule, a.schedule).length;
+        }
+        if (b.schedule) {
+            bScore += getSharedCourses(user.schedule, b.schedule).length;
+        }
+
+        return bScore - aScore;
+    });
+}

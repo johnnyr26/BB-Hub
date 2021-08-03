@@ -50,39 +50,35 @@
             <% } %>
             <% if ((locals.requestedFriends && requestedFriends.length) || (locals.availableFriends && availableFriends.length)) { %>
                 <div class="friends-divs">
-                    <h1 class="title-heading">People you may know</h1>
-                    <div class="friends-row">
-                        <% if (locals.requestedFriends && requestedFriends.length) { %>
-                            <% requestedFriends.forEach(friend => { %>
-                                <a href="/users/<%= friend.id %>" class="friends-section">
-                                    <div class="friends-header">
-                                    <% if (friend.picture) { %>
-                                        <img class="friends-image" alt="Image" src=<%= friend.picture %>>
-                                    <% } %>
-                                        <h1 class="friends-name"><%= friend.name %></h1>
+                    <% if (locals.availableFriends && availableFriends.length) { %>
+                        <% availableFriends.forEach(entry => { %>
+                            <% const { grade, friends } = entry; %>
+                            <% if (friends.length) { %>
+                                <div class="friends-grade">
+                                    <h1 class="title-heading"><%= grade %>th grade</h1>
+                                    <div class="friends-row">
+                                        <% friends.forEach(friend => { %>
+                                            <a href="/users/<%= friend.id %>" class="friends-section">
+                                                <div class="friends-header">
+                                                <% if (friend.picture) { %>
+                                                    <img class="friends-image" alt="Image" src=<%= friend.picture %>>
+                                                <% } %>
+                                                <h1 class="friends-name"><%= friend.name %></h1>
+                                                </div>
+                                                <div class="friends-body">
+                                                    <% if (friend.availableFriend) { %>
+                                                        <button class="add-friend-button" name="<%= friend.name %>">Add Friend</button>
+                                                    <% } else { %>
+                                                        <button class="cancel-request-button" name="<%= friend.name %>">Cancel Request</button>
+                                                    <% } %>
+                                                </div>
+                                            </a>
+                                        <% }); %>
                                     </div>
-                                    <div class="friends-body">
-                                        <button class="cancel-request-button" name="<%= friend.name %>">Cancel Request</button>
-                                    </div>
-                                </a>
-                            <% }); %>
-                        <% } %>
-                        <% if (locals.availableFriends && availableFriends.length) { %>
-                            <% availableFriends.forEach((friend, index) => { %>
-                                <a href="/users/<%= friend.id %>" class="friends-section">
-                                    <div class="friends-header">
-                                    <% if (friend.picture) { %>
-                                        <img class="friends-image" alt="Image" src=<%= friend.picture %>>
-                                    <% } %>
-                                    <h1 class="friends-name"><%= friend.name %></h1>
-                                    </div>
-                                    <div class="friends-body">
-                                        <button class="add-friend-button" name="<%= friend.name %>">Add Friend</button>
-                                    </div>
-                                </a>
-                            <% }); %>
-                        <% } %>
-                    </div>
+                                </div>
+                            <% } %>
+                        <% }); %>
+                    <% } %>
                 </div>
             <% } %>
         </main>
