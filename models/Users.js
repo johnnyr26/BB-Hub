@@ -63,6 +63,9 @@ const Schema = mongoose.Schema({
     }],
     googleRefreshToken: {
         type: String
+    },
+    admin: {
+        type: Boolean
     }
 });
 

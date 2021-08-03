@@ -1,7 +1,6 @@
 document.querySelector('.submit-post-button').addEventListener('click', () => {
     const title = document.querySelector('.posts-title-textfield').value.trim();
     const message = document.querySelector('.posts-message-textarea').value.trim();
-    const grades = Object.values(document.querySelectorAll('.grad-year-button.grades-selected')).map(button => parseInt(button.name));
     const img = document.querySelector('#image-upload');
 
     document.querySelector('.error-message').classList.add('invisible');
@@ -23,8 +22,6 @@ document.querySelector('.submit-post-button').addEventListener('click', () => {
     formData.append('title', title);
     formData.append('message', message);
     formData.append('img', img.files[0]);
-    formData.append('grades', grades);
-
     fetch(`/announcements`, {
         method: 'POST',
         body: formData
@@ -59,14 +56,4 @@ document.querySelector('#image-upload').addEventListener('change', function() {
 document.querySelector('.create-new-post-button').addEventListener('click', () => {
     document.querySelector('.create-new-post-button').classList.add('invisible');
     document.querySelector('.new-posts-div').classList.remove('invisible');
-
-    Object.values(document.querySelectorAll('.grad-year-button')).forEach(gradYear => {
-        gradYear.addEventListener('click', function() {
-            if (!this.classList.contains('grades-selected')) {
-                this.classList.add('grades-selected');
-            } else {
-                this.classList.remove('grades-selected');
-            }
-        });
-    });
 });

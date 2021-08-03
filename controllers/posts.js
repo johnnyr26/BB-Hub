@@ -11,6 +11,7 @@ module.exports.renderPosts = async (req, res) => {
     return res.render('pages/posts', { 
         posts,
         year: req.user.gradYear,
+        admin: req.user.admin,
         id: req.user._id,
         picture: req.user.picture
      });
@@ -21,11 +22,7 @@ module.exports.uploadPosts = async (req, res) => {
         const image = req.file;
         const { title, message } = req.body; 
 
-        const grades = req.body.grades.split(',').map(grade => parseInt(grade));
-
-        if (!grades.includes(req.user.gradYear)) {
-            grades.push(req.user.gradYear);
-        }
+        const grades = [req.user.gradYear];
 
         await Posts.createNewPost(req.user._id, title, message, image, grades);
         const user = await Users.findById(req.user._id, 'name');
