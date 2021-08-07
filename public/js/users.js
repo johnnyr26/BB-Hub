@@ -191,3 +191,12 @@ document.querySelector('.shadow-background').addEventListener('click', e => {
     }
     document.querySelector('.shadow-background').classList.add('invisible');
 });
+document.querySelector('body').addEventListener('click', e => {
+    if (e.target === document.querySelector('.profile-menu-selection')) {
+        e.stopPropagation();
+        return;
+    }
+    if (!document.querySelector('.profile-menu-selection').classList.contains('invisible')) {
+        document.querySelector('.profile-menu-selection').classList.add('invisible');
+    }
+});
