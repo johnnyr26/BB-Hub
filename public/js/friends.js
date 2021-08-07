@@ -112,11 +112,14 @@ Object.values(document.querySelectorAll('.decline-friend-button')).forEach(butto
     });
 });
 document.querySelector('body').addEventListener('click', e => {
-    if (e.target === document.querySelector('.profile-menu-selection')) {
+    if (e.target === document.querySelector('.profile-menu-selection') || e.target === document.querySelector('#nav')) {
         e.stopPropagation();
         return;
     }
     if (!document.querySelector('.profile-menu-selection').classList.contains('invisible')) {
         document.querySelector('.profile-menu-selection').classList.add('invisible');
+    }
+    if (document.querySelector('#header').classList.contains('clicked')) {
+        document.querySelector('#header').classList.remove('clicked');
     }
 });

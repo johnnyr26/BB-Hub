@@ -32,7 +32,7 @@
     display: flex;
     justify-content: center;
 }
-.nav-link {
+.nav-link, .image-link {
     margin: 0 20px;
     text-decoration: none;
     opacity: 0.7;
@@ -42,7 +42,15 @@
 .nav-link:hover {
     opacity: 1;
 }
+.pre-link {
+    margin: 0 30px;
+}
+.pre-nav {
+    margin-right: 20px;
+}
 #nav #menu-icon div {
+    width: 35px;
+    height: 5px;
     background-color: #000000;
     margin: 6px 0;
 }
@@ -84,30 +92,37 @@ img {
 .menu-option:hover {
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);  
 }
-@media screen and (max-width: 1080px) {
-    .nav-link {
+@media screen and (max-width: 880px) {
+    .nav-link, .profile-image {
         display: none;
     }
     #nav #menu-icon {
         display: block;
     }
-    #header.clicked #menu-icon{
+    #header.clicked #menu-icon {
         position: absolute;
         right: 24px;
         top: 24px;
     }
     #header.clicked #nav {
+        width: 100%;
         float: none;
-        padding-top: 48px;
+        height: max-content;
+    }
+    #header.clicked .nav-links {
+        display: flex;
+        flex-direction: column;
     }
     #header.clicked .nav-link {
         text-align: center;
         display: block;
         text-align: center;
+        margin: 6px 0;
     }
-}
-@media screen and (max-width: 480px) {
-    #header {
-        font-size: 32px;
+    #header.clicked .nav-link.invisible {
+        display: block !important;
+    }
+    #header.clicked .profile-menu-selection {
+        display: none !important;
     }
 }

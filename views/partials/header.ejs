@@ -5,32 +5,25 @@
         </a>
     </div>
     <div id="nav">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/friends">Friends</a>
-        <a class="nav-link" href="/schedule">Schedule</a>
-        <a class="nav-link" href="/announcements">Announcements</a>
-        <a class="nav-link" href="/map">Map</a>
-        <img class="nav-link profile-image" alt="profile image" src="<%= picture %>"></img>
-        <div class="profile-menu-selection invisible">
-            <a class="menu-option" href="/users/<%= id %>">View Profile</a>
-            <a class="menu-option" href="/logout">Log Out</a>
+        <div class="nav-links">
+            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="/friends">Friends</a>
+            <a class="nav-link" href="/schedule">Schedule</a>
+            <a class="nav-link" href="/announcements">Announcements</a>
+            <a class="nav-link" href="/map">Map</a>
+            <a class="nav-link invisible" href="/users/<%= id %>">View Profile</a>
+            <a class="nav-link invisible" href="/logout">Log Out</a>
         </div>
         <div id="menu-icon">
             <div></div>
             <div></div>
             <div></div>
         </div>
+        <img class="image-link profile-image" alt="profile image" src="<%= picture %>"></img>
+        <div class="profile-menu-selection invisible">
+            <a class="menu-option" href="/users/<%= id %>">View Profile</a>
+            <a class="menu-option" href="/logout">Log Out</a>
+        </div>
     </div>
-    <script>
-        document.querySelector('.profile-image').addEventListener('click', () => {
-            document.querySelector('.profile-menu-selection').classList.remove('invisible');
-        });
-        document.querySelector('#header').addEventListener('click', e => {
-            if (e.target !== document.querySelector('#header')) {
-                e.stopPropagation();
-                return;
-            }
-            document.querySelector('.profile-menu-selection').classList.add('invisible');
-        });
-    </script>
+    <script src="/js/header.js"></script>
 </div>
