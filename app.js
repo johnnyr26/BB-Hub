@@ -15,6 +15,7 @@ const postsRouter = require('./routes/posts');
 const mapRouter = require('./routes/map');
 const friendsRouter = require('./routes/friends');
 const rosterRouter = require('./routes/roster');
+const aboutRouter = require('./routes/about');
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use('/announcements', postsRouter);
 app.use('/map', mapRouter);
 app.use('/friends', friendsRouter);
 app.use('/roster', rosterRouter);
+app.use('/about', aboutRouter);
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.mongoDBURL, {

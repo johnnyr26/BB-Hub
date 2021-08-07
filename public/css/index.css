@@ -161,7 +161,7 @@ h1 {
 .authorize-classroom-div {
     height: 50px;
 }
-#authorize-classroom {
+#authorize-classroom, .upload-schedule-a {
     display: block;
     color: white;
     background-color: #1472ff;

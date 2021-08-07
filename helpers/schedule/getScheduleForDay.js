@@ -6,10 +6,6 @@ module.exports = async userId => {
     const user = await Users.findById(userId);
     const day = new Date(2020, 8, 29);
     const letterDay = await getLetterDays(day);
-    
-    if (!user.schedule || !user.schedule.length) {
-        return;
-    }
 
     const schedule = formatSchedule(user.schedule);
     const order = schedule[letterDay.day[0]];
