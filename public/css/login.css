@@ -1,5 +1,6 @@
 .sign-in-div {
     display: flex;
+    justify-content: center;
     flex-direction: column;
     padding: 50px;
     width: 500px !important;
@@ -10,6 +11,7 @@
 }
 .page-body {
     font-size: 36px;
+    text-align: center;
 }
 main {
     display: flex;
@@ -17,7 +19,20 @@ main {
     flex-direction: row;
     justify-content: space-between;
 }
+img {
+    user-drag: none;
+    -webkit-user-drag: none;
+}
 .image1 {
     width: 900px;
     height: auto;
+}
+.logo-image {
+    width: 410px;
+    height: auto;
+}
+.g-signin2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

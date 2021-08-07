@@ -33,4 +33,3 @@ function signOut(error) {
         document.getElementById('error').innerHTML = error;
     });
 }
-window.onload = () => console.log('hi');
