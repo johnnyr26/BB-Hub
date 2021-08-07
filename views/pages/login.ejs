@@ -2,20 +2,22 @@
 <html lang="eng">
   <head>
     <link  href='/css/style.css' type="text/css" rel='stylesheet'/>
+    <link href="/css/header.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/login.css" type="text/css" rel="stylesheet"/>
     <meta name="google-signin-client_id" content="665999096135-8onhd9jfj6f6rj4qid16s9j6qnqumf55.apps.googleusercontent.com">
     <title>Log In - BB Hub</title>
   </head>
   <body>
-    <div class="main">
-      <h1 id="title">BB Hub</h1>
-      <div class="pop">
-        <div id="login-content">
-          <h1 id="sign-in">Sign In</h1>
-          <strong id="error"><%= locals.error %></strong>
-          <div class="g-signin2" data-theme="dark" data-width="auto" data-height="80" data-longtitle="true" data-onsuccess="onSignIn"></div>
-        </div>
+    <%- include('../partials/preheader'); -%>
+    <main>
+      <div class="sign-in-div">
+        <h1 class="page-label">BB Hub</h1>
+        <p class="page-body">The full Blind Brook experience in one site</p>
+        <strong id="error"><%= locals.error %></strong>
+        <div class="g-signin2" data-theme="dark" data-width="360" data-height="75" data-longtitle="true" data-onsuccess="onSignIn"></div>
       </div>
-    </div>
+      <img class="image1" src="/img/image1.svg" alt="My Happy SVG" />
+    </main>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="/js/login.js"></script>
   </body>

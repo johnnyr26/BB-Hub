@@ -1,0 +1,23 @@
+.sign-in-div {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    width: 500px !important;
+}
+.page-label {
+    font-size: 96px;
+    margin: 0;
+}
+.page-body {
+    font-size: 36px;
+}
+main {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.image1 {
+    width: 900px;
+    height: auto;
+}

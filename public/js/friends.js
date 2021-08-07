@@ -31,6 +31,7 @@ const addFriend = (button) => {
     .then(response => response.json())
     .then(response => {
         button.textContent = 'Cancel Request';
+        button.classList.remove('add-friend-button');
         button.classList.add('cancel-request-button');
         const newButton = button.cloneNode(true);
         button.parentNode.replaceChild(newButton, button);
