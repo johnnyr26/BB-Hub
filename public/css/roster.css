@@ -6,6 +6,7 @@ main {
 
 .roster-header {
     margin: 12px 0;
+    text-align: center;
 }
 .roster {
     display: flex;
