@@ -62,7 +62,6 @@ main {
     max-width: 375px;
     height: max-content;
     margin-left: 0;
-    overflow-y: scroll;
 }
 .schedule-section-body {
     display: flex;
@@ -393,4 +392,109 @@ select {
     font-variant: normal; 
     font-weight: 400;
     line-height: 20px;
+}
+@media screen and (max-width: 850px) {
+    .user-profile-div {
+        width: 375px;
+    }
+    .user-profile-header {
+        align-items: center;
+    }
+    .user-profile-header-info {
+        margin-left: 0;
+    }
+    .schedule-section {
+        min-width: 375px;
+        max-width: 375px;
+        margin-right: 0;
+    }
+    .user-profile-name {
+        font-size: 48px;
+    }
+    .user-profile-info {
+        font-size: 36px;
+    }
+    .user-profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .user-profile-image {
+        width: 200px;
+        height: 200px;
+    }
+    .user-profile-body {
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+    }
+    .column {
+        margin-top: 20px;
+        width: 375px;
+    }
+    .clubs-section, .sports-section, .posts-section {
+        width: 375px !important;
+        margin-right: 0;
+    }   
+    .announcements-image {
+        width: 250px;
+    }
+    .announcements-section {
+        width: 250px;
+    }
+}
+@media screen and (max-width: 520px) {
+    .user-profile-div {
+        width: 250px;
+    }
+    .user-profile-header {
+        align-items: center;
+    }
+    .user-profile-header-info {
+        margin-left: 0;
+    }
+    .schedule-section {
+        min-width: 250px;
+        max-width: 250px;
+    }
+    .user-profile-name {
+        font-size: 36px;
+    }
+    .user-profile-info {
+        font-size: 27px;
+    }
+    .user-profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .user-profile-image {
+        width: 125px;
+        height: 125px;
+    }
+    .user-profile-body {
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+    }
+    .column {
+        width: 250px;
+    }
+    .clubs-section, .sports-section, .posts-section {
+        width: 250px !important;
+    }   
+    .modal {
+        width: 250px;
+    }
+    .name {
+        width: 100% !important;
+    }
+    .edit-sports-body, .edit-clubs-body {
+        flex-direction: row;
+        height: 240px;
+    }
+    .announcements-image {
+        width: 250px;
+    }
+    .announcements-section {
+        width: 250px;
+    }
 }
