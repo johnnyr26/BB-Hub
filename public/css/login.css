@@ -1,9 +1,13 @@
 .sign-in-div {
     display: flex;
+    align-items: flex-start;
     justify-content: center;
     flex-direction: column;
     padding: 50px;
-    width: 500px !important;
+    padding: 0 15px;
+}
+.sign-up-body {
+
 }
 .page-label {
     font-size: 96px;
@@ -11,7 +15,6 @@
 }
 .page-body {
     font-size: 36px;
-    text-align: center;
 }
 main {
     display: flex;
@@ -24,15 +27,48 @@ img {
     -webkit-user-drag: none;
 }
 .image1 {
-    width: 900px;
+    margin-top: 24px;
+    width: 800px;
     height: auto;
 }
 .logo-image {
     width: 410px;
     height: auto;
 }
-.g-signin2 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@media screen and (max-width: 1300px) {
+    .logo-image {
+        width: 300px;
+    }
+    main {
+        flex-direction: column;
+    }
+}
+@media screen and (max-width: 800px) {
+    .image1 {
+        width: 600px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .logo-image {
+        width: 240px;
+    }
+    .image1 {
+        width: 450px;
+    }
+}
+@media screen and (max-width: 450px) {
+    .logo-image {
+        width: 180px;
+    }
+    .image1 {
+        width: 360px;
+    }
+}
+@media screen and (max-width: 450px) {
+    .logo-image {
+        width: 180px;
+    }
+    .image1 {
+        width: 300px;
+    }
 }
