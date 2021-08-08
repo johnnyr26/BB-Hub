@@ -3,7 +3,6 @@ main {
     flex-direction: column;
     align-items: center;
 }
-
 .roster-header {
     margin: 12px 0;
     text-align: center;
