@@ -181,7 +181,23 @@ input[type="text"] {
 .error-message {
     color: #ff0000;
 }
+.no-import {
+    color: #ff0000;
+    font-size: 18px;
+    text-align: center;
+    display: none;
+}
 @media screen and (max-width: 900px) {
+    button {
+        display: none;
+    }
+    .no-import {
+        display: block;
+    }
+    main {
+        padding-left: 0;
+        padding-right: 0;
+    }
     .schedule-table {
         min-width: 900px;
     }
