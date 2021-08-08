@@ -236,7 +236,6 @@ select {
 .edit-clubs-body, .edit-sports-body {
     border-radius: 10px;
     border: solid #d3d3d3 1px;
-    height: 320px;
     margin-bottom: 48px;
 }
 .select-club-div, .select-sport-div {

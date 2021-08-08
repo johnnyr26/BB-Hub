@@ -79,6 +79,7 @@ const declineFriend = (button) => {
     });
 }
 if (document.querySelector('.edit-profile')) {
+    document.querySelector('.error-message').textContent = '';
     Object.values(document.querySelectorAll('.edit-profile')).forEach(button => {
         button.addEventListener('click', () => {
             document.querySelector('.shadow-background').classList.remove('invisible');
@@ -93,6 +94,12 @@ document.querySelector('.x').addEventListener('click', () => {
 });
 document.querySelector('.submit-profile-info').addEventListener('click', () => {
     const name = document.querySelector('.name').value;
+
+    if (!document.querySelector('.grad-year-button.year-selected')) {
+        document.querySelector('.error-message').textContent = 'Please scroll up and select the year that you will graduate high school';
+        return;
+    }
+
     const graduationYear = parseInt(document.querySelector('.grad-year-button.year-selected').name);
     const clubs = Object.values(document.querySelectorAll('.select-club-div.div-selected')).map(div => div.name);
     const sports = Object.values(document.querySelectorAll('.select-sport-div.div-selected')).map(div => div.name);
@@ -190,7 +197,7 @@ document.querySelector('.shadow-background').addEventListener('click', e => {
         e.stopPropagation();
         return;
     }
-    document.querySelector('.shadow-background').classList.add('invisible');
+    // document.querySelector('.shadow-background').classList.add('invisible');
 });
 
 document.querySelector('body').addEventListener('click', e => {
