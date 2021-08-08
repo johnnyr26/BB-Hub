@@ -87,6 +87,7 @@ label {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        width: 500px;
     }
     svg {
         width: 500px;
@@ -95,5 +96,11 @@ label {
 @media screen and (max-width: 520px) {
     p, label {
         font-size: 18px;
+    }
+    #map1, #map2 { 
+        width: 300px;
+    }
+    svg {
+        width: 300px;
     }
 }
