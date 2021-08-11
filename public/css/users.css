@@ -394,8 +394,13 @@ select {
     line-height: 20px;
 }
 @media screen and (max-width: 850px) {
+    main {
+        box-sizing: border-box;
+        padding: inherit 15px;
+    }
     .user-profile-div {
-        width: 375px;
+        width: auto;
+        max-width: 100%;
     }
     .user-profile-header {
         align-items: center;
@@ -442,10 +447,7 @@ select {
         width: 250px;
     }
 }
-@media screen and (max-width: 520px) {
-    .user-profile-div {
-        width: 250px;
-    }
+@media screen and (max-width: 450px) {
     .user-profile-header {
         align-items: center;
     }
@@ -492,9 +494,13 @@ select {
         height: 240px;
     }
     .announcements-image {
-        width: 250px;
+        width: 200px;
     }
     .announcements-section {
-        width: 250px;
+        width: 200px;
+    }
+    .announcements-title-heading {
+        font-size: 22px;
+        word-break: break-all;
     }
 }
