@@ -65,7 +65,12 @@ const getSchoolDays = async date => {
 
 
 module.exports.getLetterDays = async date => {
-    const schoolDays = await getSchoolDays(date);
+    let nextAvailableDate = date;
+    let schoolDays = await getSchoolDays(nextAvailableDate); 
+    while (!await getSchoolDays(nextAvailableDate)) {
+        nextAvailableDate.setDate(nextAvailableDate.getDate() + 1);
+        schoolDays = await getSchoolDays(nextAvailableDate);
+    }
     const letterDays = schoolDays.day ? schoolDays : schoolDays.map(schoolDay => schoolDay.day);
     return letterDays;
 }

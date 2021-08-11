@@ -4,7 +4,7 @@ const formatSchedule = require('./formatSchedule');
 
 module.exports = async userId => {
     const user = await Users.findById(userId);
-    const day = new Date(2020, 8, 29);
+    const day = new Date(2020, 9, 1);
     const letterDay = await getLetterDays(day);
 
     const schedule = formatSchedule(user.schedule);
