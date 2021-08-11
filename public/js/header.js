@@ -5,10 +5,11 @@ document.querySelector('#menu-icon').addEventListener('click', () => {
         document.querySelector('#header').classList.add('clicked');
     }
 });
-
-document.querySelector('.profile-image').addEventListener('click', () => {
-    document.querySelector('.profile-menu-selection').classList.remove('invisible');
-});
+if (document.querySelector('.profile-image')) {
+    document.querySelector('.profile-image').addEventListener('click', () => {
+        document.querySelector('.profile-menu-selection').classList.remove('invisible');
+    });
+}
 document.querySelector('#header').addEventListener('click', e => {
     if (e.target !== document.querySelector('#header')) {
         e.stopPropagation();
