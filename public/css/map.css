@@ -94,6 +94,12 @@ label {
     }
 }
 @media screen and (max-width: 520px) {
+    .location-div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
     p, label {
         font-size: 18px;
     }
