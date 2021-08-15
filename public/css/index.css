@@ -260,6 +260,10 @@ h1 {
         max-width: 375px;
         margin: 0;
     }
+    #column2 {
+        min-width: 375px;
+        max-width: 375px;
+    }
     section {
         width: 375px;
     }
@@ -269,6 +273,10 @@ h1 {
         font-size: 16px;
     }
     .column {
+        min-width: 300px;
+        max-width: 300px;
+    }
+    #column2 {
         min-width: 300px;
         max-width: 300px;
     }
