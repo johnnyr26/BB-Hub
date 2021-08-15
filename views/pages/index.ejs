@@ -58,6 +58,25 @@
                   <h1 id="classroom-loading">Loading...</h1>
                 </div>
               </section>
+              <section id="classroom-section">
+                <div id="classroom-section-title" class="section-title">
+                    <h1 id="classroom-title">
+                      <%- include('../partials/sports_icon'); -%>
+                      Sports
+                    </h1>
+                </div>
+                <div class="grey-line"></div>
+                <div id="classroom-section-body" class="section-body">
+                  <% games.forEach(game => { %>
+                    <div class="detail-section">
+                      <h1 class="detail-title"><%= game.sport %> vs. <%= game.opponent %></h1>
+                      <p class="detail-body">Location: <%= game.location %></p>
+                      <p class="detail-body"><%= game.month %> <%= game.day %>, <%= game.year %></p>
+                      <p class="detail-body"><%= game.time %></p>
+                    </div>
+                  <% }); %>
+                </div>
+              </section>
             </div> 
             <div id="column3" class="column">
               <section id="lunch-section">
