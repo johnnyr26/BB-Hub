@@ -29,7 +29,6 @@ module.exports.renderIndex = async (req, res) => {
     const { lunch } = await getLunch();
     const posts = await Posts.find({});
     const games = await getSportGames();
-    console.log(games);
 
     if (req.query.assignments) {
         try {
