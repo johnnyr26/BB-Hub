@@ -20,7 +20,7 @@ main {
 }
 section {
     box-sizing: border-box;
-    background-color: #ffffff;
+    background-color: #242826;
     height: 410px;
     width: 430px;
     border-radius: 10px;
@@ -79,7 +79,7 @@ section {
 .grey-line {
     margin: 0 10px;
     height: 2px;
-    background-color: #e6e6e6;
+    background-color: #363c39;
 }
 h1, p {
     margin: 5px 0;
@@ -89,11 +89,11 @@ h1 {
 }
 .detail-section {
     display: block;
-    color: #000000;
+    color: #ffffff;
     text-decoration: none;
     box-sizing: border-box;
     padding: 10px;
-    background-color: #ffffff;
+    background-color: #363c39;
     width: 100%;
     /* border-bottom: solid #e6e6e6 1px; */
     border-radius: 10px;

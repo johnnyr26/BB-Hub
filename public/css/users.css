@@ -13,7 +13,7 @@ main {
 .user-profile-div {
     padding: 24px;
     padding-bottom: 0;
-    background-color: #ffffff;
+    background-color: #48504c;
     border-radius: 10px;
     width: 900px;
     margin-bottom: 24px;
@@ -90,7 +90,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    color: #000000;
+    color: #ffffff;
     text-decoration: none;
 }
 .detail-body {
@@ -122,7 +122,7 @@ main {
     height: auto;
 }
 .club-div, .sport-div {
-    color: #000000;
+    color: #ffffff;
     text-decoration: none;
     display: flex;
     flex-direction: column;
@@ -140,7 +140,7 @@ main {
     text-align: center;
     border-radius: 100%;
     margin-bottom: 12px;
-    background-color:#bbd6ff;
+    background-color:#afcbf6;
 }
 .club-name, .sport-name {
     margin: 0;
@@ -181,7 +181,7 @@ main {
     border-radius: 10px;
     height: auto;
     margin: 24px !important;
-    background-color: #ffffff;
+    background-color: #48504c;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
 .modal-header {
@@ -204,10 +204,10 @@ main {
     margin: 0;
 }
 .grad-year-button {
-    background-color: #d3d3d3;
+    background-color: #48504c;
     border: none;
     border-radius: 10px;
-    color: #000000;
+    color: #ffffff;
     font-size: 24px;
     padding: 8px;
     cursor: pointer;
@@ -234,16 +234,16 @@ select {
 }
 .edit-clubs-body, .edit-sports-body {
     border-radius: 10px;
-    border: solid #d3d3d3 1px;
+    border: solid #48504c 1px;
     margin-bottom: 48px;
 }
 .select-club-div, .select-sport-div {
-    background-color: white;
+    background-color: #48504c;
     border: none;
     cursor: pointer;
 }
 .select-club-div:hover, .select-sport-div:hover {
-    color: #000000;
+    color: #6d7470;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 3px 10px 0 rgba(0, 0, 0, 0.4);
 }
 .select-club-div:active, .select-sport-div:active {
@@ -274,7 +274,7 @@ select {
     margin-bottom: 6px;
 }
 .x:active {
-    color: #000000;
+    color: #ffffff;
 }
 .edit-profile {
     width: 100%;

@@ -17,7 +17,7 @@ main {
 }
 
 .schedule-table {
-    background-color: #ffffff;
+    background-color: #363c39;
     table-layout: fixed;
     width: 100%;
     margin: 0 auto;
@@ -106,7 +106,7 @@ main {
     border-radius: 10px;
     height: auto;
     margin: 24px !important;
-    background-color: #ffffff;
+    background-color: #363c39;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
 .modal-header {
@@ -129,7 +129,7 @@ textarea {
     outline: none;
     width: 445px;
     height: 200px;
-    border: solid #d3d3d3 1px;
+    border: solid #363c39 1px;
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -291,7 +291,7 @@ th:first-child {
         height: 100%;
         margin: 0;
         padding: 0;
-        background: white;
+        background: #363c39;
         top: 0;
         left: 0;
         border-radius: 0;
