@@ -39,7 +39,7 @@ app.use('/lunch', lunchRouter);
 app.use('/classroom', classroomRouter);
 app.use('/announcements', postsRouter);
 app.use('/map', mapRouter);
-app.use('/friends', friendsRouter);
+app.use('/friends', indexRouter);
 app.use('/roster', rosterRouter);
 app.use('/about', aboutRouter);
 
