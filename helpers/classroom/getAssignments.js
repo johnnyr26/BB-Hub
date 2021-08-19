@@ -154,9 +154,6 @@ const authorize = async (code, user, authToken) => {
                     "http://localhost:3000",
                     "http://localhost:3000/classroom",
                     "http://localhost:3000/?assignments=true",
-                    "https://bb-hub.herokuapp.com",
-                    "https://bb-hub.herokuapp.com/classroom",
-                    "https://bb-hub.herokuapp.com/?assignments=true",
                     "https://bb-hub.com",
                     "https://bb-hub.com/classroom",
                     "https://bb-hub.com/?assignments=true",
@@ -164,13 +161,13 @@ const authorize = async (code, user, authToken) => {
                     "https://www.bb-hub.com/classroom",
                     "https://www.bb-hub.com/?assignments=true"
                 ],
-                "javascript_origins":["http://localhost:3000","https://bb-hub.herokuapp.com", "https://bb-hub.com", "https://www.bb-hub.com"]
+                "javascript_origins":["http://localhost:3000", "https://bb-hub.com", "https://www.bb-hub.com"]
             }
         };
     
         const {client_secret, client_id, redirect_uris} = credentials.web;
         const oAuth2Client = new google.auth.OAuth2(
-            client_id, client_secret, redirect_uris[3]
+            client_id, client_secret, "https://www.bb-hub.com"
         );
 
         oAuth2Client.on('tokens', async tokens => {
