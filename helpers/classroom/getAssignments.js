@@ -21,7 +21,7 @@ const sortAssignments = assignments => {
         if (i < notCompletedAssignments.length) {
             assignments[i] = notCompletedAssignments[i];
         } else {
-            assignments[i] = completedAssignments[notCompletedAssignments.length - i]
+            assignments[i] = completedAssignments[i - notCompletedAssignments.length]
         }
     }
 }
