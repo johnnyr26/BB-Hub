@@ -167,7 +167,7 @@ const authorize = async (code, user, authToken) => {
     
         const {client_secret, client_id, redirect_uris} = credentials.web;
         const oAuth2Client = new google.auth.OAuth2(
-            client_id, client_secret, "https://www.bb-hub.com"
+            client_id, client_secret, process.env.redirect_uri
         );
 
         oAuth2Client.on('tokens', async tokens => {

@@ -102,7 +102,7 @@ const postAssignments = assignments => {
         if (state === 'CREATED' || state === 'NEW' || state === 'RECLAIMED_BY_STUDENT') {
             assignmentDiv = maxPoints ?  `
             <div class="detail-section animate-load">
-                <a class="classroom-link" href=${link}>
+                <a class="classroom-link" href=${link} target="_blank">
                     <h1 class="detail-title">${name}</h1>
                     <h1 class="detail-title">${title}</h1>
                     <p class="detail-body">Due ${month} ${day}, ${year} · ${time}</p>
@@ -111,7 +111,7 @@ const postAssignments = assignments => {
             </div>
         ` : `
             <div class="detail-section animate-load">
-                <a class="classroom-link" href=${link}>
+                <a class="classroom-link" href=${link} target="_blank">
                     <h1 class="detail-title">${name}</h1>
                     <h1 class="detail-title">${title}</h1>
                     <p class="detail-body">Due ${month} ${day}, ${year} · ${time}</p>
@@ -121,7 +121,7 @@ const postAssignments = assignments => {
         } else if (state === 'TURNED_IN') {
             assignmentDiv = maxPoints ?  `
             <div class="detail-section animate-load">
-                <a class="classroom-link" href=${link}>
+                <a class="classroom-link" href=${link} target="_blank">
                     <del>
                         <h1 class="detail-title">${name}</h1>
                         <h1 class="detail-title">${title}</h1>
