@@ -13,18 +13,6 @@ module.exports.renderIndex = async (req, res) => {
         return res.redirect(`/users/${req.user._id}?newuser=true`);
     }
 
-    const allUsers = await Users.find({});
-    const availableFriends = allUsers.filter(member => {
-        const notSelf = member.id !== user.id;
-        const notAlreadyFriends = !user.friends.includes(member.id);
-        const notFriendRequested = !user.friendRequests.includes(member.id);
-        const notRequestedFriends = !user.requestedFriends.includes(member.id);
-        return notSelf && notAlreadyFriends && notFriendRequested && notRequestedFriends;
-    }).map(userInfo => userInfo.name);
-
-    const friendRequests = await Promise.all(user.friendRequests.map(async id => (await Users.findById(id)).name));
-    const requestedFriends = await Promise.all(user.requestedFriends.map(async id => (await Users.findById(id)).name));
-
     const scheduleObject = await getScheduleForDay(req.user._id);
     const { lunch } = await getLunch();
     const posts = await Posts.find({});
@@ -42,10 +30,7 @@ module.exports.renderIndex = async (req, res) => {
     }
 
     return res.render('pages/index', { 
-        title: 'BB Hub', 
-        availableFriends, 
-        friendRequests,
-        requestedFriends,
+        title: 'BB Hub',
         scheduleObject,
         posts,
         lunch,
