@@ -15,7 +15,6 @@ module.exports.renderIndex = async (req, res) => {
 
     const scheduleObject = await getScheduleForDay(req.user._id);
     const { lunch } = await getLunch();
-    const posts = await Posts.find({});
     const games = await getSportGames();
 
     if (req.query.assignments) {
@@ -32,7 +31,6 @@ module.exports.renderIndex = async (req, res) => {
     return res.render('pages/index', { 
         title: 'BB Hub',
         scheduleObject,
-        posts,
         lunch,
         games,
         picture: req.user.picture, 
