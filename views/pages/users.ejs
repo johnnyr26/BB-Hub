@@ -105,22 +105,11 @@
                         <% } %>
                         <% if (selfUser) { %>
                             <button class="profile-button edit-profile">Edit Profile</button>
-                        <% } else if (!userFriends.includes(id) ) { %>
-                            <div class="accept-decline-row">
-                                <% if (userFriendRequests.includes(id)) { %>
-                                    <button class="profile-button cancel-request-button" name="<%= userId %>">Cancel Request</button>
-                                <% } else if (userRequestedFriends.includes(id)) { %>
-                                        <button class="profile-button accept-friend-button" name="<%= userId %>">Accept</button>
-                                        <button class="profile-button decline-friend-button" name="<%= userId %>">Decline</button>
-                                <% } else { %>
-                                    <button class="profile-button add-friend-button" name="<%= userId %>">Add Friend</button>
-                                <% } %>
-                            </div>
                         <% } %>
                     </div>
                 </div>
                 <div class="user-profile-body">
-                    <% if (selfUser || userFriends.includes(id)) { %> 
+                    <% if (selfUser) { %> 
                         <% if (!locals.userSchedule && !locals.userClubs && !locals.userSports) { %>
                             <h1>No Information available</h1>
                         <% } %>
@@ -151,7 +140,7 @@
                             </section>
                         <% } %>
                         <div class="column">
-                            <% if (locals.userClubs && ((!selfUser && userPrivacy.includes('Clubs')) || selfUser)) { %>
+                            <% if (selfUser) { %>
                                 <section class="clubs-section">
                                     <div>
                                         <h1 id="my-schedule">Clubs</h1>
@@ -169,7 +158,7 @@
                                     </div>
                                 </section>
                             <% } %>
-                            <% if (locals.userSports && ((!selfUser && userPrivacy.includes('Sports')) || selfUser)) { %>
+                            <% if (selfUser) { %>
                                 <section class="sports-section">
                                     <div>
                                         <h1 id="my-schedule">Sports</h1>
@@ -187,7 +176,7 @@
                                     </div>
                                 </section>
                             <% } %>
-                            <% if (locals.userPosts && ((!selfUser && userPrivacy.includes('Announcements')) || selfUser)) { %>
+                            <% if (selfUser) { %>
                                 <section class="posts-section">
                                     <div>
                                         <h1 id="my-schedule">Announcements</h1>
