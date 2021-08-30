@@ -176,39 +176,6 @@
                                     </div>
                                 </section>
                             <% } %>
-                            <% if (selfUser) { %>
-                                <section class="posts-section">
-                                    <div>
-                                        <h1 id="my-schedule">Announcements</h1>
-                                    </div>
-                                    <% if (!userPosts.length || userPosts.every(post => !post.grades.includes(userGradYear))) { %>
-                                        <p class="no-activities">No Announcements</p>
-                                    <% } %>
-                                    <% userPosts.forEach(post => { %>
-                                        <% if (!post.grades.includes(userGradYear)) { %>
-                                            <% return; %>
-                                        <% } %>
-                                        <section class="announcements-section">
-                                            <div class="announcements-section-title section-title">
-                                                <% if (post.img.data) { %>
-                                                    <% const b64 = Buffer.from(post.img.data.buffer).toString('base64') %>
-                                                    <img class="announcements-image" alt="Image" src="data:image/jpeg;base64, <%= b64 %>">
-                                                <% } %>
-                                            </div>
-                                            <div class="section-body announcements-section-body">
-                                                <% if (post.user) { %>
-                                                    <a href="/users/<%= post.user._id %>" class="user-info">
-                                                        <img alt="profile-image" src="<%= post.user.picture %>"/>
-                                                        <p class="announcements-body userlink"><%= post.user.name %></p>
-                                                    </a>
-                                                <% } %>
-                                                <h1 class="announcements-title-heading"><%= post.title %></h1>
-                                                <p class="announcements-body"><%= post.message %></p>
-                                            </div>
-                                        </section>
-                                    <% }); %>
-                                </section>
-                            <% } %>
                         </div>
                     <% } %>
                 </div>
