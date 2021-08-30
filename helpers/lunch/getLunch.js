@@ -40,23 +40,22 @@ module.exports = async () => {
     let year = unparsedDate.getFullYear();
     let weekday = getWeekDay(unparsedDate.getDay());
 
-    
     const schoolDays = await SchoolDays.find({});
     let schoolDayLunchOffering = schoolDays.find(schoolDay => schoolDay.day.substring(8) === `${weekday}, ${month} ${date}`);
+    while (!schoolDayLunchOffering) {
+        unparsedDate.setDate(unparsedDate.getDate() + 1);
+        date = unparsedDate.getDate();
+        month = getMonth(unparsedDate.getMonth());
+        year = unparsedDate.getFullYear();
+        weekday = getWeekDay(unparsedDate.getDay());
+        schoolDayLunchOffering = schoolDays.find(schoolDay => schoolDay.day.substring(8) === `${weekday}, ${month} ${date}`);
+    }
     if (schoolDayLunchOffering && schoolDayLunchOffering.lunch.length) {
         return schoolDayLunchOffering;
     }
     month = unparsedDate.getMonth() + 1;
 
-    let response = await axios.get(`https://api.getchoosi.com/KidsChooseApi/v1.0/menus?filter%5Bdate%5D=${month}-${date}-${year}&filter%5Bschool%5D=a0f85ce7-e126-497b-9633-ebf677ea68ae`);
-    while (!response.data.menu) {
-        unparsedDate.setDate(unparsedDate.getDate() + 1);
-        date = unparsedDate.getDate();
-        month = unparsedDate.getMonth() + 1;
-        year = unparsedDate.getFullYear();
-        weekday = getWeekDay(unparsedDate.getDay());
-        response = await axios.get(`https://api.getchoosi.com/KidsChooseApi/v1.0/menus?filter%5Bdate%5D=${month}-${date}-${year}&filter%5Bschool%5D=a0f85ce7-e126-497b-9633-ebf677ea68ae`);
-    }
+    const response = await axios.get(`https://api.getchoosi.com/KidsChooseApi/v1.0/menus?filter%5Bdate%5D=${month}-${date}-${year}&filter%5Bschool%5D=a0f85ce7-e126-497b-9633-ebf677ea68ae`);
     let meals = response.data.menu.grabNGoItems.map(item => {
         return { name: item.name, description: item.description };
     });
