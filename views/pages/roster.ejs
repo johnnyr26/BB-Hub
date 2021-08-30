@@ -18,7 +18,7 @@
             <% } %>
             <div class="roster">
                 <% roster.forEach(student => { %>
-                    <a href="/users/<%= student.id %>" class="student-section">
+                    <a class="student-section">
                         <div class="student-header">
                         <% if (student.picture) { %>
                             <img class="student-image" alt="Image" src=<%= student.picture %>>

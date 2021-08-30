@@ -116,16 +116,25 @@ document.querySelector('.show-colors-checkbox').addEventListener('change', () =>
 });
 
 document.querySelector('.import-class').addEventListener('click', () => {
+    if (document.querySelector('.error-message-import') && !document.querySelector('.error-message-import').classList.contains('invisible')) {
+        document.querySelector('.error-message-import').classList.add('invisible');
+    }
+    document.querySelector('textarea').value = '';
     document.querySelector('.shadow-background').classList.remove('invisible');
     document.querySelector('.modal.import-class-modal').classList.remove('invisible');
 });
 
 document.querySelector('.edit-class').addEventListener('click', () => {
+    console.log(document.querySelector('.edit-class-modal .modal-body form').childElementCount);
+    if (!document.querySelector('.edit-class-modal .modal-body form').childElementCount) {
+        return;
+    }  
     document.querySelector('.shadow-background').classList.remove('invisible');
     document.querySelector('.modal.edit-class-modal').classList.remove('invisible');
 });
 
 document.querySelector('.add-class').addEventListener('click', () => {
+    document.querySelector('.error-message').classList.remove('invisible');
     document.querySelector('.shadow-background').classList.remove('invisible');
     document.querySelector('.modal.add-class-modal').classList.remove('invisible');
 });
@@ -148,13 +157,18 @@ document.querySelector('.submit-schedule').addEventListener('click', () => {
     })
     .then(response => response.json())
     .then(response => {
-        location.reload();
+        if (response.error) {
+            document.querySelector('.error-message-import').classList.remove('invisible');
+            document.querySelector('.error-message-import').textContent = 'Unable to detect schedule. Please try again';
+        } else {
+            location.reload();
+        }
     });
 });
 
 document.querySelector('.add-class-button').addEventListener('click', () => {
     const letterDayRegex = /([A-H],?)*[A-H]$/;
-    const periodRegex = /([1-9])$/;
+    const periodRegex = /([1-8])$/;
 
     document.querySelector('.error-message').classList.add('invisible');
 
@@ -237,8 +251,8 @@ Object.values(document.querySelectorAll('.remove')).forEach(removeButton => {
         })
         .then(response => response.json())
         .then(response => {
-            
             removeButton.parentElement.remove();
+            location.reload();
         });
     });
 });

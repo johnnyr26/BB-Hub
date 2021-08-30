@@ -178,8 +178,9 @@ input[type="text"] {
     margin: 5px 0;
     outline: none;
 }
-.error-message {
+.error-message, .error-message-import {
     color: #ff0000;
+    font-size: 24px;
 }
 .no-import {
     color: #ff0000;

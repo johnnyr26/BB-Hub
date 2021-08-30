@@ -21,6 +21,7 @@
                         <textarea placeholder="Paste Schedule"></textarea>
                         <video playsinline="" autoplay="" loop="" src="/video/tutorialow.mp4" class="import-tutorial"></video>
                     </div>
+                    <p class="error-message-import invisble"></p>
                     <button class="submit-schedule">Submit</button>
                 </div>
             </div>
@@ -30,6 +31,9 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                        <% if (!userSchedule || userSchedule.every(course => course.courseTitle.substring(0, 4) === 'FREE')) { %>
+                            <h2>You have no classes to edit</h2>
+                        <% } %>
                         <% userSchedule.forEach(course => { %>
                             <% if (course.courseTitle.substring(0, 4) !== 'FREE') { %>
                                 <div class="detail-section">

@@ -88,22 +88,6 @@
                                 <% }); %>
                             </div>
                         </div>
-                        <div class="privacy-div">
-                            <p class="privacy-label">Visible To Friends</p>
-                            <div class="privacy-col">
-                                <% privacy.forEach(privacy => { %>
-                                    <div class="privacy-option">
-                                        <% if (userPrivacy.includes(privacy)) { %>
-                                            <button class="privacy-button privacy-selected" name="<%= privacy %>"></button>
-                                            <p class="privacy-label-option"><%= privacy %></p>
-                                        <% } else { %>
-                                            <button class="privacy-button" name="<%= privacy %>"></button>
-                                            <p class="privacy-label-option"><%= privacy %></p>
-                                        <% } %>
-                                    </div>
-                                <% }); %>
-                            </div>
-                        </div>
                         <p class="error-message"></p>
                         <button class="profile-button submit-profile-info">Save</button>
                     </div>

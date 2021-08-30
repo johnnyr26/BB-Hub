@@ -132,7 +132,7 @@ module.exports.editProfile = async (req, res) => {
         const { name, gradYear, clubs, sports, privacy } = req.body;
 
         if (allUsers.find(friendUser => friendUser.name === name && friendUser.name !== user.name)) {
-            throw new Error(`The selected name can't be used`);
+            return res.send({ error: `Someone already has the same name. Please enter a different name.` });
         }
 
         user.name = name ? name : user.name;

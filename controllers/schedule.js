@@ -7,6 +7,7 @@ const filterInput = require('../helpers/schedule/filterInput');
 const getLetterDays = require('../helpers/schedule/getSchoolDays').getLetterDays;
 const getSharedCourses = require('../helpers/schedule/findSharedCourses');
 const findFreePeriods = require('../helpers/schedule/findFreePeriods');
+const detectSchedule = require('../helpers/schedule/detectSchedule');
 
 const presetColors = [
     "#ff6347",
@@ -59,6 +60,7 @@ module.exports.uploadSchedule = async (req, res) => {
         const courseId = req.body.removeCourse;
         const course = user.schedule.find(userCourse => userCourse._id.toString() === courseId);
         user.schedule = user.schedule.filter(userCourse => userCourse._id.toString() !== course._id.toString());
+        user.schedule = user.schedule.filter(userCourse => userCourse.courseTitle.substring(0,4) !== 'FREE');
         findFreePeriods(user.schedule);
         await user.save();
         return res.send({ success: true });
@@ -80,6 +82,15 @@ module.exports.uploadSchedule = async (req, res) => {
     
    
     const { schedule: uncleanedSchedule } = req.body;
+
+    try {
+        detectSchedule(uncleanedSchedule);
+    } catch (e) {
+        return res.send({ error: e.message });
+    }
+
+
+    console.log('damn');
     const schedule = uncleanedSchedule.split('\n').filter(str => str);
     
     const scheduleObject = schedule.map(courseStringInfo => {

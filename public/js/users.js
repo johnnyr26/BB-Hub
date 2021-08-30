@@ -120,21 +120,11 @@ document.querySelector('.submit-profile-info').addEventListener('click', () => {
     })
     .then(response => response.json())
     .then(response => {
-        if (window.location.href.includes('newuser')) {
-            document.querySelector('.new-user-modal').classList.remove('invisible');
-            document.querySelector('.edit-profile-modal').classList.add('invisible');
-
-            document.querySelector('.new-user-modal-header').innerHTML = `
-                <h1>Nice Job</h1>
-                <h1>Let's add your schedule</h1>
-            `;
-            document.querySelector('.new-user-modal-body').innerHTML = `
-                <a href="/schedule" class="profile-button edit-profile">Add Schedule</a>
-            `;
+        if (response.error) {
+            document.querySelector('.error-message').textContent = response.error;
+        } else if (window.location.href.includes('newuser')) {
+            location.href = '/';
         } else {
-            if (response.error) {
-                throw new Error(response.error);
-            }
             location.reload();
         }
     }).catch(e => {
