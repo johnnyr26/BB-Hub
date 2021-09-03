@@ -36,7 +36,7 @@ const getMonth = (month) => {
 module.exports = async userId => {
     const user = await Users.findById(userId);
    
-    let unparsedDate = new Date();
+    let unparsedDate = new Date(2021, 8, 11);
     let date = unparsedDate.getDate();
     let month = getMonth(unparsedDate.getMonth());
     let weekday = getWeekDay(unparsedDate.getDay());

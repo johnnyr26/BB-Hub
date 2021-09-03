@@ -16,7 +16,7 @@ module.exports = scheduleObject => {
             addedCourses.push(schedule);
         }
         const missingInput = !Object.values(schedule).every(value => {
-            if (value.courseTitle === 'FREE') {
+            if (value && value.courseTitle === 'FREE') {
                 return true;
             }
             if (typeof(value) === 'string') {
