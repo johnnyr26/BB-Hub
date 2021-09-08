@@ -49,7 +49,7 @@ const getSchoolDays = async date => {
     const { startYear, endYear } = getDates();
     const tokenResponse = await axios.get('https://www.blindbrook.org/Generator/TokenGenerator.ashx/ProcessRequest');
     const response = await axios.get(
-        `https://awsapieast1-prod2.schoolwires.com/REST/api/v4/CalendarEvents/GetEvents/1009?StartDate=${startYear - 1}-09-01&EndDate=${endYear - 1}-06-30&ModuleInstanceFilter=&CategoryFilter=&IsDBStreamAndShowAll=true`,
+        `https://awsapieast1-prod2.schoolwires.com/REST/api/v4/CalendarEvents/GetEvents/1009?StartDate=${startYear}-09-01&EndDate=${endYear}-06-30&ModuleInstanceFilter=&CategoryFilter=&IsDBStreamAndShowAll=true`,
         {
             headers: { Authorization: `Bearer ${tokenResponse.data.Token}` } 
         }       
@@ -65,6 +65,7 @@ const getSchoolDays = async date => {
 
 
 module.exports.getLetterDays = async date => {
+    console.log('hi');
     let nextAvailableDate = date;
     let schoolDays = await getSchoolDays(nextAvailableDate); 
     while (!await getSchoolDays(nextAvailableDate)) {

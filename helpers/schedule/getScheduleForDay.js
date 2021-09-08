@@ -1,7 +1,10 @@
+const axios = require('axios');
+
 const Users = require('../../models/Users');
 const SchoolDays = require('../../models/SchoolDays');
 const getLetterDays = require('./getSchoolDays').getLetterDays;
 const formatSchedule = require('./formatSchedule');
+const getDates = require('./getDates');
 
 const getWeekDay = (day) => {
     switch(day) {
@@ -41,7 +44,24 @@ module.exports = async userId => {
     let month = getMonth(unparsedDate.getMonth());
     let weekday = getWeekDay(unparsedDate.getDay());
 
-    const schoolDays = await SchoolDays.find({});
+    let schoolDays = await SchoolDays.find({});
+    console.log('hi', schoolDays);
+    if (!schoolDays.length) {
+        const { startYear, endYear } = getDates();
+        const tokenResponse = await axios.get('https://www.blindbrook.org/Generator/TokenGenerator.ashx/ProcessRequest');
+        const response = await axios.get(
+            `https://awsapieast1-prod2.schoolwires.com/REST/api/v4/CalendarEvents/GetEvents/1009?StartDate=${startYear}-09-01&EndDate=${endYear}-06-30&ModuleInstanceFilter=&CategoryFilter=&IsDBStreamAndShowAll=true`,
+            {
+                headers: { Authorization: `Bearer ${tokenResponse.data.Token}` } 
+            }       
+        );
+        letterDays = response.data.map(day => day.Title);
+        for (const day of letterDays) {
+            const newSchoolDay = new SchoolDays({ day });
+            await newSchoolDay.save();
+        }
+        schoolDays = await SchoolDays.find({});
+    }
     let schoolDay = schoolDays.find(schoolDay => schoolDay.day.substring(8) === `${weekday}, ${month} ${date}`);
     while (!schoolDay) {
         unparsedDate.setDate(unparsedDate.getDate() + 1);
