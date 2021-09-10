@@ -65,7 +65,6 @@ const getSchoolDays = async date => {
 
 
 module.exports.getLetterDays = async date => {
-    console.log('hi');
     let nextAvailableDate = date;
     let schoolDays = await getSchoolDays(nextAvailableDate); 
     while (!await getSchoolDays(nextAvailableDate)) {

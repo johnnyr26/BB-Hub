@@ -45,7 +45,6 @@ module.exports = async userId => {
     let weekday = getWeekDay(unparsedDate.getDay());
 
     let schoolDays = await SchoolDays.find({});
-    console.log('hi', schoolDays);
     if (!schoolDays.length) {
         const { startYear, endYear } = getDates();
         const tokenResponse = await axios.get('https://www.blindbrook.org/Generator/TokenGenerator.ashx/ProcessRequest');

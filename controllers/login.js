@@ -24,7 +24,7 @@ module.exports.authenticate = async (req, res) => {
       const { name, email, picture } = await verify(req.body.id_token);
       const { user, newUser } = await User.findByCredentials(name, email, picture.replace('s96-c', 's240-c'));
       const token = await user.generateAuthToken();
-      res.cookie('token', `Bearer ${token}`, { httpOnly: true, sameSite: true });
+      res.cookie('token', `Bearer ${token}`, { httpOnly: true, sameSite: true, expires: new Date(new Date().getTime() + (1000*60*60*24*365*10)) });
       return res.json({ token: `Bearer ${token}`, newUser });
     } catch (error) {
       console.log(error);
