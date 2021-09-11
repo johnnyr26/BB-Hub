@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const httpsRedirect = require('express-https-redirect');
 
 const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
@@ -12,8 +13,8 @@ const scheduleRouter = require('./routes/schedule');
 const lunchRouter = require('./routes/lunch');
 const classroomRouter = require('./routes/classroom');
 const postsRouter = require('./routes/posts');
-// const mapRouter = require('./routes/map');
-// const friendsRouter = require('./routes/friends');
+const mapRouter = require('./routes/map');
+const friendsRouter = require('./routes/friends');
 const rosterRouter = require('./routes/roster');
 const aboutRouter = require('./routes/about');
 
@@ -28,6 +29,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('*', (req, res, next) => {
+  cosole.log(req.app.get('env'));
+  next();
+  // if (req.app.get('env') === 'development') {
+  //  return next();
+  // }
+  // return req.secure ? next() : res.redirect('https://wwww.' + req.headers.host + req.url);
+});
 
 app.use('/', indexRouter);
 app.use('/home', indexRouter);
