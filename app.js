@@ -29,13 +29,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('*', (req, res, next) => {
-  console.log(req.app.get('env'));
-  next();
-  // if (req.app.get('env') === 'development') {
-  //  return next();
-  // }
-  // return req.secure ? next() : res.redirect('https://wwww.' + req.headers.host + req.url);
+app.enable('trust proxy')
+app.use((req, res, next) => {
+  console.log(req.secure);
+  if (req.app.get('env') === 'development' || req.secure) {
+   return next();
+  }
+  let host = req.headers.host.includes('www') ? req.headers.host : 'www' + req.headers.host;
+  return res.redirect('https://' + host + req.url);
 });
 
 app.use('/', indexRouter);
