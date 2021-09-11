@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const httpsRedirect = require('express-https-redirect');
 
 const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
@@ -31,7 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('*', (req, res, next) => {
-  cosole.log(req.app.get('env'));
+  console.log(req.app.get('env'));
   next();
   // if (req.app.get('env') === 'development') {
   //  return next();
