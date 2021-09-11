@@ -12,8 +12,8 @@ const scheduleRouter = require('./routes/schedule');
 const lunchRouter = require('./routes/lunch');
 const classroomRouter = require('./routes/classroom');
 const postsRouter = require('./routes/posts');
-const mapRouter = require('./routes/map');
-const friendsRouter = require('./routes/friends');
+// const mapRouter = require('./routes/map');
+// const friendsRouter = require('./routes/friends');
 const rosterRouter = require('./routes/roster');
 const aboutRouter = require('./routes/about');
 
