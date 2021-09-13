@@ -31,7 +31,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.enable('trust proxy')
 app.use((req, res, next) => {
-  console.log(req.secure);
   if (req.app.get('env') === 'development' || req.secure) {
    return next();
   }

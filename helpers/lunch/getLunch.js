@@ -50,25 +50,40 @@ module.exports = async () => {
         weekday = getWeekDay(unparsedDate.getDay());
         schoolDayLunchOffering = schoolDays.find(schoolDay => schoolDay.day.substring(8) === `${weekday}, ${month} ${date}`);
     }
-    if (schoolDayLunchOffering && schoolDayLunchOffering.lunch.length) {
-        return schoolDayLunchOffering;
-    }
-    month = unparsedDate.getMonth() + 1;
+    const response = await axios.get(`https://apiservicelocators.fdmealplanner.com/api/v1/data-locator-webapi/3/meals?menuId=0&accountId=35&locationId=119&mealPeriodId=2&monthId=${unparsedDate.getMonth() + 1}&timeOffset=300&_=1631241244273`);
 
-    const response = await axios.get(`https://api.getchoosi.com/KidsChooseApi/v1.0/menus?filter%5Bdate%5D=${month}-${date}-${year}&filter%5Bschool%5D=a0f85ce7-e126-497b-9633-ebf677ea68ae`);
-    let meals = response.data.menu.grabNGoItems.map(item => {
-        return { name: item.name, description: item.description };
+    const mealData = response.data.result.find(data => {
+        const date = data.strMenuForDate.split('-');
+        return parseInt(date[0]) === year && parseInt(date[1]) === unparsedDate.getMonth() + 1 && parseInt(date[2]) === unparsedDate.getDate(); 
     });
 
-    const hotMeals = meals.filter(meal => meal.name.substring(0, 3) === 'Hot');
-    meals = meals.filter(meal => meal.name.substring(0, 3) !== 'Hot');
-    meals.unshift(...hotMeals);
+    console.log(mealData);
+
+    let lunchForDay = {};
+
+    if (mealData.menuRecipiesData) {
+        const foods = [];
+        mealData.menuRecipiesData.forEach(meal => {
+            console.log(meal.isShowOnMenu);
+            const lunchIsServed = meal.isShowOnMenu === 1 || foods.length > 0;
+            if (lunchIsServed) {
+                foods.push({
+                    "name": meal.componentEnglishName,
+                    "description": meal.componentEnglishDescription
+                });
+            }
+        });
+        if (foods.length > 0) {
+            lunchForDay = foods;
+        }
+    }
+
     if (!schoolDayLunchOffering) {
         month = getMonth(unparsedDate.getMonth());
         schoolDayLunchOffering = schoolDays.find(schoolDay => schoolDay.day.substring(8) === `${weekday}, ${month} ${date}`);
     }
 
-    schoolDayLunchOffering.lunch = meals;
+    schoolDayLunchOffering.lunch = lunchForDay;
     await schoolDayLunchOffering.save();
     return schoolDayLunchOffering;
 };
