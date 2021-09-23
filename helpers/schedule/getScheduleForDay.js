@@ -40,6 +40,8 @@ module.exports = async userId => {
     const user = await Users.findById(userId);
    
     let unparsedDate = new Date();
+    unparsedDate.setHours(unparsedDate.getHours() + 4);
+    
     let date = unparsedDate.getDate();
     let month = getMonth(unparsedDate.getMonth());
     let weekday = getWeekDay(unparsedDate.getDay());

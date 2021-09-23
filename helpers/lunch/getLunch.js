@@ -35,6 +35,8 @@ const getMonth = (month) => {
 module.exports = async () => {
 
     let unparsedDate = new Date();
+    unparsedDate.setHours(unparsedDate.getHours() + 4);
+
     let date = unparsedDate.getDate();
     let month = getMonth(unparsedDate.getMonth());
     let year = unparsedDate.getFullYear();
@@ -56,9 +58,6 @@ module.exports = async () => {
         const date = data.strMenuForDate.split('-');
         return parseInt(date[0]) === year && parseInt(date[1]) === unparsedDate.getMonth() + 1 && parseInt(date[2]) === unparsedDate.getDate(); 
     });
-
-    console.log(mealData);
-
     let lunchForDay = {};
 
     if (mealData.menuRecipiesData) {
