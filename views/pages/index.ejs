@@ -46,6 +46,17 @@
           </div>         
           <div class="semi-column-div">  
             <div id="column2" class="column">
+              <section id="lunch-section">
+                <div id="lunch-section-title" class="section-title">
+                    <h1 id="lunch-title">
+                      Clubs
+                    </h1>
+                </div>
+                <div class="grey-line"></div>
+                <div id="lunch-section-body" class="section-body">
+                  <h1 class="club-loading">Congress will be hosting this year's club fair on Thursday, 9/30 at lunch. Each club will have a table outside at the front of the school. More information to come!</h1>
+                </div>
+              </section>
               <section id="classroom-section">
                 <div id="classroom-section-title" class="section-title">
                     <h1 id="classroom-title">
@@ -56,25 +67,6 @@
                 <div class="grey-line"></div>
                 <div id="classroom-section-body" class="section-body">
                   <h1 id="classroom-loading">Loading...</h1>
-                </div>
-              </section>
-              <section id="classroom-section">
-                <div id="classroom-section-title" class="section-title">
-                    <h1 id="classroom-title">
-                      <%- include('../partials/sports_icon'); -%>
-                      Sports
-                    </h1>
-                </div>
-                <div class="grey-line"></div>
-                <div id="classroom-section-body" class="section-body">
-                  <% games.forEach(game => { %>
-                    <div class="detail-section">
-                      <h1 class="detail-title"><%= game.sport %> vs. <%= game.opponent %></h1>
-                      <p class="detail-body">Location: <%= game.location %></p>
-                      <p class="detail-body"><%= game.month %> <%= game.day %>, <%= game.year %></p>
-                      <p class="detail-body"><%= game.time %></p>
-                    </div>
-                  <% }); %>
                 </div>
               </section>
             </div> 
@@ -96,15 +88,23 @@
                   <% }); %>
                 </div>
               </section>
-              <section id="lunch-section">
-                <div id="lunch-section-title" class="section-title">
-                    <h1 id="lunch-title">
-                      Clubs
+              <section id="classroom-section">
+                <div id="classroom-section-title" class="section-title">
+                    <h1 id="classroom-title">
+                      <%- include('../partials/sports_icon'); -%>
+                      Sports
                     </h1>
                 </div>
                 <div class="grey-line"></div>
-                <div id="lunch-section-body" class="section-body">
-                  <h1 class="club-loading">Club information will be posted soon</h1>
+                <div id="classroom-section-body" class="section-body">
+                  <% games.forEach(game => { %>
+                    <div class="detail-section">
+                      <h1 class="detail-title"><%= game.sport %> vs. <%= game.opponent %></h1>
+                      <p class="detail-body">Location: <%= game.location %></p>
+                      <p class="detail-body"><%= game.month %> <%= game.day %>, <%= game.year %></p>
+                      <p class="detail-body"><%= game.time %></p>
+                    </div>
+                  <% }); %>
                 </div>
               </section>
             </div>
