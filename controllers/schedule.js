@@ -90,7 +90,6 @@ module.exports.uploadSchedule = async (req, res) => {
     }
 
 
-    console.log('damn');
     const schedule = uncleanedSchedule.split('\n').filter(str => str);
     
     const scheduleObject = schedule.map(courseStringInfo => {

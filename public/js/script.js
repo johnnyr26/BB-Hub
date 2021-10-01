@@ -155,7 +155,9 @@ const postAssignments = assignments => {
 
 const getDateInfo = (date) => {
     let dueDate = date;
-    const month = getMonth(parseInt(dueDate[0]) - 1);
+
+    const month = getMonth(parseInt(dueDate.substring(0, dueDate.indexOf('/'))) - 1);
+
     const secondsIndex = dueDate.lastIndexOf(':');
     dueDate = dueDate.slice(0, secondsIndex) + dueDate.slice(secondsIndex + 3);
 

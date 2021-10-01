@@ -63,7 +63,6 @@ module.exports = async () => {
     if (mealData.menuRecipiesData) {
         const foods = [];
         mealData.menuRecipiesData.forEach(meal => {
-            console.log(meal.isShowOnMenu);
             const lunchIsServed = meal.isShowOnMenu === 1 || foods.length > 0;
             if (lunchIsServed) {
                 foods.push({
