@@ -68,14 +68,15 @@ module.exports = async id => {
             const hourEnd = parseInt(course.time.to.substring(0, course.time.to.indexOf(':')));
             const minuteEnd = parseInt(course.time.to.substring(course.time.to.indexOf(':') + 1));
 
-            const courseTimeStart = new Date(year, monthIndex, day, hourStart < 5 ? hourStart + 16 : hourStart + 4, minuteStart);
-            const courseTimeEnd = new Date(year, monthIndex, day, hourEnd < 5 ? hourEnd + 16 : hourEnd + 4, minuteEnd);
+            const courseTimeStart = new Date(year, monthIndex, day, hourStart < 5 ? hourStart + 12 : hourStart, minuteStart);
+            const courseTimeEnd = new Date(year, monthIndex, day, hourEnd < 5 ? hourEnd + 12 : hourEnd, minuteEnd);
 
             const title = course.course.courseTitle.substring(0, 5) === 'Lunch' ? 'Lunch' : `${course.course.courseTitle} (Period ${course.course.period})`
 
             calendar.createEvent({
                 start: courseTimeStart,
                 end: courseTimeEnd,
+                timezone: 'America/New York',
                 summary: title,
                 description: '',
                 location: course.course.classRoom
