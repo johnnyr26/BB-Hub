@@ -22,10 +22,10 @@ async function verify(token) {
 module.exports.authenticate = async (req, res) => {
     try {
       const { name, email, picture } = await verify(req.body.id_token);
-      const { user, newUser } = await User.findByCredentials(name, email, picture.replace('s96-c', 's240-c'));
+      const { user } = await User.findByCredentials(name, email, picture.replace('s96-c', 's240-c'));
       const token = await user.generateAuthToken();
       res.cookie('token', `Bearer ${token}`, { httpOnly: true, sameSite: true, expires: new Date(new Date().getTime() + (1000*60*60*24*365*10)) });
-      return res.json({ token: `Bearer ${token}`, newUser });
+      return res.json({ token: `Bearer ${token}` });
     } catch (error) {
       console.log(error);
       return res.send({ error: 'Only Blind Brook emails are allowed to sign into this platform.' });

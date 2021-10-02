@@ -57,10 +57,6 @@ module.exports.renderUser = async (req, res) => {
             picture: req.user.picture,
             id: req.user._id
         };
-
-        if (req.query.newuser) {
-            responseInfo['newUser'] = true;
-        }
         
         res.render('pages/users', responseInfo);
     }

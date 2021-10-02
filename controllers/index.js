@@ -9,9 +9,6 @@ const getSportGames = require('../helpers/sports/getSportGames');
 module.exports.renderIndex = async (req, res) => {
     const user = await Users.findById(req.user._id);
     
-    if (req.query.newuser) {
-        return res.redirect(`/users/${req.user._id}?newuser=true`);
-    }
 
     const scheduleObject = await getScheduleForDay(req.user._id);
     const { lunch } = await getLunch();

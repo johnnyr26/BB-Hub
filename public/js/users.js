@@ -122,8 +122,6 @@ document.querySelector('.submit-profile-info').addEventListener('click', () => {
     .then(response => {
         if (response.error) {
             document.querySelector('.error-message').textContent = response.error;
-        } else if (window.location.href.includes('newuser')) {
-            location.href = '/';
         } else {
             location.reload();
         }

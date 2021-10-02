@@ -17,9 +17,6 @@ function onSignIn(googleUser) {
         if (response.error) {
             throw response.error;
         }
-        if (response.newUser){
-            return location.href = '/?newuser=true';
-        }
         location.href = '/';
     })
     .catch((error) => {
