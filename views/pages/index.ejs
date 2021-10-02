@@ -11,9 +11,8 @@
     <body>
         <%- include('../partials/header'); -%>
         <main>
-        <div class="columns-div">
-          <% const appropriateSchedule = scheduleObject && scheduleObject.schedule.every(course => course.course) %>
-          <div id="column1" class="column">
+          <div class="columns-div">
+            <% const appropriateSchedule = scheduleObject && scheduleObject.schedule.every(course => course.course) %>
             <section class="schedule-section">
               <div id="schedule-section-title" class="section-title">
                 <h1 id="letter-day-title">
@@ -43,84 +42,81 @@
                 <% } %>
               </div>
             </section>
-          </div>         
-          <div class="semi-column-div">  
-            <div id="column2" class="column">
-              <section id="classroom-section">
-                <div id="classroom-section-title" class="section-title">
-                    <h1 id="classroom-title">
-                      <img id="classroom-image-icon" data-v-115389dc="" src="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZpZXdCb3g9IjAgMCAxNzIgMTcyIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9Im5vbnplcm8iIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWNhcD0iYnV0dCIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2UtZGFzaGFycmF5PSIiIHN0cm9rZS1kYXNob2Zmc2V0PSIwIiBmb250LWZhbWlseT0ibm9uZSIgZm9udC13ZWlnaHQ9Im5vbmUiIGZvbnQtc2l6ZT0ibm9uZSIgdGV4dC1hbmNob3I9Im5vbmUiIHN0eWxlPSJtaXgtYmxlbmQtbW9kZTogbm9ybWFsIj48cGF0aCBkPSJNMCwxNzJ2LTE3MmgxNzJ2MTcyeiIgZmlsbD0ibm9uZSI+PC9wYXRoPjxnIGZpbGw9IiMxNDcyZmYiPjxwYXRoIGQ9Ik0xMzQuOTcyOTcsMTcuMjA2NzJjLTI5LjY0ODkxLDAuMzc2MzggLTQzLjM3NTcxLDkuMDQzNzEgLTQ4LjY4NDA2LDEzLjcyNjQxYy01Ljc5OTg0LC00Ljk0NjcyIC0yMS40MjIzMywtMTQuNDc4NDIgLTU1LjQwOTUzLC0xMy42MzkwNmMtMS44NjQ0OCwwLjA0NDcyIC0zLjM1OTM3LDEuNTcyMDggLTMuMzU5MzcsMy40NHYxNy40NzU0N2gtNC44OTc5N2MtNC44ODgyNCwwIC04Ljg2NTQyLDMuODcyNzkgLTguNzIwOTQsOC42MjY4N3Y4NS41ODM0NGMtMC4xNDQ0OCw0Ljc1NDA4IDQuMDAwNjcsOC40NTIxOSA4Ljg4ODkxLDguNDUyMTloOTYuNTg4NzVsLTYuODU5ODUsLTYuNTcwOTRoLTg5LjcwMjAzYy0xLjA5MDQ4LDAgLTIuMTczNDksLTAuOTI0OTMgLTIuMzE3OTcsLTEuODgxMjV2LTg1LjU4MzQ0YzAuMTQ0NDgsLTAuOTU2MzIgMS4wMzI2NCwtMi4xMTY0IDIuMTIzMTIsLTIuMTE2NGg0Ljg5Nzk3djY5Ljg1NDg1YzAsMC45Mjg4IDAuMzcwNzcsMS44MDg5IDEuMDM0NjksMi40NTkwNmMwLjY2MDQ4LDAuNjQ2NzIgMS41MDg5OCwwLjk2MDMgMi40ODU5NCwwLjk4MDk0YzQwLjQ3ODQ4LC0wLjk0OTQ0IDUyLjgwNjIsOC40MjAxNSA1My4wODQ4NCw4LjY0MDMxYzAuNjMyOTYsMC41Mjk3NiAxLjQxOTExLDAuODA2MjUgMi4yMTcxOSwwLjgwNjI1YzAuNDg1MDQsMCAwLjk3MzU4LC0wLjEwMjUgMS40MzExLC0wLjMxNTc4YzAuNDk1MzYsLTAuMjIzNiAwLjkxOTQ1LC0wLjU1ODE0IDEuMjQ5NjksLTAuOTY3NWMxLjA1OTUyLC0wLjcwMTc2IDQuMzQyMzYsLTIuNTcyNDggMTAuOTkxODgsLTQuMzI2ODhsLTUuNTc2NTYsLTUuNTc2NTZjLTEuODIzMiwwLjU5MTY4IC0zLjg1MzEyLDEuMTg2MTYgLTUuMTQ2NTYsMS43NDY4OHYtNi40MDI5N2wtNi4zODk1MywtNi44OHYxMy40NTA5NGMtNi45MDA2NCwtMy4wNDQ0IC0yMC44NjUxLC03LjEyMTg4IC00Ni4wOTA2MiwtNy4xMjE4OGMtMC43OTQ2NCwwIC0xLjYwMDAzLDAuMDAzMTIgLTIuNDE4NzUsMC4wMTM0NHYtODYuOTU0MDZoMC40OTcxOWMzMi43NjI1NiwtMC4wNDgxNiA0NC44OTQ2NCw5Ljk2MTU0IDQ3Ljc2MzYsMTIuNzg1Nzh2MzAuNjkxMjVsNi42NDQ4NCwyLjU4di0zMy4wNzY0MWMyLjc0ODU2LC0yLjgzOCAxNS4zOTQwNiwtMTMuMTI3NDEgNDguMzAxMSwtMTMuMDI3NjV2ODEuODM0MzdsNi44OCw2Ljg4di02OC4xNzUxNWg0Ljk5ODc1YzEuMDkwNDgsMCAxLjg4MTI1LDAuODkxMzMgMS44ODEyNSwxLjg0NzY1djczLjIyMDk0bDYuNzMyMTksNi44OHYtODAuMTA3NjZjMCwtNC43NTQwOCAtMy42OTE2LC04LjQ5MjUgLTguNTc5ODQsLTguNDkyNWgtNS4wMzIzNXYtMTcuMjgwNjJjMCwtMS44Njc5MiAtMS40OTE0NSwtMy4zOTUyOCAtMy4zNTkzNywtMy40NGMtMi4xMjAzMywtMC4wNTIyNCAtNC4xNzEwNywtMC4wNjU0IC02LjE0NzY2LC0wLjA0MDMxek04My40ODA0Nyw3NS4yODM2Yy0xLjA5Mzc0LDAuMDUyNzIgLTIuMDk3MDYsMC42MjI5NiAtMi43MDIwMSwxLjUzNTdjLTAuNjA0OTUsMC45MTI3MyAtMC43MzkyNywyLjA1ODkzIC0wLjM2MTc0LDMuMDg2OGw3LjA2ODEzLDE5LjIyOTA2YzAuMTcwNDgsMC40NjkxNSAwLjQ0MTAxLDAuODk1NTcgMC43OTI4MSwxLjI0OTY5bDU4LjUyMDMxLDU4LjUxMzU5YzAuOTE0MjUsMC45MTQyIDIuMjYzODcsMS4yMzg2MyAzLjQ5Mzc1LDAuODM5ODVsMS4xMDE4OCwxLjEwMTg3YzMuOTgyMDUsMy45ODIwNiAxMC41MjUzMiwzLjg5OTg1IDE0LjUwNTc4LC0wLjA4MDYyYzAsLTAuMDAyMjQgMCwtMC4wMDQ0OCAwLC0wLjAwNjcyYzMuOTc2MzIsLTMuOTg2NjQgNC4wNjM3NCwtMTAuNTI5MzggMC4wODA2MywtMTQuNTEyNWwtMS4yMjk1MywtMS4yMjk1M2MwLjIzOTg2LC0xLjEzNTMyIC0wLjEwODc2LC0yLjMxNTA2IC0wLjkyNzE5LC0zLjEzNzY1bC01OC41MTM2LC01OC41MjAzMWMtMC4zNTIxNywtMC4zNTA5OCAtMC43NzYyMiwtMC42MjE0NiAtMS4yNDI5NywtMC43OTI4MWwtMTkuMjM1NzgsLTcuMDY4MTNjLTAuNDMxNywtMC4xNTkwMiAtMC44OTA5MSwtMC4yMjk4NSAtMS4zNTA0NywtMC4yMDgyOHpNOTIuMTIwNzgsODUuNDk2MWw2Ljk1MzksMi41NTk4NGwtMC43NzI2NSwwLjc3MjY2Yy0wLjYzNjk2LDAuNjM2NzkgLTAuOTk4OCwxLjQ5Nzk2IC0xLjAwNzgxLDIuMzk4NTlsLTAuMDA2NzIsMS4wMDc4MWwtMS4wMDc4MSwwLjAwNjcyYy0wLjkwMjk2LDAuMDA3MjYgLTEuNzY2ODcsMC4zNjkyMyAtMi40MDUzMSwxLjAwNzgxbC0wLjg5MzU5LDAuODkzNmwtMi41NTk4NSwtNi45NDcxOXpNMTA0LjU0Mzc1LDkyLjMxNTYzbDQyLjk2NjQsNDIuOTczMTJsLTcuMjk2NTYsNy4yOTY1NmwtNDIuOTczMTMsLTQyLjk3MzEzbDAuNTAzOSwtMC41MDM5bDIuOTgzMTMsLTAuMDIwMTVjMS44NzYyMywtMC4wMTg0NSAzLjM5MTY1LC0xLjUzNjg3IDMuNDA2NCwtMy40MTMxM2wwLjAyNjg4LC0yLjk3NjR6TTE1Mi4zODEyNSwxNDAuMTUzMTNsNC4xNDU0Nyw0LjE1MjE5bC03LjI5NjU2LDcuMjk2NTZsLTQuMTQ1NDcsLTQuMTUyMTl6TTE2MC4yODI1LDE1MC4yNzE1NmwwLjgzMzEzLDAuODMzMTJjMS4yMzE5MSwxLjIzMTkyIDEuMjQwODEsMy40NTg4NyAtMC4wODczNSw0Ljc5MDQ3Yy0xLjMyNDU3LDEuMzE5MyAtMy41Mzg3OSwxLjMxMjE0IC00Ljc3MDMxLDAuMDgwNjNsLTAuODM5ODQsLTAuODMzMTN6Ij48L3BhdGg+PC9nPjwvZz48L3N2Zz4=">
-                      Classroom Assignments
-                    </h1>
-                </div>
-                <div class="grey-line"></div>
-                <div id="classroom-section-body" class="section-body">
-                  <h1 id="classroom-loading">Loading...</h1>
-                </div>
-              </section>
-              <section id="lunch-section">
-                <div id="lunch-section-title" class="section-title">
-                    <h1 id="lunch-title">
-                      Clubs
-                    </h1>
-                </div>
-                <div class="grey-line"></div>
-                <div id="lunch-section-body" class="section-body">
-                  <h1 class="club-loading">Monday will be the Club Fair during lunch oustide the school!</h1>
-                </div>
-              </section>
-            </div> 
-            <div id="column3" class="column">
-              <section id="lunch-section">
-                <div id="lunch-section-title" class="section-title">
-                    <h1 id="lunch-title">
-                      Download BB Hub
-                    </h1>
-                </div>
-                <div class="grey-line"></div>
-                <div id="lunch-section-body" class="section-body">
-                  <video playsinline autoplay muted loop src="/video/bb-hub-download.MOV"></video>
-                </div>
-              </section>
-              <section id="lunch-section">
-                <div id="lunch-section-title" class="section-title">
-                    <h1 id="lunch-title">
-                      <img id="lunch-image-icon" data-v-115389dc="" src="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZpZXdCb3g9IjAgMCAxNzIgMTcyIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9Im5vbnplcm8iIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWNhcD0iYnV0dCIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2UtZGFzaGFycmF5PSIiIHN0cm9rZS1kYXNob2Zmc2V0PSIwIiBmb250LWZhbWlseT0ibm9uZSIgZm9udC13ZWlnaHQ9Im5vbmUiIGZvbnQtc2l6ZT0ibm9uZSIgdGV4dC1hbmNob3I9Im5vbmUiIHN0eWxlPSJtaXgtYmxlbmQtbW9kZTogbm9ybWFsIj48cGF0aCBkPSJNMCwxNzJ2LTE3MmgxNzJ2MTcyeiIgZmlsbD0ibm9uZSI+PC9wYXRoPjxnIGZpbGw9IiMxNDcyZmYiPjxwYXRoIGQ9Ik03Mi41NjI1LDUuMzc1Yy03LjQwOTQ0LDAgLTEzLjQzNzUsNi4wMjgwNiAtMTMuNDM3NSwxMy40Mzc1djEzLjQzNzVoLTEzLjQzNzVjLTE2LjI5OTY5LDAgLTI5LjU2MjUsMTMuMjYyODEgLTI5LjU2MjUsMjkuNTYyNXYxMC43NXYyNi44NzV2MzcuNjI1YzAsMTAuMzcxMDYgOC40Mzg3NSwxOC44MTI1IDE4LjgxMjUsMTguODEyNWgxMDIuMTI1YzEwLjM3Mzc1LDAgMTguODEyNSwtOC40NDE0NCAxOC44MTI1LC0xOC44MTI1di0zNy42MjV2LTI2Ljg3NXYtMTAuNzVjMCwtMTYuMjk5NjkgLTEzLjI2MjgxLC0yOS41NjI1IC0yOS41NjI1LC0yOS41NjI1aC0xMy40Mzc1di0xMy40Mzc1YzAsLTcuNDA5NDQgLTYuMDI4MDYsLTEzLjQzNzUgLTEzLjQzNzUsLTEzLjQzNzV6TTcyLjU2MjUsMTAuNzVoMjYuODc1YzQuNDQ1MTMsMCA4LjA2MjUsMy42MTczOCA4LjA2MjUsOC4wNjI1djEzLjQzNzVoLTUuMzc1di0xNi4xMjVoLTMyLjI1djE2LjEyNWgtNS4zNzV2LTEzLjQzNzVjMCwtNC40NDUxMiAzLjYxNzM3LC04LjA2MjUgOC4wNjI1LC04LjA2MjV6TTc1LjI1LDIxLjVoMjEuNXYxMC43NWgtMjEuNXpNNDUuNjg3NSwzNy42MjVoMTMuNDM3NWgxNi4xMjVoMjEuNWgxNi4xMjVoMTMuNDM3NWMxMy4zMzUzOCwwIDI0LjE4NzUsMTAuODQ5NDQgMjQuMTg3NSwyNC4xODc1djEwLjc1djI2Ljg3NXYzNy42MjVjMCw3LjQwOTQ0IC02LjAyODA2LDEzLjQzNzUgLTEzLjQzNzUsMTMuNDM3NWgtMTAyLjEyNWMtNy40MDk0NCwwIC0xMy40Mzc1LC02LjAyODA2IC0xMy40Mzc1LC0xMy40Mzc1di0zNy42MjV2LTI2Ljg3NXYtMTAuNzVjMCwtMTMuMzM4MDYgMTAuODUyMTMsLTI0LjE4NzUgMjQuMTg3NSwtMjQuMTg3NXpNNzIuNTYyNSw1Ni40Mzc1Yy0xMy4zMzUzNywwIC0yNC4xODc1LDEwLjg0OTQ0IC0yNC4xODc1LDI0LjE4NzVjMCwxLjMzMDMxIDAuMzUzOTUsMi41NjcwNyAwLjkyOTA4LDMuNjc0MzJjLTMuNzA4NzUsMS42OTg1IC02LjMwNDA4LDUuNDIyODcgLTYuMzA0MDgsOS43NjMxOGMwLDMuOTYxMzcgMi4xNzY4Nyw3LjM4ODkgNS4zNzUsOS4yNTQwM3Y5LjU1ODQ3YzAsNC40NDUxMyAzLjYxNzM4LDguMDYyNSA4LjA2MjUsOC4wNjI1aDU5LjEyNWM0LjQ0NTEzLDAgOC4wNjI1LC0zLjYxNzM3IDguMDYyNSwtOC4wNjI1di05LjU1ODQ3YzMuMTk4MTIsLTEuODY1MTMgNS4zNzUsLTUuMjg5OTYgNS4zNzUsLTkuMjU0MDNjMCwtNC4zNDAzMSAtMi41OTUzMywtOC4wNjQ2OCAtNi4zMDQwOCwtOS43NjMxOGMwLjU3NTEyLC0xLjEwNzI1IDAuOTI5MDgsLTIuMzQ0MDEgMC45MjkwOCwtMy42NzQzMmMwLC0xMy4zMzgwNiAtMTAuODUyMTIsLTI0LjE4NzUgLTI0LjE4NzUsLTI0LjE4NzV6TTcyLjU2MjUsNjEuODEyNWgyNi44NzVjMTAuMzczNzUsMCAxOC44MTI1LDguNDQxNDQgMTguODEyNSwxOC44MTI1YzAsMS40ODM1IC0xLjIwNjY5LDIuNjg3NSAtMi42ODc1LDIuNjg3NWgtNTkuMTI1Yy0xLjQ4MDgxLDAgLTIuNjg3NSwtMS4yMDQgLTIuNjg3NSwtMi42ODc1YzAsLTEwLjM3MTA2IDguNDM4NzUsLTE4LjgxMjUgMTguODEyNSwtMTguODEyNXpNNTMuNzUsODguNjg3NWgyLjY4NzVoNTkuMTI1aDIuNjg3NWMyLjk2NDMxLDAgNS4zNzUsMi40MTA2OSA1LjM3NSw1LjM3NWMwLDIuOTY0MzEgLTIuNDEwNjksNS4zNzUgLTUuMzc1LDUuMzc1aC02NC41Yy0yLjk2NDMxLDAgLTUuMzc1LC0yLjQxMDY5IC01LjM3NSwtNS4zNzVjMCwtMi45NjQzMSAyLjQxMDY5LC01LjM3NSA1LjM3NSwtNS4zNzV6TTUzLjc1LDEwNC44MTI1aDY0LjV2OC4wNjI1YzAsMS40ODM1IC0xLjIwNjY5LDIuNjg3NSAtMi42ODc1LDIuNjg3NWgtNTkuMTI1Yy0xLjQ4MDgxLDAgLTIuNjg3NSwtMS4yMDQgLTIuNjg3NSwtMi42ODc1ek0zMi4yNSwxMzEuNjg3NWMtMS40ODM1LDAgLTIuNjg3NSwxLjIwMTMxIC0yLjY4NzUsMi42ODc1djUuMzc1YzAsMS40ODYxOSAxLjIwNCwyLjY4NzUgMi42ODc1LDIuNjg3NWMxLjQ4MzUsMCAyLjY4NzUsLTEuMjAxMzEgMi42ODc1LC0yLjY4NzV2LTUuMzc1YzAsLTEuNDg2MTkgLTEuMjA0LC0yLjY4NzUgLTIuNjg3NSwtMi42ODc1ek00NS42ODc1LDEzMS42ODc1Yy0xLjQ4MzUsMCAtMi42ODc1LDEuMjAxMzEgLTIuNjg3NSwyLjY4NzV2NS4zNzVjMCwxLjQ4NjE5IDEuMjA0LDIuNjg3NSAyLjY4NzUsMi42ODc1YzEuNDgzNSwwIDIuNjg3NSwtMS4yMDEzMSAyLjY4NzUsLTIuNjg3NXYtNS4zNzVjMCwtMS40ODYxOSAtMS4yMDQsLTIuNjg3NSAtMi42ODc1LC0yLjY4NzV6TTU5LjEyNSwxMzEuNjg3NWMtMS40ODM1LDAgLTIuNjg3NSwxLjIwMTMxIC0yLjY4NzUsMi42ODc1djUuMzc1YzAsMS40ODYxOSAxLjIwNCwyLjY4NzUgMi42ODc1LDIuNjg3NWMxLjQ4MzUsMCAyLjY4NzUsLTEuMjAxMzEgMi42ODc1LC0yLjY4NzV2LTUuMzc1YzAsLTEuNDg2MTkgLTEuMjA0LC0yLjY4NzUgLTIuNjg3NSwtMi42ODc1ek03Mi41NjI1LDEzMS42ODc1Yy0xLjQ4MzUsMCAtMi42ODc1LDEuMjAxMzEgLTIuNjg3NSwyLjY4NzV2NS4zNzVjMCwxLjQ4NjE5IDEuMjA0LDIuNjg3NSAyLjY4NzUsMi42ODc1YzEuNDgzNSwwIDIuNjg3NSwtMS4yMDEzMSAyLjY4NzUsLTIuNjg3NXYtNS4zNzVjMCwtMS40ODYxOSAtMS4yMDQsLTIuNjg3NSAtMi42ODc1LC0yLjY4NzV6TTg2LDEzMS42ODc1Yy0xLjQ4MzUsMCAtMi42ODc1LDEuMjAxMzEgLTIuNjg3NSwyLjY4NzV2NS4zNzVjMCwxLjQ4NjE5IDEuMjA0LDIuNjg3NSAyLjY4NzUsMi42ODc1YzEuNDgzNSwwIDIuNjg3NSwtMS4yMDEzMSAyLjY4NzUsLTIuNjg3NXYtNS4zNzVjMCwtMS40ODYxOSAtMS4yMDQsLTIuNjg3NSAtMi42ODc1LC0yLjY4NzV6TTk5LjQzNzUsMTMxLjY4NzVjLTEuNDgzNSwwIC0yLjY4NzUsMS4yMDEzMSAtMi42ODc1LDIuNjg3NXY1LjM3NWMwLDEuNDg2MTkgMS4yMDQsMi42ODc1IDIuNjg3NSwyLjY4NzVjMS40ODM1LDAgMi42ODc1LC0xLjIwMTMxIDIuNjg3NSwtMi42ODc1di01LjM3NWMwLC0xLjQ4NjE5IC0xLjIwNCwtMi42ODc1IC0yLjY4NzUsLTIuNjg3NXpNMTEyLjg3NSwxMzEuNjg3NWMtMS40ODM1LDAgLTIuNjg3NSwxLjIwMTMxIC0yLjY4NzUsMi42ODc1djUuMzc1YzAsMS40ODYxOSAxLjIwNCwyLjY4NzUgMi42ODc1LDIuNjg3NWMxLjQ4MzUsMCAyLjY4NzUsLTEuMjAxMzEgMi42ODc1LC0yLjY4NzV2LTUuMzc1YzAsLTEuNDg2MTkgLTEuMjA0LC0yLjY4NzUgLTIuNjg3NSwtMi42ODc1ek0xMjYuMzEyNSwxMzEuNjg3NWMtMS40ODM1LDAgLTIuNjg3NSwxLjIwMTMxIC0yLjY4NzUsMi42ODc1djUuMzc1YzAsMS40ODYxOSAxLjIwNCwyLjY4NzUgMi42ODc1LDIuNjg3NWMxLjQ4MzUsMCAyLjY4NzUsLTEuMjAxMzEgMi42ODc1LC0yLjY4NzV2LTUuMzc1YzAsLTEuNDg2MTkgLTEuMjA0LC0yLjY4NzUgLTIuNjg3NSwtMi42ODc1ek0xMzkuNzUsMTMxLjY4NzVjLTEuNDgzNSwwIC0yLjY4NzUsMS4yMDEzMSAtMi42ODc1LDIuNjg3NXY1LjM3NWMwLDEuNDg2MTkgMS4yMDQsMi42ODc1IDIuNjg3NSwyLjY4NzVjMS40ODM1LDAgMi42ODc1LC0xLjIwMTMxIDIuNjg3NSwtMi42ODc1di01LjM3NWMwLC0xLjQ4NjE5IC0xLjIwNCwtMi42ODc1IC0yLjY4NzUsLTIuNjg3NXoiPjwvcGF0aD48L2c+PC9nPjwvc3ZnPg==">
-                      Patty's Corner
-                    </h1>
-                </div>
-                <div class="grey-line"></div>
-                <div id="lunch-section-body" class="section-body">
-                  <% lunch.forEach(food => { %>
-                    <div class="detail-section">
-                      <h1 class="detail-title"><%= food.name %></h1>
-                      <p class="detail-body"><%= food.description %></p>
-                    </div>
-                  <% }); %>
-                </div>
-              </section>
-              <section id="classroom-section">
-                <div id="classroom-section-title" class="section-title">
-                    <h1 id="classroom-title">
-                      <%- include('../partials/sports_icon'); -%>
-                      Sports
-                    </h1>
-                </div>
-                <div class="grey-line"></div>
-                <div id="classroom-section-body" class="section-body">
-                  <% games.forEach(game => { %>
-                    <div class="detail-section">
-                      <h1 class="detail-title"><%= game.sport %> vs. <%= game.opponent %></h1>
-                      <p class="detail-body">Location: <%= game.location %></p>
-                      <p class="detail-body"><%= game.month %> <%= game.day %>, <%= game.year %></p>
-                      <p class="detail-body"><%= game.time %></p>
-                    </div>
-                  <% }); %>
-                </div>
-              </section>
-            </div>
+            <section id="lunch-section">
+              <div id="lunch-section-title" class="section-title">
+                  <h1 id="lunch-title">
+                    Download BB Hub
+                  </h1>
+              </div>
+              <div class="grey-line"></div>
+              <div id="lunch-section-body" class="section-body">
+                <video playsinline autoplay muted loop src="/video/bb-hub-download.MOV"></video>
+              </div>
+            </section>
+            <section id="classroom-section">
+              <div id="classroom-section-title" class="section-title">
+                  <h1 id="classroom-title">
+                    <img id="classroom-image-icon" data-v-115389dc="" src="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZpZXdCb3g9IjAgMCAxNzIgMTcyIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9Im5vbnplcm8iIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWNhcD0iYnV0dCIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2UtZGFzaGFycmF5PSIiIHN0cm9rZS1kYXNob2Zmc2V0PSIwIiBmb250LWZhbWlseT0ibm9uZSIgZm9udC13ZWlnaHQ9Im5vbmUiIGZvbnQtc2l6ZT0ibm9uZSIgdGV4dC1hbmNob3I9Im5vbmUiIHN0eWxlPSJtaXgtYmxlbmQtbW9kZTogbm9ybWFsIj48cGF0aCBkPSJNMCwxNzJ2LTE3MmgxNzJ2MTcyeiIgZmlsbD0ibm9uZSI+PC9wYXRoPjxnIGZpbGw9IiMxNDcyZmYiPjxwYXRoIGQ9Ik0xMzQuOTcyOTcsMTcuMjA2NzJjLTI5LjY0ODkxLDAuMzc2MzggLTQzLjM3NTcxLDkuMDQzNzEgLTQ4LjY4NDA2LDEzLjcyNjQxYy01Ljc5OTg0LC00Ljk0NjcyIC0yMS40MjIzMywtMTQuNDc4NDIgLTU1LjQwOTUzLC0xMy42MzkwNmMtMS44NjQ0OCwwLjA0NDcyIC0zLjM1OTM3LDEuNTcyMDggLTMuMzU5MzcsMy40NHYxNy40NzU0N2gtNC44OTc5N2MtNC44ODgyNCwwIC04Ljg2NTQyLDMuODcyNzkgLTguNzIwOTQsOC42MjY4N3Y4NS41ODM0NGMtMC4xNDQ0OCw0Ljc1NDA4IDQuMDAwNjcsOC40NTIxOSA4Ljg4ODkxLDguNDUyMTloOTYuNTg4NzVsLTYuODU5ODUsLTYuNTcwOTRoLTg5LjcwMjAzYy0xLjA5MDQ4LDAgLTIuMTczNDksLTAuOTI0OTMgLTIuMzE3OTcsLTEuODgxMjV2LTg1LjU4MzQ0YzAuMTQ0NDgsLTAuOTU2MzIgMS4wMzI2NCwtMi4xMTY0IDIuMTIzMTIsLTIuMTE2NGg0Ljg5Nzk3djY5Ljg1NDg1YzAsMC45Mjg4IDAuMzcwNzcsMS44MDg5IDEuMDM0NjksMi40NTkwNmMwLjY2MDQ4LDAuNjQ2NzIgMS41MDg5OCwwLjk2MDMgMi40ODU5NCwwLjk4MDk0YzQwLjQ3ODQ4LC0wLjk0OTQ0IDUyLjgwNjIsOC40MjAxNSA1My4wODQ4NCw4LjY0MDMxYzAuNjMyOTYsMC41Mjk3NiAxLjQxOTExLDAuODA2MjUgMi4yMTcxOSwwLjgwNjI1YzAuNDg1MDQsMCAwLjk3MzU4LC0wLjEwMjUgMS40MzExLC0wLjMxNTc4YzAuNDk1MzYsLTAuMjIzNiAwLjkxOTQ1LC0wLjU1ODE0IDEuMjQ5NjksLTAuOTY3NWMxLjA1OTUyLC0wLjcwMTc2IDQuMzQyMzYsLTIuNTcyNDggMTAuOTkxODgsLTQuMzI2ODhsLTUuNTc2NTYsLTUuNTc2NTZjLTEuODIzMiwwLjU5MTY4IC0zLjg1MzEyLDEuMTg2MTYgLTUuMTQ2NTYsMS43NDY4OHYtNi40MDI5N2wtNi4zODk1MywtNi44OHYxMy40NTA5NGMtNi45MDA2NCwtMy4wNDQ0IC0yMC44NjUxLC03LjEyMTg4IC00Ni4wOTA2MiwtNy4xMjE4OGMtMC43OTQ2NCwwIC0xLjYwMDAzLDAuMDAzMTIgLTIuNDE4NzUsMC4wMTM0NHYtODYuOTU0MDZoMC40OTcxOWMzMi43NjI1NiwtMC4wNDgxNiA0NC44OTQ2NCw5Ljk2MTU0IDQ3Ljc2MzYsMTIuNzg1Nzh2MzAuNjkxMjVsNi42NDQ4NCwyLjU4di0zMy4wNzY0MWMyLjc0ODU2LC0yLjgzOCAxNS4zOTQwNiwtMTMuMTI3NDEgNDguMzAxMSwtMTMuMDI3NjV2ODEuODM0MzdsNi44OCw2Ljg4di02OC4xNzUxNWg0Ljk5ODc1YzEuMDkwNDgsMCAxLjg4MTI1LDAuODkxMzMgMS44ODEyNSwxLjg0NzY1djczLjIyMDk0bDYuNzMyMTksNi44OHYtODAuMTA3NjZjMCwtNC43NTQwOCAtMy42OTE2LC04LjQ5MjUgLTguNTc5ODQsLTguNDkyNWgtNS4wMzIzNXYtMTcuMjgwNjJjMCwtMS44Njc5MiAtMS40OTE0NSwtMy4zOTUyOCAtMy4zNTkzNywtMy40NGMtMi4xMjAzMywtMC4wNTIyNCAtNC4xNzEwNywtMC4wNjU0IC02LjE0NzY2LC0wLjA0MDMxek04My40ODA0Nyw3NS4yODM2Yy0xLjA5Mzc0LDAuMDUyNzIgLTIuMDk3MDYsMC42MjI5NiAtMi43MDIwMSwxLjUzNTdjLTAuNjA0OTUsMC45MTI3MyAtMC43MzkyNywyLjA1ODkzIC0wLjM2MTc0LDMuMDg2OGw3LjA2ODEzLDE5LjIyOTA2YzAuMTcwNDgsMC40NjkxNSAwLjQ0MTAxLDAuODk1NTcgMC43OTI4MSwxLjI0OTY5bDU4LjUyMDMxLDU4LjUxMzU5YzAuOTE0MjUsMC45MTQyIDIuMjYzODcsMS4yMzg2MyAzLjQ5Mzc1LDAuODM5ODVsMS4xMDE4OCwxLjEwMTg3YzMuOTgyMDUsMy45ODIwNiAxMC41MjUzMiwzLjg5OTg1IDE0LjUwNTc4LC0wLjA4MDYyYzAsLTAuMDAyMjQgMCwtMC4wMDQ0OCAwLC0wLjAwNjcyYzMuOTc2MzIsLTMuOTg2NjQgNC4wNjM3NCwtMTAuNTI5MzggMC4wODA2MywtMTQuNTEyNWwtMS4yMjk1MywtMS4yMjk1M2MwLjIzOTg2LC0xLjEzNTMyIC0wLjEwODc2LC0yLjMxNTA2IC0wLjkyNzE5LC0zLjEzNzY1bC01OC41MTM2LC01OC41MjAzMWMtMC4zNTIxNywtMC4zNTA5OCAtMC43NzYyMiwtMC42MjE0NiAtMS4yNDI5NywtMC43OTI4MWwtMTkuMjM1NzgsLTcuMDY4MTNjLTAuNDMxNywtMC4xNTkwMiAtMC44OTA5MSwtMC4yMjk4NSAtMS4zNTA0NywtMC4yMDgyOHpNOTIuMTIwNzgsODUuNDk2MWw2Ljk1MzksMi41NTk4NGwtMC43NzI2NSwwLjc3MjY2Yy0wLjYzNjk2LDAuNjM2NzkgLTAuOTk4OCwxLjQ5Nzk2IC0xLjAwNzgxLDIuMzk4NTlsLTAuMDA2NzIsMS4wMDc4MWwtMS4wMDc4MSwwLjAwNjcyYy0wLjkwMjk2LDAuMDA3MjYgLTEuNzY2ODcsMC4zNjkyMyAtMi40MDUzMSwxLjAwNzgxbC0wLjg5MzU5LDAuODkzNmwtMi41NTk4NSwtNi45NDcxOXpNMTA0LjU0Mzc1LDkyLjMxNTYzbDQyLjk2NjQsNDIuOTczMTJsLTcuMjk2NTYsNy4yOTY1NmwtNDIuOTczMTMsLTQyLjk3MzEzbDAuNTAzOSwtMC41MDM5bDIuOTgzMTMsLTAuMDIwMTVjMS44NzYyMywtMC4wMTg0NSAzLjM5MTY1LC0xLjUzNjg3IDMuNDA2NCwtMy40MTMxM2wwLjAyNjg4LC0yLjk3NjR6TTE1Mi4zODEyNSwxNDAuMTUzMTNsNC4xNDU0Nyw0LjE1MjE5bC03LjI5NjU2LDcuMjk2NTZsLTQuMTQ1NDcsLTQuMTUyMTl6TTE2MC4yODI1LDE1MC4yNzE1NmwwLjgzMzEzLDAuODMzMTJjMS4yMzE5MSwxLjIzMTkyIDEuMjQwODEsMy40NTg4NyAtMC4wODczNSw0Ljc5MDQ3Yy0xLjMyNDU3LDEuMzE5MyAtMy41Mzg3OSwxLjMxMjE0IC00Ljc3MDMxLDAuMDgwNjNsLTAuODM5ODQsLTAuODMzMTN6Ij48L3BhdGg+PC9nPjwvZz48L3N2Zz4=">
+                    Classroom Assignments
+                  </h1>
+              </div>
+              <div class="grey-line"></div>
+              <div id="classroom-section-body" class="section-body">
+                <h1 id="classroom-loading">Loading...</h1>
+              </div>
+            </section>
+            <section id="lunch-section">
+              <div id="lunch-section-title" class="section-title">
+                  <h1 id="lunch-title">
+                    Clubs
+                  </h1>
+              </div>
+              <div class="grey-line"></div>
+              <div id="lunch-section-body" class="section-body">
+                <h1 class="club-loading">Monday will be the Club Fair during lunch oustide the school!</h1>
+              </div>
+            </section>
+            <section id="lunch-section">
+              <div id="lunch-section-title" class="section-title">
+                  <h1 id="lunch-title">
+                    <img id="lunch-image-icon" data-v-115389dc="" src="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZpZXdCb3g9IjAgMCAxNzIgMTcyIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9Im5vbnplcm8iIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWNhcD0iYnV0dCIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2UtZGFzaGFycmF5PSIiIHN0cm9rZS1kYXNob2Zmc2V0PSIwIiBmb250LWZhbWlseT0ibm9uZSIgZm9udC13ZWlnaHQ9Im5vbmUiIGZvbnQtc2l6ZT0ibm9uZSIgdGV4dC1hbmNob3I9Im5vbmUiIHN0eWxlPSJtaXgtYmxlbmQtbW9kZTogbm9ybWFsIj48cGF0aCBkPSJNMCwxNzJ2LTE3MmgxNzJ2MTcyeiIgZmlsbD0ibm9uZSI+PC9wYXRoPjxnIGZpbGw9IiMxNDcyZmYiPjxwYXRoIGQ9Ik03Mi41NjI1LDUuMzc1Yy03LjQwOTQ0LDAgLTEzLjQzNzUsNi4wMjgwNiAtMTMuNDM3NSwxMy40Mzc1djEzLjQzNzVoLTEzLjQzNzVjLTE2LjI5OTY5LDAgLTI5LjU2MjUsMTMuMjYyODEgLTI5LjU2MjUsMjkuNTYyNXYxMC43NXYyNi44NzV2MzcuNjI1YzAsMTAuMzcxMDYgOC40Mzg3NSwxOC44MTI1IDE4LjgxMjUsMTguODEyNWgxMDIuMTI1YzEwLjM3Mzc1LDAgMTguODEyNSwtOC40NDE0NCAxOC44MTI1LC0xOC44MTI1di0zNy42MjV2LTI2Ljg3NXYtMTAuNzVjMCwtMTYuMjk5NjkgLTEzLjI2MjgxLC0yOS41NjI1IC0yOS41NjI1LC0yOS41NjI1aC0xMy40Mzc1di0xMy40Mzc1YzAsLTcuNDA5NDQgLTYuMDI4MDYsLTEzLjQzNzUgLTEzLjQzNzUsLTEzLjQzNzV6TTcyLjU2MjUsMTAuNzVoMjYuODc1YzQuNDQ1MTMsMCA4LjA2MjUsMy42MTczOCA4LjA2MjUsOC4wNjI1djEzLjQzNzVoLTUuMzc1di0xNi4xMjVoLTMyLjI1djE2LjEyNWgtNS4zNzV2LTEzLjQzNzVjMCwtNC40NDUxMiAzLjYxNzM3LC04LjA2MjUgOC4wNjI1LC04LjA2MjV6TTc1LjI1LDIxLjVoMjEuNXYxMC43NWgtMjEuNXpNNDUuNjg3NSwzNy42MjVoMTMuNDM3NWgxNi4xMjVoMjEuNWgxNi4xMjVoMTMuNDM3NWMxMy4zMzUzOCwwIDI0LjE4NzUsMTAuODQ5NDQgMjQuMTg3NSwyNC4xODc1djEwLjc1djI2Ljg3NXYzNy42MjVjMCw3LjQwOTQ0IC02LjAyODA2LDEzLjQzNzUgLTEzLjQzNzUsMTMuNDM3NWgtMTAyLjEyNWMtNy40MDk0NCwwIC0xMy40Mzc1LC02LjAyODA2IC0xMy40Mzc1LC0xMy40Mzc1di0zNy42MjV2LTI2Ljg3NXYtMTAuNzVjMCwtMTMuMzM4MDYgMTAuODUyMTMsLTI0LjE4NzUgMjQuMTg3NSwtMjQuMTg3NXpNNzIuNTYyNSw1Ni40Mzc1Yy0xMy4zMzUzNywwIC0yNC4xODc1LDEwLjg0OTQ0IC0yNC4xODc1LDI0LjE4NzVjMCwxLjMzMDMxIDAuMzUzOTUsMi41NjcwNyAwLjkyOTA4LDMuNjc0MzJjLTMuNzA4NzUsMS42OTg1IC02LjMwNDA4LDUuNDIyODcgLTYuMzA0MDgsOS43NjMxOGMwLDMuOTYxMzcgMi4xNzY4Nyw3LjM4ODkgNS4zNzUsOS4yNTQwM3Y5LjU1ODQ3YzAsNC40NDUxMyAzLjYxNzM4LDguMDYyNSA4LjA2MjUsOC4wNjI1aDU5LjEyNWM0LjQ0NTEzLDAgOC4wNjI1LC0zLjYxNzM3IDguMDYyNSwtOC4wNjI1di05LjU1ODQ3YzMuMTk4MTIsLTEuODY1MTMgNS4zNzUsLTUuMjg5OTYgNS4zNzUsLTkuMjU0MDNjMCwtNC4zNDAzMSAtMi41OTUzMywtOC4wNjQ2OCAtNi4zMDQwOCwtOS43NjMxOGMwLjU3NTEyLC0xLjEwNzI1IDAuOTI5MDgsLTIuMzQ0MDEgMC45MjkwOCwtMy42NzQzMmMwLC0xMy4zMzgwNiAtMTAuODUyMTIsLTI0LjE4NzUgLTI0LjE4NzUsLTI0LjE4NzV6TTcyLjU2MjUsNjEuODEyNWgyNi44NzVjMTAuMzczNzUsMCAxOC44MTI1LDguNDQxNDQgMTguODEyNSwxOC44MTI1YzAsMS40ODM1IC0xLjIwNjY5LDIuNjg3NSAtMi42ODc1LDIuNjg3NWgtNTkuMTI1Yy0xLjQ4MDgxLDAgLTIuNjg3NSwtMS4yMDQgLTIuNjg3NSwtMi42ODc1YzAsLTEwLjM3MTA2IDguNDM4NzUsLTE4LjgxMjUgMTguODEyNSwtMTguODEyNXpNNTMuNzUsODguNjg3NWgyLjY4NzVoNTkuMTI1aDIuNjg3NWMyLjk2NDMxLDAgNS4zNzUsMi40MTA2OSA1LjM3NSw1LjM3NWMwLDIuOTY0MzEgLTIuNDEwNjksNS4zNzUgLTUuMzc1LDUuMzc1aC02NC41Yy0yLjk2NDMxLDAgLTUuMzc1LC0yLjQxMDY5IC01LjM3NSwtNS4zNzVjMCwtMi45NjQzMSAyLjQxMDY5LC01LjM3NSA1LjM3NSwtNS4zNzV6TTUzLjc1LDEwNC44MTI1aDY0LjV2OC4wNjI1YzAsMS40ODM1IC0xLjIwNjY5LDIuNjg3NSAtMi42ODc1LDIuNjg3NWgtNTkuMTI1Yy0xLjQ4MDgxLDAgLTIuNjg3NSwtMS4yMDQgLTIuNjg3NSwtMi42ODc1ek0zMi4yNSwxMzEuNjg3NWMtMS40ODM1LDAgLTIuNjg3NSwxLjIwMTMxIC0yLjY4NzUsMi42ODc1djUuMzc1YzAsMS40ODYxOSAxLjIwNCwyLjY4NzUgMi42ODc1LDIuNjg3NWMxLjQ4MzUsMCAyLjY4NzUsLTEuMjAxMzEgMi42ODc1LC0yLjY4NzV2LTUuMzc1YzAsLTEuNDg2MTkgLTEuMjA0LC0yLjY4NzUgLTIuNjg3NSwtMi42ODc1ek00NS42ODc1LDEzMS42ODc1Yy0xLjQ4MzUsMCAtMi42ODc1LDEuMjAxMzEgLTIuNjg3NSwyLjY4NzV2NS4zNzVjMCwxLjQ4NjE5IDEuMjA0LDIuNjg3NSAyLjY4NzUsMi42ODc1YzEuNDgzNSwwIDIuNjg3NSwtMS4yMDEzMSAyLjY4NzUsLTIuNjg3NXYtNS4zNzVjMCwtMS40ODYxOSAtMS4yMDQsLTIuNjg3NSAtMi42ODc1LC0yLjY4NzV6TTU5LjEyNSwxMzEuNjg3NWMtMS40ODM1LDAgLTIuNjg3NSwxLjIwMTMxIC0yLjY4NzUsMi42ODc1djUuMzc1YzAsMS40ODYxOSAxLjIwNCwyLjY4NzUgMi42ODc1LDIuNjg3NWMxLjQ4MzUsMCAyLjY4NzUsLTEuMjAxMzEgMi42ODc1LC0yLjY4NzV2LTUuMzc1YzAsLTEuNDg2MTkgLTEuMjA0LC0yLjY4NzUgLTIuNjg3NSwtMi42ODc1ek03Mi41NjI1LDEzMS42ODc1Yy0xLjQ4MzUsMCAtMi42ODc1LDEuMjAxMzEgLTIuNjg3NSwyLjY4NzV2NS4zNzVjMCwxLjQ4NjE5IDEuMjA0LDIuNjg3NSAyLjY4NzUsMi42ODc1YzEuNDgzNSwwIDIuNjg3NSwtMS4yMDEzMSAyLjY4NzUsLTIuNjg3NXYtNS4zNzVjMCwtMS40ODYxOSAtMS4yMDQsLTIuNjg3NSAtMi42ODc1LC0yLjY4NzV6TTg2LDEzMS42ODc1Yy0xLjQ4MzUsMCAtMi42ODc1LDEuMjAxMzEgLTIuNjg3NSwyLjY4NzV2NS4zNzVjMCwxLjQ4NjE5IDEuMjA0LDIuNjg3NSAyLjY4NzUsMi42ODc1YzEuNDgzNSwwIDIuNjg3NSwtMS4yMDEzMSAyLjY4NzUsLTIuNjg3NXYtNS4zNzVjMCwtMS40ODYxOSAtMS4yMDQsLTIuNjg3NSAtMi42ODc1LC0yLjY4NzV6TTk5LjQzNzUsMTMxLjY4NzVjLTEuNDgzNSwwIC0yLjY4NzUsMS4yMDEzMSAtMi42ODc1LDIuNjg3NXY1LjM3NWMwLDEuNDg2MTkgMS4yMDQsMi42ODc1IDIuNjg3NSwyLjY4NzVjMS40ODM1LDAgMi42ODc1LC0xLjIwMTMxIDIuNjg3NSwtMi42ODc1di01LjM3NWMwLC0xLjQ4NjE5IC0xLjIwNCwtMi42ODc1IC0yLjY4NzUsLTIuNjg3NXpNMTEyLjg3NSwxMzEuNjg3NWMtMS40ODM1LDAgLTIuNjg3NSwxLjIwMTMxIC0yLjY4NzUsMi42ODc1djUuMzc1YzAsMS40ODYxOSAxLjIwNCwyLjY4NzUgMi42ODc1LDIuNjg3NWMxLjQ4MzUsMCAyLjY4NzUsLTEuMjAxMzEgMi42ODc1LC0yLjY4NzV2LTUuMzc1YzAsLTEuNDg2MTkgLTEuMjA0LC0yLjY4NzUgLTIuNjg3NSwtMi42ODc1ek0xMjYuMzEyNSwxMzEuNjg3NWMtMS40ODM1LDAgLTIuNjg3NSwxLjIwMTMxIC0yLjY4NzUsMi42ODc1djUuMzc1YzAsMS40ODYxOSAxLjIwNCwyLjY4NzUgMi42ODc1LDIuNjg3NWMxLjQ4MzUsMCAyLjY4NzUsLTEuMjAxMzEgMi42ODc1LC0yLjY4NzV2LTUuMzc1YzAsLTEuNDg2MTkgLTEuMjA0LC0yLjY4NzUgLTIuNjg3NSwtMi42ODc1ek0xMzkuNzUsMTMxLjY4NzVjLTEuNDgzNSwwIC0yLjY4NzUsMS4yMDEzMSAtMi42ODc1LDIuNjg3NXY1LjM3NWMwLDEuNDg2MTkgMS4yMDQsMi42ODc1IDIuNjg3NSwyLjY4NzVjMS40ODM1LDAgMi42ODc1LC0xLjIwMTMxIDIuNjg3NSwtMi42ODc1di01LjM3NWMwLC0xLjQ4NjE5IC0xLjIwNCwtMi42ODc1IC0yLjY4NzUsLTIuNjg3NXoiPjwvcGF0aD48L2c+PC9nPjwvc3ZnPg==">
+                    Patty's Corner
+                  </h1>
+              </div>
+              <div class="grey-line"></div>
+              <div id="lunch-section-body" class="section-body">
+                <% lunch.forEach(food => { %>
+                  <div class="detail-section">
+                    <h1 class="detail-title"><%= food.name %></h1>
+                    <p class="detail-body"><%= food.description %></p>
+                  </div>
+                <% }); %>
+              </div>
+            </section>
+            <section id="classroom-section">
+              <div id="classroom-section-title" class="section-title">
+                  <h1 id="classroom-title">
+                    <%- include('../partials/sports_icon'); -%>
+                    Sports
+                  </h1>
+              </div>
+              <div class="grey-line"></div>
+              <div id="classroom-section-body" class="section-body">
+                <% games.forEach(game => { %>
+                  <div class="detail-section">
+                    <h1 class="detail-title"><%= game.sport %> vs. <%= game.opponent %></h1>
+                    <p class="detail-body">Location: <%= game.location %></p>
+                    <p class="detail-body"><%= game.month %> <%= game.day %>, <%= game.year %></p>
+                    <p class="detail-body"><%= game.time %></p>
+                  </div>
+                <% }); %>
+              </div>
+            </section>
+          </div>
+        </div>
           </div> 
         </div>
+        
       </main>
     <script src="/js/script.js"></script>
   </body>

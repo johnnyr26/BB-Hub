@@ -3,11 +3,11 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 .columns-div {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    columns: 5 430px;
+    column-gap: 12px;
 }
 .column {
     height: max-content;
@@ -25,10 +25,11 @@ main {
     max-width: max-content;
 }
 section {
+    display: inline-block;
     box-sizing: border-box;
     background-color: #ffffff;
     height: 410px;
-    width: 430px;
+    width: 100%;
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
@@ -231,8 +232,8 @@ h1 {
     }
 }
 video {
-    width: 390px;
-    height: auto;;
+    width: 100%;
+    height: auto;
 }
 @media screen and (max-width: 1850px) {
     #column2 {
@@ -247,15 +248,13 @@ video {
     }
 }
 @media screen and (max-width: 1360px) {
-    .semi-column-div {
-        flex-direction: column;
-        align-items: center;
+    .columns-div {
+        /* column-count: 2; */
     }
 }
 @media screen and (max-width: 900px) {
     .columns-div {
-        flex-direction: column;
-        align-items: center;
+        /* columns: 1; */
     }
 }
 @media screen and (max-width: 450px) {
