@@ -278,6 +278,23 @@ th:first-child {
     display: flex;
     justify-content: space-evenly;
 }
+.download-schedule-button {
+    box-sizing: border-box;
+    text-align: center;
+    display: inline-block;
+    font-size: 18px;
+    background-color: #1472ff;
+    color: #ffffff; 
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    width: 100%;
+    text-decoration: none;
+}
+.download-schedule-div {
+    padding-bottom: 24px;
+}
 
 @media print {
 

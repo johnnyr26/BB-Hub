@@ -118,6 +118,12 @@
                     </tbody>
                 </table>
             </div>
+            <% if (calendar) { %>
+                <% const icsFile = "data:text/calendar;charset=utf8," + escape(calendar) %>
+                <div class="download-schedule-div">
+                    <a class="download-schedule-button" href="<%= icsFile %>" target="_blank" download="Blind Brook Course Schedule">Download Course Schedule</a>
+                </div>
+            <% } %>
         </main>
     </body>
     <script src="/js/schedule.js"></script>

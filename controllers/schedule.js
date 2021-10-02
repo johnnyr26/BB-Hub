@@ -1,4 +1,5 @@
 const Users = require('../models/Users');
+const ical = require('ical-generator');
 
 const parseLetterDays = require('../helpers/schedule/parseLetterDays');
 const formatCourseTitle = require('../helpers/schedule/formatCourseTitle');
@@ -8,6 +9,8 @@ const getLetterDays = require('../helpers/schedule/getSchoolDays').getLetterDays
 const getSharedCourses = require('../helpers/schedule/findSharedCourses');
 const findFreePeriods = require('../helpers/schedule/findFreePeriods');
 const detectSchedule = require('../helpers/schedule/detectSchedule');
+
+const createICal = require('../helpers/schedule/iCal');
 
 const presetColors = [
     "#ff6347",
@@ -40,6 +43,8 @@ module.exports.renderSchedule = async (req, res) => {
     });
     const formattedSchedule = formatSchedule(user.schedule);
 
+    const calendar = user.schedule ? await createICal(user._id) : null;
+
     return res.render('pages/schedule', { 
         user, 
         letterDays,
@@ -48,7 +53,8 @@ module.exports.renderSchedule = async (req, res) => {
         schedule: formattedSchedule, 
         courseBackgroundColors,
         picture: req.user.picture, 
-        id: req.user._id 
+        id: req.user._id,
+        calendar
     });
 };
 
