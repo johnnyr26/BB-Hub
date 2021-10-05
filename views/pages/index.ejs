@@ -12,17 +12,6 @@
         <%- include('../partials/header'); -%>
         <main>
           <div class="columns-div">
-            <section id="lunch-section">
-              <div id="lunch-section-title" class="section-title">
-                  <h1 id="lunch-title">
-                    Clubs
-                  </h1>
-              </div>
-              <div class="grey-line"></div>
-              <div id="lunch-section-body" class="section-body">
-                <a class="upload-schedule-a" target="_blank" href="https://docs.google.com/document/d/164ipOrt6sZOqVoxSZ4HHn7wCSDEK7N36AzvelT8O7hY/edit">See Club Fair Map</a>
-              </div>
-            </section>
             <% const appropriateSchedule = scheduleObject && scheduleObject.schedule.every(course => course.course) %>
             <section class="schedule-section">
               <div id="schedule-section-title" class="section-title">
@@ -53,17 +42,6 @@
                 <% } %>
               </div>
             </section>
-            <section id="lunch-section">
-              <div id="lunch-section-title" class="section-title">
-                  <h1 id="lunch-title">
-                    Download BB Hub
-                  </h1>
-              </div>
-              <div class="grey-line"></div>
-              <div id="lunch-section-body" class="section-body">
-                <video playsinline autoplay muted loop src="/video/bb-hub-download.MOV"></video>
-              </div>
-            </section>
             <section id="classroom-section">
               <div id="classroom-section-title" class="section-title">
                   <h1 id="classroom-title">
@@ -91,6 +69,28 @@
                     <p class="detail-body"><%= food.description %></p>
                   </div>
                 <% }); %>
+              </div>
+            </section>
+            <!-- <section id="lunch-section">
+              <div id="lunch-section-title" class="section-title">
+                  <h1 id="lunch-title">
+                    Download BB Hub
+                  </h1>
+              </div>
+              <div class="grey-line"></div>
+              <div id="lunch-section-body" class="section-body">
+                <video playsinline autoplay muted loop src="/video/bb-hub-download.MOV"></video>
+              </div>
+            </section> -->
+            <section id="lunch-section">
+              <div id="lunch-section-title" class="section-title">
+                  <h1 id="lunch-title">
+                    Clubs
+                  </h1>
+              </div>
+              <div class="grey-line"></div>
+              <div id="lunch-section-body" class="section-body">
+                <h1>Club information will be posted soon.</h1>
               </div>
             </section>
             <section id="classroom-section">
