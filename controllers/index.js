@@ -8,11 +8,15 @@ const getSportGames = require('../helpers/sports/getSportGames');
 
 module.exports.renderIndex = async (req, res) => {
     const user = await Users.findById(req.user._id);
-    
+
+    console.log(user.name);
 
     const scheduleObject = await getScheduleForDay(req.user._id);
     const { lunch } = await getLunch();
+    console.log(lunch);
     const games = await getSportGames();
+
+    console.log(scheduleObject, lunch, games);
 
     if (req.query.assignments) {
         try {
