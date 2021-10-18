@@ -52,9 +52,7 @@ module.exports = async () => {
         weekday = getWeekDay(unparsedDate.getDay());
         schoolDayLunchOffering = schoolDays.find(schoolDay => schoolDay.day.substring(8) === `${weekday}, ${month} ${date}`);
     }
-
-    return { lunch: [{name: "Lunch feature is currently not available", description: "We hope to have this feature available soon."}] };
-
+    
     const response = await axios.get(`https://apiservicelocators.fdmealplanner.com/api/v1/data-locator-webapi/3/meals?menuId=0&accountId=35&locationId=119&mealPeriodId=2&monthId=${unparsedDate.getMonth() + 1}&timeOffset=300&_=1631241244273`);
     const mealData = response.data.result.find(data => {
         const date = data.strMenuForDate.split('-');
