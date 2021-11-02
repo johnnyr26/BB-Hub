@@ -19,33 +19,33 @@ const HIGH_SCHOOL_SCHEDULE = {
         },
         {
             block: 2,
-            from: "08:46",
-            to: "09:39"
+            from: "08:48",
+            to: "09:41"
         },
         {
             block: 3,
-            from: "09:42",
-            to: "10:35"
+            from: "09:46",
+            to: "10:39"
         },
         {
             block: "LUNCH",
-            from: "10:38",
-            to: "11:31"
+            from: "10:42",
+            to: "11:28"
         },
         {
             block: 4,
-            from: "11:34",
-            to: "12:27"
+            from: "11:31",
+            to: "12:24"
         },
         {
             block: 5,
-            from: "12:30",
-            to: "13:23"
+            from: "12:29",
+            to: "13:22"
         },
         {
             block: 6,
-            from: "13:26",
-            to: "14:19"
+            from: "13:27",
+            to: "14:20"
         }
     ]
 };

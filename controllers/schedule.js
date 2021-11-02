@@ -1,5 +1,4 @@
 const Users = require('../models/Users');
-const ical = require('ical-generator');
 
 const parseLetterDays = require('../helpers/schedule/parseLetterDays');
 const formatCourseTitle = require('../helpers/schedule/formatCourseTitle');
