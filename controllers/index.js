@@ -5,6 +5,7 @@ const getScheduleForDay = require('../helpers/schedule/getScheduleForDay');
 const getLunch = require('../helpers/lunch/getLunch');
 const getAssignments = require('../helpers/classroom/getAssignments');
 const getSportGames = require('../helpers/sports/getSportGames');
+const getClubs = require('../helpers/clubs/getClubForDay');
 
 module.exports.renderIndex = async (req, res) => {
     const user = await Users.findById(req.user._id);
@@ -12,6 +13,7 @@ module.exports.renderIndex = async (req, res) => {
     const scheduleObject = await getScheduleForDay(req.user._id);
     const { lunch } = await getLunch();
     const games = await getSportGames();
+    const clubs = await getClubs();
 
     if (req.query.assignments) {
         try {
@@ -29,6 +31,7 @@ module.exports.renderIndex = async (req, res) => {
         scheduleObject,
         lunch,
         games,
+        clubs,
         picture: req.user.picture, 
         id: req.user._id 
     });
