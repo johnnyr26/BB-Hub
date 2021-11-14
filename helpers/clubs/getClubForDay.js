@@ -76,7 +76,7 @@ module.exports = async () => {
             }
     
             const getClubs = clubs.filter(club =>  club.day === weekDay);
-            console.log(getClubs);
+
             resolve(getClubs);
         });
     })

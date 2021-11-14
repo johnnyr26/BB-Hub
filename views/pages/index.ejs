@@ -90,7 +90,13 @@
               </div>
               <div class="grey-line"></div>
               <div id="lunch-section-body" class="section-body">
-                
+                <% clubs.forEach(club => { %>
+                  <div class="detail-section">
+                    <h1 class="detail-title"><%= club.name %></h1>
+                    <p class="detail-body"><%= club.day %> · <%= club.time %></p>
+                    <p class="detail-body">Room: <%= club.location %></p>
+                  </div>
+                <% }); %>
               </div>
             </section>
             <section id="classroom-section">

@@ -13,7 +13,7 @@ module.exports.renderIndex = async (req, res) => {
     const scheduleObject = await getScheduleForDay(req.user._id);
     const { lunch } = await getLunch();
     const games = await getSportGames();
-    // const clubs = await getClubs();
+    const clubs = await getClubs();
 
     if (req.query.assignments) {
         try {
@@ -31,7 +31,7 @@ module.exports.renderIndex = async (req, res) => {
         scheduleObject,
         lunch,
         games,
-        // clubs,
+        clubs,
         picture: req.user.picture, 
         id: req.user._id 
     });
