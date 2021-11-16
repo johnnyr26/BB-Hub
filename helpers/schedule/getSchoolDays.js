@@ -56,6 +56,7 @@ const getSchoolDays = async date => {
     );
     letterDays = response.data.map(day => day.Title);
     for (const day of letterDays) {
+        console.log(day);
         const newSchoolDay = new SchoolDays({ day });
         await newSchoolDay.save();
     }
