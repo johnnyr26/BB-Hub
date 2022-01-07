@@ -68,6 +68,7 @@ module.exports = async (req, res) => {
             });
 
             const courseWorkResponseArray = await Promise.allSettled(coursePromises);
+            
             for (let i = 0; i < courseWorkResponseArray.length; i ++) {
                 if (courseWorkResponseArray[i].status === 'rejected') {
                     continue;
